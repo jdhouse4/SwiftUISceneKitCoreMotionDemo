@@ -21,6 +21,8 @@ struct ContentView: View {
 
     private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
 
+    @StateObject private var aircraftSceneDelegate       = AircraftSceneRendererDelegate()
+
     // SceneView.Options for affecting the SceneView.
     // Uncomment if you would like to have Apple do all of the camera control
     //private var sceneViewCameraOption       = SceneView.Options.allowsCameraControl
@@ -69,7 +71,8 @@ struct ContentView: View {
 
             SceneView (
                 scene: aircraftScene,
-                pointOfView: aircraftScene.rootNode.childNode(withName: povName, recursively: true)
+                pointOfView: aircraftScene.rootNode.childNode(withName: povName, recursively: true),
+                delegate: aircraftSceneDelegate
             )
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
@@ -123,6 +126,15 @@ struct ContentView: View {
                         Image(systemName: cameraSwitch ? "video.fill" : "video")
                             .imageScale(.large)
                             .accessibility(label: Text("Camera Switch"))
+                            .padding()
+                    }
+
+                    Button( action: {
+                        aircraftSceneDelegate.showsStatistics.toggle()
+                    }) {
+                        Image(systemName: "gear")
+                            .imageScale(.large)
+                            .accessibility(label: Text("Settings"))
                             .padding()
                     }
                 }
