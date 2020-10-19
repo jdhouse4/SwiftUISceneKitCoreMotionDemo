@@ -120,9 +120,12 @@ struct ContentView: View {
                         }
                         if self.cameraSwitch == false {
                             povName = "shipCamera"
+                            //self.isMotionWorkng(motion: motionManager)
                         }
                         if self.cameraSwitch == true {
                             povName = "distantCamera"
+                            aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!.simdOrientation = motionManager.motionQuaternion
+                            //self.isMotionWorkng(motion: motionManager)
                         }
                         print("\(povName)")
                     }) {
@@ -135,6 +138,12 @@ struct ContentView: View {
             }
         }
         .statusBar(hidden: true)
+    }
+
+
+
+    private func isMotionWorkng(motion: MotionManager) {
+        print("quaternion: \(String(describing: motion.motionQuaternion))")
     }
 
 
