@@ -19,9 +19,9 @@ struct ContentView: View {
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
-    private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
+    //private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
 
-    @StateObject private var aircraftSceneDelegate       = AircraftSceneRendererDelegate()
+    @StateObject private var aircraft       = AircraftSceneKitScene()
 
     // SceneView.Options for affecting the SceneView.
     // Uncomment if you would like to have Apple do all of the camera control
@@ -33,12 +33,12 @@ struct ContentView: View {
             .onChanged { value in
                 self.isDragging = true
 
-                changeOrientation(of: aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!, with: value.translation)
+                changeOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!, with: value.translation)
             }
             .onEnded { value in
                 self.isDragging = false
 
-                updateOrientation(of: aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
+                updateOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
             }
     }
 
@@ -50,7 +50,7 @@ struct ContentView: View {
 
                 self.magnification = value
 
-                changeCameraFOV(of: (self.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!,
+                changeCameraFOV(of: (self.aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!,
                                 value: self.magnification)
             }
             .onEnded{ value in
@@ -70,13 +70,13 @@ struct ContentView: View {
             Color.black.edgesIgnoringSafeArea(.all)
 
             SceneView (
-                scene: aircraftScene,
-                pointOfView: aircraftScene.rootNode.childNode(withName: povName, recursively: true),
-                delegate: aircraftSceneDelegate
+                scene: aircraft.aircraftScene,
+                pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
+                delegate: aircraft
             )
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
-                resetOrientation(of: aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
+                resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
             })
 
             VStack() {
@@ -97,7 +97,7 @@ struct ContentView: View {
                         withAnimation{
                             self.sunlightSwitch.toggle()
                         }
-                        let sunlight = self.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
+                        let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
 
                         if self.sunlightSwitch == true {
                             sunlight!.intensity = 2000.0
@@ -121,6 +121,9 @@ struct ContentView: View {
                         if self.cameraSwitch == true {
                             povName = "distantCamera"
                         }
+
+                        // Need this to feed the camera being used back into the SCNSceneRendererDelegate.
+                        aircraft.aircraftCamera = povName
                         print("\(povName)")
                     }) {
                         Image(systemName: cameraSwitch ? "video.fill" : "video")
@@ -130,7 +133,7 @@ struct ContentView: View {
                     }
 
                     Button( action: {
-                        aircraftSceneDelegate.showsStatistics.toggle()
+                        aircraft.showsStatistics.toggle()
                     }) {
                         Image(systemName: "gear")
                             .imageScale(.large)

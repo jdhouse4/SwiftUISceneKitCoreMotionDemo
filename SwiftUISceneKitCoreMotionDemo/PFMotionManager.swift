@@ -151,13 +151,13 @@ class PFMotionManager
 
             //print("Device Motion is available.")
 
-            NotificationCenter.default.post(name: Notification.Name(rawValue: DeviceMotionState.DeviceMotionOn.rawValue), object: self)
+            //NotificationCenter.default.post(name: Notification.Name(rawValue: DeviceMotionState.DeviceMotionOn.rawValue), object: self)
         }
         else
         {
             print("Device Motion isn't available. You're in deep doo-doo!")
 
-            NotificationCenter.default.post(name: Notification.Name(rawValue: DeviceMotionState.DeviceMotionInoperative.rawValue), object: self)
+            //NotificationCenter.default.post(name: Notification.Name(rawValue: DeviceMotionState.DeviceMotionInoperative.rawValue), object: self)
         }
 
         if let sceneQ = tempSceneQuaternion
