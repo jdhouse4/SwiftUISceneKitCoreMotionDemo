@@ -12,6 +12,8 @@ import SceneKit
 
 
 struct ContentView: View {
+    @ObservedObject var motionManager       = MotionManager()
+
     @State private var sunlightSwitch       = true
     @State private var cameraSwitch         = true
     @State private var povName              = "distantCamera"
@@ -85,6 +87,10 @@ struct ContentView: View {
                 Text("And SceneView too")
                     .foregroundColor(Color.gray)
                     .font(.title2)
+
+                Text("motionManager: \(String(describing: motionManager.motionQuaternion))")
+                    .foregroundColor(Color.gray)
+                    .font(.body)
 
                 Spacer(minLength: 300)
 
@@ -203,8 +209,10 @@ struct ContentView: View {
     }
 }
 
+/*
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+*/

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E636620E253D456600576D7F /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E636620D253D456600576D7F /* MotionManager.swift */; };
+		E6366211253D49D000576D7F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = E6366210253D49D000576D7F /* art.scnassets */; };
 		E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */; };
 		E6840702253CE69800E621F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6840701253CE69800E621F1 /* ContentView.swift */; };
 		E6840704253CE69A00E621F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6840703253CE69A00E621F1 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E636620D253D456600576D7F /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		E6366210253D49D000576D7F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		E68406FC253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUISceneKitCoreMotionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISceneKitCoreMotionDemoApp.swift; sourceTree = "<group>"; };
 		E6840701253CE69800E621F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +58,8 @@
 			children = (
 				E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */,
 				E6840701253CE69800E621F1 /* ContentView.swift */,
+				E636620D253D456600576D7F /* MotionManager.swift */,
+				E6366210253D49D000576D7F /* art.scnassets */,
 				E6840703253CE69A00E621F1 /* Assets.xcassets */,
 				E6840708253CE69A00E621F1 /* Info.plist */,
 				E6840705253CE69A00E621F1 /* Preview Content */,
@@ -127,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6840707253CE69A00E621F1 /* Preview Assets.xcassets in Resources */,
+				E6366211253D49D000576D7F /* art.scnassets in Resources */,
 				E6840704253CE69A00E621F1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6840702253CE69800E621F1 /* ContentView.swift in Sources */,
+				E636620E253D456600576D7F /* MotionManager.swift in Sources */,
 				E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
