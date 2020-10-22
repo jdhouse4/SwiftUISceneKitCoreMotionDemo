@@ -56,7 +56,7 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
     {
-        //print("AircraftSceneRendererDelegate.renderer(_, time)")
+        print("AircraftSceneRendererDelegate.renderer(_, time)")
 
         //renderer.showsStatistics = showsStatistics
 

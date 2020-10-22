@@ -26,6 +26,7 @@ struct ContentView: View {
     // SceneView.Options for affecting the SceneView.
     // Uncomment if you would like to have Apple do all of the camera control
     //private var sceneViewCameraOption       = SceneView.Options.allowsCameraControl
+    private var sceneViewRenderContinuously = SceneView.Options.rendersContinuously
 
     // Don't forget to comment this is you are using .allowsCameraControl
     var drag: some Gesture {
@@ -72,6 +73,7 @@ struct ContentView: View {
             SceneView (
                 scene: aircraft.aircraftScene,
                 pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
+                options: sceneViewRenderContinuously,
                 delegate: aircraft
             )
             .gesture(exclusiveGesture)
