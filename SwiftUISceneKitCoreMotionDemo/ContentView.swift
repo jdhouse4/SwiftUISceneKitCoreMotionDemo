@@ -116,6 +116,7 @@ struct ContentView: View {
                     Button( action: {
                         withAnimation {
                             self.cameraSwitch.toggle()
+                            self.aircraft.changeCamera = true
                         }
                         if self.cameraSwitch == false {
                             povName = "shipCamera"

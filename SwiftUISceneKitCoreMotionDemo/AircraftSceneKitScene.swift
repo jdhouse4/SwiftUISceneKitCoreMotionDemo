@@ -17,6 +17,8 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
     var aircraftNode    = SCNNode()
     var aircraftCamera  = "distantCamera"
 
+    var changeCamera: Bool?
+
     var showsStatistics: Bool   = true
 
     var motionManager: MotionManager = MotionManager()
@@ -34,6 +36,7 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
         //self.motionManager      = MotionManager()
         self.motionManager.setupDeviceMotion()
         self.sceneQuaternion    = self.motionManager.motionQuaternion
+        self.changeCamera       = false
 
         //self.aircraftNode.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: .pi, y: 0.0, z: 0.0, duration: 2.0)))
 
@@ -47,6 +50,7 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
         //self.motionManager      = MotionManager()
         self.motionManager.setupDeviceMotion()
         self.sceneQuaternion    = self.motionManager.motionQuaternion
+        self.changeCamera       = false
 
         //self.aircraftNode.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: .pi, y: 0.0, z: 0.0, duration: 2.0)))
 
@@ -56,18 +60,29 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
     {
-        print("AircraftSceneRendererDelegate.renderer(_, time)")
+        //print("AircraftSceneRendererDelegate.renderer(_, time)")
 
         //renderer.showsStatistics = showsStatistics
 
-        if aircraftCamera == "shipCamera" {
-            print("Now using shipCamera")
-        }
 
-        if aircraftCamera == "distantCamera" {
-            print("Now using distantCamera")
-        }
+        if changeCamera == true {
+            print("\n\nchanging cameras\n\n")
 
+            changeCamera?.toggle()
+            motionManager.resetReferenceFrame()
+
+
+            if aircraftCamera == "shipCamera" {
+                print("Using shipCamera")
+                //motionManager.startDeviceMotion()
+            }
+
+            if aircraftCamera == "distantCamera" {
+                print("Using distantCamera")
+                //motionManager.stopMotion()
+            }
+
+        }
 
         // The main input pump for the simulator.
 
@@ -91,4 +106,12 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
         print("quaternion: \(String(describing: sceneQuaternion))")
 
     }
+
+
+
+    /*
+    func changeCamera(<#parameters#>) -> <#return type#> {
+        <#function body#>
+    }
+    */
 }
