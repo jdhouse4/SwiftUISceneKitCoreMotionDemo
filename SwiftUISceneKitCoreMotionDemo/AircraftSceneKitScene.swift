@@ -73,13 +73,15 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
 
 
             if aircraftCamera == "shipCamera" {
-                print("Using shipCamera")
+                print("Switching to shipCamera")
                 //motionManager.startDeviceMotion()
+                // Make a function call to CommanderCamera function
             }
 
             if aircraftCamera == "distantCamera" {
-                print("Using distantCamera")
+                print("Switching to distantCamera")
                 //motionManager.stopMotion()
+                // Make a function call to Orion360Camera
             }
 
         }
