@@ -95,6 +95,9 @@ struct ContentView: View {
 
                 HStack (spacing: 5) {
 
+                    //
+                    // Button for toggling the sunlight.
+                    //
                     Button( action: {
                         withAnimation{
                             self.sunlightSwitch.toggle()
@@ -113,21 +116,35 @@ struct ContentView: View {
                             .padding()
                     }
 
+
+                    //
+                    // Button for toggling cameras.
+                    //
                     Button( action: {
                         withAnimation {
                             self.cameraSwitch.toggle()
-                            self.aircraft.changeCamera = true
-                        }
-                        if self.cameraSwitch == false {
-                            povName = "shipCamera"
-                        }
-                        if self.cameraSwitch == true {
-                            povName = "distantCamera"
                         }
 
+                        self.aircraft.changeCamera = true
+
+                        print("\nContentView cameraSwitch")
+
+                        /*
+                        if self.cameraSwitch == false {
+                            //povName = "shipCamera"
+                            povName = self.aircraft.aircraftCamera
+                        }
+                        if self.cameraSwitch == true {
+                            //povName = "distantCamera"
+                            povName = self.aircraft.aircraftCamera
+                        }
+                         */
+
                         // Need this to feed the camera being used back into the SCNSceneRendererDelegate.
-                        aircraft.aircraftCamera = povName
-                        print("\(povName)")
+                        // aircraft.aircraftCamera = povName
+                        self.povName = self.aircraft.aircraftCamera
+                        print("\npovName: \(self.povName)")
+
                     }) {
                         Image(systemName: cameraSwitch ? "video.fill" : "video")
                             .imageScale(.large)
@@ -135,6 +152,10 @@ struct ContentView: View {
                             .padding()
                     }
 
+
+                    //
+                    // Button to show statistics.
+                    //
                     Button( action: {
                         aircraft.showsStatistics.toggle()
                     }) {
@@ -148,6 +169,27 @@ struct ContentView: View {
         }
         .statusBar(hidden: true)
     }
+
+
+
+    private func
+
+
+
+    private func changePOV(completionHandler: @escaping () -> Void) -> Void {
+
+    }
+
+    var completionHandlers = [() -> Void]()
+
+    func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
+        completionHandlers.append(completionHandler)
+    }
+
+    func doSomething() {
+        someFunctionWithEscapingClosure { self.x = 100 }
+    }
+
 
 
 
