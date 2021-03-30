@@ -34,13 +34,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     override init() {
         print("AircraftScenekitScene override initialized")
-        self.aircraftNode       = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
-        //self.motionManager      = MotionManager()
-        //self.motionManager.setupDeviceMotion()
-        //self.sceneQuaternion    = self.motionManager.motionQuaternion
-        //self.changeCamera       = false
-
-        //self.aircraftNode.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: .pi, y: 0.0, z: 0.0, duration: 2.0)))
+        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
         super.init()
     }
@@ -49,13 +43,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene initialized")
-        self.aircraftNode       = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
-        //self.motionManager      = MotionManager()
-        //self.motionManager.setupDeviceMotion()
-        //self.sceneQuaternion    = self.motionManager.motionQuaternion
-        //self.changeCamera       = false
-
-        //self.aircraftNode.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: .pi, y: 0.0, z: 0.0, duration: 2.0)))
+        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
         super.init(coder: coder)
     }

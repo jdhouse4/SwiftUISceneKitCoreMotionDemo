@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E60904042613CC1300C8ABF8 /* AircraftCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60904032613CC1300C8ABF8 /* AircraftCamera.swift */; };
 		E646891A253CFAD4008BE1CC /* AircraftSceneKitScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6468919253CFAD4008BE1CC /* AircraftSceneKitScene.swift */; };
 		E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */; };
 		E6840702253CE69800E621F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6840701253CE69800E621F1 /* ContentView.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E60904032613CC1300C8ABF8 /* AircraftCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftCamera.swift; sourceTree = "<group>"; };
 		E6468919253CFAD4008BE1CC /* AircraftSceneKitScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftSceneKitScene.swift; sourceTree = "<group>"; };
 		E68406FC253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUISceneKitCoreMotionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISceneKitCoreMotionDemoApp.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				E684070F253CE7F600E621F1 /* MotionManager.swift */,
 				E6840713253CE88A00E621F1 /* PFMotionManager.swift */,
 				E6840716253CE8E000E621F1 /* AircraftSceneRendererDelegate.swift */,
+				E60904032613CC1300C8ABF8 /* AircraftCamera.swift */,
 				E6840703253CE69A00E621F1 /* Assets.xcassets */,
 				E6840719253CEA1500E621F1 /* art.scnassets */,
 				E6840708253CE69A00E621F1 /* Info.plist */,
@@ -159,6 +162,7 @@
 				E6840717253CE8E000E621F1 /* AircraftSceneRendererDelegate.swift in Sources */,
 				E6840710253CE7F600E621F1 /* MotionManager.swift in Sources */,
 				E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */,
+				E60904042613CC1300C8ABF8 /* AircraftCamera.swift in Sources */,
 				E6840714253CE88A00E621F1 /* PFMotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
