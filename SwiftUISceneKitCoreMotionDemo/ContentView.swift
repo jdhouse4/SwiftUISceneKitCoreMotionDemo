@@ -23,7 +23,7 @@ struct ContentView: View {
     //private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
 
     @StateObject private var aircraft           = AircraftSceneKitScene()
-    //@StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
+    @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
 
 
     // SceneView.Options for affecting the SceneView.
@@ -77,7 +77,7 @@ struct ContentView: View {
                 scene: aircraft.aircraftScene,
                 pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
                 options: sceneViewRenderContinuously,
-                delegate: aircraft
+                delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
@@ -128,7 +128,7 @@ struct ContentView: View {
                             self.cameraSwitch.toggle()
                         }
 
-                        self.changePOV(scene: self.aircraft)
+                        self.changePOV(scene: self.aircraftDelegate)
 
                         //self.aircraft.changeCamera = true
 
@@ -162,7 +162,7 @@ struct ContentView: View {
                     // Button to show statistics.
                     //
                     Button( action: {
-                        aircraft.showsStatistics.toggle()
+                        //aircraft.showsStatistics.toggle()
                     }) {
                         Image(systemName: "gear")
                             .imageScale(.large)
@@ -179,9 +179,8 @@ struct ContentView: View {
     //
     // Escaping closure to push change from the AircraftScene function cycleCameras()
     //
-    // Because of the way SwiftUI works, the call to the AircraftScene function cycleCamera() wasn't being 'seen'.
-    // This fixed that. However, I need to think about the architecture and whether I want to AircraftScene to
-    // continue to inherit from SCNSceneRenderDelegate and break that out into a seperate implementation.
+    // Because of the way SwiftUI works, the call to the AircraftSceneRendererDelegate function cycleCamera()
+    // wasn't being 'seen'.
     //
     func modifyPOV(closure: @escaping () -> Void) {
         closure()
@@ -189,13 +188,13 @@ struct ContentView: View {
 
 
 
-    private func changePOV(scene: SCNScene) -> Void {
-        self.aircraft.changeCamera = true
+    private func changePOV(scene: SCNSceneRendererDelegate) -> Void {
+        self.aircraftDelegate.changeCamera = true
         print("\nContentView cameraSwitch")
 
         modifyPOV { [self] in
-            self.aircraft.cycleCameras()
-            self.povName = self.aircraft.aircraftCamera
+            self.aircraftDelegate.cycleCameras()
+            self.povName = self.aircraftDelegate.aircraftCamera
             print("self.povName: \(self.povName)")
         }
     }
