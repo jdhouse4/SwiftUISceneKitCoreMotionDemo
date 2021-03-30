@@ -187,6 +187,7 @@ struct ContentView: View {
         print("\nContentView cameraSwitch")
 
         modifyPOV { [self] in
+            self.aircraft.cycleCameras()
             self.povName = self.aircraft.aircraftCamera
             print("self.povName: \(self.povName)")
         }
