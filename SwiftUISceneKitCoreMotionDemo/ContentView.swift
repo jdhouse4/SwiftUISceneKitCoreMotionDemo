@@ -19,9 +19,11 @@ struct ContentView: View {
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
+
     //private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
 
     @StateObject private var aircraft       = AircraftSceneKitScene()
+
 
     // SceneView.Options for affecting the SceneView.
     // Uncomment if you would like to have Apple do all of the camera control
@@ -125,9 +127,11 @@ struct ContentView: View {
                             self.cameraSwitch.toggle()
                         }
 
-                        self.aircraft.changeCamera = true
+                        self.changePOV(scene: self.aircraft)
 
-                        print("\nContentView cameraSwitch")
+                        //self.aircraft.changeCamera = true
+
+                        //print("\nContentView cameraSwitch")
 
                         /*
                         if self.cameraSwitch == false {
@@ -142,8 +146,8 @@ struct ContentView: View {
 
                         // Need this to feed the camera being used back into the SCNSceneRendererDelegate.
                         // aircraft.aircraftCamera = povName
-                        self.povName = self.aircraft.aircraftCamera
-                        print("\npovName: \(self.povName)")
+                        //self.povName = self.aircraft.aircraftCamera
+                        //print("\npovName: \(self.povName)")
 
                     }) {
                         Image(systemName: cameraSwitch ? "video.fill" : "video")
@@ -172,24 +176,21 @@ struct ContentView: View {
 
 
 
-    private func
-
-
-
-    private func changePOV(completionHandler: @escaping () -> Void) -> Void {
-
+    func modifyPOV(closure: @escaping () -> Void) {
+        closure()
     }
 
-    var completionHandlers = [() -> Void]()
 
-    func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
-        completionHandlers.append(completionHandler)
+
+    private func changePOV(scene: SCNScene) -> Void {
+        self.aircraft.changeCamera = true
+        print("\nContentView cameraSwitch")
+
+        modifyPOV { [self] in
+            self.povName = self.aircraft.aircraftCamera
+            print("self.povName: \(self.povName)")
+        }
     }
-
-    func doSomething() {
-        someFunctionWithEscapingClosure { self.x = 100 }
-    }
-
 
 
 
@@ -262,6 +263,9 @@ struct ContentView: View {
         }
     }
 }
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
