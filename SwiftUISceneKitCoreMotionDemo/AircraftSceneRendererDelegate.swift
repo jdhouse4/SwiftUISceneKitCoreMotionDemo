@@ -10,7 +10,7 @@ import SceneKit
 
 
 
-class AircraftSceneRendererDelegate: SCNScene, SCNSceneRendererDelegate, ObservableObject {
+class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
     var aircraft = SCNScene(named: "art.scnassets/ship.scn")!
     var aircraftNode: SCNNode
@@ -27,14 +27,14 @@ class AircraftSceneRendererDelegate: SCNScene, SCNSceneRendererDelegate, Observa
         super.init()
     }
 
-
-    required init?(coder: NSCoder) {
+    /*
+    required init?() {
         self.aircraftNode = aircraft.rootNode.childNode(withName: "shipNode", recursively: true)!
         self.aircraftNode.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: .pi, y: 0.0, z: 0.0, duration: 2.0)))
 
-        super .init(coder: coder)
+        super .init()
     }
-
+    */
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
     {

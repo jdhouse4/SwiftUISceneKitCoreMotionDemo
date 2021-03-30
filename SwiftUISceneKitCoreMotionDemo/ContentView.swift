@@ -22,7 +22,8 @@ struct ContentView: View {
 
     //private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
 
-    @StateObject private var aircraft       = AircraftSceneKitScene()
+    @StateObject private var aircraft           = AircraftSceneKitScene()
+    //@StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
 
 
     // SceneView.Options for affecting the SceneView.
@@ -175,7 +176,13 @@ struct ContentView: View {
     }
 
 
-
+    //
+    // Escaping closure to push change from the AircraftScene function cycleCameras()
+    //
+    // Because of the way SwiftUI works, the call to the AircraftScene function cycleCamera() wasn't being 'seen'.
+    // This fixed that. However, I need to think about the architecture and whether I want to AircraftScene to
+    // continue to inherit from SCNSceneRenderDelegate and break that out into a seperate implementation.
+    //
     func modifyPOV(closure: @escaping () -> Void) {
         closure()
     }

@@ -68,41 +68,6 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
         //renderer.showsStatistics = showsStatistics
 
         cycleCameras()
-        /*if changeCamera == true {
-            print("\n\nAircraftSceneKitScene Changing cameras")
-
-            changeCamera.toggle()
-
-            cameraIndex += 1
-            if cameraIndex > 1 {
-                cameraIndex = 0
-            }
-            print("AircraftScenekitScene camera index = \(cameraIndex)")
-
-            motionManager.resetReferenceFrame()
-
-            if cameraIndex == 0 {
-                aircraftCamera = "distantCamera"
-                print("Switching to distantCamera")
-            } else if cameraIndex == 1 {
-                aircraftCamera = "shipCamera"
-                print("Switching to shipCamera")
-            }
-
-            /*
-            if aircraftCamera == "shipCamera" {
-                print("Switching to shipCamera")
-                //motionManager.startDeviceMotion()
-                // Make a function call to CommanderCamera function
-            }
-
-            if aircraftCamera == "distantCamera" {
-                print("Switching to distantCamera")
-                //motionManager.stopMotion()
-                // Make a function call to Orion360Camera
-            }
-             */
-        }*/
 
         // The main input pump for the simulator.
 
@@ -127,7 +92,6 @@ class AircraftSceneKitScene: SCNScene, SCNSceneRendererDelegate, ObservableObjec
 
 
     }
-
 
 
 
