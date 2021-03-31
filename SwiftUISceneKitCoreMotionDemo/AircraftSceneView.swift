@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
+//  AircraftSceneView.swift
 //  SwiftUISceneKitCoreMotionDemo
 //
-//  Created by James Hillhouse IV on 10/18/20.
+//  Created by James Hillhouse IV on 3/30/21.
 //
 
 import SwiftUI
@@ -11,21 +11,23 @@ import SceneKit
 
 
 
-struct ContentView: View {
-    @State private var sunlightSwitch       = true
-    @State private var cameraSwitch         = true
-
-    /*
+struct AircraftSceneView: View {
     @State private var povName              = "distantCamera"
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
 
+    @Binding private var sunlightOn: Bool
+
+
     //private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
 
     @StateObject private var aircraft           = AircraftSceneKitScene()
     @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
+
+    // Bindings
+    //@Binding var
 
 
     // SceneView.Options for affecting the SceneView.
@@ -68,127 +70,34 @@ struct ContentView: View {
     var exclusiveGesture: some Gesture {
         ExclusiveGesture(drag, magnify)
     }
-    */
+
 
 
     var body: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-
-            AircraftSceneView()
-
-            /*
-            SceneView (
-                scene: aircraft.aircraftScene,
-                pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
-                options: sceneViewRenderContinuously,
-                delegate: aircraftDelegate
-            )
-            .gesture(exclusiveGesture)
-            .onTapGesture(count: 2, perform: {
-                resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
-            })
-            */
-
-            VStack() {
-                Text("Hello, SwiftUI!").multilineTextAlignment(.leading).padding()
-                    .foregroundColor(Color.gray)
-
-                    .font(.largeTitle)
-
-                Text("And SceneView too")
-                    .foregroundColor(Color.gray)
-                    .font(.title2)
-
-                Spacer(minLength: 300)
-
-                HStack (spacing: 5) {
-
-
-                    //
-                    // Button for toggling the sunlight.
-                    //
-                    Button( action: {
-                        withAnimation{
-                            self.sunlightSwitch.toggle()
-                        }
-                        //let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
-
-
-                        //
-                        // Add links for toggling sunlight in AircraftSceneView
-                        //
-
-
-                        if self.sunlightSwitch == true {
-                            sunlight!.intensity = 2000.0
-                        } else {
-                            sunlight!.intensity = 0.0
-                        }
-                    }) {
-                        Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Light Switch"))
-                            .padding()
-                    }
-
-
-                    //
-                    // Button for toggling cameras.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.cameraSwitch.toggle()
-                        }
-
-                        self.changePOV(scene: self.aircraftDelegate)
-
-                        //self.aircraft.changeCamera = true
-
-                        //print("\nContentView cameraSwitch")
-
-                        /*
-                        if self.cameraSwitch == false {
-                            //povName = "shipCamera"
-                            povName = self.aircraft.aircraftCamera
-                        }
-                        if self.cameraSwitch == true {
-                            //povName = "distantCamera"
-                            povName = self.aircraft.aircraftCamera
-                        }
-                         */
-
-                        // Need this to feed the camera being used back into the SCNSceneRendererDelegate.
-                        // aircraft.aircraftCamera = povName
-                        //self.povName = self.aircraft.aircraftCamera
-                        //print("\npovName: \(self.povName)")
-
-                    }) {
-                        Image(systemName: cameraSwitch ? "video.fill" : "video")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Camera Switch"))
-                            .padding()
-                    }
-
-
-                    //
-                    // Button to show statistics.
-                    //
-                    Button( action: {
-                        //aircraft.showsStatistics.toggle()
-                    }) {
-                        Image(systemName: "gear")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Settings"))
-                            .padding()
-                    }
-                }
-            }
-        }
-        .statusBar(hidden: true)
+        SceneView (
+            scene: aircraft.aircraftScene,
+            pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
+            options: sceneViewRenderContinuously,
+            delegate: aircraftDelegate
+        )
+        .gesture(exclusiveGesture)
+        .onTapGesture(count: 2, perform: {
+            resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
+        })
     }
 
-    /*
+
+    func toggleSunlight() -> Void {
+        let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
+
+        if self.sunlightOn == true {
+            sunlight!.intensity = 2000.0
+        } else {
+            sunlight!.intensity = 0.0
+        }
+    }
+
+
     //
     // Escaping closure to push change from the AircraftScene function cycleCameras()
     //
@@ -282,14 +191,14 @@ struct ContentView: View {
             self.magnification        = 1.0
         }
     }
- */
+
 }
 
 
 
 
-struct ContentView_Previews: PreviewProvider {
+struct AircraftSceneView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        AircraftSceneView()
     }
 }

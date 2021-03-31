@@ -15,20 +15,13 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     var aircraftScene   = SCNScene(named: "art.scnassets/ship.scn")!
     var aircraftNode    = SCNNode()
-    var aircraftCamera  = "distantCamera"
+    var aircraftCamera  = AircraftCamera.distantCamera.rawValue
+    
 
     var changeCamera: Bool                  = false
     var cameraIndex: Int                    = 0
 
     //var showsStatistics: Bool               = true
-
-    //var motionManager: MotionManager        = MotionManager()
-    //var sceneQuaternion: simd_quatf?
-
-    //var _previousUpdateTime: TimeInterval   = 0.0
-    //var _deltaTime: TimeInterval            = 0.0
-
-    //var gyroReset: Bool                     = false
 
 
 
@@ -62,11 +55,11 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
             print("AircraftScenekitScene camera index = \(cameraIndex)")
 
             if cameraIndex == 0 {
-                aircraftCamera = "distantCamera"
-                print("Switching to distantCamera")
+                aircraftCamera = AircraftCamera.distantCamera.rawValue
+                print("Switching to \(AircraftCamera.distantCamera.rawValue)")
             } else if cameraIndex == 1 {
-                aircraftCamera = "shipCamera"
-                print("Switching to shipCamera")
+                aircraftCamera = AircraftCamera.shipCamera.rawValue
+                print("Switching to \(AircraftCamera.shipCamera.rawValue)")
             }
         }
     }
