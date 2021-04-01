@@ -12,10 +12,10 @@ import SceneKit
 
 
 struct ContentView: View {
+    /*
     @State private var sunlightSwitch       = true
     @State private var cameraSwitch         = true
 
-    /*
     @State private var povName              = "distantCamera"
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
@@ -76,6 +76,7 @@ struct ContentView: View {
             Color.black.edgesIgnoringSafeArea(.all)
 
             AircraftSceneView()
+            //AircraftSceneView(sunlightOn: $sunlightSwitch, povToggle: $cameraSwitch)
 
             /*
             SceneView (
@@ -102,6 +103,7 @@ struct ContentView: View {
 
                 Spacer(minLength: 300)
 
+                /*
                 HStack (spacing: 5) {
 
 
@@ -112,19 +114,24 @@ struct ContentView: View {
                         withAnimation{
                             self.sunlightSwitch.toggle()
                         }
+
+                        //self.sunlightSwitch = false
+
                         //let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
 
 
                         //
                         // Add links for toggling sunlight in AircraftSceneView
                         //
+                        
 
-
+                        /*
                         if self.sunlightSwitch == true {
                             sunlight!.intensity = 2000.0
                         } else {
                             sunlight!.intensity = 0.0
                         }
+                        */
                     }) {
                         Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
                             .imageScale(.large)
@@ -141,7 +148,9 @@ struct ContentView: View {
                             self.cameraSwitch.toggle()
                         }
 
-                        self.changePOV(scene: self.aircraftDelegate)
+
+
+                        //self.changePOV(scene: self.aircraftDelegate)
 
                         //self.aircraft.changeCamera = true
 
@@ -183,6 +192,7 @@ struct ContentView: View {
                             .padding()
                     }
                 }
+                */
             }
         }
         .statusBar(hidden: true)
