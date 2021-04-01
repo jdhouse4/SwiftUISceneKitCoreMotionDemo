@@ -89,8 +89,9 @@ struct AircraftSceneView: View {
             })
 
             Spacer()
-            
+
             HStack (spacing: 5) {
+
                 //
                 // Button for toggling the sunlight.
                 //
@@ -100,24 +101,6 @@ struct AircraftSceneView: View {
                     }
 
                     self.toggleSunlight()
-
-                    //self.sunlightSwitch = false
-
-                    //let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
-
-
-                    //
-                    // Add links for toggling sunlight in AircraftSceneView
-                    //
-
-
-                    /*
-                    if self.sunlightSwitch == true {
-                        sunlight!.intensity = 2000.0
-                    } else {
-                        sunlight!.intensity = 0.0
-                    }
-                    */
                 }) {
                     Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
                         .imageScale(.large)
@@ -134,30 +117,7 @@ struct AircraftSceneView: View {
                         self.cameraSwitch.toggle()
                     }
 
-
-
                     self.changePOV(scene: self.aircraftDelegate)
-
-                    //self.aircraft.changeCamera = true
-
-                    //print("\nContentView cameraSwitch")
-
-                    /*
-                    if self.cameraSwitch == false {
-                        //povName = "shipCamera"
-                        povName = self.aircraft.aircraftCamera
-                    }
-                    if self.cameraSwitch == true {
-                        //povName = "distantCamera"
-                        povName = self.aircraft.aircraftCamera
-                    }
-                     */
-
-                    // Need this to feed the camera being used back into the SCNSceneRendererDelegate.
-                    // aircraft.aircraftCamera = povName
-                    //self.povName = self.aircraft.aircraftCamera
-                    //print("\npovName: \(self.povName)")
-
                 }) {
                     Image(systemName: cameraSwitch ? "video.fill" : "video")
                         .imageScale(.large)
@@ -170,7 +130,7 @@ struct AircraftSceneView: View {
                 // Button to show statistics.
                 //
                 Button( action: {
-                    //aircraft.showsStatistics.toggle()
+                    aircraftDelegate.showsStatistics.toggle()
                 }) {
                     Image(systemName: "gear")
                         .imageScale(.large)
@@ -178,9 +138,7 @@ struct AircraftSceneView: View {
                         .padding()
                 }
             }
-
         }
-
     }
 
 
@@ -293,10 +251,10 @@ struct AircraftSceneView: View {
 
 
 
-/*
+
 struct AircraftSceneView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftSceneView(sunlightOn: true, povToggle: false)
+        AircraftSceneView()
     }
 }
-*/
+
