@@ -114,9 +114,9 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         // Change Orientation with Device Motion
         //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
 
-        node.simdOrientation    = simd_quatf(ix: -Float(motionManager.deviceMotion!.attitude.quaternion.x),
-                                             iy: -Float(motionManager.deviceMotion!.attitude.quaternion.y),
-                                             iz: -Float(motionManager.deviceMotion!.attitude.quaternion.z),
+        node.simdOrientation    = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
+                                             iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
+                                             iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
                                              r:   Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
     }
 
