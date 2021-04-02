@@ -14,6 +14,7 @@ import SceneKit
 struct AircraftSceneView: View {
     @State private var sunlightSwitch       = true
     @State private var cameraSwitch         = true
+    @State private var settingsSwitch       = false
     @State private var povName              = "distantCamera"
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
@@ -27,9 +28,6 @@ struct AircraftSceneView: View {
 
     @StateObject private var aircraft           = AircraftSceneKitScene()
     @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
-
-    // Bindings
-    //@Binding var
 
 
     // SceneView.Options for affecting the SceneView.
@@ -88,55 +86,62 @@ struct AircraftSceneView: View {
                 resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
             })
 
-            Spacer()
+            VStack {
+                Spacer()
 
-            HStack (spacing: 5) {
+                HStack (spacing: 5) {
 
-                //
-                // Button for toggling the sunlight.
-                //
-                Button( action: {
-                    withAnimation{
-                        self.sunlightSwitch.toggle()
+                    //
+                    // Button for toggling the sunlight.
+                    //
+                    Button( action: {
+                        withAnimation{
+                            self.sunlightSwitch.toggle()
+                        }
+
+                        self.toggleSunlight()
+                    }) {
+                        Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
+                            .imageScale(.large)
+                            .accessibility(label: Text("Light Switch"))
+                            .padding()
                     }
 
-                    self.toggleSunlight()
-                }) {
-                    Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
-                        .imageScale(.large)
-                        .accessibility(label: Text("Light Switch"))
-                        .padding()
-                }
 
+                    //
+                    // Button for toggling cameras.
+                    //
+                    Button( action: {
+                        withAnimation {
+                            self.cameraSwitch.toggle()
+                        }
 
-                //
-                // Button for toggling cameras.
-                //
-                Button( action: {
-                    withAnimation {
-                        self.cameraSwitch.toggle()
+                        self.changePOV(scene: self.aircraftDelegate)
+
+                    }) {
+                        Image(systemName: cameraSwitch ? "video.fill" : "video")
+                            .imageScale(.large)
+                            .accessibility(label: Text("Camera Switch"))
+                            .padding()
                     }
 
-                    self.changePOV(scene: self.aircraftDelegate)
-                }) {
-                    Image(systemName: cameraSwitch ? "video.fill" : "video")
-                        .imageScale(.large)
-                        .accessibility(label: Text("Camera Switch"))
-                        .padding()
-                }
 
+                    //
+                    // Button to show statistics.
+                    //
+                    Button( action: {
+                        withAnimation {
+                            self.settingsSwitch.toggle()
+                        }
 
-                //
-                // Button to show statistics.
-                //
-                Button( action: {
-                    aircraftDelegate.showsStatistics.toggle()
-                }) {
-                    Image(systemName: "gear")
-                        .imageScale(.large)
-                        .accessibility(label: Text("Settings"))
-                        .padding()
-                }
+                        aircraftDelegate.showsStatistics.toggle()
+                    }) {
+                        Image(systemName: settingsSwitch ? "gearshape" : "gearshape.fill")
+                            .imageScale(.large)
+                            .accessibility(label: Text("Settings"))
+                            .padding()
+                    }
+                }.padding(.bottom, settingsSwitch ? 120 : 5)
             }
         }
     }
@@ -170,9 +175,15 @@ struct AircraftSceneView: View {
         print("\nContentView cameraSwitch")
 
         modifyPOV { [self] in
+            // This calls the delegate function to change cameras.
             self.aircraftDelegate.cycleCameras()
+
+            // This sets povName String that will be read in the next call to initialize SceneView.
             self.povName = self.aircraftDelegate.aircraftCamera
             print("self.povName: \(self.povName)")
+
+            // This (hopefully) sets the camera node that will be manipulated by the motion manager.
+            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
         }
     }
 

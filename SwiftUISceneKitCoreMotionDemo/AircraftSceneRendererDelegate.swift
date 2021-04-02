@@ -12,12 +12,13 @@ import SceneKit
 
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
-    var aircraftCamera = "distantCamera"
+    var aircraftCamera                      = AircraftCamera.distantCamera.rawValue
+    var aircraftCameraNode: SCNNode?
 
     var changeCamera: Bool                  = false
     var cameraIndex: Int                    = 0
 
-    var showsStatistics: Bool               = true
+    var showsStatistics: Bool               = false
 
     var motionManager: MotionManager        = MotionManager()
     var sceneQuaternion: simd_quatf?
@@ -41,9 +42,11 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
     {
-        //renderer.showsStatistics = showsStatistics
+        renderer.showsStatistics = showsStatistics
+
 
         cycleCameras()
+
 
         // The main input pump for the simulator.
 
@@ -64,9 +67,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         //
         motionManager.updateAttitude()
         sceneQuaternion = motionManager.motionQuaternion
-        //prprint("quaternion: \(String(describing: sceneQuaternion))")
+        //print("quaternion: \(String(describing: sceneQuaternion))")
 
-
+        if cameraIndex == 0 {
+            if aircraftCameraNode != nil {
+                self.updateAttitude(of: aircraftCameraNode!)
+            }
+        }
     }
 
 
@@ -86,27 +93,31 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             motionManager.resetReferenceFrame()
 
             if cameraIndex == 0 {
-                aircraftCamera = "distantCamera"
-                print("Switching to distantCamera")
+                aircraftCamera = AircraftCamera.distantCamera.rawValue
+                print("Switching to \(AircraftCamera.distantCamera.rawValue)")
             } else if cameraIndex == 1 {
-                aircraftCamera = "shipCamera"
-                print("Switching to shipCamera")
+                aircraftCamera = AircraftCamera.shipCamera.rawValue
+                print("Switching to \(AircraftCamera.shipCamera.rawValue)")
             }
-
-            /*
-            if aircraftCamera == "shipCamera" {
-                print("Switching to shipCamera")
-                //motionManager.startDeviceMotion()
-                // Make a function call to CommanderCamera function
-            }
-
-            if aircraftCamera == "distantCamera" {
-                print("Switching to distantCamera")
-                //motionManager.stopMotion()
-                // Make a function call to Orion360Camera
-            }
-             */
         }
+    }
+
+
+
+    func updateAttitude(of node: SCNNode) -> Void {
+        //print("OrionChase360Camera")
+
+        // 1. Set the zoom level that will be used for the chaseCameraNode in a bit.
+        // TODO: Zoom now ranges from 1.0 to the negatives. Need to have a touch pinch zoom that will range from equate to 1 through -3.
+        //let chase360CameraZoom          = Float(0.0) // Before Swift 3, default zoom was 6.0, closest zoom was 8.625, farthest zoom was 0.0
+
+        // Change Orientation with Device Motion
+        //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
+
+        node.simdOrientation    = simd_quatf(ix: -Float(motionManager.deviceMotion!.attitude.quaternion.x),
+                                             iy: -Float(motionManager.deviceMotion!.attitude.quaternion.y),
+                                             iz: -Float(motionManager.deviceMotion!.attitude.quaternion.z),
+                                             r:   Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
     }
 
 }

@@ -76,20 +76,6 @@ struct ContentView: View {
             Color.black.edgesIgnoringSafeArea(.all)
 
             AircraftSceneView()
-            //AircraftSceneView(sunlightOn: $sunlightSwitch, povToggle: $cameraSwitch)
-
-            /*
-            SceneView (
-                scene: aircraft.aircraftScene,
-                pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
-                options: sceneViewRenderContinuously,
-                delegate: aircraftDelegate
-            )
-            .gesture(exclusiveGesture)
-            .onTapGesture(count: 2, perform: {
-                resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
-            })
-            */
 
             VStack() {
                 Text("Hello, SwiftUI!").multilineTextAlignment(.leading).padding()
@@ -102,97 +88,6 @@ struct ContentView: View {
                     .font(.title2)
 
                 Spacer(minLength: 300)
-
-                /*
-                HStack (spacing: 5) {
-
-
-                    //
-                    // Button for toggling the sunlight.
-                    //
-                    Button( action: {
-                        withAnimation{
-                            self.sunlightSwitch.toggle()
-                        }
-
-                        //self.sunlightSwitch = false
-
-                        //let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
-
-
-                        //
-                        // Add links for toggling sunlight in AircraftSceneView
-                        //
-                        
-
-                        /*
-                        if self.sunlightSwitch == true {
-                            sunlight!.intensity = 2000.0
-                        } else {
-                            sunlight!.intensity = 0.0
-                        }
-                        */
-                    }) {
-                        Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Light Switch"))
-                            .padding()
-                    }
-
-
-                    //
-                    // Button for toggling cameras.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.cameraSwitch.toggle()
-                        }
-
-
-
-                        //self.changePOV(scene: self.aircraftDelegate)
-
-                        //self.aircraft.changeCamera = true
-
-                        //print("\nContentView cameraSwitch")
-
-                        /*
-                        if self.cameraSwitch == false {
-                            //povName = "shipCamera"
-                            povName = self.aircraft.aircraftCamera
-                        }
-                        if self.cameraSwitch == true {
-                            //povName = "distantCamera"
-                            povName = self.aircraft.aircraftCamera
-                        }
-                         */
-
-                        // Need this to feed the camera being used back into the SCNSceneRendererDelegate.
-                        // aircraft.aircraftCamera = povName
-                        //self.povName = self.aircraft.aircraftCamera
-                        //print("\npovName: \(self.povName)")
-
-                    }) {
-                        Image(systemName: cameraSwitch ? "video.fill" : "video")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Camera Switch"))
-                            .padding()
-                    }
-
-
-                    //
-                    // Button to show statistics.
-                    //
-                    Button( action: {
-                        //aircraft.showsStatistics.toggle()
-                    }) {
-                        Image(systemName: "gear")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Settings"))
-                            .padding()
-                    }
-                }
-                */
             }
         }
         .statusBar(hidden: true)
