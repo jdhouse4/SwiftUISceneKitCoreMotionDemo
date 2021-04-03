@@ -20,8 +20,6 @@ struct AircraftSceneView: View {
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
-    @State private var hackCameraNodeSwitch = true
-
     @StateObject private var aircraft           = AircraftSceneKitScene()
     @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
 
@@ -78,6 +76,7 @@ struct AircraftSceneView: View {
             )
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
+                resetCameraFOV(of: (self.aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!)
                 resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
@@ -258,6 +257,11 @@ struct AircraftSceneView: View {
         }
     }
 
+
+
+    private func resetCameraFOV(of camera: SCNCamera) {
+        camera.fieldOfView = 60
+    }
 }
 
 

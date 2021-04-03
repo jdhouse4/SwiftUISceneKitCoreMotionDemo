@@ -70,9 +70,15 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         sceneQuaternion = motionManager.motionQuaternion
         //print("quaternion: \(String(describing: sceneQuaternion))")
 
+
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
-                self.updateOrientation(of: aircraftCameraNode!)
+                self.updateVehicleOrientation(of: aircraftCameraNode!)
+            }
+        }
+        if cameraIndex == 1 {
+            if aircraftCameraNode != nil {
+                self.updateCameraOrientation(of: aircraftCameraNode!)
             }
         }
     }
@@ -107,12 +113,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
 
     func updateOrientation(of node: SCNNode) -> Void {
-        //print("OrionChase360Camera")
-
-        // 1. Set the zoom level that will be used for the chaseCameraNode in a bit.
-        // TODO: Zoom now ranges from 1.0 to the negatives. Need to have a touch pinch zoom that will range from equate to 1 through -3.
-        //let chase360CameraZoom          = Float(0.0) // Before Swift 3, default zoom was 6.0, closest zoom was 8.625, farthest zoom was 0.0
-
         // Change Orientation with Device Motion
         //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
 
@@ -121,6 +121,39 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                                              iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
                                              iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
                                              r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
+    }
+
+
+
+    func updateVehicleOrientation(of node: SCNNode) -> Void {
+        // Change Orientation with Device Motion
+        //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
+
+        #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
+        node.simdOrientation    = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
+                                             iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
+                                             iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
+                                             r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
+    }
+
+
+
+    func updateCameraOrientation(of node: SCNNode) -> Void {
+        // Change Orientation with Device Motion
+
+        #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
+        //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
+
+        node.simdOrientation    = simd_quatf(angle: -.pi,
+                                             axis: simd_normalize(simd_float3(x: 0, y: 1, z: 0))).normalized
+
+
+        let motionSimdQuatf     = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
+                                             iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
+                                             iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
+                                             r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
+
+        node.simdOrientation   = simd_mul(node.simdOrientation, motionSimdQuatf).normalized
     }
 
 }
