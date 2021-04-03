@@ -6,8 +6,6 @@
 //  Copyright © 2020 PortableFrontier. All rights reserved.
 //
 
-import Foundation
-import Combine
 import CoreMotion
 import simd
 
@@ -124,42 +122,3 @@ class MotionManager: ObservableObject {
         }
     }
 }
-
-
-
-/*
- func startContinuousDeviceMotion() {
-     if motionManager.isDeviceMotionAvailable {
-         self.motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
-         //self.motionManager.showsDeviceMovementDisplay = true
-
-         /*
-         self.motionManager.startDeviceMotionUpdates()
-
-         if let tempDeviceMotion = self.motionManager.deviceMotion {
-             self.deviceMotion       = tempDeviceMotion
-             self.referenceFrame     = tempDeviceMotion.attitude
-             let deviceQ             = tempDeviceMotion.attitude.quaternion
-             self.motionQuaternion   = simd_quatf(ix: Float(deviceQ.x), iy: Float(deviceQ.y), iz: Float(deviceQ.z), r: Float(deviceQ.w))
-         }
-         */
-
-
-         self.motionManager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: {
-             myDeviceMotion, error in
-             if let tempDeviceMotion     = myDeviceMotion {
-                 self.deviceMotion       = tempDeviceMotion
-                 self.referenceFrame     = tempDeviceMotion.attitude
-                 let deviceQ             = tempDeviceMotion.attitude.quaternion
-                 self.motionQuaternion   = simd_quatf(ix: Float(deviceQ.x), iy: Float(deviceQ.y), iz: Float(deviceQ.z), r: Float(deviceQ.w)).normalized
-             }
-             print("dviceMotion: \(String(describing: self.deviceMotion))")
-         })
-
-     }
- }
-
-
-
-
- */

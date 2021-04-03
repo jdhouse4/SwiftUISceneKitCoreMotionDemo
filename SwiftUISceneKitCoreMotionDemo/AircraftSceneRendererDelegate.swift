@@ -4,7 +4,6 @@
 //
 //  Created by James Hillhouse IV on 10/17/20.
 //
-
 import SceneKit
 
 
@@ -45,12 +44,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     {
         renderer.showsStatistics = showsStatistics
 
-        // Probably don't wont to hit this function at 60 Hz...
-        //cycleCameras()
-
 
         // The main input pump for the simulator.
-
         if _previousUpdateTime == 0.0
         {
             _previousUpdateTime     = time
@@ -67,9 +62,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         // MARK: Update the attitude.quaternion from device manager
         //
         motionManager.updateAttitude()
-        sceneQuaternion = motionManager.motionQuaternion
-        //print("quaternion: \(String(describing: sceneQuaternion))")
-
 
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
@@ -106,33 +98,28 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                 aircraftCamera = AircraftCamera.shipCamera.rawValue
                 print("Switching to \(AircraftCamera.shipCamera.rawValue)")
             }
-
-            #warning("Set aircraftCameraNode here?")
         }
     }
 
 
     func updateExteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
-        // Change Orientation with Device Motion
-        //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
 
-        #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
+        // Change Orientation with Device Motion
         node.simdOrientation    = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
                                              iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
                                              iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
                                              r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
+
     }
 
 
 
     func updateInteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
+
         // Change Orientation with Device Motion
-
-        #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
-        //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
-
         node.simdOrientation    = simd_quatf(angle: -.pi,
                                              axis: simd_normalize(simd_float3(x: 0, y: 1, z: 0))).normalized
+
 
 
         let motionSimdQuatf     = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
@@ -142,5 +129,4 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
         node.simdOrientation   = simd_mul(node.simdOrientation, motionSimdQuatf).normalized
     }
-
 }
