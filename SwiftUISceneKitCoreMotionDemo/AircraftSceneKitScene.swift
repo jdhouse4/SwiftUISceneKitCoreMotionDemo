@@ -18,12 +18,6 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     var aircraftCamera  = AircraftCamera.distantCamera.rawValue
     
 
-    //var changeCamera: Bool                  = false
-    //var cameraIndex: Int                    = 0
-
-    //var showsStatistics: Bool               = true
-
-
 
     override init() {
         print("AircraftScenekitScene override initialized")
@@ -40,29 +34,4 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         super.init(coder: coder)
     }
-
-    /*
-    func cycleCameras() -> Void {
-        if changeCamera == true {
-            print("\n\nAircraftSceneKitScene Changing cameras")
-
-            changeCamera.toggle()
-
-            cameraIndex += 1
-            if cameraIndex > 1 {
-                cameraIndex = 0
-            }
-            print("AircraftScenekitScene camera index = \(cameraIndex)")
-
-            if cameraIndex == 0 {
-                aircraftCamera = AircraftCamera.distantCamera.rawValue
-                print("Switching to \(AircraftCamera.distantCamera.rawValue)")
-            } else if cameraIndex == 1 {
-                aircraftCamera = AircraftCamera.shipCamera.rawValue
-                print("Switching to \(AircraftCamera.shipCamera.rawValue)")
-            }
-        }
-    }
-     */
-
 }

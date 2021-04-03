@@ -73,12 +73,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
-                self.updateVehicleOrientation(of: aircraftCameraNode!)
+                self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode!)
             }
         }
         if cameraIndex == 1 {
             if aircraftCameraNode != nil {
-                self.updateCameraOrientation(of: aircraftCameraNode!)
+                self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode!)
             }
         }
     }
@@ -112,7 +112,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     }
 
 
-    func updateOrientation(of node: SCNNode) -> Void {
+    func updateExteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
         // Change Orientation with Device Motion
         //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
 
@@ -125,20 +125,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
 
 
-    func updateVehicleOrientation(of node: SCNNode) -> Void {
-        // Change Orientation with Device Motion
-        //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
-
-        #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
-        node.simdOrientation    = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
-                                             iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
-                                             iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
-                                             r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
-    }
-
-
-
-    func updateCameraOrientation(of node: SCNNode) -> Void {
+    func updateInteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
         // Change Orientation with Device Motion
 
         #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
