@@ -12,6 +12,7 @@ import SceneKit
 
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
+    var aircraftScene: SCNScene?
     var aircraftCamera                      = AircraftCamera.distantCamera.rawValue
     var aircraftCameraNode: SCNNode?
 
@@ -29,11 +30,11 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     var gyroReset: Bool                     = false
 
 
-
     override init() {
         print("AircraftSceneRendererDelegate override initialized")
         self.motionManager.setupDeviceMotion()
         self.sceneQuaternion    = self.motionManager.motionQuaternion
+
 
         super.init()
     }
@@ -44,8 +45,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     {
         renderer.showsStatistics = showsStatistics
 
-
-        cycleCameras()
+        // Probably don't wont to hit this function at 60 Hz...
+        //cycleCameras()
 
 
         // The main input pump for the simulator.
@@ -71,7 +72,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
-                self.updateAttitude(of: aircraftCameraNode!)
+                self.updateOrientation(of: aircraftCameraNode!)
             }
         }
     }
@@ -80,7 +81,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     func cycleCameras() -> Void {
         if changeCamera == true {
-            print("\n\nAircraftSceneKitScene Changing cameras")
+            print("\n\nAircraftSceneRendererDelegate Changing cameras")
 
             changeCamera.toggle()
 
@@ -99,12 +100,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                 aircraftCamera = AircraftCamera.shipCamera.rawValue
                 print("Switching to \(AircraftCamera.shipCamera.rawValue)")
             }
+
+            #warning("Set aircraftCameraNode here?")
         }
     }
 
 
-
-    func updateAttitude(of node: SCNNode) -> Void {
+    func updateOrientation(of node: SCNNode) -> Void {
         //print("OrionChase360Camera")
 
         // 1. Set the zoom level that will be used for the chaseCameraNode in a bit.
@@ -114,10 +116,11 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         // Change Orientation with Device Motion
         //let deviceAttitudeSCNQ  = sceneQuaternion as SCNQuaternion
 
+        #warning("Figure out why one cannot cast using sceneQuaternion as SCNQuaternion.")
         node.simdOrientation    = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
                                              iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
                                              iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
-                                             r:   Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
+                                             r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
     }
 
 }

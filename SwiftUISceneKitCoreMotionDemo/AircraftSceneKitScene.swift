@@ -18,8 +18,8 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     var aircraftCamera  = AircraftCamera.distantCamera.rawValue
     
 
-    var changeCamera: Bool                  = false
-    var cameraIndex: Int                    = 0
+    //var changeCamera: Bool                  = false
+    //var cameraIndex: Int                    = 0
 
     //var showsStatistics: Bool               = true
 
@@ -41,7 +41,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         super.init(coder: coder)
     }
 
-
+    /*
     func cycleCameras() -> Void {
         if changeCamera == true {
             print("\n\nAircraftSceneKitScene Changing cameras")
@@ -63,5 +63,6 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
             }
         }
     }
+     */
 
 }

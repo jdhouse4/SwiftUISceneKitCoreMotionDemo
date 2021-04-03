@@ -15,16 +15,12 @@ struct AircraftSceneView: View {
     @State private var sunlightSwitch       = true
     @State private var cameraSwitch         = true
     @State private var settingsSwitch       = false
-    @State private var povName              = "distantCamera"
+    @State private var povName              = AircraftCamera.distantCamera.rawValue
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
-    //@Binding var sunlightOn: Bool
-    //@Binding var povToggle: Bool
-
-
-    //private var aircraftScene               = SCNScene(named: "art.scnassets/ship.scn")!
+    @State private var hackCameraNodeSwitch = true
 
     @StateObject private var aircraft           = AircraftSceneKitScene()
     @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
@@ -72,7 +68,6 @@ struct AircraftSceneView: View {
     }
 
 
-
     var body: some View {
         ZStack {
             SceneView (
@@ -84,6 +79,7 @@ struct AircraftSceneView: View {
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
                 resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
+                self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
             VStack {
@@ -143,8 +139,12 @@ struct AircraftSceneView: View {
                     }
                 }.padding(.bottom, settingsSwitch ? 120 : 5)
             }
+        }.onAppear {
+            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
+            self.aircraftDelegate.motionManager.resetReferenceFrame()
         }
     }
+
 
 
     func toggleSunlight() -> Void {
