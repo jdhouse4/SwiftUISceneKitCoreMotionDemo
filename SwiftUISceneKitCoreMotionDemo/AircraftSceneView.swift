@@ -71,7 +71,7 @@ struct AircraftSceneView: View {
             SceneView (
                 scene: aircraft.aircraftScene,
                 pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
-                options: sceneViewRenderContinuously,
+                /*options: sceneViewRenderContinuously,*/
                 delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)
