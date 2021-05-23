@@ -63,6 +63,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         //
         motionManager.updateAttitude()
 
+        /*
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
                 self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode!)
@@ -73,6 +74,21 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                 self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode!)
             }
         }
+        */
+
+        if aircraftCamera == AircraftCamera.distantCamera.rawValue {
+            self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode!)
+        }
+
+        if aircraftCamera == AircraftCamera.shipCamera.rawValue {
+            self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode!)
+        }
+    }
+
+
+
+    func setCameraNode(node: SCNNode) {
+        aircraftCameraNode = node
     }
 
 
@@ -92,7 +108,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             motionManager.resetReferenceFrame()
 
             if cameraIndex == 0 {
-                aircraftCamera = AircraftCamera.distantCamera.rawValue
+                aircraftCamera      = AircraftCamera.distantCamera.rawValue
                 print("Switching to \(AircraftCamera.distantCamera.rawValue)")
             } else if cameraIndex == 1 {
                 aircraftCamera = AircraftCamera.shipCamera.rawValue

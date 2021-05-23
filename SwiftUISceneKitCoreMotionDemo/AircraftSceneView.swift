@@ -110,7 +110,7 @@ struct AircraftSceneView: View {
                             self.cameraSwitch.toggle()
                         }
 
-                        self.changePOV(scene: self.aircraftDelegate)
+                        self.changePOV()
 
                     }) {
                         Image(systemName: cameraSwitch ? "video.fill" : "video")
@@ -168,20 +168,21 @@ struct AircraftSceneView: View {
 
 
 
-    private func changePOV(scene: SCNSceneRendererDelegate) -> Void {
+    private func changePOV() -> Void {
         self.aircraftDelegate.changeCamera = true
         print("\nContentView cameraSwitch")
 
         modifyPOV { [self] in
             // This calls the delegate function to change cameras.
+            #warning("Change this to just changeCameraNode(node: SCNNode)")
             self.aircraftDelegate.cycleCameras()
 
             // This sets povName String that will be read in the next call to initialize SceneView.
             self.povName = self.aircraftDelegate.aircraftCamera
-            print("self.povName: \(self.povName)")
+            //print("self.povName: \(self.povName)")
 
             // This (hopefully) sets the camera node that will be manipulated by the motion manager.
-            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
+            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.aircraftDelegate.aircraftCamera + "Node", recursively: true)
         }
     }
 
