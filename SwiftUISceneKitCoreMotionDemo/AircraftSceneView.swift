@@ -60,7 +60,7 @@ struct AircraftSceneView: View {
 
                 changeCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!,
                                 value: self.magnification)
-                
+
             }
             .onEnded{ value in
                 print("Ended pinch with value \(value)\n\n")
@@ -77,7 +77,7 @@ struct AircraftSceneView: View {
         ZStack {
             SceneView (
                 scene: aircraft.aircraftScene,
-                pointOfView: aircraft.aircraftCurrentCamera, //aircraftScene.rootNode.childNode(withName: povName, recursively: true)!,
+                pointOfView: aircraft.aircraftCurrentCamera,
                 delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)
@@ -114,11 +114,9 @@ struct AircraftSceneView: View {
                     //
                     Button( action: {
                         withAnimation {
-                            self.distantCamera.toggle()
-                            self.shipCamera.toggle()
+                            self.distantCamera  = true
+                            self.shipCamera     = false
                         }
-                        //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
-
                         self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
 
                     }) {
@@ -134,10 +132,9 @@ struct AircraftSceneView: View {
                     //
                     Button( action: {
                         withAnimation {
-                            self.shipCamera.toggle()
-                            self.distantCamera.toggle()
+                            self.shipCamera     = true
+                            self.distantCamera  = false
                         }
-                        //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftShipCamera
 
                         self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
 
@@ -204,8 +201,10 @@ struct AircraftSceneView: View {
 
         modifyPOV { [self] in
 
-            self.povName = cameraString
-            print("self.povName: \(self.povName)")
+            //self.povName = cameraString
+            //print("self.povName: \(self.povName)")
+
+            print("cameraString: \(self.povName)")
 
             if cameraString == aircraft.aircraftDistantCameraString {
                 self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
