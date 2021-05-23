@@ -53,13 +53,14 @@ struct AircraftSceneView: View {
 
                 self.magnification = value
 
+                /*
                 changeCameraFOV(of: (self.aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!,
                                 value: self.magnification)
+                */
 
-                /*
                 changeCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!,
                                 value: self.magnification)
-                */
+                
             }
             .onEnded{ value in
                 print("Ended pinch with value \(value)\n\n")
@@ -76,7 +77,7 @@ struct AircraftSceneView: View {
         ZStack {
             SceneView (
                 scene: aircraft.aircraftScene,
-                pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)!,
+                pointOfView: aircraft.aircraftCurrentCamera, //aircraftScene.rootNode.childNode(withName: povName, recursively: true)!,
                 delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)
@@ -207,13 +208,13 @@ struct AircraftSceneView: View {
             print("self.povName: \(self.povName)")
 
             if cameraString == aircraft.aircraftDistantCameraString {
-                //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
+                self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
                 self.aircraftDelegate.setCameraName(name: aircraft.aircraftDistantCameraString)
                 self.aircraftDelegate.setCameraNode(node: aircraft.aircraftDistantCameraNode)
             }
 
             if cameraString == aircraft.aircraftShipCameraString {
-                //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftShipCamera
+                self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftShipCamera
                 self.aircraftDelegate.setCameraName(name: aircraft.aircraftShipCameraString)
                 self.aircraftDelegate.setCameraNode(node: aircraft.aircraftShipCameraNode)
             }

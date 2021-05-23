@@ -19,7 +19,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftDistantCameraString  = AircraftCamera.distantCamera.rawValue
     @Published var aircraftShipCameraString     = AircraftCamera.shipCamera.rawValue
 
-    //@Published var aircraftCurrentCamera: SCNNode
+    @Published var aircraftCurrentCamera: SCNNode
 
     @Published var aircraftDistantCamera: SCNNode
     @Published var aircraftShipCamera: SCNNode
@@ -33,7 +33,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         print("AircraftScenekitScene override initialized")
         self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
-        //self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
+        self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
         self.aircraftDistantCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
         self.aircraftShipCamera         = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
@@ -50,7 +50,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         print("AircraftScenekitScene initialized")
         self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
-        //self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
+        self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
         self.aircraftDistantCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
         self.aircraftShipCamera         = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
