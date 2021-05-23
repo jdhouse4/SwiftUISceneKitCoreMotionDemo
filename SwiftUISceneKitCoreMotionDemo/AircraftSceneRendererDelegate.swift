@@ -87,8 +87,15 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
 
 
+    func setCameraName(name: String) {
+        aircraftCamera = name
+    }
+
+
+
     func setCameraNode(node: SCNNode) {
         aircraftCameraNode = node
+        motionManager.resetReferenceFrame()
     }
 
 

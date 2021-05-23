@@ -13,7 +13,8 @@ import SceneKit
 
 struct AircraftSceneView: View {
     @State private var sunlightSwitch       = true
-    @State private var cameraSwitch         = true
+    @State private var distantCamera        = true
+    @State private var shipCamera           = false
     @State private var settingsSwitch       = false
     @State private var povName              = AircraftCamera.distantCamera.rawValue
     @State private var magnification        = CGFloat(1.0)
@@ -103,19 +104,39 @@ struct AircraftSceneView: View {
 
 
                     //
-                    // Button for toggling cameras.
+                    // Button for toggling distant camera.
                     //
                     Button( action: {
                         withAnimation {
-                            self.cameraSwitch.toggle()
+                            self.distantCamera.toggle()
+                            self.shipCamera.toggle()
                         }
 
-                        self.changePOV()
+                        self.changePOV(cameraString: self.aircraft.aircraftDistantCamera)
 
                     }) {
-                        Image(systemName: cameraSwitch ? "video.fill" : "video")
+                        Image(systemName: distantCamera ? "camera.circle.fill" : "camera.circle")
                             .imageScale(.large)
-                            .accessibility(label: Text("Camera Switch"))
+                            .accessibility(label: Text("Distant Camera"))
+                            .padding()
+                    }
+
+
+                    //
+                    // Button for toggling ship camera.
+                    //
+                    Button( action: {
+                        withAnimation {
+                            self.shipCamera.toggle()
+                            self.distantCamera.toggle()
+                        }
+
+                        self.changePOV(cameraString: self.aircraft.aircraftShipCamera)
+
+                    }) {
+                        Image(systemName: shipCamera ? "airplane.circle.fill" : "airplane.circle")
+                            .imageScale(.large)
+                            .accessibility(label: Text("Airplane Camera"))
                             .padding()
                     }
 
@@ -137,7 +158,9 @@ struct AircraftSceneView: View {
                     }
                 }.padding(.bottom, settingsSwitch ? 120 : 5)
             }
-        }.onAppear {
+        }
+        .environmentObject(aircraft)
+        .onAppear {
             self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
             self.aircraftDelegate.motionManager.resetReferenceFrame()
         }
@@ -168,21 +191,23 @@ struct AircraftSceneView: View {
 
 
 
-    private func changePOV() -> Void {
-        self.aircraftDelegate.changeCamera = true
-        print("\nContentView cameraSwitch")
+    private func changePOV(cameraString: String) -> Void {
+        print("\nContentView changePOV")
 
         modifyPOV { [self] in
-            // This calls the delegate function to change cameras.
-            #warning("Change this to just changeCameraNode(node: SCNNode)")
-            self.aircraftDelegate.cycleCameras()
 
-            // This sets povName String that will be read in the next call to initialize SceneView.
-            self.povName = self.aircraftDelegate.aircraftCamera
-            //print("self.povName: \(self.povName)")
+            self.povName = cameraString
+            print("self.povName: \(self.povName)")
 
-            // This (hopefully) sets the camera node that will be manipulated by the motion manager.
-            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.aircraftDelegate.aircraftCamera + "Node", recursively: true)
+            if cameraString == aircraft.aircraftDistantCamera {
+                self.aircraftDelegate.setCameraName(name: aircraft.aircraftDistantCamera)
+                self.aircraftDelegate.setCameraNode(node: aircraft.aircraftDistantCameraNode)
+            }
+
+            if cameraString == aircraft.aircraftShipCamera {
+                self.aircraftDelegate.setCameraName(name: aircraft.aircraftShipCamera)
+                self.aircraftDelegate.setCameraNode(node: aircraft.aircraftShipCameraNode)
+            }
         }
     }
 
