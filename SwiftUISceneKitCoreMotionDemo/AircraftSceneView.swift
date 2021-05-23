@@ -36,12 +36,12 @@ struct AircraftSceneView: View {
             .onChanged { value in
                 self.isDragging = true
 
-                changeOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!, with: value.translation)
+                changeOrientation(of: aircraft.aircraftNode, with: value.translation)
             }
             .onEnded { value in
                 self.isDragging = false
 
-                updateOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
+                updateOrientation(of: aircraft.aircraftNode)
             }
     }
 
@@ -55,6 +55,11 @@ struct AircraftSceneView: View {
 
                 changeCameraFOV(of: (self.aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!,
                                 value: self.magnification)
+
+                /*
+                changeCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!,
+                                value: self.magnification)
+                */
             }
             .onEnded{ value in
                 print("Ended pinch with value \(value)\n\n")
@@ -71,7 +76,7 @@ struct AircraftSceneView: View {
         ZStack {
             SceneView (
                 scene: aircraft.aircraftScene,
-                pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true),
+                pointOfView: aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)!,
                 delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)
@@ -111,8 +116,9 @@ struct AircraftSceneView: View {
                             self.distantCamera.toggle()
                             self.shipCamera.toggle()
                         }
+                        //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
 
-                        self.changePOV(cameraString: self.aircraft.aircraftDistantCamera)
+                        self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
 
                     }) {
                         Image(systemName: distantCamera ? "camera.circle.fill" : "camera.circle")
@@ -130,8 +136,9 @@ struct AircraftSceneView: View {
                             self.shipCamera.toggle()
                             self.distantCamera.toggle()
                         }
+                        //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftShipCamera
 
-                        self.changePOV(cameraString: self.aircraft.aircraftShipCamera)
+                        self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
 
                     }) {
                         Image(systemName: shipCamera ? "airplane.circle.fill" : "airplane.circle")
@@ -199,13 +206,15 @@ struct AircraftSceneView: View {
             self.povName = cameraString
             print("self.povName: \(self.povName)")
 
-            if cameraString == aircraft.aircraftDistantCamera {
-                self.aircraftDelegate.setCameraName(name: aircraft.aircraftDistantCamera)
+            if cameraString == aircraft.aircraftDistantCameraString {
+                //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
+                self.aircraftDelegate.setCameraName(name: aircraft.aircraftDistantCameraString)
                 self.aircraftDelegate.setCameraNode(node: aircraft.aircraftDistantCameraNode)
             }
 
-            if cameraString == aircraft.aircraftShipCamera {
-                self.aircraftDelegate.setCameraName(name: aircraft.aircraftShipCamera)
+            if cameraString == aircraft.aircraftShipCameraString {
+                //self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftShipCamera
+                self.aircraftDelegate.setCameraName(name: aircraft.aircraftShipCameraString)
                 self.aircraftDelegate.setCameraNode(node: aircraft.aircraftShipCameraNode)
             }
         }
