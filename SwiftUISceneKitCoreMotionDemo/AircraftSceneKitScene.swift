@@ -14,8 +14,8 @@ import SwiftUI
 
 class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftCamera: String       = AircraftCamera.distantCamera.rawValue
-    var aircraftCameraNode  = SCNNode()
 
+    //var aircraftCameraNode  = SCNNode()
     var aircraftScene       = SCNScene(named: "art.scnassets/ship.scn")!
     var aircraftNode        = SCNNode()
 

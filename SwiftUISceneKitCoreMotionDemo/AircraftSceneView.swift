@@ -139,6 +139,7 @@ struct AircraftSceneView: View {
             }
         }
         .environmentObject(aircraft)
+        .environmentObject(aircraftDelegate)
         .onAppear {
                     //self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
                     self.aircraftDelegate.motionManager.resetReferenceFrame()
@@ -181,8 +182,7 @@ struct AircraftSceneView: View {
             // This sets povName String that will be read in the next call to initialize SceneView.
             #warning("Change this to follow change in aircraft.aircraftCamera")
             self.povName = self.aircraftDelegate.aircraftCamera
-            //self.povName = self.aircraft.aircraftCamera
-            print("self.povName: \(self.povName)")
+            print("self.povName = self.aircraftDelegate.aircraftCamera = \(self.povName)")
 
             // This (hopefully) sets the camera node that will be manipulated by the motion manager.
             self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)

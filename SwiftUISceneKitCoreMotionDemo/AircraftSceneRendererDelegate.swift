@@ -13,8 +13,9 @@ import SwiftUI
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
     var aircraftScene: SCNScene?
-    var aircraftCamera                      = AircraftCamera.distantCamera.rawValue
-    var aircraftCameraNode: SCNNode?
+
+    @Published var aircraftCamera                      = AircraftCamera.distantCamera.rawValue
+    @Published var aircraftCameraNode: SCNNode?
 
     var changeCamera: Bool                  = false
     var cameraIndex: Int                    = 0
@@ -66,11 +67,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
+                //print("self.updateExteriorVehicleCameraOrientation(of: \(aircraftCameraNode!)")
                 self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode!)
             }
         }
         if cameraIndex == 1 {
             if aircraftCameraNode != nil {
+                //print("self.updateInteriorVehicleCameraOrientation(of: \(aircraftCameraNode!)")
                 self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode!)
             }
         }
@@ -94,16 +97,17 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
             if cameraIndex == 0 {
                 aircraftCamera = AircraftCamera.distantCamera.rawValue
-                print("\(#file) Switching to \(aircraftCamera)")
+                print("\(#function) Switching to \(aircraftCamera)")
             } else if cameraIndex == 1 {
                 aircraftCamera = AircraftCamera.shipCamera.rawValue
-                print("\(#file) Switching to \(aircraftCamera)")
+                print("\(#function) Switching to \(aircraftCamera)")
             }
         }
     }
 
 
     func updateExteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
+        //print("self.updateExteriorVehicleCameraOrientation(of: \(node)")
 
         // Change Orientation with Device Motion
         node.simdOrientation    = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
@@ -116,6 +120,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
 
     func updateInteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
+        //print("self.updateInteriorVehicleCameraOrientation(of: \(node)")
 
         // Change Orientation with Device Motion
         node.simdOrientation    = simd_quatf(angle: -.pi,
