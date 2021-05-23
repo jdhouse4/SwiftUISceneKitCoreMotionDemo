@@ -5,6 +5,7 @@
 //  Created by James Hillhouse IV on 10/17/20.
 //
 import SceneKit
+import SwiftUI
 
 
 
@@ -93,10 +94,10 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
             if cameraIndex == 0 {
                 aircraftCamera = AircraftCamera.distantCamera.rawValue
-                print("Switching to \(AircraftCamera.distantCamera.rawValue)")
+                print("\(#file) Switching to \(aircraftCamera)")
             } else if cameraIndex == 1 {
                 aircraftCamera = AircraftCamera.shipCamera.rawValue
-                print("Switching to \(AircraftCamera.shipCamera.rawValue)")
+                print("\(#file) Switching to \(aircraftCamera)")
             }
         }
     }

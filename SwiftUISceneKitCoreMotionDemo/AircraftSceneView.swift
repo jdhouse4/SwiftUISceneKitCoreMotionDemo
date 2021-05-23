@@ -137,10 +137,12 @@ struct AircraftSceneView: View {
                     }
                 }.padding(.bottom, settingsSwitch ? 120 : 5)
             }
-        }.onAppear {
-            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
-            self.aircraftDelegate.motionManager.resetReferenceFrame()
         }
+        .environmentObject(aircraft)
+        .onAppear {
+                    //self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
+                    self.aircraftDelegate.motionManager.resetReferenceFrame()
+                }
     }
 
 
@@ -177,7 +179,9 @@ struct AircraftSceneView: View {
             self.aircraftDelegate.cycleCameras()
 
             // This sets povName String that will be read in the next call to initialize SceneView.
+            #warning("Change this to follow change in aircraft.aircraftCamera")
             self.povName = self.aircraftDelegate.aircraftCamera
+            //self.povName = self.aircraft.aircraftCamera
             print("self.povName: \(self.povName)")
 
             // This (hopefully) sets the camera node that will be manipulated by the motion manager.
@@ -268,7 +272,7 @@ struct AircraftSceneView: View {
 
 struct AircraftSceneView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftSceneView()
+        AircraftSceneView().environmentObject(AircraftSceneKitScene())
     }
 }
 
