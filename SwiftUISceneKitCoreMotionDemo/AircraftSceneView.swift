@@ -22,8 +22,9 @@ struct AircraftSceneView: View {
     @State private var totalChangePivot     = SCNMatrix4Identity
 
     // @StateObject is a property wrapper type that instantiates an observable object.
-    @StateObject private var aircraft           = AircraftSceneKitScene()
-    @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
+    @StateObject var aircraft           = AircraftSceneKitScene()
+    @StateObject var aircraftDelegate   = AircraftSceneRendererDelegate()
+    @StateObject var aircraftButton     = AircraftCameraButton()
 
 
     // SceneView.Options for affecting the SceneView.
@@ -176,6 +177,7 @@ struct AircraftSceneView: View {
         }
         .environmentObject(aircraft)
         .environmentObject(aircraftDelegate)
+        .environmentObject(aircraftButton)
         .onAppear {
             self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
             self.aircraftDelegate.motionManager.resetReferenceFrame()
