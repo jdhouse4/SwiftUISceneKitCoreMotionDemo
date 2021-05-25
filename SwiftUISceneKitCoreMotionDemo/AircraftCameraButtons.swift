@@ -44,12 +44,14 @@ struct AircraftCameraButtons: View {
                     .padding()
                 */
                 Image(systemName: "camera")
-                    .frame(width: 20, height: 20, alignment: .center)
+                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
                     .imageScale(.large)
+                    .background(Capsule().stroke(lineWidth: 2))
+                    .background(Color.gray.opacity(distantCamera ? 0.5 : 0.15))
+                    .cornerRadius(CircleButton.cornerRadius.rawValue)
                     .accessibility(label: Text("Show Distant Camera"))
                     .padding()
             }
-            .background(Capsule().stroke(lineWidth: 1))
 
 
             //
@@ -72,12 +74,14 @@ struct AircraftCameraButtons: View {
                     .padding()
                 */
                 Image(systemName: "airplane")
-                    .frame(width: 20, height: 20)
+                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                     .imageScale(.large)
+                    .background(Capsule().stroke(lineWidth: 2))
+                    .background(Color.gray.opacity(shipCamera ? 0.5 : 0.15))
+                    .cornerRadius(CircleButton.cornerRadius.rawValue)
                     .accessibility(label: Text("Airplane Camera"))
                     .padding()
             }
-            .background(Capsule().stroke(lineWidth: 1))
 
         }
     }

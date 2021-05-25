@@ -100,8 +100,11 @@ struct AircraftSceneView: View {
 
                     }) {
                         Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
-                            .frame(width: 20, height: 20)
+                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                             .imageScale(.large)
+                            .background(Capsule().stroke(lineWidth: 2))
+                            .background(Color.gray.opacity(sunlightSwitch ? 0.5 : 0.15))
+                            .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Light Switch"))
                             .padding()
                     }
@@ -160,12 +163,15 @@ struct AircraftSceneView: View {
 
                     }) {
                         Image(systemName: settingsSwitch ? "gearshape" : "gearshape.fill")
-                            .frame(width: 20, height: 20)
+                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                             .imageScale(.large)
+                            .background(Capsule().stroke(lineWidth: 2))
+                            .background(Color.gray.opacity(settingsSwitch ? 0.5 : 0.15))
+                            .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Settings"))
                             .padding()
                     }
-                }.padding(.bottom, settingsSwitch ? 120 : 5)
+                }.padding(.bottom, settingsSwitch ? 140 : 5)
             }
         }
         .environmentObject(aircraft)
