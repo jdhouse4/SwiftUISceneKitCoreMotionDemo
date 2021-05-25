@@ -11,10 +11,10 @@ import SceneKit
 
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
-    var aircraftScene: SCNScene?
-    var aircraftCamera                      = AircraftCamera.distantCamera.rawValue
-    var aircraftCameraNode: SCNNode?
+    @Published var aircraftCamera                      = AircraftCamera.distantCamera.rawValue
+    @Published var aircraftCameraNode: SCNNode         = SCNNode()
 
+    var aircraftScene: SCNScene?
     var changeCamera: Bool                  = false
     var cameraIndex: Int                    = 0
 
@@ -77,11 +77,11 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         */
 
         if aircraftCamera == AircraftCamera.distantCamera.rawValue {
-            self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode!)
+            self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode)
         }
 
         if aircraftCamera == AircraftCamera.shipCamera.rawValue {
-            self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode!)
+            self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode)
         }
     }
 

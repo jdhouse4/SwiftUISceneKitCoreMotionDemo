@@ -21,6 +21,7 @@ struct AircraftSceneView: View {
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
+    // @StateObject is a property wrapper type that instantiates an observable object.
     @StateObject private var aircraft           = AircraftSceneKitScene()
     @StateObject private var aircraftDelegate   = AircraftSceneRendererDelegate()
 
@@ -104,7 +105,9 @@ struct AircraftSceneView: View {
                             .padding()
                     }
 
+                    AircraftCameraButtons()
 
+/*
                     //
                     // Button for toggling distant camera.
                     //
@@ -142,7 +145,7 @@ struct AircraftSceneView: View {
                             .padding()
                     }
 
-
+*/
                     //
                     // Button to show statistics.
                     //
@@ -163,8 +166,9 @@ struct AircraftSceneView: View {
             }
         }
         .environmentObject(aircraft)
+        .environmentObject(aircraftDelegate)
         .onAppear {
-            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftScene.rootNode.childNode(withName: self.povName + "Node", recursively: true)
+            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
             self.aircraftDelegate.motionManager.resetReferenceFrame()
         }
     }
@@ -181,7 +185,7 @@ struct AircraftSceneView: View {
         }
     }
 
-
+/*
     //
     // Escaping closure to push change from the AircraftScene function cycleCameras()
     //
@@ -214,7 +218,7 @@ struct AircraftSceneView: View {
             }
         }
     }
-
+*/
 
 
     private func changeOrientation(of node: SCNNode, with translation: CGSize) {
