@@ -53,11 +53,6 @@ struct AircraftSceneView: View {
 
                 self.magnification = value
 
-                /*
-                changeCameraFOV(of: (self.aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!,
-                                value: self.magnification)
-                */
-
                 changeCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!,
                                 value: self.magnification)
 
@@ -82,8 +77,8 @@ struct AircraftSceneView: View {
             )
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
-                resetCameraFOV(of: (self.aircraft.aircraftScene.rootNode.childNode(withName: povName, recursively: true)?.camera)!)
-                resetOrientation(of: aircraft.aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!)
+                resetCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!)
+                resetOrientation(of: aircraft.aircraftNode)
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
@@ -101,6 +96,7 @@ struct AircraftSceneView: View {
                         }
 
                         self.toggleSunlight()
+
                     }) {
                         Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
                             .imageScale(.large)
@@ -117,12 +113,13 @@ struct AircraftSceneView: View {
                             self.distantCamera  = true
                             self.shipCamera     = false
                         }
+
                         self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
 
                     }) {
                         Image(systemName: distantCamera ? "camera.circle.fill" : "camera.circle")
                             .imageScale(.large)
-                            .accessibility(label: Text("Distant Camera"))
+                            .accessibility(label: Text("Show Distant Camera"))
                             .padding()
                     }
 
@@ -155,6 +152,7 @@ struct AircraftSceneView: View {
                         }
 
                         aircraftDelegate.showsStatistics.toggle()
+
                     }) {
                         Image(systemName: settingsSwitch ? "gearshape" : "gearshape.fill")
                             .imageScale(.large)
@@ -200,9 +198,6 @@ struct AircraftSceneView: View {
         print("\nContentView changePOV")
 
         modifyPOV { [self] in
-
-            //self.povName = cameraString
-            //print("self.povName: \(self.povName)")
 
             print("cameraString: \(self.povName)")
 
