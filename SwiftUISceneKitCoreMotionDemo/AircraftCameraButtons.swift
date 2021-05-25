@@ -35,11 +35,21 @@ struct AircraftCameraButtons: View {
                 self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
 
             }) {
+                /*
                 Image(systemName: distantCamera ? "camera.circle.fill" : "camera.circle")
+                    //.resizable()
+                    .frame(width: 40, height: 40, alignment: .center)
+                    .imageScale(.large)
+                    .accessibility(label: Text("Show Distant Camera"))
+                    .padding()
+                */
+                Image(systemName: "camera")
+                    .frame(width: 20, height: 20, alignment: .center)
                     .imageScale(.large)
                     .accessibility(label: Text("Show Distant Camera"))
                     .padding()
             }
+            .background(Capsule().stroke(lineWidth: 1))
 
 
             //
@@ -54,11 +64,20 @@ struct AircraftCameraButtons: View {
                 self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
 
             }) {
+                /*
                 Image(systemName: shipCamera ? "airplane.circle.fill" : "airplane.circle")
+                    .frame(width: 40, height: 40)
+                    .imageScale(.large)
+                    .accessibility(label: Text("Airplane Camera"))
+                    .padding()
+                */
+                Image(systemName: "airplane")
+                    .frame(width: 20, height: 20)
                     .imageScale(.large)
                     .accessibility(label: Text("Airplane Camera"))
                     .padding()
             }
+            .background(Capsule().stroke(lineWidth: 1))
 
         }
     }

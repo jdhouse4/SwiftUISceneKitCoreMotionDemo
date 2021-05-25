@@ -100,12 +100,14 @@ struct AircraftSceneView: View {
 
                     }) {
                         Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
+                            .frame(width: 20, height: 20)
                             .imageScale(.large)
                             .accessibility(label: Text("Light Switch"))
                             .padding()
                     }
 
                     AircraftCameraButtons()
+                        //.frame(width: 80, height: 20, alignment: .center)
 
 /*
                     //
@@ -158,6 +160,7 @@ struct AircraftSceneView: View {
 
                     }) {
                         Image(systemName: settingsSwitch ? "gearshape" : "gearshape.fill")
+                            .frame(width: 20, height: 20)
                             .imageScale(.large)
                             .accessibility(label: Text("Settings"))
                             .padding()
