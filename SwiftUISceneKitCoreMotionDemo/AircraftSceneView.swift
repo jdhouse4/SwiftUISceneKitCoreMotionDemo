@@ -22,9 +22,9 @@ struct AircraftSceneView: View {
     @State private var totalChangePivot     = SCNMatrix4Identity
 
     // @StateObject is a property wrapper type that instantiates an observable object.
-    @StateObject var aircraft           = AircraftSceneKitScene()
-    @StateObject var aircraftDelegate   = AircraftSceneRendererDelegate()
-    @StateObject var aircraftButton     = AircraftCameraButton()
+    @StateObject var aircraft               = AircraftSceneKitScene()
+    @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
+    @StateObject var aircraftCameraButton   = AircraftCameraButton()
 
 
     // SceneView.Options for affecting the SceneView.
@@ -104,54 +104,18 @@ struct AircraftSceneView: View {
                             .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                             .imageScale(.large)
                             .background(Capsule().stroke(lineWidth: 2))
-                            .background(Color.gray.opacity(sunlightSwitch ? 0.5 : 0.15))
+                            .background(sunlightSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
                             .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Light Switch"))
                             .padding()
                     }
 
+
+
                     AircraftCameraButtons()
-                        //.frame(width: 80, height: 20, alignment: .center)
-
-/*
-                    //
-                    // Button for toggling distant camera.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.distantCamera  = true
-                            self.shipCamera     = false
-                        }
-
-                        self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
-
-                    }) {
-                        Image(systemName: distantCamera ? "camera.circle.fill" : "camera.circle")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Show Distant Camera"))
-                            .padding()
-                    }
 
 
-                    //
-                    // Button for toggling ship camera.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.shipCamera     = true
-                            self.distantCamera  = false
-                        }
 
-                        self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
-
-                    }) {
-                        Image(systemName: shipCamera ? "airplane.circle.fill" : "airplane.circle")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Airplane Camera"))
-                            .padding()
-                    }
-
-*/
                     //
                     // Button to show statistics.
                     //
@@ -163,11 +127,11 @@ struct AircraftSceneView: View {
                         aircraftDelegate.showsStatistics.toggle()
 
                     }) {
-                        Image(systemName: settingsSwitch ? "gearshape" : "gearshape.fill")
+                        Image(systemName: settingsSwitch ? "gearshape.fill" : "gearshape")
                             .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                             .imageScale(.large)
                             .background(Capsule().stroke(lineWidth: 2))
-                            .background(Color.gray.opacity(settingsSwitch ? 0.5 : 0.15))
+                            .background(settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
                             .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Settings"))
                             .padding()
@@ -177,7 +141,7 @@ struct AircraftSceneView: View {
         }
         .environmentObject(aircraft)
         .environmentObject(aircraftDelegate)
-        .environmentObject(aircraftButton)
+        .environmentObject(aircraftCameraButton)
         .onAppear {
             self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
             self.aircraftDelegate.motionManager.resetReferenceFrame()
@@ -196,40 +160,6 @@ struct AircraftSceneView: View {
         }
     }
 
-/*
-    //
-    // Escaping closure to push change from the AircraftScene function cycleCameras()
-    //
-    // Because of the way SwiftUI works, the call to the AircraftSceneRendererDelegate function cycleCamera()
-    // wasn't being 'seen'.
-    //
-    func modifyPOV(closure: @escaping () -> Void) {
-        closure()
-    }
-
-
-
-    private func changePOV(cameraString: String) -> Void {
-        print("\nContentView changePOV")
-
-        modifyPOV { [self] in
-
-            print("cameraString: \(self.povName)")
-
-            if cameraString == aircraft.aircraftDistantCameraString {
-                self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftDistantCamera
-                self.aircraftDelegate.setCameraName(name: aircraft.aircraftDistantCameraString)
-                self.aircraftDelegate.setCameraNode(node: aircraft.aircraftDistantCameraNode)
-            }
-
-            if cameraString == aircraft.aircraftShipCameraString {
-                self.aircraft.aircraftCurrentCamera = self.aircraft.aircraftShipCamera
-                self.aircraftDelegate.setCameraName(name: aircraft.aircraftShipCameraString)
-                self.aircraftDelegate.setCameraNode(node: aircraft.aircraftShipCameraNode)
-            }
-        }
-    }
-*/
 
 
     private func changeOrientation(of node: SCNNode, with translation: CGSize) {

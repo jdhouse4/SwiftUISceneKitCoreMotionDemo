@@ -22,3 +22,19 @@ class AircraftCameraButton: ObservableObject {
     //@Published var settingsButtonPressed: Bool          = false
 }
 
+
+
+
+extension Animation {
+    static func ripple(buttonIndex: Int) -> Animation {
+        Animation.spring(dampingFraction: 0.5)
+            .speed(1.2)
+            .delay(0.05 * Double(buttonIndex))
+
+    }
+}
+
+
+
+
+

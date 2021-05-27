@@ -20,3 +20,6 @@ enum AircraftCamera: String
     case distantCamera  = "distantCamera"
     case shipCamera     = "shipCamera"
 }
+
+
+

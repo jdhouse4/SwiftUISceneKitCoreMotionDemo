@@ -10,11 +10,28 @@ import SwiftUI
 
 
 
+extension AnyTransition {
+    static var leftButtonsMoveAndFadeTransition: AnyTransition {
+        let insertion   = AnyTransition.move(edge: .leading)
+            .combined(with: .opacity)
+
+        let removal     = AnyTransition.offset(x: -200, y: 0)
+            .combined(with: .opacity)
+
+        return asymmetric(insertion: insertion, removal: removal)
+    }
+}
+
+
+
+
+
 struct AircraftCameraButtons: View {
     // @EnvironmentObject is a property wrapper type for an observable object that is
     // instantiated by @StateObject supplied by a parent or ancestor view.
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
+    @EnvironmentObject var aircraftCameraButton: AircraftCameraButton
 
     @State private var distantCamera        = true
     @State private var shipCamera           = false
@@ -23,66 +40,85 @@ struct AircraftCameraButtons: View {
     var body: some View {
 
         HStack (spacing: 5) {
-            //
-            // Button for toggling distant camera.
-            //
-            Button( action: {
-                withAnimation {
-                    self.distantCamera  = true
-                    self.shipCamera     = false
+
+            ZStack {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.75)) {
+                        self.aircraftCameraButton.showCameraButtons.toggle()
+                    }
+                }) {
+                    Image(systemName: "video.fill")
+                        .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                        .imageScale(.large)
+                        .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                        //.background(Color.white.opacity(self.aircraftCameraButton.showCameraButtons ? 0.5 : 0.15))
+                        .cornerRadius(CircleButton.cornerRadius.rawValue)
                 }
-
-                self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
-
-            }) {
-                /*
-                Image(systemName: distantCamera ? "camera.circle.fill" : "camera.circle")
-                    //.resizable()
-                    .frame(width: 40, height: 40, alignment: .center)
-                    .imageScale(.large)
-                    .accessibility(label: Text("Show Distant Camera"))
-                    .padding()
-                */
-                Image(systemName: "camera")
-                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
-                    .imageScale(.large)
-                    .background(Capsule().stroke(lineWidth: 2))
-                    .background(Color.gray.opacity(distantCamera ? 0.5 : 0.15))
-                    .cornerRadius(CircleButton.cornerRadius.rawValue)
-                    .accessibility(label: Text("Show Distant Camera"))
-                    .padding()
-            }
+                .frame(alignment: .leading)
+                .zIndex(3)
+                .background(Capsule().stroke(lineWidth: 2))
+                .cornerRadius(CircleButton.cornerRadius.rawValue)
 
 
-            //
-            // Button for toggling ship camera.
-            //
-            Button( action: {
-                withAnimation {
-                    self.shipCamera     = true
-                    self.distantCamera  = false
+                if aircraftCameraButton.showCameraButtons {
+
+                    //
+                    // Button for toggling distant camera.
+                    //
+                    Button( action: {
+                        withAnimation {
+                            self.distantCamera  = true
+                            self.shipCamera     = false
+                            self.aircraftCameraButton.distantCameraButtonPressed.toggle()
+                        }
+
+                        self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
+
+                    }) {
+                        Image(systemName: "airplane")
+                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                            .imageScale(.large)
+                            .background(Capsule().stroke(lineWidth: 2))
+                            .background(distantCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                            .cornerRadius(CircleButton.cornerRadius.rawValue)
+                            .accessibility(label: Text("Show Distant Camera"))
+                            .padding()
+                    }
+                    .zIndex(2)
+                    .transition(moveAndFadeLeft(buttonIndex: 1))
+                    .offset(x: -( CircleButton.diameter.rawValue + CircleButton.spacer.rawValue ), y: 0)
+                    .animation(.ripple(buttonIndex: 1))
+
+
+                    //
+                    // Button for toggling ship camera.
+                    //
+                    Button( action: {
+                        withAnimation {
+                            self.shipCamera     = true
+                            self.distantCamera  = false
+                            self.aircraftCameraButton.shipCameraButtonPressed.toggle()
+                        }
+
+                        self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
+
+                    }) {
+                        Image(systemName: "person.fill")
+                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                            .imageScale(.large)
+                            .background(Capsule().stroke(lineWidth: 2))
+                            .background(shipCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                            .cornerRadius(CircleButton.cornerRadius.rawValue)
+                            .accessibility(label: Text("Airplane Camera"))
+                            .padding()
+                    }
+                    .zIndex(2)
+                    .transition(moveAndFadeRight(buttonIndex: 1))
+                    .offset(x: CircleButton.diameter.rawValue + CircleButton.spacer.rawValue, y: 0)
+                    .animation(.ripple(buttonIndex: 2))
                 }
-
-                self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
-
-            }) {
-                /*
-                Image(systemName: shipCamera ? "airplane.circle.fill" : "airplane.circle")
-                    .frame(width: 40, height: 40)
-                    .imageScale(.large)
-                    .accessibility(label: Text("Airplane Camera"))
-                    .padding()
-                */
-                Image(systemName: "airplane")
-                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
-                    .imageScale(.large)
-                    .background(Capsule().stroke(lineWidth: 2))
-                    .background(Color.gray.opacity(shipCamera ? 0.5 : 0.15))
-                    .cornerRadius(CircleButton.cornerRadius.rawValue)
-                    .accessibility(label: Text("Airplane Camera"))
-                    .padding()
             }
-
+            .frame(width: 200, height: 70, alignment: .center)
         }
     }
 
@@ -120,6 +156,29 @@ struct AircraftCameraButtons: View {
         }
     }
 
+
+
+    func moveAndFadeRight(buttonIndex: Int) -> AnyTransition {
+        let insertion   = AnyTransition.offset(x: -CircleButton.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+            //.combined(with: .opacity)
+
+        let removal     = AnyTransition.offset(x: -CircleButton.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+            .combined(with: .opacity)
+
+        return AnyTransition.asymmetric(insertion: insertion, removal: removal)
+    }
+
+
+
+    func moveAndFadeLeft(buttonIndex: Int) -> AnyTransition {
+        let insertion   = AnyTransition.offset(x: CircleButton.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+            //.combined(with: .opacity)
+
+        let removal     = AnyTransition.offset(x: CircleButton.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+            .combined(with: .opacity)
+
+        return AnyTransition.asymmetric(insertion: insertion, removal: removal)
+    }
 }
 
 
