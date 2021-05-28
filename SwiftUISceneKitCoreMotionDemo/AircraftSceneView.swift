@@ -109,6 +109,7 @@ struct AircraftSceneView: View {
                             .accessibility(label: Text("Light Switch"))
                             .padding()
                     }
+                    .animation(.ripple(buttonIndex: 2))
 
 
 
@@ -136,6 +137,7 @@ struct AircraftSceneView: View {
                             .accessibility(label: Text("Settings"))
                             .padding()
                     }
+                    .animation(.ripple(buttonIndex: 2))
                 }.padding(.bottom, settingsSwitch ? 140 : 5)
             }
         }
