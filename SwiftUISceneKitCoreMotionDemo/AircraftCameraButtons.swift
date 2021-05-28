@@ -33,8 +33,8 @@ struct AircraftCameraButtons: View {
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
     @EnvironmentObject var aircraftCameraButton: AircraftCameraButton
 
-    @State private var distantCamera        = true
-    @State private var shipCamera           = false
+    @State private var distantCamera    = true
+    @State private var shipCamera       = false
 
     
     var body: some View {
@@ -44,20 +44,19 @@ struct AircraftCameraButtons: View {
             ZStack {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.75)) {
+
                         self.aircraftCameraButton.showCameraButtons.toggle()
                     }
                 }) {
-                    Image(systemName: "video.fill")
+                    Image(systemName: "camera.fill")
                         .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
                         .imageScale(.large)
+                        .background(Capsule().stroke(lineWidth: 2))
                         .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                        //.background(Color.white.opacity(self.aircraftCameraButton.showCameraButtons ? 0.5 : 0.15))
                         .cornerRadius(CircleButton.cornerRadius.rawValue)
                 }
-                .frame(alignment: .leading)
                 .zIndex(3)
-                .background(Capsule().stroke(lineWidth: 2))
-                .cornerRadius(CircleButton.cornerRadius.rawValue)
+                .animation(.ripple(buttonIndex: 2))
 
 
                 if aircraftCameraButton.showCameraButtons {
@@ -87,7 +86,7 @@ struct AircraftCameraButtons: View {
                     .zIndex(2)
                     .transition(moveAndFadeLeft(buttonIndex: 1))
                     .offset(x: -( CircleButton.diameter.rawValue + CircleButton.spacer.rawValue ), y: 0)
-                    .animation(.ripple(buttonIndex: 1))
+                    .animation(.ripple(buttonIndex: 2))
 
 
                     //
