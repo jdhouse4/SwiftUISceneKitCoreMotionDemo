@@ -19,7 +19,7 @@ struct AircraftSceneView: View {
     @State private var distantCamera        = true
     @State private var shipCamera           = false
     @State private var settingsSwitch       = false
-    @State private var povName              = AircraftCamera.distantCamera//.rawValue
+    @State private var povName              = AircraftCamera.distantCamera
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
