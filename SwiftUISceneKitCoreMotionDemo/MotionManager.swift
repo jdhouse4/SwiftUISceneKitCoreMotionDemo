@@ -93,15 +93,13 @@ class MotionManager: ObservableObject {
 
 
 
-    func stopMotion()
-    {
+    func stopMotion() {
         motionManager.stopDeviceMotionUpdates()
     }
 
 
 
-    func resetReferenceFrame()
-    {
+    func resetReferenceFrame() {
         //print("MotionManager resetReferenceFrame()")
         if motionManager.isDeviceMotionAvailable
         {

@@ -17,8 +17,8 @@ CameraType enum member.
 */
 enum AircraftCamera: String
 {
-    case distantCamera  = "distantCamera"
-    case shipCamera     = "shipCamera"
+    case distantCamera //  = "distantCamera"
+    case shipCamera //     = "shipCamera"
 }
 
 

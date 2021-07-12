@@ -11,12 +11,15 @@ import SceneKit
 
 
 
+/*
+ This view contains all of the code for the SceneView() for the primary scene.
+ */
 struct AircraftSceneView: View {
     @State private var sunlightSwitch       = true
     @State private var distantCamera        = true
     @State private var shipCamera           = false
     @State private var settingsSwitch       = false
-    @State private var povName              = AircraftCamera.distantCamera.rawValue
+    @State private var povName              = AircraftCamera.distantCamera//.rawValue
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
