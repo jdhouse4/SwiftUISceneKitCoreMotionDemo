@@ -15,7 +15,6 @@ import SceneKit
  This view contains all of the code for the SceneView() for the primary scene.
  */
 struct AircraftSceneView: View {
-    @State private var sunlightSwitch       = true
     @State private var distantCamera        = true
     @State private var shipCamera           = false
     @State private var settingsSwitch       = false
@@ -27,7 +26,9 @@ struct AircraftSceneView: View {
     // @StateObject is a property wrapper type that instantiates an observable object.
     @StateObject var aircraft               = AircraftSceneKitScene()
     @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
+    @StateObject var aircraftSunlightButton = AircraftSunlightButton()
     @StateObject var aircraftCameraButton   = AircraftCameraButton()
+    @StateObject var aircraftSettingsButton = AircraftSettingsButton()
 
 
     // SceneView.Options for affecting the SceneView.
@@ -92,34 +93,16 @@ struct AircraftSceneView: View {
 
                 HStack (spacing: 5) {
 
-                    //
-                    // Button for toggling the sunlight.
-                    //
-                    Button( action: {
-                        withAnimation{
-                            self.sunlightSwitch.toggle()
-                        }
-
-                        self.toggleSunlight()
-
-                    }) {
-                        Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Light Switch"))
-                    }
-                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
-                    .background(sunlightSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                    .clipShape(Circle())
-                    .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                    .padding()
-                    .animation(.ripple(buttonIndex: 2))
-
+                    AircraftSunlightButtonView()
 
 
                     AircraftCameraButtons()
 
 
+                    AircraftSettingsButtonView()
 
+
+                    /*
                     //
                     // Button to show statistics.
                     //
@@ -141,31 +124,22 @@ struct AircraftSceneView: View {
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .animation(.ripple(buttonIndex: 2))
                     .padding()
+                    */
                 }.padding(.bottom, settingsSwitch ? 140 : 5)
             }
         }
         .environmentObject(aircraft)
         .environmentObject(aircraftDelegate)
+        .environmentObject(aircraftSunlightButton)
         .environmentObject(aircraftCameraButton)
+        .environmentObject(aircraftSettingsButton)
         .onAppear {
             aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
             aircraftDelegate.motionManager.resetReferenceFrame()
         }
     }
 
-
-
-    func toggleSunlight() -> Void {
-        let sunlight = aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
-
-        if self.sunlightSwitch == true {
-            sunlight!.intensity = 2000.0
-        } else {
-            sunlight!.intensity = 0.0
-        }
-    }
-
-
+    
 
     private func changeOrientation(of node: SCNNode, with translation: CGSize) {
         let x = Float(translation.width)

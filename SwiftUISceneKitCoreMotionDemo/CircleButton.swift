@@ -12,7 +12,6 @@ import CoreGraphics
 
 enum CircleButton: CGFloat {
     case diameter       = 60
-    case cornerRadius   = 30
     case spacer         = 4
 }
 

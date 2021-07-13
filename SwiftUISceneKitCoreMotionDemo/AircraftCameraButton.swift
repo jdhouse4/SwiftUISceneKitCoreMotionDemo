@@ -16,10 +16,6 @@ class AircraftCameraButton: ObservableObject {
     @Published var showCameraButtons: Bool          = false
     @Published var shipCameraButtonPressed: Bool    = false
     @Published var distantCameraButtonPressed: Bool = false
-
-    // Top Right Buttons
-    //@Published var showSettingsButtons: Bool            = false
-    //@Published var settingsButtonPressed: Bool          = false
 }
 
 

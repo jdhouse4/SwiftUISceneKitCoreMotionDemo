@@ -169,6 +169,6 @@ struct AircraftCameraButtons: View {
 
 struct AircraftCameraButtons_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftCameraButtons()
+        AircraftCameraButtons().environmentObject(AircraftCameraButton())
     }
 }
