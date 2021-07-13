@@ -148,15 +148,15 @@ struct AircraftSceneView: View {
         .environmentObject(aircraftDelegate)
         .environmentObject(aircraftCameraButton)
         .onAppear {
-            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
-            self.aircraftDelegate.motionManager.resetReferenceFrame()
+            aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
+            aircraftDelegate.motionManager.resetReferenceFrame()
         }
     }
 
 
 
     func toggleSunlight() -> Void {
-        let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
+        let sunlight = aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
 
         if self.sunlightSwitch == true {
             sunlight!.intensity = 2000.0
@@ -214,11 +214,11 @@ struct AircraftSceneView: View {
 
 
     private func changeCameraFOV(of camera: SCNCamera, value: CGFloat) {
-        if self.magnification >= 1.025 {
-            self.magnification = 1.025
+        if magnification >= 1.025 {
+            magnification = 1.025
         }
-        if self.magnification <= 0.97 {
-            self.magnification = 0.97
+        if magnification <= 0.97 {
+            magnification = 0.97
         }
 
         let maximumFOV: CGFloat = 25 // Zoom-in.
@@ -228,11 +228,11 @@ struct AircraftSceneView: View {
 
         if camera.fieldOfView <= maximumFOV {
             camera.fieldOfView = maximumFOV
-            self.magnification        = 1.0
+            magnification        = 1.0
         }
         if camera.fieldOfView >= minimumFOV {
             camera.fieldOfView = minimumFOV
-            self.magnification        = 1.0
+            magnification        = 1.0
         }
     }
 
