@@ -15,10 +15,6 @@ import SceneKit
  This view contains all of the code for the SceneView() for the primary scene.
  */
 struct AircraftSceneView: View {
-    @State private var distantCamera        = true
-    @State private var shipCamera           = false
-    @State private var settingsSwitch       = false
-    @State private var povName              = AircraftCamera.distantCamera
     @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
@@ -91,41 +87,8 @@ struct AircraftSceneView: View {
             VStack {
                 Spacer()
 
-                HStack (spacing: 5) {
+                AircraftButtonsView()
 
-                    AircraftSunlightButtonView()
-
-
-                    AircraftCameraButtons()
-
-
-                    AircraftSettingsButtonView()
-
-
-                    /*
-                    //
-                    // Button to show statistics.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.settingsSwitch.toggle()
-                        }
-
-                        aircraftDelegate.showsStatistics.toggle()
-
-                    }) {
-                        Image(systemName: settingsSwitch ? "gearshape.fill" : "gearshape")
-                            .imageScale(.large)
-                            .accessibility(label: Text("Settings"))
-                    }
-                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
-                    .background(settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                    .clipShape(Circle())
-                    .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                    .animation(.ripple(buttonIndex: 2))
-                    .padding()
-                    */
-                }.padding(.bottom, settingsSwitch ? 140 : 5)
             }
         }
         .environmentObject(aircraft)
@@ -139,7 +102,7 @@ struct AircraftSceneView: View {
         }
     }
 
-    
+
 
     private func changeOrientation(of node: SCNNode, with translation: CGSize) {
         let x = Float(translation.width)

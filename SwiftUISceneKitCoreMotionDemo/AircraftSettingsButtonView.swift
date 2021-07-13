@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct AircraftSettingsButtonView: View {
-    @EnvironmentObject var aircraftSettingsSwitch: AircraftSettingsButton
+    @EnvironmentObject var aircraftSettingsButton: AircraftSettingsButton
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
 
@@ -21,18 +21,18 @@ struct AircraftSettingsButtonView: View {
         //
         Button( action: {
             withAnimation {
-                self.aircraftSettingsSwitch.settingsSwitch.toggle()
+                self.aircraftSettingsButton.settingsSwitch.toggle()
             }
 
             aircraftDelegate.showsStatistics.toggle()
 
         }) {
-            Image(systemName: aircraftSettingsSwitch.settingsSwitch ? "gearshape.fill" : "gearshape")
+            Image(systemName: aircraftSettingsButton.settingsSwitch ? "gearshape.fill" : "gearshape")
                 .imageScale(.large)
                 .accessibility(label: Text("Settings"))
         }
         .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
-        .background(aircraftSettingsSwitch.settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+        .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
         .animation(.ripple(buttonIndex: 2))
@@ -47,5 +47,19 @@ struct AircraftSettingsButtonView: View {
 struct AircraftSettingsButtonView_Previews: PreviewProvider {
     static var previews: some View {
         AircraftSettingsButtonView().environmentObject(AircraftSettingsButton())
+    }
+}
+
+
+
+extension AnyTransition {
+    static var leftButtonsMoveAndFadeTransition: AnyTransition {
+        let insertion   = AnyTransition.move(edge: .leading)
+            .combined(with: .opacity)
+
+        let removal     = AnyTransition.offset(x: -200, y: 0)
+            .combined(with: .opacity)
+
+        return asymmetric(insertion: insertion, removal: removal)
     }
 }
