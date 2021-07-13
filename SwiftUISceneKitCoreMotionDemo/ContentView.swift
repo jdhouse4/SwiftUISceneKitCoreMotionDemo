@@ -33,7 +33,15 @@ struct ContentView: View {
             AircraftSceneView()
 
             AircraftHeaderView()
-            
+
+            VStack {
+                
+                Spacer()
+
+                AircraftButtonsView()
+
+            }
+
         }
         .statusBar(hidden: true)
 
