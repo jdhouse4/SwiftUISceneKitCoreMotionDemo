@@ -104,14 +104,14 @@ struct AircraftSceneView: View {
 
                     }) {
                         Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
-                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                             .imageScale(.large)
-                            .background(Capsule().stroke(lineWidth: 2))
-                            .background(sunlightSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                            .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Light Switch"))
-                            .padding()
                     }
+                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
+                    .background(sunlightSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                    .clipShape(Circle())
+                    .background(Capsule().stroke(Color.blue, lineWidth: 1))
+                    .padding()
                     .animation(.ripple(buttonIndex: 2))
 
 
@@ -132,15 +132,15 @@ struct AircraftSceneView: View {
 
                     }) {
                         Image(systemName: settingsSwitch ? "gearshape.fill" : "gearshape")
-                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
                             .imageScale(.large)
-                            .background(Capsule().stroke(lineWidth: 2))
-                            .background(settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                            .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Settings"))
-                            .padding()
                     }
+                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
+                    .background(settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                    .clipShape(Circle())
+                    .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .animation(.ripple(buttonIndex: 2))
+                    .padding()
                 }.padding(.bottom, settingsSwitch ? 140 : 5)
             }
         }

@@ -49,13 +49,13 @@ struct AircraftCameraButtons: View {
                     }
                 }) {
                     Image(systemName: "camera.fill")
-                        .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
                         .imageScale(.large)
-                        .background(Capsule().stroke(lineWidth: 2))
-                        .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                        .cornerRadius(CircleButton.cornerRadius.rawValue)
                 }
                 .zIndex(3)
+                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                .clipShape(Circle())
+                .background(Capsule().stroke(Color.blue, lineWidth: 1))
                 .animation(.ripple(buttonIndex: 2))
 
 
@@ -75,15 +75,15 @@ struct AircraftCameraButtons: View {
 
                     }) {
                         Image(systemName: "airplane")
-                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
                             .imageScale(.large)
-                            .background(Capsule().stroke(lineWidth: 2))
-                            .background(distantCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                            .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Show Distant Camera"))
                             .padding()
                     }
                     .zIndex(2)
+                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                    .background(distantCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                    .clipShape(Circle())
+                    .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeLeft(buttonIndex: 1))
                     .offset(x: -( CircleButton.diameter.rawValue + CircleButton.spacer.rawValue ), y: 0)
                     .animation(.ripple(buttonIndex: 2))
@@ -103,15 +103,15 @@ struct AircraftCameraButtons: View {
 
                     }) {
                         Image(systemName: "person.fill")
-                            .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
                             .imageScale(.large)
-                            .background(Capsule().stroke(lineWidth: 2))
-                            .background(shipCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
-                            .cornerRadius(CircleButton.cornerRadius.rawValue)
                             .accessibility(label: Text("Airplane Camera"))
                             .padding()
                     }
                     .zIndex(2)
+                    .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                    .background(shipCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                    .clipShape(Circle())
+                    .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeRight(buttonIndex: 1))
                     .offset(x: CircleButton.diameter.rawValue + CircleButton.spacer.rawValue, y: 0)
                     .animation(.ripple(buttonIndex: 2))
