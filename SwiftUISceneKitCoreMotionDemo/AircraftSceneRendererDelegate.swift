@@ -11,7 +11,7 @@ import SceneKit
 
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
-    @Published var aircraftCamera: String       = AircraftCamera.distantCamera.rawValue
+    @Published var aircraftCamera: String   = AircraftCamera.distantCamera.rawValue
     @Published var aircraftCameraNode: SCNNode  = SCNNode()
 
     var aircraftScene: SCNScene?
