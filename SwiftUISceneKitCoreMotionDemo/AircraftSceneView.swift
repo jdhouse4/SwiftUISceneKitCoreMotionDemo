@@ -20,11 +20,14 @@ struct AircraftSceneView: View {
     @State private var totalChangePivot     = SCNMatrix4Identity
 
     // @StateObject is a property wrapper type that instantiates an observable object.
-    @StateObject var aircraft               = AircraftSceneKitScene()
-    @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
-    @StateObject var aircraftSunlightButton = AircraftSunlightButton()
-    @StateObject var aircraftCameraButton   = AircraftCameraButton()
-    @StateObject var aircraftSettingsButton = AircraftSettingsButton()
+//    @StateObject var aircraft               = AircraftSceneKitScene()
+//    @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
+//    @StateObject var aircraftSunlightButton = AircraftSunlightButton()
+//    @StateObject var aircraftCameraButton   = AircraftCameraButton()
+//    @StateObject var aircraftSettingsButton = AircraftSettingsButton()
+
+    @EnvironmentObject var aircraft: AircraftSceneKitScene
+    @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
 
     // SceneView.Options for affecting the SceneView.
@@ -84,18 +87,21 @@ struct AircraftSceneView: View {
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
+            /*
             VStack {
                 Spacer()
 
                 AircraftButtonsView()
 
             }
+            */
+
         }
-        .environmentObject(aircraft)
-        .environmentObject(aircraftDelegate)
-        .environmentObject(aircraftSunlightButton)
-        .environmentObject(aircraftCameraButton)
-        .environmentObject(aircraftSettingsButton)
+        //.environmentObject(aircraft)
+        //.environmentObject(aircraftDelegate)
+        //.environmentObject(aircraftSunlightButton)
+        //.environmentObject(aircraftCameraButton)
+        //.environmentObject(aircraftSettingsButton)
         .onAppear {
             aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
             aircraftDelegate.motionManager.resetReferenceFrame()

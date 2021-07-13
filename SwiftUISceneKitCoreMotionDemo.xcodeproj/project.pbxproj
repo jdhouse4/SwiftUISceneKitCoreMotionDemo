@@ -15,6 +15,7 @@
 		E6777687269D5262004BE5EB /* AircraftSettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777686269D5262004BE5EB /* AircraftSettingsButton.swift */; };
 		E6777689269D52C5004BE5EB /* AircraftSettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777688269D52C5004BE5EB /* AircraftSettingsButtonView.swift */; };
 		E677768B269D57E5004BE5EB /* AircraftButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677768A269D57E5004BE5EB /* AircraftButtonsView.swift */; };
+		E677768D269D5A55004BE5EB /* AircraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677768C269D5A55004BE5EB /* AircraftView.swift */; };
 		E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */; };
 		E6840702253CE69800E621F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6840701253CE69800E621F1 /* ContentView.swift */; };
 		E6840704253CE69A00E621F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6840703253CE69A00E621F1 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		E6777686269D5262004BE5EB /* AircraftSettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftSettingsButton.swift; sourceTree = "<group>"; };
 		E6777688269D52C5004BE5EB /* AircraftSettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftSettingsButtonView.swift; sourceTree = "<group>"; };
 		E677768A269D57E5004BE5EB /* AircraftButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AircraftButtonsView.swift; path = SwiftUISceneKitCoreMotionDemo/AircraftButtonsView.swift; sourceTree = "<group>"; };
+		E677768C269D5A55004BE5EB /* AircraftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AircraftView.swift; path = SwiftUISceneKitCoreMotionDemo/AircraftView.swift; sourceTree = "<group>"; };
 		E68406FC253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUISceneKitCoreMotionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISceneKitCoreMotionDemoApp.swift; sourceTree = "<group>"; };
 		E6840701253CE69800E621F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		E68406F3253CE69800E621F1 = {
 			isa = PBXGroup;
 			children = (
+				E677768C269D5A55004BE5EB /* AircraftView.swift */,
 				E677768A269D57E5004BE5EB /* AircraftButtonsView.swift */,
 				E68406FE253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemo */,
 				E68406FD253CE69800E621F1 /* Products */,
@@ -185,6 +188,7 @@
 				E677768B269D57E5004BE5EB /* AircraftButtonsView.swift in Sources */,
 				E6840702253CE69800E621F1 /* ContentView.swift in Sources */,
 				E69290A8265D9E8F007D3A6C /* AircraftCameraButton.swift in Sources */,
+				E677768D269D5A55004BE5EB /* AircraftView.swift in Sources */,
 				E69290A4265CC5FC007D3A6C /* AircraftCameraButtons.swift in Sources */,
 				E69290A6265D97C5007D3A6C /* CircleButton.swift in Sources */,
 				E6777685269D4E0C004BE5EB /* AircraftSunlightButton.swift in Sources */,

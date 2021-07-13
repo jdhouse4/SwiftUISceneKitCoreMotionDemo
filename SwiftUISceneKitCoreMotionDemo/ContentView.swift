@@ -12,8 +12,12 @@ import SceneKit
 
 
 struct ContentView: View {
+
     var body: some View {
-        ZStack {
+        
+        AircraftView()
+
+        /*ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
 
             AircraftSceneView()
@@ -30,16 +34,18 @@ struct ContentView: View {
 
                 Spacer(minLength: 300)
             }
-        }
+        }*/
         .statusBar(hidden: true)
     }
+
 }
 
 
 
-
+/*
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+ */
