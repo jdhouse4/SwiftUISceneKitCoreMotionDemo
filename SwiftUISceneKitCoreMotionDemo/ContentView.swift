@@ -16,6 +16,7 @@ struct ContentView: View {
     var body: some View {
         
         AircraftView()
+            .statusBar(hidden: true)
 
         /*ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -34,8 +35,9 @@ struct ContentView: View {
 
                 Spacer(minLength: 300)
             }
-        }*/
-        .statusBar(hidden: true)
+        }
+             .statusBar(hidden: true)
+             */
     }
 
 }

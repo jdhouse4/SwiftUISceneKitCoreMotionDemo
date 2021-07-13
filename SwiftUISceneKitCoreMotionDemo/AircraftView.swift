@@ -39,13 +39,15 @@ struct AircraftView: View {
 
             VStack() {
                 Text("Hello, SwiftUI!").multilineTextAlignment(.leading).padding()
-                    .foregroundColor(Color.gray)
-
+                    .foregroundColor(Color.black)
                     .font(.largeTitle)
+                    .opacity(0.7)
+
 
                 Text("And SceneView too")
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.black)
                     .font(.title2)
+                    .opacity(0.8)
 
                 Spacer(minLength: 300)
             }
