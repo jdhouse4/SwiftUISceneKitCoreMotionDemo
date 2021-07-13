@@ -42,9 +42,6 @@ struct AircraftSunlightButtonView: View {
 
 
 
-
-
-
     func toggleSunlight() -> Void {
         let sunlight = aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
 

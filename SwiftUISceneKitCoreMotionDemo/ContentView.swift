@@ -13,31 +13,37 @@ import SceneKit
 
 struct ContentView: View {
 
-    var body: some View {
-        
-        AircraftView()
-            .statusBar(hidden: true)
 
-        /*ZStack {
+    //
+    // @StateObject is a property wrapper type that instantiates an observable object.
+    //
+    @StateObject var aircraft               = AircraftSceneKitScene()
+    @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
+    @StateObject var aircraftSunlightButton = AircraftSunlightButton()
+    @StateObject var aircraftCameraButton   = AircraftCameraButton()
+    @StateObject var aircraftSettingsButton = AircraftSettingsButton()
+
+
+    var body: some View {
+
+        ZStack {
+
             Color.black.edgesIgnoringSafeArea(.all)
 
             AircraftSceneView()
 
-            VStack() {
-                Text("Hello, SwiftUI!").multilineTextAlignment(.leading).padding()
-                    .foregroundColor(Color.gray)
-
-                    .font(.largeTitle)
-
-                Text("And SceneView too")
-                    .foregroundColor(Color.gray)
-                    .font(.title2)
-
-                Spacer(minLength: 300)
-            }
+            AircraftHeaderView()
+            
         }
-             .statusBar(hidden: true)
-             */
+        .statusBar(hidden: true)
+
+
+        .environmentObject(aircraft)
+        .environmentObject(aircraftDelegate)
+        .environmentObject(aircraftSunlightButton)
+        .environmentObject(aircraftCameraButton)
+        .environmentObject(aircraftSettingsButton)
+
     }
 
 }
@@ -45,9 +51,9 @@ struct ContentView: View {
 
 
 /*
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+ struct ContentView_Previews: PreviewProvider {
+ static var previews: some View {
+ ContentView()
+ }
+ }
  */

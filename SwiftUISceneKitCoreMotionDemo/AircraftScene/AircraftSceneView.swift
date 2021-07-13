@@ -19,13 +19,6 @@ struct AircraftSceneView: View {
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
-    // @StateObject is a property wrapper type that instantiates an observable object.
-//    @StateObject var aircraft               = AircraftSceneKitScene()
-//    @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
-//    @StateObject var aircraftSunlightButton = AircraftSunlightButton()
-//    @StateObject var aircraftCameraButton   = AircraftCameraButton()
-//    @StateObject var aircraftSettingsButton = AircraftSettingsButton()
-
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
@@ -34,6 +27,7 @@ struct AircraftSceneView: View {
     // Uncomment if you would like to have Apple do all of the camera control
     //private var sceneViewCameraOptions      = SceneView.Options.allowsCameraControl
     //private var sceneViewRenderContinuously = SceneView.Options.rendersContinuously
+
 
     // Don't forget to comment this is you are using .allowsCameraControl
     var drag: some Gesture {
@@ -49,6 +43,7 @@ struct AircraftSceneView: View {
                 updateOrientation(of: aircraft.aircraftNode)
             }
     }
+
 
     // Don't forget to comment this is you are using .allowsCameraControl
     var magnify: some Gesture {
@@ -66,6 +61,7 @@ struct AircraftSceneView: View {
                 print("Ended pinch with value \(value)\n\n")
             }
     }
+
 
     // Don't forget to comment this is you are using .allowsCameraControl
     var exclusiveGesture: some Gesture {
@@ -87,21 +83,7 @@ struct AircraftSceneView: View {
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
-            /*
-            VStack {
-                Spacer()
-
-                AircraftButtonsView()
-
-            }
-            */
-
         }
-        //.environmentObject(aircraft)
-        //.environmentObject(aircraftDelegate)
-        //.environmentObject(aircraftSunlightButton)
-        //.environmentObject(aircraftCameraButton)
-        //.environmentObject(aircraftSettingsButton)
         .onAppear {
             aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
             aircraftDelegate.motionManager.resetReferenceFrame()

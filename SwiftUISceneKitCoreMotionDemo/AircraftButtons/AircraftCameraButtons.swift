@@ -141,6 +141,13 @@ struct AircraftCameraButtons: View {
 
 
 
+    /*
+     Note:
+
+     I chose not to remove these functions from the camera buttons view since they are only called here in this
+     function. Were there calls to these functions elsewhere in the code, I wuold have moved these two functions
+     to AircraftHelpers.swift
+     */
     func moveAndFadeRight(buttonIndex: Int) -> AnyTransition {
         let insertion   = AnyTransition.offset(x: -CircleButton.diameter.rawValue * CGFloat(buttonIndex), y: 0)
             //.combined(with: .opacity)

@@ -12,6 +12,4 @@ import SwiftUI
 
 class AircraftSunlightButton: ObservableObject {
     @Published var sunlight: Bool   = true
-
-
 }
