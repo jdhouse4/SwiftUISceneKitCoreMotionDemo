@@ -10,22 +10,6 @@ import SwiftUI
 
 
 
-extension AnyTransition {
-    static var leftButtonsMoveAndFadeTransition: AnyTransition {
-        let insertion   = AnyTransition.move(edge: .leading)
-            .combined(with: .opacity)
-
-        let removal     = AnyTransition.offset(x: -200, y: 0)
-            .combined(with: .opacity)
-
-        return asymmetric(insertion: insertion, removal: removal)
-    }
-}
-
-
-
-
-
 struct AircraftCameraButtons: View {
     // @EnvironmentObject is a property wrapper type for an observable object that is
     // instantiated by @StateObject supplied by a parent or ancestor view.
