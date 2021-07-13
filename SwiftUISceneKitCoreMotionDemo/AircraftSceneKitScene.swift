@@ -34,15 +34,15 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     override init() {
         print("AircraftScenekitScene override initialized")
-        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
-        self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
+        aircraftCurrentCamera       = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
-        self.aircraftDistantCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
-        self.aircraftShipCamera         = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
+        aircraftDistantCamera       = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
+        aircraftShipCamera          = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
 
-        self.aircraftDistantCameraNode  = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
-        self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
+        aircraftDistantCameraNode   = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
+        aircraftShipCameraNode      = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
 
         super.init()
     }
@@ -51,15 +51,15 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene initialized")
-        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
-        self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
+        aircraftCurrentCamera       = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
-        self.aircraftDistantCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
-        self.aircraftShipCamera         = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
+        aircraftDistantCamera       = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
+        aircraftShipCamera          = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
 
-        self.aircraftDistantCameraNode  = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
-        self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
+        aircraftDistantCameraNode   = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
+        aircraftShipCameraNode      = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
 
         super.init(coder: coder)
     }

@@ -31,8 +31,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     override init() {
         print("AircraftSceneRendererDelegate override initialized")
-        self.motionManager.setupDeviceMotion()
-        self.sceneQuaternion    = self.motionManager.motionQuaternion
+        motionManager.setupDeviceMotion()
+        sceneQuaternion    = self.motionManager.motionQuaternion
 
 
         super.init()

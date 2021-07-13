@@ -66,12 +66,12 @@ struct AircraftCameraButtons: View {
                     //
                     Button( action: {
                         withAnimation {
-                            self.distantCamera  = true
-                            self.shipCamera     = false
-                            self.aircraftCameraButton.distantCameraButtonPressed.toggle()
+                            distantCamera  = true
+                            shipCamera     = false
+                            aircraftCameraButton.distantCameraButtonPressed.toggle()
                         }
 
-                        self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
+                        changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
 
                     }) {
                         Image(systemName: "airplane")
@@ -94,12 +94,12 @@ struct AircraftCameraButtons: View {
                     //
                     Button( action: {
                         withAnimation {
-                            self.shipCamera     = true
-                            self.distantCamera  = false
-                            self.aircraftCameraButton.shipCameraButtonPressed.toggle()
+                            shipCamera     = true
+                            distantCamera  = false
+                            aircraftCameraButton.shipCameraButtonPressed.toggle()
                         }
 
-                        self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
+                        changePOV(cameraString: self.aircraft.aircraftShipCameraString)
 
                     }) {
                         Image(systemName: "person.fill")

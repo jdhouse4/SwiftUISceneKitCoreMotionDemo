@@ -39,12 +39,12 @@ struct AircraftSceneView: View {
     var drag: some Gesture {
         DragGesture()
             .onChanged { value in
-                self.isDragging = true
+                isDragging = true
 
                 changeOrientation(of: aircraft.aircraftNode, with: value.translation)
             }
             .onEnded { value in
-                self.isDragging = false
+                isDragging = false
 
                 updateOrientation(of: aircraft.aircraftNode)
             }
@@ -54,12 +54,12 @@ struct AircraftSceneView: View {
     var magnify: some Gesture {
         MagnificationGesture()
             .onChanged{ (value) in
-                print("magnify = \(self.magnification)")
+                print("magnify = \(magnification)")
 
                 self.magnification = value
 
-                changeCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!,
-                                value: self.magnification)
+                changeCameraFOV(of: (aircraft.aircraftCurrentCamera.camera)!,
+                                value: magnification)
 
             }
             .onEnded{ value in
@@ -82,9 +82,9 @@ struct AircraftSceneView: View {
             )
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
-                resetCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!)
+                resetCameraFOV(of: (aircraft.aircraftCurrentCamera.camera)!)
                 resetOrientation(of: aircraft.aircraftNode)
-                self.aircraftDelegate.motionManager.resetReferenceFrame()
+                aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
             VStack {
@@ -97,10 +97,10 @@ struct AircraftSceneView: View {
                     //
                     Button( action: {
                         withAnimation{
-                            self.sunlightSwitch.toggle()
+                            sunlightSwitch.toggle()
                         }
 
-                        self.toggleSunlight()
+                        toggleSunlight()
 
                     }) {
                         Image(systemName: sunlightSwitch ? "lightbulb.fill" : "lightbulb")
@@ -125,7 +125,7 @@ struct AircraftSceneView: View {
                     //
                     Button( action: {
                         withAnimation {
-                            self.settingsSwitch.toggle()
+                            settingsSwitch.toggle()
                         }
 
                         aircraftDelegate.showsStatistics.toggle()
@@ -148,15 +148,15 @@ struct AircraftSceneView: View {
         .environmentObject(aircraftDelegate)
         .environmentObject(aircraftCameraButton)
         .onAppear {
-            self.aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
-            self.aircraftDelegate.motionManager.resetReferenceFrame()
+            aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
+            aircraftDelegate.motionManager.resetReferenceFrame()
         }
     }
 
 
 
     func toggleSunlight() -> Void {
-        let sunlight = self.aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
+        let sunlight = aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
 
         if self.sunlightSwitch == true {
             sunlight!.intensity = 2000.0
@@ -214,11 +214,11 @@ struct AircraftSceneView: View {
 
 
     private func changeCameraFOV(of camera: SCNCamera, value: CGFloat) {
-        if self.magnification >= 1.025 {
-            self.magnification = 1.025
+        if magnification >= 1.025 {
+            magnification = 1.025
         }
-        if self.magnification <= 0.97 {
-            self.magnification = 0.97
+        if magnification <= 0.97 {
+            magnification = 0.97
         }
 
         let maximumFOV: CGFloat = 25 // Zoom-in.
@@ -228,11 +228,11 @@ struct AircraftSceneView: View {
 
         if camera.fieldOfView <= maximumFOV {
             camera.fieldOfView = maximumFOV
-            self.magnification        = 1.0
+            magnification        = 1.0
         }
         if camera.fieldOfView >= minimumFOV {
             camera.fieldOfView = minimumFOV
-            self.magnification        = 1.0
+            magnification        = 1.0
         }
     }
 

@@ -27,8 +27,8 @@ class MotionManager: ObservableObject {
 
     init() {
         print("MotionManager initialized")
-        self.motionManager = CMMotionManager()
-        //self.setupDeviceMotion()
+        motionManager = CMMotionManager()
+        //setupDeviceMotion()
     }
 
 
@@ -36,24 +36,24 @@ class MotionManager: ObservableObject {
     func setupDeviceMotion() {
         //var cycles: Int = 1
         if motionManager.isDeviceMotionAvailable {
-            self.motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
-            self.motionManager.startDeviceMotionUpdates()
+            motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
+            motionManager.startDeviceMotionUpdates()
 
 
             while motionQuaterionAvailable == false {
-                if self.motionManager.deviceMotion != nil {
-                    if self.motionManager.isDeviceMotionActive {
+                if motionManager.deviceMotion != nil {
+                    if motionManager.isDeviceMotionActive {
 
-                        self.deviceMotion = self.motionManager.deviceMotion
+                        deviceMotion = motionManager.deviceMotion
 
                         if motionManager.isGyroAvailable {
                             if motionManager.deviceMotion?.attitude != nil {
 
-                                self.referenceFrame = self.deviceMotion?.attitude
+                                referenceFrame = self.deviceMotion?.attitude
 
-                                self.deviceMotion?.attitude.multiply(byInverseOf: self.referenceFrame!)
+                                deviceMotion?.attitude.multiply(byInverseOf: self.referenceFrame!)
 
-                                self.motionQuaterionAvailable = true
+                                motionQuaterionAvailable = true
                             }
                         }
                     }
@@ -72,7 +72,7 @@ class MotionManager: ObservableObject {
 
     func startDeviceMotion() {
         print("motion startDeviceMotion()")
-        self.motionTimer = Timer(fire: Date(), interval: (1.0 / 60.0), repeats: true,
+        motionTimer = Timer(fire: Date(), interval: (1.0 / 60.0), repeats: true,
                                  block: { (motionTimer) in
                                     if self.deviceMotion != nil {
                                         self.motionQuaternion = simd_quatf(ix: Float((self.deviceMotion?.attitude.quaternion.x)!),
