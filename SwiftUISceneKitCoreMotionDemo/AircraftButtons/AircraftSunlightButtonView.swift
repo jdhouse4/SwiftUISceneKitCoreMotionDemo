@@ -33,7 +33,7 @@ struct AircraftSunlightButtonView: View {
                 .accessibility(label: Text("Light Switch"))
         }
         .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
-        .background(sunlightSwitch.sunlight ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+        .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
         .padding()

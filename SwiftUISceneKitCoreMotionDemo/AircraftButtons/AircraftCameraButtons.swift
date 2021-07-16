@@ -37,7 +37,7 @@ struct AircraftCameraButtons: View {
                 }
                 .zIndex(3)
                 .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
-                .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))
                 .animation(.ripple(buttonIndex: 2))
@@ -65,7 +65,7 @@ struct AircraftCameraButtons: View {
                     }
                     .zIndex(2)
                     .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
-                    .background(distantCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                    .background(distantCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeLeft(buttonIndex: 1))
@@ -93,7 +93,7 @@ struct AircraftCameraButtons: View {
                     }
                     .zIndex(2)
                     .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
-                    .background(shipCamera ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+                    .background(shipCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeRight(buttonIndex: 1))

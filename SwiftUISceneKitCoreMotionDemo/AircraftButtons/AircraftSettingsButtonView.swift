@@ -32,7 +32,7 @@ struct AircraftSettingsButtonView: View {
                 .accessibility(label: Text("Settings"))
         }
         .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
-        .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.on.rawValue : CircleButtonColor.off.rawValue)
+        .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
         .animation(.ripple(buttonIndex: 2))
