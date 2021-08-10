@@ -11,11 +11,12 @@ import SwiftUI
 
 
 class AircraftCameraButton: ObservableObject {
-    // Top Left Buttons
+
     @Published var cameraButton: Bool               = false
     @Published var showCameraButtons: Bool          = false
     @Published var shipCameraButtonPressed: Bool    = false
     @Published var distantCameraButtonPressed: Bool = false
+
 }
 
 

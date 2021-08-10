@@ -30,6 +30,9 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftDistantCameraNode: SCNNode
     @Published var aircraftShipCameraNode: SCNNode
 
+    @Published var aircraftEnginesNode: SCNNode
+    @Published var aircraftEngine: SCNParticleSystem
+
 
 
     override init() {
@@ -44,7 +47,18 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         self.aircraftDistantCameraNode  = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
         self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
 
+        self.aircraftEnginesNode        = aircraftScene.rootNode.childNode(withName: "shipEnginesNode", recursively: true)!
+        //self.aircraftEngine             = aircraftScene.rootNode.childNode(withName: "engine1", recursively: true)!
+
+        //self.aircraftEngine             = SCNParticleSystem(named: "engine1", inDirectory: nil)!
+
+        //self.aircraftEngine             = self.aircraftEngineNode.particleSystems![0]
+
+        self.aircraftEngine              = SCNParticleSystem()
+
         super.init()
+
+        self.setAircraftEngine()
     }
 
 
@@ -61,6 +75,20 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         self.aircraftDistantCameraNode  = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
         self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
 
+        self.aircraftEnginesNode        = aircraftScene.rootNode.childNode(withName: "shipEngineNode", recursively: true)!
+        //self.aircraftEngine             = aircraftScene.rootNode.childNode(withName: "engine1", recursively: true)!
+
+        self.aircraftEngine              = SCNParticleSystem()
+
         super.init(coder: coder)
+
+        self.setAircraftEngine()
+    }
+
+
+
+    func setAircraftEngine() {
+        aircraftEngine  = aircraftEnginesNode.particleSystems![0]
+        print("aircraftEngine: \(String(describing: aircraftEnginesNode.particleSystems![0]))")
     }
 }

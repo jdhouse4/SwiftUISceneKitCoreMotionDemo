@@ -22,6 +22,7 @@ struct ContentView: View {
     @StateObject var aircraftSunlightButton = AircraftSunlightButton()
     @StateObject var aircraftCameraButton   = AircraftCameraButton()
     @StateObject var aircraftSettingsButton = AircraftSettingsButton()
+    @StateObject var aircraftEngineThrottle = AircraftEngineThrottle()
 
 
     var body: some View {
@@ -51,6 +52,7 @@ struct ContentView: View {
         .environmentObject(aircraftSunlightButton)
         .environmentObject(aircraftCameraButton)
         .environmentObject(aircraftSettingsButton)
+        .environmentObject(aircraftEngineThrottle)
 
     }
 

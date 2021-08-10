@@ -13,10 +13,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     @Published var aircraftCamera: String       = AircraftCamera.distantCamera.rawValue
     @Published var aircraftCameraNode: SCNNode  = SCNNode()
+    @Published var aircraftEngineNode: SCNNode  = SCNNode()
 
-    var aircraftScene: SCNScene?
+    //var aircraftScene: SCNScene?
     var changeCamera: Bool                  = false
     var cameraIndex: Int                    = 0
+
+    var engineThrottle: Double?
 
     var showsStatistics: Bool               = false
 
@@ -63,6 +66,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         //
         motionManager.updateAttitude()
 
+    
+
         /*
         if cameraIndex == 0 {
             if aircraftCameraNode != nil {
@@ -99,7 +104,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     }
 
 
-
+    /*
     func cycleCameras() -> Void {
         if changeCamera == true {
             print("\n\nAircraftSceneRendererDelegate Changing cameras")
@@ -123,8 +128,10 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             }
         }
     }
+     */
 
 
+    
     func updateExteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
 
         // Change Orientation with Device Motion
