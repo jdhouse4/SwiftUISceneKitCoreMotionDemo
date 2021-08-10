@@ -17,6 +17,7 @@ class AircraftEngineThrottle: ObservableObject {
     @Published var aircraftEngineThrust: Double     = 1000
     @Published var aircraftThrottleSetting: String  = ""
 
-     
+
+    
 
 }
