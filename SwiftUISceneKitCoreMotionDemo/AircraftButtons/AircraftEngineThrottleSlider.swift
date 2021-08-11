@@ -17,16 +17,33 @@ struct AircraftEngineThrottleSlider: View {
     //@EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
     @EnvironmentObject var aircraftEngineThrottle: AircraftEngineThrottle
 
-    @State private var throttle: Double = 0
 
     var sliderHeight: CGFloat = 200
 
+    var throttle: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        let throttle = aircraft.aircraftEngine.birthRate / 1500.00
+
+        //print("Throttle: \(throttle)")
+
+        return formatter.string(from: NSNumber(value: throttle)) ?? "0"
+    }
+
 
     var body: some View {
-        Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
-            .rotationEffect(.degrees(-90), anchor: .topLeading)
-            .frame(width: sliderHeight)
-            .offset(x: 138, y: 200)
+
+        VStack {
+            Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
+                .rotationEffect(.degrees(-90), anchor: .topLeading)
+                .frame(width: sliderHeight)
+                .offset(x: 138, y: 200)
+
+            Text(throttle)
+                .foregroundColor(Color.black)
+                .font(.title3)
+                .offset(x: 55, y: 180)
+        }
     }
 
 }
@@ -36,6 +53,6 @@ struct AircraftEngineThrottleSlider: View {
 
 struct AircraftEngineThrottleSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftEngineThrottleSlider(sliderHeight: 100)
+        AircraftEngineThrottleSlider()
     }
 }
