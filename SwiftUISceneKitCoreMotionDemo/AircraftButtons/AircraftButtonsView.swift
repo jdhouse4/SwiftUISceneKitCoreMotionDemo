@@ -27,14 +27,11 @@ struct AircraftButtonsView: View {
             GeometryReader { geo in
 
                 HStack {
-                    //Spacer(minLength: 200)
-
-                    //Text("Throttle: \(String(format: "%.0f", \((aircraft.aircraftEngine.birthRate / 1500.0) * 100)))%")
 
                     AircraftEngineThrottleSlider()
 
                 }
-                .frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)
+                .frame(width: geo.size.width, height: aircraftSettingsButton.settingsSwitch ? geo.size.height / 2 : geo.size.height, alignment: .trailing)
                 .padding(.bottom, 150)
 
             }
@@ -49,11 +46,9 @@ struct AircraftButtonsView: View {
 
                 AircraftSettingsButtonView()
 
+            }//.padding(.bottom, aircraftSettingsButton.settingsSwitch ? 140 : 5)
 
-
-            }.padding(.bottom, aircraftSettingsButton.settingsSwitch ? 140 : 5)
-
-        }
+        }.padding(.bottom, aircraftSettingsButton.settingsSwitch ? 140 : 5)
 
     }
 }
