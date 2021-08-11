@@ -34,15 +34,16 @@ struct AircraftEngineThrottleSlider: View {
     var body: some View {
 
         VStack {
-            Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
-                .rotationEffect(.degrees(-90), anchor: .topLeading)
-                .frame(width: sliderHeight)
-                .offset(x: 138, y: 200)
 
             Text(throttle)
                 .foregroundColor(Color.black)
                 .font(.title3)
-                .offset(x: 55, y: 180)
+                .offset(x: 55, y: 10)
+
+            Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
+                .rotationEffect(.degrees(-90), anchor: .topLeading)
+                .frame(width: sliderHeight)
+                .offset(x: 138, y: 200)
         }
     }
 
