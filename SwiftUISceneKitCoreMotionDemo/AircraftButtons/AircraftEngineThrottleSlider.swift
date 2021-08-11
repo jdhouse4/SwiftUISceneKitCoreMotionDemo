@@ -37,6 +37,7 @@ struct AircraftEngineThrottleSlider: View {
 
             Text(throttle)
                 .foregroundColor(Color.black)
+                .opacity(CircleButton.primaryOpacity.rawValue)
                 .font(.title3)
                 .offset(x: 55, y: 10)
 
