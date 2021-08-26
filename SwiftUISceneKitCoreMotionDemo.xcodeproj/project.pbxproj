@@ -27,6 +27,7 @@
 		E69290A4265CC5FC007D3A6C /* AircraftCameraButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A3265CC5FC007D3A6C /* AircraftCameraButtons.swift */; };
 		E69290A6265D97C5007D3A6C /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A5265D97C5007D3A6C /* CircleButton.swift */; };
 		E69290A8265D9E8F007D3A6C /* AircraftCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A7265D9E8F007D3A6C /* AircraftCameraButton.swift */; };
+		E6A8BC9126C9BFE500BEDD1C /* AircraftRCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8BC9026C9BFE500BEDD1C /* AircraftRCS.swift */; };
 		E6B6317F26C2E85C00E94CDC /* AircraftEngineThrottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6317E26C2E85C00E94CDC /* AircraftEngineThrottle.swift */; };
 		E6B6318126C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6318026C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		E69290A3265CC5FC007D3A6C /* AircraftCameraButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftCameraButtons.swift; sourceTree = "<group>"; };
 		E69290A5265D97C5007D3A6C /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		E69290A7265D9E8F007D3A6C /* AircraftCameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftCameraButton.swift; sourceTree = "<group>"; };
+		E6A8BC9026C9BFE500BEDD1C /* AircraftRCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftRCS.swift; sourceTree = "<group>"; };
 		E6B6317E26C2E85C00E94CDC /* AircraftEngineThrottle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftEngineThrottle.swift; sourceTree = "<group>"; };
 		E6B6318026C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftEngineThrottleSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				E6B6317E26C2E85C00E94CDC /* AircraftEngineThrottle.swift */,
+				E6A8BC9026C9BFE500BEDD1C /* AircraftRCS.swift */,
 				E6B6318026C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift */,
 			);
 			path = "Engines & RCS";
@@ -225,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6A8BC9126C9BFE500BEDD1C /* AircraftRCS.swift in Sources */,
 				E646891A253CFAD4008BE1CC /* AircraftSceneKitScene.swift in Sources */,
 				E677768B269D57E5004BE5EB /* AircraftButtonsView.swift in Sources */,
 				E6840702253CE69800E621F1 /* ContentView.swift in Sources */,
