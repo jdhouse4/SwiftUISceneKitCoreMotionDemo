@@ -15,7 +15,6 @@ struct AircraftHeaderView: View {
         VStack() {
             Text("Hello, SwiftUI!").multilineTextAlignment(.leading).padding()
                 .foregroundColor(Color.gray)
-
                 .font(.largeTitle)
 
             Text("And SceneView too")

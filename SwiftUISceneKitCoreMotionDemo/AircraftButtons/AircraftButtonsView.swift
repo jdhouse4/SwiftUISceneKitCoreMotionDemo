@@ -20,18 +20,33 @@ struct AircraftButtonsView: View {
 
     var body: some View {
 
+        ZStack {
+
+            VStack {
+
+                Spacer(minLength: 375)
+
+                AircraftRotationButtonsView()
+
+                Spacer(minLength: 30)
+
+            }
+            //.padding(.leading, 50)
+            //.background(Color.orange)
+
+
         VStack {
 
             Spacer(minLength: 200)
 
-            GeometryReader { geo in
+            GeometryReader { geometry in
 
-                HStack {
+                HStack (spacing: 5) {
 
                     AircraftEngineThrottleSlider()
 
                 }
-                .frame(width: geo.size.width, height: aircraftSettingsButton.settingsSwitch ? geo.size.height - 140 : geo.size.height, alignment: .trailing)
+                .frame(width: geometry.size.width, height: aircraftSettingsButton.settingsSwitch ? geometry.size.height - 140 : geometry.size.height, alignment: .trailing)
                 .padding(.bottom, 150)
 
             }
@@ -49,7 +64,7 @@ struct AircraftButtonsView: View {
             }.padding(.bottom, aircraftSettingsButton.settingsSwitch ? 140 : 5)
 
         }
-
+    }
     }
 }
 

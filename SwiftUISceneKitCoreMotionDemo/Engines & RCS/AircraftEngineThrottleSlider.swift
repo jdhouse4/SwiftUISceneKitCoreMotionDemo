@@ -44,7 +44,7 @@ struct AircraftEngineThrottleSlider: View {
             Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
                 .rotationEffect(.degrees(-90), anchor: .topLeading)
                 .frame(width: sliderHeight)
-                .offset(x: 138, y: 200)
+                .offset(x: 138, y: 200) // x was 138
         }
     }
 

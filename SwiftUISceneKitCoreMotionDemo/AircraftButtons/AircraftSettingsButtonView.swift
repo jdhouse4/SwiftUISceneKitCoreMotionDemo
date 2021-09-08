@@ -35,7 +35,7 @@ struct AircraftSettingsButtonView: View {
         .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
-        .animation(.ripple(buttonIndex: 2))
+        .animation(.ripple(buttonIndex: 2), value: aircraftSettingsButton.settingsSwitch)
         .padding()
     }
 }
