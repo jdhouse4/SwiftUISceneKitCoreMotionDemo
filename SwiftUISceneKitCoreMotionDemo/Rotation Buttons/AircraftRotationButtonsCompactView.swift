@@ -47,7 +47,7 @@ struct AircraftRotationButtonsCompactView: View {
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))
                 .position(x: CircleButtonHelper.positionMainButtonCompact().x, y: CircleButtonHelper.positionMainButtonCompact().y)
-                .animation(.easeInOut(duration: self.buttonAnimationTime).delay(0.0))
+                .animation(.easeInOut(duration: self.buttonAnimationTime).delay(0.0), value: rotationButtons.showRotationButtons)
 
 
                 if rotationButtons.showRotationButtons {

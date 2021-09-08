@@ -33,7 +33,12 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftEnginesNode: SCNNode
     @Published var aircraftEngine: SCNParticleSystem
 
+    @Published var rcsNode: SCNNode
+    @Published var rcsRollPortUpNode: SCNNode
+    @Published var rcsRollStarboardUpNode: SCNNode
 
+    @Published var rcsRollPortUp: SCNParticleSystem
+    @Published var rcsRollStarboardUp: SCNParticleSystem
 
     override init() {
         print("AircraftScenekitScene override initialized")
@@ -54,11 +59,20 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         //self.aircraftEngine             = self.aircraftEngineNode.particleSystems![0]
 
-        self.aircraftEngine              = SCNParticleSystem()
+        self.aircraftEngine             = SCNParticleSystem()
+
+        rcsNode                         = aircraftScene.rootNode.childNode(withName: "rcsNode", recursively: true)!
+        rcsRollPortUpNode               = aircraftScene.rootNode.childNode(withName: "rcsRollPortUp", recursively: true)!
+        rcsRollStarboardUpNode          = aircraftScene.rootNode.childNode(withName: "rcsRollStarboardUp", recursively: true)!
+
+        rcsRollPortUp                   = SCNParticleSystem()
+        rcsRollStarboardUp              = SCNParticleSystem()
 
         super.init()
 
         self.setAircraftEngine()
+
+        setAircraftRCS()
     }
 
 
@@ -80,9 +94,18 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         self.aircraftEngine              = SCNParticleSystem()
 
+        rcsNode                         = aircraftScene.rootNode.childNode(withName: "rcsNode", recursively: true)!
+        rcsRollPortUpNode               = aircraftScene.rootNode.childNode(withName: "rcsRollPortUp", recursively: true)!
+        rcsRollStarboardUpNode          = aircraftScene.rootNode.childNode(withName: "rcsRollStarboardUp", recursively: true)!
+
+        rcsRollPortUp                   = SCNParticleSystem()
+        rcsRollStarboardUp              = SCNParticleSystem()
+
         super.init(coder: coder)
 
         self.setAircraftEngine()
+
+        setAircraftRCS()
     }
 
 
@@ -90,5 +113,10 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     func setAircraftEngine() {
         aircraftEngine  = aircraftEnginesNode.particleSystems![0]
         print("aircraftEngine: \(String(describing: aircraftEnginesNode.particleSystems![0]))")
+    }
+
+    func setAircraftRCS() {
+        rcsRollPortUp       = rcsRollPortUpNode.particleSystems![0]
+        rcsRollStarboardUp  = rcsRollStarboardUpNode.particleSystems![0]
     }
 }

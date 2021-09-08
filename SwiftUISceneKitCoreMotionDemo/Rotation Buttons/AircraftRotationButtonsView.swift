@@ -11,6 +11,7 @@ import SwiftUI
 
 
 struct AircraftRotationButtonsView: View {
+    @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var rotationButtons: AircraftRotationButtons
 
     let buttonAnimationTime = 0.25
@@ -92,6 +93,7 @@ struct AircraftRotationButtonsView: View {
                             }
                             
                             // Code to do something goes here
+                            aircraft.rcsRollStarboardUp.birthRate = rotationButtons.rollStarboardButtonPressed ? 250 : 0
                             
                         }) {
                             Image(systemName: "arrow.clockwise")
