@@ -93,7 +93,13 @@ struct AircraftRotationButtonsView: View {
                             }
                             
                             // Code to do something goes here
-                            aircraft.rcsRollStarboardUp.birthRate = rotationButtons.rollStarboardButtonPressed ? 250 : 0
+                            aircraft.rcsRollStarboardUp.birthRate = rotationButtons.aircraftRCSDefaultBirthrate
+
+                            // Milliseconds of duration for firing
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rotationButtons.aircraftRCSMinDuration)) {
+                                aircraft.rcsRollStarboardUp.birthRate = 0
+                            }
+                            //aircraft.rcsRollStarboardUp.birthRate = 0
                             
                         }) {
                             Image(systemName: "arrow.clockwise")
@@ -210,7 +216,13 @@ struct AircraftRotationButtonsView: View {
                             }
                             
                             // Code to do something goes here
-                            
+                            aircraft.rcsRollPortUp.birthRate = rotationButtons.aircraftRCSDefaultBirthrate
+
+                            // Milliseconds of duration for firing
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rotationButtons.aircraftRCSMinDuration)) {
+                                aircraft.rcsRollPortUp.birthRate = 0
+                            }
+
                         }) {
                             Image(systemName: "arrow.counterclockwise")
                                 .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
