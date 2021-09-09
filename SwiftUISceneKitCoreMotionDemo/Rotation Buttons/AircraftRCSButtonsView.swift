@@ -1,5 +1,5 @@
 //
-//  AircraftRotationButtonsView.swift
+//  AircraftRCSButtonsView.swift
 //  FourCornersUIWithSwiftUI
 //
 //  Created by James Hillhouse IV on 6/6/21.
@@ -10,7 +10,7 @@ import SwiftUI
 
 
 
-struct AircraftRotationButtonsView: View {
+struct AircraftRCSButtonsView: View {
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
 
@@ -102,8 +102,7 @@ struct AircraftRotationButtonsView: View {
                                 aircraft.rcsRollStarboardUp.birthRate   = 0
                                 aircraft.rcsRollPortDown.birthRate      = 0
                             }
-                            //aircraft.rcsRollStarboardUp.birthRate = 0
-                            
+
                         }) {
                             Image(systemName: "arrow.clockwise")
                                 .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
@@ -215,7 +214,7 @@ struct AircraftRotationButtonsView: View {
                             withAnimation {
                                 
                                 self.rcsButtons.rollPortButtonPressed.toggle()
-                                
+                                print("Roll Port")
                             }
                             
                             // Code to do something goes here
@@ -266,6 +265,6 @@ struct AircraftRotationButtonsView: View {
 
 struct BottomRightButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftRotationButtonsView().environmentObject(AircraftRCSButtons())
+        AircraftRCSButtonsView().environmentObject(AircraftRCSButtons())
     }
 }

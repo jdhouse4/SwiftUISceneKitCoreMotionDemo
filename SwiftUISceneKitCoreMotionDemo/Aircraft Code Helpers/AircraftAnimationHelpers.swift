@@ -1,5 +1,5 @@
 //
-//  AircraftHelperFunctions.swift
+//  AircraftAnimationHelpers.swift
 //  SwiftUISceneKitCoreMotionDemo
 //
 //  Created by James Hillhouse IV on 7/13/21.

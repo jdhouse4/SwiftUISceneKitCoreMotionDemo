@@ -26,7 +26,7 @@ struct AircraftButtonsView: View {
 
                 Spacer(minLength: 375)
 
-                AircraftRotationButtonsView()
+                AircraftRCSButtonsView()
 
                 Spacer(minLength: 30)
 
@@ -57,7 +57,7 @@ struct AircraftButtonsView: View {
 
                 AircraftSunlightButtonView()
 
-                AircraftCameraButtons()
+                AircraftCameraButtonsView()
 
                 AircraftSettingsButtonView()
 

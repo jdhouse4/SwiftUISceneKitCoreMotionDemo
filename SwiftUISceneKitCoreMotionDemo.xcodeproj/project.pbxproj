@@ -17,7 +17,7 @@
 		E6777689269D52C5004BE5EB /* AircraftSettingsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777688269D52C5004BE5EB /* AircraftSettingsButtonView.swift */; };
 		E677768B269D57E5004BE5EB /* AircraftButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677768A269D57E5004BE5EB /* AircraftButtonsView.swift */; };
 		E677768F269E4227004BE5EB /* AircraftHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677768E269E4227004BE5EB /* AircraftHeaderView.swift */; };
-		E6777693269E4403004BE5EB /* AircraftHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777692269E4403004BE5EB /* AircraftHelpers.swift */; };
+		E6777693269E4403004BE5EB /* AircraftAnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777692269E4403004BE5EB /* AircraftAnimationHelpers.swift */; };
 		E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */; };
 		E6840702253CE69800E621F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6840701253CE69800E621F1 /* ContentView.swift */; };
 		E6840704253CE69A00E621F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6840703253CE69A00E621F1 /* Assets.xcassets */; };
@@ -25,10 +25,10 @@
 		E6840710253CE7F600E621F1 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684070F253CE7F600E621F1 /* MotionManager.swift */; };
 		E6840717253CE8E000E621F1 /* AircraftSceneRendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6840716253CE8E000E621F1 /* AircraftSceneRendererDelegate.swift */; };
 		E684071A253CEA1500E621F1 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = E6840719253CEA1500E621F1 /* art.scnassets */; };
-		E69290A4265CC5FC007D3A6C /* AircraftCameraButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A3265CC5FC007D3A6C /* AircraftCameraButtons.swift */; };
+		E69290A4265CC5FC007D3A6C /* AircraftCameraButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A3265CC5FC007D3A6C /* AircraftCameraButtonsView.swift */; };
 		E69290A6265D97C5007D3A6C /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A5265D97C5007D3A6C /* CircleButton.swift */; };
 		E69290A8265D9E8F007D3A6C /* AircraftCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69290A7265D9E8F007D3A6C /* AircraftCameraButton.swift */; };
-		E69A879E26DED2840074A5AA /* AircraftRotationButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A879C26DED2840074A5AA /* AircraftRotationButtonsView.swift */; };
+		E69A879E26DED2840074A5AA /* AircraftRCSButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A879C26DED2840074A5AA /* AircraftRCSButtonsView.swift */; };
 		E69A879F26DED2840074A5AA /* AircraftRotationButtonsCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A879D26DED2840074A5AA /* AircraftRotationButtonsCompactView.swift */; };
 		E69A87A426DF12620074A5AA /* CircleButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69A87A226DF12620074A5AA /* CircleButtonHelper.swift */; };
 		E6A8BC9126C9BFE500BEDD1C /* AircraftRCSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8BC9026C9BFE500BEDD1C /* AircraftRCSButton.swift */; };
@@ -48,7 +48,7 @@
 		E6777688269D52C5004BE5EB /* AircraftSettingsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftSettingsButtonView.swift; sourceTree = "<group>"; };
 		E677768A269D57E5004BE5EB /* AircraftButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftButtonsView.swift; sourceTree = "<group>"; };
 		E677768E269E4227004BE5EB /* AircraftHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftHeaderView.swift; sourceTree = "<group>"; };
-		E6777692269E4403004BE5EB /* AircraftHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftHelpers.swift; sourceTree = "<group>"; };
+		E6777692269E4403004BE5EB /* AircraftAnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnimationHelpers.swift; sourceTree = "<group>"; };
 		E68406FC253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUISceneKitCoreMotionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E68406FF253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISceneKitCoreMotionDemoApp.swift; sourceTree = "<group>"; };
 		E6840701253CE69800E621F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,10 +58,10 @@
 		E684070F253CE7F600E621F1 /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		E6840716253CE8E000E621F1 /* AircraftSceneRendererDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AircraftSceneRendererDelegate.swift; sourceTree = "<group>"; };
 		E6840719253CEA1500E621F1 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		E69290A3265CC5FC007D3A6C /* AircraftCameraButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftCameraButtons.swift; sourceTree = "<group>"; };
+		E69290A3265CC5FC007D3A6C /* AircraftCameraButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftCameraButtonsView.swift; sourceTree = "<group>"; };
 		E69290A5265D97C5007D3A6C /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		E69290A7265D9E8F007D3A6C /* AircraftCameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftCameraButton.swift; sourceTree = "<group>"; };
-		E69A879C26DED2840074A5AA /* AircraftRotationButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AircraftRotationButtonsView.swift; sourceTree = "<group>"; };
+		E69A879C26DED2840074A5AA /* AircraftRCSButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AircraftRCSButtonsView.swift; sourceTree = "<group>"; };
 		E69A879D26DED2840074A5AA /* AircraftRotationButtonsCompactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AircraftRotationButtonsCompactView.swift; sourceTree = "<group>"; };
 		E69A87A226DF12620074A5AA /* CircleButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButtonHelper.swift; sourceTree = "<group>"; };
 		E6A8BC9026C9BFE500BEDD1C /* AircraftRCSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftRCSButton.swift; sourceTree = "<group>"; };
@@ -86,12 +86,8 @@
 			children = (
 				E677768A269D57E5004BE5EB /* AircraftButtonsView.swift */,
 				E6777682269D4D7E004BE5EB /* AircraftSunlightButtonView.swift */,
-				E6777684269D4E0C004BE5EB /* AircraftSunlightButton.swift */,
-				E69290A3265CC5FC007D3A6C /* AircraftCameraButtons.swift */,
-				E69290A7265D9E8F007D3A6C /* AircraftCameraButton.swift */,
-				E60904032613CC1300C8ABF8 /* AircraftCamera.swift */,
+				E69290A3265CC5FC007D3A6C /* AircraftCameraButtonsView.swift */,
 				E6777688269D52C5004BE5EB /* AircraftSettingsButtonView.swift */,
-				E6777686269D5262004BE5EB /* AircraftSettingsButton.swift */,
 			);
 			path = AircraftButtons;
 			sourceTree = "<group>";
@@ -110,7 +106,7 @@
 		E6777694269E4486004BE5EB /* Aircraft Code Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E6777692269E4403004BE5EB /* AircraftHelpers.swift */,
+				E6777692269E4403004BE5EB /* AircraftAnimationHelpers.swift */,
 				E69290A5265D97C5007D3A6C /* CircleButton.swift */,
 				E69A87A226DF12620074A5AA /* CircleButtonHelper.swift */,
 			);
@@ -166,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				E69A879D26DED2840074A5AA /* AircraftRotationButtonsCompactView.swift */,
-				E69A879C26DED2840074A5AA /* AircraftRotationButtonsView.swift */,
+				E69A879C26DED2840074A5AA /* AircraftRCSButtonsView.swift */,
 			);
 			path = "Rotation Buttons";
 			sourceTree = "<group>";
@@ -174,6 +170,10 @@
 		E69A879526DED12B0074A5AA /* Environment Objects */ = {
 			isa = PBXGroup;
 			children = (
+				E6777684269D4E0C004BE5EB /* AircraftSunlightButton.swift */,
+				E60904032613CC1300C8ABF8 /* AircraftCamera.swift */,
+				E69290A7265D9E8F007D3A6C /* AircraftCameraButton.swift */,
+				E6777686269D5262004BE5EB /* AircraftSettingsButton.swift */,
 				E62EA57E26EA9C8B0056C866 /* AircraftRCSButtons.swift */,
 			);
 			path = "Environment Objects";
@@ -265,19 +265,19 @@
 				E677768B269D57E5004BE5EB /* AircraftButtonsView.swift in Sources */,
 				E6840702253CE69800E621F1 /* ContentView.swift in Sources */,
 				E69290A8265D9E8F007D3A6C /* AircraftCameraButton.swift in Sources */,
-				E69290A4265CC5FC007D3A6C /* AircraftCameraButtons.swift in Sources */,
+				E69290A4265CC5FC007D3A6C /* AircraftCameraButtonsView.swift in Sources */,
 				E6FA558926E9384900569450 /* AircraftRCSButtonView.swift in Sources */,
 				E69A87A426DF12620074A5AA /* CircleButtonHelper.swift in Sources */,
 				E69290A6265D97C5007D3A6C /* CircleButton.swift in Sources */,
 				E6777685269D4E0C004BE5EB /* AircraftSunlightButton.swift in Sources */,
-				E6777693269E4403004BE5EB /* AircraftHelpers.swift in Sources */,
+				E6777693269E4403004BE5EB /* AircraftAnimationHelpers.swift in Sources */,
 				E6B6318126C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift in Sources */,
 				E677768F269E4227004BE5EB /* AircraftHeaderView.swift in Sources */,
 				E6777687269D5262004BE5EB /* AircraftSettingsButton.swift in Sources */,
 				E6777683269D4D7E004BE5EB /* AircraftSunlightButtonView.swift in Sources */,
 				E6B6317F26C2E85C00E94CDC /* AircraftEngineThrottle.swift in Sources */,
 				E6840717253CE8E000E621F1 /* AircraftSceneRendererDelegate.swift in Sources */,
-				E69A879E26DED2840074A5AA /* AircraftRotationButtonsView.swift in Sources */,
+				E69A879E26DED2840074A5AA /* AircraftRCSButtonsView.swift in Sources */,
 				E6840710253CE7F600E621F1 /* MotionManager.swift in Sources */,
 				E6777689269D52C5004BE5EB /* AircraftSettingsButtonView.swift in Sources */,
 				E62EA57F26EA9C8B0056C866 /* AircraftRCSButtons.swift in Sources */,
