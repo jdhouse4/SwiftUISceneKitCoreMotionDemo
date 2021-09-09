@@ -89,15 +89,18 @@ struct AircraftRotationButtonsView: View {
                             withAnimation {
                                 
                                 self.rotationButtons.rollStarboardButtonPressed.toggle()
+                                print("Rolling Starboard")
                                 
                             }
                             
                             // Code to do something goes here
-                            aircraft.rcsRollStarboardUp.birthRate = rotationButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollStarboardUp.birthRate   = rotationButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollPortDown.birthRate      = rotationButtons.aircraftRCSDefaultBirthrate
 
                             // Milliseconds of duration for firing
                             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rotationButtons.aircraftRCSMinDuration)) {
-                                aircraft.rcsRollStarboardUp.birthRate = 0
+                                aircraft.rcsRollStarboardUp.birthRate   = 0
+                                aircraft.rcsRollPortDown.birthRate      = 0
                             }
                             //aircraft.rcsRollStarboardUp.birthRate = 0
                             
@@ -216,11 +219,13 @@ struct AircraftRotationButtonsView: View {
                             }
                             
                             // Code to do something goes here
-                            aircraft.rcsRollPortUp.birthRate = rotationButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollPortUp.birthRate        = rotationButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollStarboardDown.birthRate = rotationButtons.aircraftRCSDefaultBirthrate
 
                             // Milliseconds of duration for firing
                             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rotationButtons.aircraftRCSMinDuration)) {
-                                aircraft.rcsRollPortUp.birthRate = 0
+                                aircraft.rcsRollPortUp.birthRate        = 0
+                                aircraft.rcsRollStarboardDown.birthRate = 0
                             }
 
                         }) {
