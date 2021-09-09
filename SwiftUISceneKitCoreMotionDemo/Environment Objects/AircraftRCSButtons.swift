@@ -1,5 +1,5 @@
 //
-//  AircraftRotationButtons.swift
+//  AircraftRCSButtons.swift
 //  FourCornersUIWithSwiftUI
 //
 //  Created by James Hillhouse IV on 6/6/21.
@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-class AircraftRotationButtons: ObservableObject {
+class AircraftRCSButtons: ObservableObject {
     @Published var showRotationButtons: Bool            = false
     
     @Published var pitchUpButtonPressed: Bool           = false

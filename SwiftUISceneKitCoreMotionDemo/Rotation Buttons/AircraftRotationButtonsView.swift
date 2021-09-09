@@ -12,7 +12,7 @@ import SwiftUI
 
 struct AircraftRotationButtonsView: View {
     @EnvironmentObject var aircraft: AircraftSceneKitScene
-    @EnvironmentObject var rotationButtons: AircraftRotationButtons
+    @EnvironmentObject var rotationButtons: AircraftRCSButtons
 
     let buttonAnimationTime = 0.25
 
@@ -266,6 +266,6 @@ struct AircraftRotationButtonsView: View {
 
 struct BottomRightButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftRotationButtonsView().environmentObject(AircraftRotationButtons())
+        AircraftRotationButtonsView().environmentObject(AircraftRCSButtons())
     }
 }

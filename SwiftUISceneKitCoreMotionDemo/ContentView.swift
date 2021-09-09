@@ -23,7 +23,7 @@ struct ContentView: View {
     @StateObject var aircraftCameraButton   = AircraftCameraButton()
     @StateObject var aircraftSettingsButton = AircraftSettingsButton()
     @StateObject var aircraftEngineThrottle = AircraftEngineThrottle()
-    @StateObject var aircraftRotationButton = AircraftRotationButtons()
+    @StateObject var aircraftRotationButton = AircraftRCSButtons()
 
 
     var body: some View {
