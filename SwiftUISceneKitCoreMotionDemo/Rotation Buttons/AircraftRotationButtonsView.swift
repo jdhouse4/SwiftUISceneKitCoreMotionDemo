@@ -12,7 +12,7 @@ import SwiftUI
 
 struct AircraftRotationButtonsView: View {
     @EnvironmentObject var aircraft: AircraftSceneKitScene
-    @EnvironmentObject var rotationButtons: AircraftRCSButtons
+    @EnvironmentObject var rcsButtons: AircraftRCSButtons
 
     let buttonAnimationTime = 0.25
 
@@ -35,7 +35,7 @@ struct AircraftRotationButtonsView: View {
                 Button(action: {
                     withAnimation(.easeInOut(duration: Double(CircleButton.animationFast.rawValue))) {
 
-                        self.rotationButtons.showRotationButtons.toggle()
+                        self.rcsButtons.showRotationButtons.toggle()
 
                     }
                 }) {
@@ -50,7 +50,7 @@ struct AircraftRotationButtonsView: View {
                 .position(x: CircleButtonHelper.positionMainButton().x, y: CircleButtonHelper.positionMainButton().y)
 
 
-                if rotationButtons.showRotationButtons {
+                if rcsButtons.showRotationButtons {
 
                     Group {
                         /*
@@ -60,7 +60,7 @@ struct AircraftRotationButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rotationButtons.pitchUpButtonPressed.toggle()
+                                self.rcsButtons.pitchUpButtonPressed.toggle()
                                 
                             }
                             
@@ -78,7 +78,7 @@ struct AircraftRotationButtonsView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition0DegreeButton())
                         .position(x: CircleButtonHelper.position0DegreeButton().x, y: CircleButtonHelper.position0DegreeButton().y)
-                        .animation(.ripple(buttonIndex: 2), value: rotationButtons.showRotationButtons)
+                        .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
                         */
                         
@@ -88,17 +88,17 @@ struct AircraftRotationButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rotationButtons.rollStarboardButtonPressed.toggle()
+                                self.rcsButtons.rollStarboardButtonPressed.toggle()
                                 print("Rolling Starboard")
                                 
                             }
                             
                             // Code to do something goes here
-                            aircraft.rcsRollStarboardUp.birthRate   = rotationButtons.aircraftRCSDefaultBirthrate
-                            aircraft.rcsRollPortDown.birthRate      = rotationButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollStarboardUp.birthRate   = rcsButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollPortDown.birthRate      = rcsButtons.aircraftRCSDefaultBirthrate
 
                             // Milliseconds of duration for firing
-                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rotationButtons.aircraftRCSMinDuration)) {
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rcsButtons.aircraftRCSMinDuration)) {
                                 aircraft.rcsRollStarboardUp.birthRate   = 0
                                 aircraft.rcsRollPortDown.birthRate      = 0
                             }
@@ -116,7 +116,7 @@ struct AircraftRotationButtonsView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition60DegreeButton())
                         .position(x: CircleButtonHelper.position60DegreeButton().x, y: CircleButtonHelper.position60DegreeButton().y)
-                        .animation(.ripple(buttonIndex: 2), value: rotationButtons.showRotationButtons)
+                        .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
                         
                         
@@ -127,7 +127,7 @@ struct AircraftRotationButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rotationButtons.yawStarboardButtonPressed.toggle()
+                                self.rcsButtons.yawStarboardButtonPressed.toggle()
                                 
                             }
                             
@@ -145,7 +145,7 @@ struct AircraftRotationButtonsView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition120DegreeButton())
                         .position(x: CircleButtonHelper.position120DegreeButton().x, y: CircleButtonHelper.position120DegreeButton().y)
-                        .animation(.ripple(buttonIndex: 2), value: rotationButtons.showRotationButtons)
+                        .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
                         */
                         
@@ -156,7 +156,7 @@ struct AircraftRotationButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rotationButtons.pitchDownButtonPressed.toggle()
+                                self.rcsButtons.pitchDownButtonPressed.toggle()
                                 
                             }
                             
@@ -174,7 +174,7 @@ struct AircraftRotationButtonsView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition180DegreeButton())
                         .position(x: CircleButtonHelper.position180DegreeButton().x, y: CircleButtonHelper.position180DegreeButton().y)
-                        .animation(.ripple(buttonIndex: 2), value: rotationButtons.showRotationButtons)
+                        .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
                         */
                         
@@ -185,7 +185,7 @@ struct AircraftRotationButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rotationButtons.yawPortButtonPressed.toggle()
+                                self.rcsButtons.yawPortButtonPressed.toggle()
                                 
                             }
                             
@@ -203,7 +203,7 @@ struct AircraftRotationButtonsView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition240DegreeButton())
                         .position(x: CircleButtonHelper.position240DegreeButton().x, y: CircleButtonHelper.position240DegreeButton().y)
-                        .animation(.ripple(buttonIndex: 2), value: rotationButtons.showRotationButtons)
+                        .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
                         */
                         
@@ -214,16 +214,16 @@ struct AircraftRotationButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rotationButtons.rollPortButtonPressed.toggle()
+                                self.rcsButtons.rollPortButtonPressed.toggle()
                                 
                             }
                             
                             // Code to do something goes here
-                            aircraft.rcsRollPortUp.birthRate        = rotationButtons.aircraftRCSDefaultBirthrate
-                            aircraft.rcsRollStarboardDown.birthRate = rotationButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollPortUp.birthRate        = rcsButtons.aircraftRCSDefaultBirthrate
+                            aircraft.rcsRollStarboardDown.birthRate = rcsButtons.aircraftRCSDefaultBirthrate
 
                             // Milliseconds of duration for firing
-                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rotationButtons.aircraftRCSMinDuration)) {
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rcsButtons.aircraftRCSMinDuration)) {
                                 aircraft.rcsRollPortUp.birthRate        = 0
                                 aircraft.rcsRollStarboardDown.birthRate = 0
                             }
@@ -240,11 +240,11 @@ struct AircraftRotationButtonsView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition300DegreeButton())
                         .position(x: CircleButtonHelper.position300DegreeButton().x, y: CircleButtonHelper.position300DegreeButton().y)
-                        .animation(.ripple(buttonIndex: 2), value: rotationButtons.showRotationButtons)
+                        .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
                         
                 }
-                    .animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0), value: rotationButtons.showRotationButtons)
+                    .animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0), value: rcsButtons.showRotationButtons)
 
                 }
 
