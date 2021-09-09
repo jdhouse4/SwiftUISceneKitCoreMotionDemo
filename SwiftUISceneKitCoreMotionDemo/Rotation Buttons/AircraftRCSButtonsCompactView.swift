@@ -1,6 +1,6 @@
 //
 //  RotationButtonsCompactView.swift
-//  FourCornersUIWithSwiftUI
+//  SwiftUISceneKitCoreMotionDemo
 //
 //  Created by James Hillhouse IV on 6/23/21.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 
 
 
-struct AircraftRotationButtonsCompactView: View {
+struct AircraftRCSButtonsCompactView: View {
     @EnvironmentObject var rotationButtons: AircraftRCSButtons
 
     let buttonAnimationTime = 0.25
@@ -244,6 +244,6 @@ struct AircraftRotationButtonsCompactView: View {
 
 struct BottomRightButtonsCompactView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftRotationButtonsCompactView().environmentObject(AircraftRCSButtons())
+        AircraftRCSButtonsCompactView().environmentObject(AircraftRCSButtons())
     }
 }

@@ -1,6 +1,6 @@
 //
 //  AircraftRCSButtons.swift
-//  FourCornersUIWithSwiftUI
+//  SwiftUISceneKitCoreMotionDemo
 //
 //  Created by James Hillhouse IV on 6/6/21.
 //
