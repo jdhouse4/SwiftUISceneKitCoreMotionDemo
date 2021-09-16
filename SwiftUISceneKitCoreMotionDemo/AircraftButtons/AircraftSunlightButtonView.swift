@@ -37,7 +37,7 @@ struct AircraftSunlightButtonView: View {
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
         .padding()
-        .animation(.ripple(buttonIndex: 2))
+        .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
     }
 
 

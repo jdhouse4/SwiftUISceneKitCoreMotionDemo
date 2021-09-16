@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct AircraftRCSButtonsCompactView: View {
-    @EnvironmentObject var rotationButtons: AircraftRCSButtons
+    @EnvironmentObject var rcsButtons: AircraftRCSButtons
 
     let buttonAnimationTime = 0.25
 
@@ -34,7 +34,7 @@ struct AircraftRCSButtonsCompactView: View {
                 Button(action: {
                     withAnimation(.easeInOut(duration: Double(CircleButton.animationFast.rawValue))) {
 
-                        self.rotationButtons.showRotationButtons.toggle()
+                        self.rcsButtons.showRotationButtons.toggle()
 
                     }
                 }) {
@@ -47,10 +47,10 @@ struct AircraftRCSButtonsCompactView: View {
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))
                 .position(x: CircleButtonHelper.positionMainButtonCompact().x, y: CircleButtonHelper.positionMainButtonCompact().y)
-                .animation(.easeInOut(duration: self.buttonAnimationTime).delay(0.0), value: rotationButtons.showRotationButtons)
+                .animation(.easeInOut(duration: self.buttonAnimationTime).delay(0.0), value: rcsButtons.showRotationButtons)
 
 
-                if rotationButtons.showRotationButtons {
+                if rcsButtons.showRotationButtons {
 
                     Group {
 
@@ -60,7 +60,7 @@ struct AircraftRCSButtonsCompactView: View {
                         Button( action: {
                             withAnimation {
 
-                                self.rotationButtons.pitchUpButtonPressed.toggle()
+                                self.rcsButtons.pitchUpButtonPressed.toggle()
 
                             }
 
@@ -78,7 +78,7 @@ struct AircraftRCSButtonsCompactView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition0DegreeButtonCompact())
                         .position(x: CircleButtonHelper.position0DegreeButtonCompact().x, y: CircleButtonHelper.position0DegreeButtonCompact().y)
-                        //.animation(.ripple(buttonIndex: 2))
+                        //.animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
 
 
@@ -89,7 +89,7 @@ struct AircraftRCSButtonsCompactView: View {
                         Button( action: {
                             withAnimation {
 
-                                self.rotationButtons.rollStarboardButtonPressed.toggle()
+                                self.rcsButtons.rollStarboardButtonPressed.toggle()
 
                             }
 
@@ -107,7 +107,7 @@ struct AircraftRCSButtonsCompactView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition60DegreeButtonCompact())
                         .position(x: CircleButtonHelper.position60DegreeButtonCompact().x, y: CircleButtonHelper.position60DegreeButtonCompact().y)
-                        //.animation(.ripple(buttonIndex: 2))
+                        //.animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
 
 
@@ -118,7 +118,7 @@ struct AircraftRCSButtonsCompactView: View {
                         Button( action: {
                             withAnimation {
 
-                                self.rotationButtons.yawStarboardButtonPressed.toggle()
+                                self.rcsButtons.yawStarboardButtonPressed.toggle()
 
                             }
 
@@ -136,7 +136,7 @@ struct AircraftRCSButtonsCompactView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition120DegreeButtonCompact())
                         .position(x: CircleButtonHelper.position120DegreeButtonCompact().x, y: CircleButtonHelper.position120DegreeButtonCompact().y)
-                        //.animation(.ripple(buttonIndex: 2))
+                        //.animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
 
 
@@ -147,7 +147,7 @@ struct AircraftRCSButtonsCompactView: View {
                         Button( action: {
                             withAnimation {
 
-                                self.rotationButtons.pitchDownButtonPressed.toggle()
+                                self.rcsButtons.pitchDownButtonPressed.toggle()
 
                             }
 
@@ -165,7 +165,7 @@ struct AircraftRCSButtonsCompactView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition180DegreeButtonCompact())
                         .position(x: CircleButtonHelper.position180DegreeButtonCompact().x, y: CircleButtonHelper.position180DegreeButtonCompact().y)
-                        //.animation(.ripple(buttonIndex: 2))
+                        //.animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
 
 
@@ -176,7 +176,7 @@ struct AircraftRCSButtonsCompactView: View {
                         Button( action: {
                             withAnimation {
 
-                                self.rotationButtons.yawPortButtonPressed.toggle()
+                                self.rcsButtons.yawPortButtonPressed.toggle()
 
                             }
 
@@ -194,7 +194,7 @@ struct AircraftRCSButtonsCompactView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition240DegreeButtonCompact())
                         .position(x: CircleButtonHelper.position240DegreeButtonCompact().x, y: CircleButtonHelper.position240DegreeButtonCompact().y)
-                        //.animation(.ripple(buttonIndex: 2))
+                        //.animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
 
 
@@ -205,7 +205,7 @@ struct AircraftRCSButtonsCompactView: View {
                         Button( action: {
                             withAnimation {
 
-                                self.rotationButtons.yawPortButtonPressed.toggle()
+                                self.rcsButtons.yawPortButtonPressed.toggle()
 
                             }
 
@@ -223,11 +223,11 @@ struct AircraftRCSButtonsCompactView: View {
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
                         .transition(CircleButtonHelper.transition300DegreeButtonCompact())
                         .position(x: CircleButtonHelper.position300DegreeButtonCompact().x, y: CircleButtonHelper.position300DegreeButtonCompact().y)
-                        //.animation(.ripple(buttonIndex: 2))
+                        //.animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
 
                     }
-                    .animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                    .animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0), value: rcsButtons.showRotationButtons)
 
                 }
 
