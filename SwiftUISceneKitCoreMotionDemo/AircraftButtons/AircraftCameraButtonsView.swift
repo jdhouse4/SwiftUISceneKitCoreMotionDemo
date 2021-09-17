@@ -27,7 +27,7 @@ struct AircraftCameraButtonsView: View {
 
             ZStack {
                 Button(action: {
-                    withAnimation(.easeInOut(duration: 0.75)) {
+                    withAnimation(.ripple(buttonIndex: 2) /*.easeInOut(duration: 0.25)*/) {
 
                         self.aircraftCameraButton.showCameraButtons.toggle()
                     }
@@ -40,8 +40,8 @@ struct AircraftCameraButtonsView: View {
                 .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                .animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
-
+                //.animation(.ripple(buttonIndex: 2), value: aircraftCameraButton.showCameraButtons)
+                //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0), value: aircraftCameraButton.showCameraButtons)
 
 
                 if aircraftCameraButton.showCameraButtons {
@@ -71,7 +71,7 @@ struct AircraftCameraButtonsView: View {
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeLeft(buttonIndex: 1))
                     .offset(x: -( CircleButton.diameter.rawValue + CircleButton.spacer.rawValue ), y: 0)
-                    .animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
+                    //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
 
 
                     //
@@ -99,7 +99,7 @@ struct AircraftCameraButtonsView: View {
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeRight(buttonIndex: 1))
                     .offset(x: CircleButton.diameter.rawValue + CircleButton.spacer.rawValue, y: 0)
-                    .animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
+                    //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
                 }
             }
             .frame(width: 200, height: 70, alignment: .center)

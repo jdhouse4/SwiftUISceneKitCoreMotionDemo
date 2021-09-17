@@ -24,14 +24,11 @@ struct AircraftButtonsView: View {
 
             VStack {
 
-                Spacer(minLength: 375)
-
                 AircraftRCSButtonsView()
-
-                Spacer(minLength: 30)
+                    .padding(.top, aircraftSettingsButton.settingsSwitch ? 230 : 350)
+                    .padding(.bottom, aircraftSettingsButton.settingsSwitch ? 260 : 100)
 
             }
-            //.padding(.leading, 50)
             //.background(Color.orange)
 
 

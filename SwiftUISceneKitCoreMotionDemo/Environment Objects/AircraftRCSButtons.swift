@@ -20,6 +20,6 @@ class AircraftRCSButtons: ObservableObject {
     @Published var yawStarboardButtonPressed: Bool      = false
 
     let aircraftRCSDefaultBirthrate: Double             = 500
-    let aircraftRCSMinDuration: Int                     = 250
-    let aircraftRCSMaxDuration: Int                     = 500 // milliseconds
+    let aircraftRCSMinDuration: Int                     = 150 // milliseconds
+    let aircraftRCSMaxDuration: Int                     = 300 // milliseconds
 }
