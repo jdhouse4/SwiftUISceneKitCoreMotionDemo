@@ -100,6 +100,7 @@ struct AircraftSceneView: View {
 
         var rotationVector = SCNVector4()
 
+
         rotationVector.x = -y
         rotationVector.y = x
         rotationVector.z = 0
@@ -109,7 +110,8 @@ struct AircraftSceneView: View {
     }
 
 
-
+    // TODO: Move this to the state observable object when it's done.
+    // TODO: Consider changing this to quaternions
     private func updateOrientation(of node: SCNNode) {
         let currentPivot = node.pivot
 
