@@ -181,10 +181,10 @@
 		E6E17ACD26C9B7EA003A347E /* Engines & RCS */ = {
 			isa = PBXGroup;
 			children = (
-				E6FA558826E9384900569450 /* AircraftRCSButtonView.swift */,
 				E6B6317E26C2E85C00E94CDC /* AircraftEngineThrottle.swift */,
-				E6A8BC9026C9BFE500BEDD1C /* AircraftRCSButton.swift */,
 				E6B6318026C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift */,
+				E6A8BC9026C9BFE500BEDD1C /* AircraftRCSButton.swift */,
+				E6FA558826E9384900569450 /* AircraftRCSButtonView.swift */,
 			);
 			path = "Engines & RCS";
 			sourceTree = "<group>";
