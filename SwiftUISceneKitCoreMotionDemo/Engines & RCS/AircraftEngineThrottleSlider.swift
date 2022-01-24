@@ -11,10 +11,9 @@ import SwiftUI
 
 
 struct AircraftEngineThrottleSlider: View {
-    // @EnvironmentObject is a property wrapper type for an observable object that is
-    // instantiated by @StateObject supplied by a parent or ancestor view.
+    /// @EnvironmentObject is a property wrapper type for an observable object that is
+    /// instantiated by @StateObject supplied by a parent or ancestor view.
     @EnvironmentObject var aircraft: AircraftSceneKitScene
-    //@EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
     @EnvironmentObject var aircraftEngineThrottle: AircraftEngineThrottle
 
 

@@ -11,10 +11,10 @@ import SwiftUI
 
 
 struct AircraftButtonsView: View {
-    @EnvironmentObject var sunlightSwitch: AircraftSunlightButton
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftCameraButton: AircraftCameraButton
     @EnvironmentObject var aircraftSettingsButton: AircraftSettingsButton
+    @EnvironmentObject var sunlightSwitch: AircraftSunlightButton
 
 
 

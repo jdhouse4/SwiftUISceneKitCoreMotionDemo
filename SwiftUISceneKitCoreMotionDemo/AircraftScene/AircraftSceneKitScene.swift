@@ -16,29 +16,38 @@ import SceneKit
  */
 class AircraftSceneKitScene: SCNScene, ObservableObject {
 
+    /// I wonder I should break this out into another way,
+    /// var aircraftScene = AircraftScene( )
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
+    
     var aircraftNode            = SCNNode()
 
+    /// Aircraft camera strings (This should be an enum)
     @Published var aircraftDistantCameraString  = AircraftCamera.distantCamera.rawValue
     @Published var aircraftShipCameraString     = AircraftCamera.shipCamera.rawValue
 
+    /// Aircraft cameras
     @Published var aircraftCurrentCamera: SCNNode
 
     @Published var aircraftDistantCamera: SCNNode
     @Published var aircraftShipCamera: SCNNode
 
+    /// Aircraft camera nodes
     @Published var aircraftDistantCameraNode: SCNNode
     @Published var aircraftShipCameraNode: SCNNode
 
+    /// Aircraft engine nodes
     @Published var aircraftEnginesNode: SCNNode
     @Published var aircraftEngine: SCNParticleSystem
 
+    /// Aircraft RCS nodes
     @Published var rcsNode: SCNNode
     @Published var rcsRollPortUpNode: SCNNode
     @Published var rcsRollPortDownNode: SCNNode
     @Published var rcsRollStarboardUpNode: SCNNode
     @Published var rcsRollStarboardDownNode: SCNNode
 
+    /// RCS roll motion
     @Published var rcsRollPortUp: SCNParticleSystem
     @Published var rcsRollPortDown: SCNParticleSystem
     @Published var rcsRollStarboardUp: SCNParticleSystem
@@ -57,11 +66,6 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
 
         self.aircraftEnginesNode        = aircraftScene.rootNode.childNode(withName: "shipEnginesNode", recursively: true)!
-        //self.aircraftEngine             = aircraftScene.rootNode.childNode(withName: "engine1", recursively: true)!
-
-        //self.aircraftEngine             = SCNParticleSystem(named: "engine1", inDirectory: nil)!
-
-        //self.aircraftEngine             = self.aircraftEngineNode.particleSystems![0]
 
         self.aircraftEngine             = SCNParticleSystem()
 
@@ -100,7 +104,6 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
 
         self.aircraftEnginesNode        = aircraftScene.rootNode.childNode(withName: "shipEngineNode", recursively: true)!
-        //self.aircraftEngine             = aircraftScene.rootNode.childNode(withName: "engine1", recursively: true)!
 
         self.aircraftEngine              = SCNParticleSystem()
 

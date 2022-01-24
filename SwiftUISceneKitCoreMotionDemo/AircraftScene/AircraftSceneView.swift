@@ -20,6 +20,10 @@ struct AircraftSceneView: View {
     @State private var totalChangePivot     = SCNMatrix4Identity
 
     @EnvironmentObject var aircraft: AircraftSceneKitScene
+    
+    /// This contains the function
+    /// `renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)`
+    /// that is used to animate the model.
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
 
