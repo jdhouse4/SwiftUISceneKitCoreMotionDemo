@@ -11,13 +11,11 @@ import SceneKit
 
 
 
-/*
+/**
  This is the View Model of the SwiftUISceneKitCoreMotionDemo app.
  */
 class AircraftSceneKitScene: SCNScene, ObservableObject {
 
-    /// I wonder I should break this out into another way,
-    /// var aircraftScene = AircraftScene( )
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
     
     var aircraftNode            = SCNNode()
@@ -84,7 +82,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         super.init()
 
-        self.setAircraftEngine()
+        setAircraftEngine()
 
         setAircraftRCS()
     }
@@ -122,7 +120,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         super.init(coder: coder)
 
-        self.setAircraftEngine()
+        setAircraftEngine()
 
         setAircraftRCS()
     }
@@ -131,9 +129,11 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     func setAircraftEngine() {
         aircraftEngine  = aircraftEnginesNode.particleSystems![0]
-        print("aircraftEngine: \(String(describing: aircraftEnginesNode.particleSystems![0]))")
+        //print("aircraftEngine: \(String(describing: aircraftEnginesNode.particleSystems![0]))")
     }
 
+    
+    
     func setAircraftRCS() {
         rcsRollPortUp           = rcsRollPortUpNode.particleSystems![0]
         rcsRollPortDown         = rcsRollPortDownNode.particleSystems![0]
