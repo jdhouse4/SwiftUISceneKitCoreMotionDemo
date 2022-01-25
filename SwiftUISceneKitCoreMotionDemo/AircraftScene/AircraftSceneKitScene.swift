@@ -12,7 +12,7 @@ import SceneKit
 
 
 /**
- This is the View Model of the SwiftUISceneKitCoreMotionDemo app.
+ This is the SceneKit Model for the  of the SwiftUISceneKitCoreMotionDemo app.
  */
 class AircraftSceneKitScene: SCNScene, ObservableObject {
 

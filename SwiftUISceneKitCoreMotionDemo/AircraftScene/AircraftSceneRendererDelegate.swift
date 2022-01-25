@@ -9,6 +9,14 @@ import SceneKit
 
 
 
+/**
+ This is the delegate class for AircraftSceneKitScene model.
+ 
+ It's purpose is to do some of the grunt work for an SCNScene. One important role is the function,
+ `renderer(_:updateAtTime:)`
+ 
+ Which allows for changes of the Scene on a reglar time interval. For our purposes, this will allow for the motion due to physics of the aircraft's RCS to be displayed.
+ */
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
 
     @Published var aircraftCamera: String       = AircraftCamera.distantCamera.rawValue
