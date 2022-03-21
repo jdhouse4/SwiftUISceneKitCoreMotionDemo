@@ -71,10 +71,15 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         _previousUpdateTime         = time
 
 
-        //
+        ///
         // MARK: Update the attitude.quaternion from device manager
-        //
+        ///
         motionManager.updateAttitude()
+        
+        
+        
+        // MARK: Update the orientation due to RCS activity
+        
 
     
 

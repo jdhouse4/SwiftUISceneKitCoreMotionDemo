@@ -39,12 +39,12 @@ struct AircraftSceneView: View {
             .onChanged { value in
                 self.isDragging = true
 
-                changeOrientation(of: aircraft.aircraftNode, with: value.translation)
+                changeOrientation(of: aircraft.aircraftDistantCameraNode, with: value.translation)
             }
             .onEnded { value in
                 self.isDragging = false
 
-                updateOrientation(of: aircraft.aircraftNode)
+                updateOrientation(of: aircraft.aircraftDistantCameraNode)
             }
     }
 
