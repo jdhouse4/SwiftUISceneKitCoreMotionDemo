@@ -262,9 +262,10 @@ struct AircraftRCSButtonsView: View {
 
 
 
-
+/*
 struct BottomRightButtonsView_Previews: PreviewProvider {
     static var previews: some View {
         AircraftRCSButtonsView().environmentObject(AircraftRCSButtons())
     }
 }
+*/

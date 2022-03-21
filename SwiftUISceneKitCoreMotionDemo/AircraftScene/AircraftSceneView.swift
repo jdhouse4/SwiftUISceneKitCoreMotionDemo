@@ -33,7 +33,7 @@ struct AircraftSceneView: View {
     //private var sceneViewRenderContinuously = SceneView.Options.rendersContinuously
 
 
-    // Don't forget to comment this is you are using .allowsCameraControl
+    // Don't forget to comment that you are using .allowsCameraControl
     var drag: some Gesture {
         DragGesture()
             .onChanged { value in

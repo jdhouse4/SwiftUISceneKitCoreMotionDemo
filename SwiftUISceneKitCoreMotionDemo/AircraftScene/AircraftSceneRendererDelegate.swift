@@ -160,8 +160,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         node.simdOrientation    = simd_quatf(angle: -.pi,
                                              axis: simd_normalize(simd_float3(x: 0, y: 1, z: 0))).normalized
 
-
-
         let motionSimdQuatf     = simd_quatf(ix: Float(motionManager.deviceMotion!.attitude.quaternion.x),
                                              iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
                                              iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
