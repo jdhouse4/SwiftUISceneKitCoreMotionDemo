@@ -18,7 +18,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
     
-    var worldCameraNode         = SCNNode()
+    //var worldCameraNode         = SCNNode()
     
     var aircraftNode            = SCNNode()
 
@@ -56,7 +56,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     override init() {
         print("AircraftScenekitScene override initialized")
-        self.worldCameraNode            = aircraftScene.rootNode.childNode(withName: "ship", recursively: true)!
+        //self.worldCameraNode            = aircraftScene.rootNode.childNode(withName: "ship", recursively: true)!
         
         self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
         
@@ -98,7 +98,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene initialized")
-        self.worldCameraNode            = aircraftScene.rootNode.childNode(withName: "ship", recursively: true)!
+        //self.worldCameraNode            = aircraftScene.rootNode.childNode(withName: "ship", recursively: true)!
         
         self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
