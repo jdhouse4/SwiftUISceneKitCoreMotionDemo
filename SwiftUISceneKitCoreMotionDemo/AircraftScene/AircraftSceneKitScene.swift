@@ -18,6 +18,8 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
     
+    var worldCameraNode               = SCNNode()
+    
     var aircraftNode            = SCNNode()
 
     /// Aircraft camera strings (This should be an enum)
@@ -31,6 +33,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftShipCamera: SCNNode
 
     /// Aircraft camera nodes
+    var frontCameraNode: SCNNode
     @Published var aircraftDistantCameraNode: SCNNode
     @Published var aircraftShipCameraNode: SCNNode
 
@@ -53,7 +56,11 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     override init() {
         print("AircraftScenekitScene override initialized")
-        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        self.worldCameraNode            = aircraftScene.rootNode.childNode(withName: "ship", recursively: true)!
+        
+        self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        
+        self.frontCameraNode            = aircraftScene.rootNode.childNode(withName: "frontCamera", recursively: true)!
 
         self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
@@ -91,7 +98,11 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene initialized")
-        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        self.worldCameraNode            = aircraftScene.rootNode.childNode(withName: "ship", recursively: true)!
+        
+        self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+
+        self.frontCameraNode            = aircraftScene.rootNode.childNode(withName: "frontCamera", recursively: true)!
 
         self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
