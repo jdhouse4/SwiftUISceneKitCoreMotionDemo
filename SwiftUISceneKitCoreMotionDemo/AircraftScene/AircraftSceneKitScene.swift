@@ -33,7 +33,8 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftShipCamera: SCNNode
 
     /// Aircraft camera nodes
-    var frontCameraNode: SCNNode
+    //var frontCameraNode: SCNNode
+    
     @Published var aircraftDistantCameraNode: SCNNode
     @Published var aircraftShipCameraNode: SCNNode
 
@@ -60,7 +61,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         
         self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
         
-        self.frontCameraNode            = aircraftScene.rootNode.childNode(withName: "frontCamera", recursively: true)!
+        //self.frontCameraNode            = aircraftScene.rootNode.childNode(withName: "frontCamera", recursively: true)!
 
         self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
@@ -102,7 +103,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         
         self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
-        self.frontCameraNode            = aircraftScene.rootNode.childNode(withName: "frontCamera", recursively: true)!
+        //self.frontCameraNode            = aircraftScene.rootNode.childNode(withName: "frontCamera", recursively: true)!
 
         self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
