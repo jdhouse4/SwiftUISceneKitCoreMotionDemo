@@ -18,7 +18,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
     
-    var worldCameraNode               = SCNNode()
+    var worldCameraNode         = SCNNode()
     
     var aircraftNode            = SCNNode()
 
