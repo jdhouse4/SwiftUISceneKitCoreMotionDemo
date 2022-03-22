@@ -53,7 +53,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     override init() {
         print("AircraftScenekitScene override initialized")
-        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
         self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
@@ -91,7 +91,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene initialized")
-        self.aircraftNode   = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
+        self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
 
         self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
 
