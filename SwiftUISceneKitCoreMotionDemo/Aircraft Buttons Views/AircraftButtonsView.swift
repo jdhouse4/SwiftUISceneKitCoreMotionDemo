@@ -13,7 +13,7 @@ import SwiftUI
 struct AircraftButtonsView: View {
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftCameraButton: AircraftCameraButton
-    @EnvironmentObject var aircraftSettingsButton: AircraftSettingsButton
+    @EnvironmentObject var aircraftAnalyticsButton: AircraftAnalyticsButton
     @EnvironmentObject var sunlightSwitch: AircraftSunlightButton
 
 
@@ -25,8 +25,8 @@ struct AircraftButtonsView: View {
             VStack {
 
                 AircraftRCSButtonsView()
-                    .padding(.top, aircraftSettingsButton.settingsSwitch ? 210 : 350)
-                    .padding(.bottom, aircraftSettingsButton.settingsSwitch ? 240 : 100)
+                    .padding(.top, aircraftAnalyticsButton.analyticsSwitch ? 210 : 350)
+                    .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 240 : 100)
 
             }
             //.background(Color.orange)
@@ -43,7 +43,7 @@ struct AircraftButtonsView: View {
                     AircraftEngineThrottleSlider()
 
                 }
-                .frame(width: geometry.size.width, height: aircraftSettingsButton.settingsSwitch ? geometry.size.height - 140 : geometry.size.height, alignment: .trailing)
+                .frame(width: geometry.size.width, height: aircraftAnalyticsButton.analyticsSwitch ? geometry.size.height - 140 : geometry.size.height, alignment: .trailing)
                 .padding(.bottom, 150)
 
             }
@@ -56,9 +56,9 @@ struct AircraftButtonsView: View {
 
                 AircraftCameraButtonsView()
 
-                AircraftSettingsButtonView()
+                AircraftAnalyticsButtonView()
 
-            }.padding(.bottom, aircraftSettingsButton.settingsSwitch ? 140 : 5)
+            }.padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
 
         }
     }

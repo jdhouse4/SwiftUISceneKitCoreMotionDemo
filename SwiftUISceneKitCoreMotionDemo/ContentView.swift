@@ -17,13 +17,14 @@ struct ContentView: View {
     //
     // @StateObject is a property wrapper type that instantiates an observable object.
     //
-    @StateObject var aircraft               = AircraftSceneKitScene()
-    @StateObject var aircraftDelegate       = AircraftSceneRendererDelegate()
-    @StateObject var aircraftSunlightButton = AircraftSunlightButton()
-    @StateObject var aircraftCameraButton   = AircraftCameraButton()
-    @StateObject var aircraftSettingsButton = AircraftSettingsButton()
-    @StateObject var aircraftEngineThrottle = AircraftEngineThrottle()
-    @StateObject var aircraftRotationButton = AircraftRCSButtons()
+    @StateObject var aircraft                   = AircraftSceneKitScene()
+    @StateObject var aircraftDelegate           = AircraftSceneRendererDelegate()
+    @StateObject var aircraftSunlightButton     = AircraftSunlightButton()
+    @StateObject var aircraftCameraButton       = AircraftCameraButton()
+    @StateObject var aircraftSettingsButton     = AircraftSettingsButton()
+    @StateObject var aircraftAnalyticsButton    = AircraftAnalyticsButton()
+    @StateObject var aircraftEngineThrottle     = AircraftEngineThrottle()
+    @StateObject var aircraftRotationButton     = AircraftRCSButtons()
 
 
     var body: some View {
@@ -52,6 +53,7 @@ struct ContentView: View {
         .environmentObject(aircraftDelegate)
         .environmentObject(aircraftSunlightButton)
         .environmentObject(aircraftCameraButton)
+        .environmentObject(aircraftAnalyticsButton)
         .environmentObject(aircraftSettingsButton)
         .environmentObject(aircraftEngineThrottle)
         .environmentObject(aircraftRotationButton)
