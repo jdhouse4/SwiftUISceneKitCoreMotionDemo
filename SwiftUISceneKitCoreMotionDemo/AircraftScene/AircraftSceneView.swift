@@ -39,12 +39,12 @@ struct AircraftSceneView: View {
             .onChanged { value in
                 self.isDragging = true
 
-                changeOrientation(of: aircraft.aircraftNode, with: value.translation)
+                changeOrientation(of: aircraft.aircraftSceneNode, with: value.translation)
             }
             .onEnded { value in
                 self.isDragging = false
 
-                updateOrientation(of: aircraft.aircraftNode)
+                updateOrientation(of: aircraft.aircraftSceneNode)
             }
     }
 
@@ -83,7 +83,7 @@ struct AircraftSceneView: View {
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
                 resetCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!)
-                resetOrientation(of: aircraft.aircraftNode)
+                resetOrientation(of: aircraft.aircraftSceneNode)
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
