@@ -101,6 +101,7 @@ struct AircraftSceneView: View {
         let y = Float(-translation.height)
 
         let anglePan = sqrt(pow(x,2)+pow(y,2)) * (Float)(Double.pi) / 180.0
+        //let anglePan = sqrt(pow((x * .pi / 180.0), 2) + pow((y * .pi / 180.0), 2))
 
         var rotationVector = SCNVector4()
 
