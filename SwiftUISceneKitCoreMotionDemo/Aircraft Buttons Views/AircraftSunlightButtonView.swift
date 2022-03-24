@@ -20,6 +20,7 @@ struct AircraftSunlightButtonView: View {
         //
         // Button for toggling the sunlight.
         //
+        /*
         Button( action: {
             withAnimation{
                 sunlightSwitch.sunlight.toggle()
@@ -32,13 +33,35 @@ struct AircraftSunlightButtonView: View {
                 .imageScale(.large)
                 .accessibility(label: Text("Light Switch"))
         }
-        .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
+        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
         .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
         .padding()
         .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
+         */
+        
+        
+        Button( action: {
+            withAnimation{
+                sunlightSwitch.sunlight.toggle()
+            }
+            
+            toggleSunlight()
+            
+        }) {
+            Image(systemName: sunlightSwitch.sunlight ? "lightbulb.fill" : "lightbulb")
+                .imageScale(.large)
+                .accessibility(label: Text("Light Switch"))
+        }
+        .buttonStyle(CircleMainButtonFlexible())
+        .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
     }
+        
+        
+        
+        
+        
 
 
 

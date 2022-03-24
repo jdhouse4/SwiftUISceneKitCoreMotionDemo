@@ -10,7 +10,36 @@ import CoreGraphics
 
 
 
-enum CircleButton: CGFloat {
+struct CircleButtonMainButtonCompact: ButtonStyle {
+    @Environment(\.horizontalSizeClass) var sizeClass
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: CircleButtonSize.halfWidthHeightCompact.rawValue, height: CircleButtonSize.halfWidthHeightCompact.rawValue)
+            .padding()
+            .background(Color.secondary)
+            .foregroundColor(Color.white)
+            .clipShape(Circle())
+    }
+}
+
+struct CircleMainButtonFlexible: ButtonStyle {
+    @Environment(\.horizontalSizeClass) var sizeClass
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: sizeClass == .compact ? CircleButtonSize.halfWidthHeightCompact.rawValue : CircleButtonSize.halfWidthHeight.rawValue,
+                   height: sizeClass == .compact ? CircleButtonSize.halfWidthHeightCompact.rawValue : CircleButtonSize.halfWidthHeight.rawValue)
+            .padding()
+            .background(Color.secondary)
+            .foregroundColor(Color.white)
+    }
+}
+
+
+
+
+enum CircleButtonSize: CGFloat {
     // Regular Screen
     case center                             = 90
     case diameter                           = 60
@@ -39,11 +68,27 @@ enum CircleButton: CGFloat {
     case animationDebug                     = 1.5
     case animationSlow                      = 0.4
     case animationFast                      = 0.25
+
+
+    // Regular Screen
+    case extendedHeight                     = 250
+    case widthHeight                        = 200
+    case halfWidthHeight                    = 100
+    case buttonBottonPosition               = 170
+
+    // Compact Screen
+    case extendedHeightCompact              = 190
+    case innerExtendedHeightCompact         = 95
+    case widthHeightCompact                 = 160
+    case halfWidthHeightCompact             = 80
+    case quarterExtendedHeightCompact       = 85
+    case centerButtonTopPositionCompact     = 53
+    case centerButtonBottomPositionCompact  = 165
 }
 
 
 
-enum CircleButtonSize: CGFloat {
+enum CircleButtonView: CGFloat {
     // Regular Screen
     case extendedHeight                     = 250
     case widthHeight                        = 200

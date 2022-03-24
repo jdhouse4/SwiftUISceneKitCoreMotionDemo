@@ -31,11 +31,11 @@ struct AircraftSettingsButtonView: View {
                 .imageScale(.large)
                 .accessibility(label: Text("Settings"))
         }
-        .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
+        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
         .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
-        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0), value: aircraftSettingsButton.settingsSwitch)
+        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0), value: aircraftSettingsButton.settingsSwitch)
         //.animation(.ripple(buttonIndex: 2), value: aircraftSettingsButton.settingsSwitch)
         .padding()
     }

@@ -33,14 +33,14 @@ struct AircraftRCSButtonsView: View {
                 // Access Rotation Buttons
                 //
                 Button(action: {
-                    withAnimation(.easeInOut(duration: Double(CircleButton.animationFast.rawValue))) {
+                    withAnimation(.easeInOut(duration: Double(CircleButtonSize.animationFast.rawValue))) {
 
                         self.rcsButtons.showRotationButtons.toggle()
 
                     }
                 }) {
                     Image(systemName: "rotate.3d")
-                        .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                         .imageScale(.large)
                 }
                 .zIndex(3)
@@ -68,7 +68,7 @@ struct AircraftRCSButtonsView: View {
                             
                         }) {
                             Image(systemName: "arrow.up")
-                                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                                 .imageScale(.large)
                                 .accessibility(label: Text("Pitching up."))
                         }
@@ -79,7 +79,7 @@ struct AircraftRCSButtonsView: View {
                         .transition(CircleButtonHelper.transition0DegreeButton())
                         .position(x: CircleButtonHelper.position0DegreeButton().x, y: CircleButtonHelper.position0DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         */
                         
                         //
@@ -105,7 +105,7 @@ struct AircraftRCSButtonsView: View {
 
                         }) {
                             Image(systemName: "arrow.clockwise")
-                                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                                 .imageScale(.large)
                                 .accessibility(label: Text("Roll starboard."))
                         }
@@ -116,7 +116,7 @@ struct AircraftRCSButtonsView: View {
                         .transition(CircleButtonHelper.transition60DegreeButton())
                         .position(x: CircleButtonHelper.position60DegreeButton().x, y: CircleButtonHelper.position60DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         
                         
                         /*
@@ -134,7 +134,7 @@ struct AircraftRCSButtonsView: View {
                             
                         }) {
                             Image(systemName: "arrow.right")
-                                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                                 .imageScale(.large)
                                 .accessibility(label: Text("Yawing starboard."))
                         }
@@ -145,7 +145,7 @@ struct AircraftRCSButtonsView: View {
                         .transition(CircleButtonHelper.transition120DegreeButton())
                         .position(x: CircleButtonHelper.position120DegreeButton().x, y: CircleButtonHelper.position120DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         */
                         
                         /*
@@ -163,7 +163,7 @@ struct AircraftRCSButtonsView: View {
                             
                         }) {
                             Image(systemName: "arrow.down")
-                                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                                 .imageScale(.large)
                                 .accessibility(label: Text("Pitching down."))
                         }
@@ -174,7 +174,7 @@ struct AircraftRCSButtonsView: View {
                         .transition(CircleButtonHelper.transition180DegreeButton())
                         .position(x: CircleButtonHelper.position180DegreeButton().x, y: CircleButtonHelper.position180DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         */
                         
                         /*
@@ -192,7 +192,7 @@ struct AircraftRCSButtonsView: View {
                             
                         }) {
                             Image(systemName: "arrow.left")
-                                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                                 .imageScale(.large)
                                 .accessibility(label: Text("Yawing port."))
                         }
@@ -203,7 +203,7 @@ struct AircraftRCSButtonsView: View {
                         .transition(CircleButtonHelper.transition240DegreeButton())
                         .position(x: CircleButtonHelper.position240DegreeButton().x, y: CircleButtonHelper.position240DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         */
                         
 
@@ -229,7 +229,7 @@ struct AircraftRCSButtonsView: View {
 
                         }) {
                             Image(systemName: "arrow.counterclockwise")
-                                .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue, alignment: .center)
+                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
                                 .imageScale(.large)
                                 .accessibility(label: Text("Rolling port."))
                         }
@@ -240,10 +240,10 @@ struct AircraftRCSButtonsView: View {
                         .transition(CircleButtonHelper.transition300DegreeButton())
                         .position(x: CircleButtonHelper.position300DegreeButton().x, y: CircleButtonHelper.position300DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0))
+                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         
                 }
-                    .animation(.easeInOut(duration: Double( CircleButton.animationFast.rawValue) ).delay(0.0), value: rcsButtons.showRotationButtons)
+                    .animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0), value: rcsButtons.showRotationButtons)
 
                 }
 

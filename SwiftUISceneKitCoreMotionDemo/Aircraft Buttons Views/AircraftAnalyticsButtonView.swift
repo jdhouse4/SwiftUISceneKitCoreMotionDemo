@@ -31,7 +31,7 @@ struct AircraftAnalyticsButtonView: View {
                 .imageScale(.large)
                 .accessibility(label: Text("Analytics"))
         }
-        .frame(width: CircleButton.diameter.rawValue, height: CircleButton.diameter.rawValue)
+        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
         .background(aircraftAnalyticsButton.analyticsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
