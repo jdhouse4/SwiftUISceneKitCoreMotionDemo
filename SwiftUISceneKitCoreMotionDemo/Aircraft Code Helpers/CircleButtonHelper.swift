@@ -17,61 +17,61 @@ struct CircleButtonHelper {
     // Compact
     //
     static func positionMainButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue, y: CircleButtonView.halfWidthHeightCompact.rawValue)
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue, y: CircleButtonSize.halfWidthHeightCompact.rawValue)
     }
 
 
 
     static func position0DegreeButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue, y: CircleButtonView.halfWidthHeightCompact.rawValue - CircleButton.diameterWithRadialSpacingCompact.rawValue)
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue, y: CircleButtonSize.halfWidthHeightCompact.rawValue - CircleButton.diameterWithRadialSpacingCompact.rawValue)
     }
 
 
 
     static func position60DegreeButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position120DegreeButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position180DegreeButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue, y: CircleButtonView.halfWidthHeightCompact.rawValue + CircleButton.diameterWithRadialSpacingCompact.rawValue)
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue, y: CircleButtonSize.halfWidthHeightCompact.rawValue + CircleButton.diameterWithRadialSpacingCompact.rawValue)
     }
 
 
 
     static func position240DegreeButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position300DegreeButtonCompact() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position60DegreeRisingButtonCompact() -> (x: CGFloat, y: CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.centerButtonTopPositionCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue + ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.centerButtonTopPositionCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position180DegreeRisingButtonCompact() -> (x: CGFloat, y: CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue, y: CircleButtonView.centerButtonTopPositionCompact.rawValue + CircleButton.diameterWithRadialSpacingCompact.rawValue)
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue, y: CircleButtonSize.centerButtonTopPositionCompact.rawValue + CircleButton.diameterWithRadialSpacingCompact.rawValue)
     }
 
 
 
     static func position300DegreeRisingButtonCompact() -> (x: CGFloat, y: CGFloat) {
-        return (x: CircleButtonView.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.centerButtonTopPositionCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeightCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.centerButtonTopPositionCompact.rawValue - ( CircleButton.diameterWithRadialSpacingCompact.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
@@ -83,43 +83,43 @@ struct CircleButtonHelper {
     // Standard
     //
     static func positionMainButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue, y: CircleButtonView.halfWidthHeight.rawValue)
+        return (x: CircleButtonSize.halfWidthHeight.rawValue, y: CircleButtonSize.halfWidthHeight.rawValue)
     }
 
 
 
     static func position0DegreeButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue, y: CircleButtonView.halfWidthHeight.rawValue - CircleButton.diameterWithRadialSpacing.rawValue)
+        return (x: CircleButtonSize.halfWidthHeight.rawValue, y: CircleButtonSize.halfWidthHeight.rawValue - CircleButton.diameterWithRadialSpacing.rawValue)
     }
 
 
 
     static func position60DegreeButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position120DegreeButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position180DegreeButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue, y: CircleButtonView.halfWidthHeight.rawValue + CircleButton.diameterWithRadialSpacing.rawValue)
+        return (x: CircleButtonSize.halfWidthHeight.rawValue, y: CircleButtonSize.halfWidthHeight.rawValue + CircleButton.diameterWithRadialSpacing.rawValue)
     }
 
 
 
     static func position240DegreeButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeight.rawValue + ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 
 
     static func position300DegreeButton() -> (x: CGFloat, y:CGFloat) {
-        return (x: CircleButtonView.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonView.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
+        return (x: CircleButtonSize.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * cos( CGFloat( Double.pi / 6 ) ) ), y: CircleButtonSize.halfWidthHeight.rawValue - ( CircleButton.diameterWithRadialSpacing.rawValue * sin( CGFloat( Double.pi / 6 ) ) ) )
     }
 
 

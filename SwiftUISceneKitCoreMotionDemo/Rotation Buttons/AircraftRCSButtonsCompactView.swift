@@ -24,7 +24,7 @@ struct AircraftRCSButtonsCompactView: View {
                     .fill(CircleButtonColor.background.rawValue)
                     .zIndex(-1)
                     .clipShape(Circle())
-                    .position(x: CircleButtonView.halfWidthHeightCompact.rawValue, y: CircleButtonView.halfWidthHeightCompact.rawValue)
+                    .position(x: CircleButtonSize.halfWidthHeightCompact.rawValue, y: CircleButtonSize.halfWidthHeightCompact.rawValue)
 
 
 
@@ -232,9 +232,9 @@ struct AircraftRCSButtonsCompactView: View {
                 }
 
             }
-            .frame(width: CircleButtonView.widthHeightCompact.rawValue, height: CircleButtonView.widthHeightCompact.rawValue, alignment: .bottomTrailing)
+            .frame(width: CircleButtonSize.widthHeightCompact.rawValue, height: CircleButtonSize.widthHeightCompact.rawValue, alignment: .bottomTrailing)
         }
-        .frame(width: CircleButtonView.widthHeightCompact.rawValue, height: CircleButtonView.extendedHeightCompact.rawValue, alignment: .bottomTrailing)
+        .frame(width: CircleButtonSize.widthHeightCompact.rawValue, height: CircleButtonSize.extendedHeightCompact.rawValue, alignment: .bottomTrailing)
         .padding(.init(top: 5, leading: 5, bottom: 0, trailing: 5))
     }
 }

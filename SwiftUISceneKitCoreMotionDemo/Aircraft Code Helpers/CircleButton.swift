@@ -43,7 +43,7 @@ enum CircleButton: CGFloat {
 
 
 
-enum CircleButtonView: CGFloat {
+enum CircleButtonSize: CGFloat {
     // Regular Screen
     case extendedHeight                     = 250
     case widthHeight                        = 200
