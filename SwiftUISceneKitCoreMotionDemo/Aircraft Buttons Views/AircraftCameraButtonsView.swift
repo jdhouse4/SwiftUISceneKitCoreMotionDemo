@@ -11,6 +11,8 @@ import SwiftUI
 
 
 struct AircraftCameraButtonsView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     /// @EnvironmentObject is a property wrapper type for an observable object that is
     /// instantiated by @StateObject supplied by a parent or ancestor view.
     @EnvironmentObject var aircraft: AircraftSceneKitScene
@@ -36,7 +38,9 @@ struct AircraftCameraButtonsView: View {
                         .imageScale(.large)
                 }
                 .zIndex(3)
-                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
+                .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                       height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                 .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))
@@ -65,12 +69,15 @@ struct AircraftCameraButtonsView: View {
                             .padding()
                     }
                     .zIndex(2)
-                    .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
+                    .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                           height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                    /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                     .background(distantCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeLeft(buttonIndex: 1))
-                    .offset(x: -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)
+                    .offset(x: sizeClass == .compact ? -( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)
+                    /*.offset(x: -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)*/
                     //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
 
 
@@ -93,13 +100,15 @@ struct AircraftCameraButtonsView: View {
                             .padding()
                     }
                     .zIndex(2)
-                    .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
+                    .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                           height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                    /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                     .background(shipCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeRight(buttonIndex: 1))
-                    .offset(x: CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue, y: 0)
-                    //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
+                    .offset(x: sizeClass == .compact ? ( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : ( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)
+                    /*.offset(x: CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue, y: 0)*/
                 }
             }
             .frame(width: 200, height: 70, alignment: .center)

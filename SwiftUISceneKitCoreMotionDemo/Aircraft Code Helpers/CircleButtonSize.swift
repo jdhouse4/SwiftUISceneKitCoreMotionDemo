@@ -73,6 +73,7 @@ enum CircleButtonSize: CGFloat {
     case diameterWithRadialSpacingCompact   = 54
     case radiusCompact                      = 25
     case radiusWithSpacingCompact           = 27
+    case spacerCompact                      = 1
     case radiusWithRadialSpacingCompact     = 29
 
     // Colors

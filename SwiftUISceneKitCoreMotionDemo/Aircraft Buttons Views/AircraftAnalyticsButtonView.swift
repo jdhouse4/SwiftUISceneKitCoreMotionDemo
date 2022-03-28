@@ -11,6 +11,8 @@ import SwiftUI
 
 
 struct AircraftAnalyticsButtonView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     @EnvironmentObject var aircraftAnalyticsButton: AircraftAnalyticsButton
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
@@ -31,7 +33,9 @@ struct AircraftAnalyticsButtonView: View {
                 .imageScale(.large)
                 .accessibility(label: Text("Analytics"))
         }
-        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
+        .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+               height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+        /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)*/
         .background(aircraftAnalyticsButton.analyticsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))

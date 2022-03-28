@@ -11,6 +11,8 @@ import SwiftUI
 
 
 struct AircraftRCSButtonsCompactView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
 
     let buttonAnimationTime = 0.25
@@ -43,6 +45,7 @@ struct AircraftRCSButtonsCompactView: View {
                         .imageScale(.large)
                 }
                 .zIndex(3)
+                
                 .background(CircleButtonColor.main.rawValue)
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))

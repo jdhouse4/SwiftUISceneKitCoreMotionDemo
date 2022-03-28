@@ -41,30 +41,6 @@ struct AircraftSunlightButtonView: View {
         .clipShape(Circle())
         .background(Circle().stroke(Color.blue, lineWidth: 1))
         .padding()
-        //.animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
-         
-        
-        /*
-        Button( action: {
-            withAnimation{
-                sunlightSwitch.sunlight.toggle()
-            }
-            
-            toggleSunlight()
-            
-        }) {
-            Image(systemName: sunlightSwitch.sunlight ? "lightbulb.fill" : "lightbulb")
-                .imageScale(.large)
-                .background(Color.blue)
-                .accessibility(label: Text("Light Switch"))
-        }
-        .buttonStyle(CircleButtonFlexible())
-         .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
-         .clipShape(Circle())
-         .background(Circle().stroke(Color.blue, lineWidth: 1))
-         .padding()
-         .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
-         */
     }
         
         

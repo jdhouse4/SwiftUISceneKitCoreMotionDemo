@@ -11,6 +11,8 @@ import SwiftUI
 
 
 struct AircraftRCSButtonsView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
 
@@ -25,7 +27,9 @@ struct AircraftRCSButtonsView: View {
                     .fill(CircleButtonColor.background.rawValue)
                     .zIndex(-1)
                     .clipShape(Circle())
-                    .position(x: CircleButtonSize.halfWidthHeight.rawValue, y: CircleButtonSize.halfWidthHeight.rawValue)
+                    .position(
+                              x: sizeClass == .compact ? CircleButtonSize.halfWidthHeightCompact.rawValue : CircleButtonSize.halfWidthHeight.rawValue,
+                              y: sizeClass == .compact ? CircleButtonSize.halfWidthHeightCompact.rawValue : CircleButtonSize.halfWidthHeight.rawValue)
 
 
 
@@ -40,14 +44,20 @@ struct AircraftRCSButtonsView: View {
                     }
                 }) {
                     Image(systemName: "rotate.3d")
-                        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
+                        /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                         .imageScale(.large)
                 }
                 .zIndex(3)
+                .frame(
+                    width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                    height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                    alignment: .center)
                 .background(CircleButtonColor.main.rawValue)
                 .clipShape(Circle())
-                .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                .position(x: CircleButtonHelper.positionMainButton().x, y: CircleButtonHelper.positionMainButton().y)
+                .background(Circle().stroke(Color.blue, lineWidth: 1))
+                .position(
+                    x: sizeClass == .compact ? CircleButtonHelper.positionMainButtonCompact().x :         CircleButtonHelper.positionMainButton().x,
+                    y: sizeClass == .compact ? CircleButtonHelper.positionMainButtonCompact().y : CircleButtonHelper.positionMainButton().y)
 
 
                 if rcsButtons.showRotationButtons {
@@ -105,16 +115,21 @@ struct AircraftRCSButtonsView: View {
 
                         }) {
                             Image(systemName: "arrow.clockwise")
-                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
+                                /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                                 .imageScale(.large)
                                 .accessibility(label: Text("Roll starboard."))
                         }
                         .zIndex(2)
+                        .frame(
+                            width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue, alignment: .center)
                         .background(CircleButtonColor.offWithBackground.rawValue)
                         .clipShape(Circle())
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                        .transition(CircleButtonHelper.transition60DegreeButton())
-                        .position(x: CircleButtonHelper.position60DegreeButton().x, y: CircleButtonHelper.position60DegreeButton().y)
+                        .transition( sizeClass == .compact ? CircleButtonHelper.transition60DegreeButtonCompact() : CircleButtonHelper.transition60DegreeButton() )
+                        .position(
+                            x: sizeClass == .compact ? CircleButtonHelper.position60DegreeButtonCompact().x : CircleButtonHelper.position60DegreeButton().x ,
+                            y: sizeClass == .compact ? CircleButtonHelper.position60DegreeButtonCompact().y : CircleButtonHelper.position60DegreeButton().y )
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         
@@ -229,16 +244,21 @@ struct AircraftRCSButtonsView: View {
 
                         }) {
                             Image(systemName: "arrow.counterclockwise")
-                                .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)
+                                /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                                 .imageScale(.large)
                                 .accessibility(label: Text("Rolling port."))
                         }
                         .zIndex(2)
+                        .frame(
+                            width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue, alignment: .center)
                         .background(CircleButtonColor.offWithBackground.rawValue)
                         .clipShape(Circle())
                         .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                        .transition(CircleButtonHelper.transition300DegreeButton())
-                        .position(x: CircleButtonHelper.position300DegreeButton().x, y: CircleButtonHelper.position300DegreeButton().y)
+                        .transition(sizeClass == .compact ? CircleButtonHelper.transition300DegreeButtonCompact() : CircleButtonHelper.transition300DegreeButton())
+                        .position(
+                            x: sizeClass == .compact ? CircleButtonHelper.position300DegreeButtonCompact().x : CircleButtonHelper.position300DegreeButton().x,
+                            y: sizeClass == .compact ? CircleButtonHelper.position300DegreeButtonCompact().y : CircleButtonHelper.position300DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
                         //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
                         
@@ -248,11 +268,17 @@ struct AircraftRCSButtonsView: View {
                 }
 
             }
-            .frame(width: CircleButtonSize.widthHeight.rawValue, height: CircleButtonSize.widthHeight.rawValue, alignment: .bottomTrailing)
+            .frame(
+                width: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
+                height: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
+                alignment: .bottomTrailing)
             //.background(Color.blue)
 
         }
-        .frame(width: CircleButtonSize.widthHeight.rawValue, height: CircleButtonSize.extendedHeight.rawValue, alignment: .bottomTrailing)
+        .frame(
+            width: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
+            height: sizeClass == .compact ? CircleButtonSize.extendedHeightCompact.rawValue : CircleButtonSize.extendedHeight.rawValue,
+            alignment: .bottomTrailing)
         .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
         //.background(Color.red)
 
