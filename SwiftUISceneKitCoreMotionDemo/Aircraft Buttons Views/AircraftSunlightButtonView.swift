@@ -11,6 +11,7 @@ import SwiftUI
 
 
 struct AircraftSunlightButtonView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
     @EnvironmentObject var sunlightSwitch: AircraftSunlightButton
     @EnvironmentObject var aircraft: AircraftSceneKitScene
 
@@ -20,42 +21,50 @@ struct AircraftSunlightButtonView: View {
         //
         // Button for toggling the sunlight.
         //
+        
+        Button( action: {
+            withAnimation{
+                sunlightSwitch.sunlight.toggle()
+            }
+
+            toggleSunlight()
+
+        }) {
+            Image(systemName: sunlightSwitch.sunlight ? "lightbulb.fill" : "lightbulb")
+                .imageScale(.large)
+                .accessibility(label: Text("Light Switch"))
+        }
+        //.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
+        .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+               height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+        .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
+        .clipShape(Circle())
+        .background(Circle().stroke(Color.blue, lineWidth: 1))
+        .padding()
+        .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
+         
+        
         /*
         Button( action: {
             withAnimation{
                 sunlightSwitch.sunlight.toggle()
             }
-
+            
             toggleSunlight()
-
+            
         }) {
             Image(systemName: sunlightSwitch.sunlight ? "lightbulb.fill" : "lightbulb")
                 .imageScale(.large)
+                .background(Color.blue)
                 .accessibility(label: Text("Light Switch"))
         }
-        .frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
-        .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
-        .clipShape(Circle())
-        .background(Capsule().stroke(Color.blue, lineWidth: 1))
-        .padding()
-        .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
+        .buttonStyle(CircleButtonFlexible())
+         .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
+         .clipShape(Circle())
+         .background(Circle().stroke(Color.blue, lineWidth: 1))
+         .padding()
+         .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
          */
-        
-        
-        Button( action: {
-            withAnimation{
-                sunlightSwitch.sunlight.toggle()
-            }
-            
-            toggleSunlight()
-            
-        }) {
-            Image(systemName: sunlightSwitch.sunlight ? "lightbulb.fill" : "lightbulb")
-                .imageScale(.large)
-                .accessibility(label: Text("Light Switch"))
-        }
-        .buttonStyle(CircleMainButtonFlexible())
-        .animation(.ripple(buttonIndex: 2), value: sunlightSwitch.sunlight)
     }
         
         

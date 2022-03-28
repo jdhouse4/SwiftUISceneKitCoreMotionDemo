@@ -28,11 +28,26 @@ struct CircleMainButtonFlexible: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(width: sizeClass == .compact ? CircleButtonSize.halfWidthHeightCompact.rawValue : CircleButtonSize.halfWidthHeight.rawValue,
-                   height: sizeClass == .compact ? CircleButtonSize.halfWidthHeightCompact.rawValue : CircleButtonSize.halfWidthHeight.rawValue)
-            .padding()
-            .background(Color.secondary)
-            .foregroundColor(Color.white)
+            .frame(width: sizeClass == .compact ? CircleButtonSize.halfWidthHeight.rawValue : CircleButtonSize.halfWidthHeight.rawValue,
+                   height: sizeClass == .compact ? CircleButtonSize.halfWidthHeight.rawValue : CircleButtonSize.halfWidthHeight.rawValue)
+            //.padding()
+            //.background(Color.secondary)
+            //.foregroundColor(Color.white)
+    }
+}
+
+
+
+struct CircleButtonFlexible: ButtonStyle {
+    @Environment(\.horizontalSizeClass) var sizeClass
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                   height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+            //.padding()
+            //.background(Color.secondary)
+            //.foregroundColor(Color.white)
     }
 }
 
