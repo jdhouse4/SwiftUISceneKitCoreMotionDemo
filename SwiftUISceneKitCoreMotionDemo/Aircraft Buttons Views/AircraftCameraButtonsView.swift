@@ -34,12 +34,14 @@ struct AircraftCameraButtonsView: View {
                         self.aircraftCameraButton.showCameraButtons.toggle()
                     }
                 }) {
-                    Image(systemName: "camera.fill")
+                    Image(systemName: aircraftCameraButton.showCameraButtons ? "camera.fill" : "camera")
                         .imageScale(.large)
+                        .accessibility(label: Text("Cameras"))
                 }
                 .zIndex(3)
-                .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                       height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                .frame(
+                    width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                    height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
                 /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                 .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                 .clipShape(Circle())
@@ -76,7 +78,9 @@ struct AircraftCameraButtonsView: View {
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeLeft(buttonIndex: 1))
-                    .offset(x: sizeClass == .compact ? -( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)
+                    .offset(
+                        x: sizeClass == .compact ? -( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
+                        y: 0)
                     /*.offset(x: -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)*/
                     //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
 
@@ -100,14 +104,17 @@ struct AircraftCameraButtonsView: View {
                             .padding()
                     }
                     .zIndex(2)
-                    .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                           height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                    .frame(
+                        width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                        height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
                     /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                     .background(shipCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeRight(buttonIndex: 1))
-                    .offset(x: sizeClass == .compact ? ( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : ( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)
+                    .offset(
+                        x: sizeClass == .compact ? ( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : ( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
+                        y: 0)
                     /*.offset(x: CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue, y: 0)*/
                 }
             }
@@ -159,10 +166,14 @@ struct AircraftCameraButtonsView: View {
      to AircraftHelpers.swift
      */
     func moveAndFadeRight(buttonIndex: Int) -> AnyTransition {
-        let insertion   = AnyTransition.offset(x: -CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+        let insertion   = AnyTransition.offset(
+            x: sizeClass == .compact ? ( -CircleButtonSize.diameterCompact.rawValue * CGFloat(buttonIndex) ) : ( -CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex) ),
+            y: 0)
             //.combined(with: .opacity)
 
-        let removal     = AnyTransition.offset(x: -CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+        let removal     = AnyTransition.offset(
+            x: sizeClass == .compact ? ( -CircleButtonSize.diameterCompact.rawValue * CGFloat(buttonIndex) ) : ( -CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex) ),
+            y: 0)
             .combined(with: .opacity)
 
         return AnyTransition.asymmetric(insertion: insertion, removal: removal)
@@ -171,10 +182,14 @@ struct AircraftCameraButtonsView: View {
 
 
     func moveAndFadeLeft(buttonIndex: Int) -> AnyTransition {
-        let insertion   = AnyTransition.offset(x: CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+        let insertion   = AnyTransition.offset(
+            x: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue * CGFloat(buttonIndex) : CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex),
+            y: 0)
             //.combined(with: .opacity)
 
-        let removal     = AnyTransition.offset(x: CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex), y: 0)
+        let removal     = AnyTransition.offset(
+            x: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue * CGFloat(buttonIndex) : CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex),
+            y: 0)
             .combined(with: .opacity)
 
         return AnyTransition.asymmetric(insertion: insertion, removal: removal)
