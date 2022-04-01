@@ -48,7 +48,6 @@ struct ContentView: View {
         }
         .statusBar(hidden: true)
 
-
         .environmentObject(aircraft)
         .environmentObject(aircraftDelegate)
         .environmentObject(aircraftSunlightButton)

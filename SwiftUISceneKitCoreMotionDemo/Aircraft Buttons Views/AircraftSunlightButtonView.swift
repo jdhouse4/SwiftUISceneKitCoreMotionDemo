@@ -12,6 +12,7 @@ import SwiftUI
 
 struct AircraftSunlightButtonView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
+    
     @EnvironmentObject var sunlightSwitch: AircraftSunlightButton
     @EnvironmentObject var aircraft: AircraftSceneKitScene
 
