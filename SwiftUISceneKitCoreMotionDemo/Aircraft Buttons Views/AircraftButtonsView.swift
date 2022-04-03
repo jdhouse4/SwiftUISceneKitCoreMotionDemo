@@ -27,19 +27,14 @@ struct AircraftButtonsView: View {
                 Spacer(minLength: 100)
 
                 AircraftRCSButtonsView()
-                    //.frame(alignment: .bottom)
-                    //.padding(.top, aircraftAnalyticsButton.analyticsSwitch ? 210 : 350)
-                    //.padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 240 : 100)
                     .padding(EdgeInsets(top: 5, leading: 5, bottom: aircraftAnalyticsButton.analyticsSwitch ? 205 : 70, trailing: 5))
                 
-                //Spacer(minLength: 50)
             }
             //.background(Color.black.opacity(0.7))
 
 
             VStack {
                 
-                //Spacer(minLength: 200)
                 Spacer()
                 
                 GeometryReader { geometry in
@@ -52,11 +47,7 @@ struct AircraftButtonsView: View {
                         AircraftEngineThrottleSlider()
                         
                     }
-                    /*.frame(width: geometry.size.width, height: aircraftAnalyticsButton.analyticsSwitch ? geometry.size.height - 140 - 100 : geometry.size.height - 50, alignment: .trailing)
-                     */
-                    .frame(width: geometry.size.width, height: geometry.size.height - 50/*, alignment: .trailing*/)
-                    //.padding(.bottom, 150)
-                    //.padding(EdgeInsets(top: 00, leading: 5, bottom: 20, trailing: 5))
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                     .padding(EdgeInsets(top: 10, leading: 135, bottom: 20, trailing: 5))
                     //.background(Color.cyan.opacity(0.95))
                 }

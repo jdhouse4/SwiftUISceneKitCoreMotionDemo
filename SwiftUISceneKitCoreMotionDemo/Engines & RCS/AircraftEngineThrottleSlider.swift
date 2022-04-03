@@ -17,7 +17,7 @@ struct AircraftEngineThrottleSlider: View {
     @EnvironmentObject var aircraftEngineThrottle: AircraftEngineThrottle
 
 
-    var sliderHeight: CGFloat = 125//200
+    var sliderHeight: CGFloat = 125
 
     var throttle: String {
         let formatter = NumberFormatter()
@@ -40,22 +40,17 @@ struct AircraftEngineThrottleSlider: View {
                 .foregroundColor(Color.black)
                 .opacity(CircleButtonSize.primaryOpacity.rawValue)
                 .font(.title3)
-                //.offset(x: 55, y: 10)
                 //.background(Color.red.opacity(0.9))
 
             Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
                 .frame(width: sliderHeight)
-                //.rotationEffect(.degrees(-90), anchor: .bottomTrailing)
-                //.rotationEffect(.degrees(-90), anchor: .topLeading)
-                //.rotationEffect(.degrees(-90), anchor: .topTrailing)
                 .rotationEffect(.degrees(-90), anchor: .center)
             
-                //.offset(x: 138, y: 200) // x was 138
                 .padding(EdgeInsets(top: 50, leading: 5, bottom: 5, trailing: 5))
                 //.background(Color.pink.opacity(0.9))
         }
         .frame(alignment: .bottom)
-        .padding(EdgeInsets(top: 5, leading: 5, bottom: 10, trailing: 10))
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 60, trailing: 10))
         //.background(Color.green.opacity(0.95))
     }
 
