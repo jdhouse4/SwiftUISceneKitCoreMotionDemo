@@ -39,7 +39,7 @@ struct AircraftAnalyticsButtonView: View {
         .background(aircraftAnalyticsButton.analyticsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Capsule().stroke(Color.blue, lineWidth: 1))
-        .padding()
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
     }
 }
 

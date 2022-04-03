@@ -21,8 +21,9 @@ struct AircraftHeaderView: View {
                 .foregroundColor(Color.gray)
                 .font(.title2)
 
-            Spacer(minLength: 300)
+            Spacer(minLength: 3)
         }
+        .background(Color.white.opacity(0.7))
     }
 }
 

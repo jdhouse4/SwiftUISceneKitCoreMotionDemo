@@ -23,13 +23,17 @@ struct AircraftButtonsView: View {
         ZStack {
 
             VStack {
+                
+                Spacer(minLength: 150)
 
                 AircraftRCSButtonsView()
-                    .padding(.top, aircraftAnalyticsButton.analyticsSwitch ? 210 : 350)
-                    .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 240 : 100)
-
+                    //.padding(.top, aircraftAnalyticsButton.analyticsSwitch ? 210 : 350)
+                    //.padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 240 : 100)
+                
+                
+                Spacer(minLength: 50)
             }
-            //.background(Color.orange)
+            .background(Color.black.opacity(0.7))
 
 
         VStack {
@@ -45,21 +49,26 @@ struct AircraftButtonsView: View {
                 }
                 .frame(width: geometry.size.width, height: aircraftAnalyticsButton.analyticsSwitch ? geometry.size.height - 140 : geometry.size.height, alignment: .trailing)
                 .padding(.bottom, 150)
-
+                .background(Color.cyan.opacity(0.7))
             }
 
             //Spacer(minLength: 50)
 
             HStack (spacing: 5) {
 
-                AircraftSunlightButtonView()
+                Group {
+                    
+                    AircraftSunlightButtonView()
+                    
+                    AircraftCameraButtonsView()
+                    
+                    AircraftAnalyticsButtonView()
 
-                AircraftCameraButtonsView()
-
-                AircraftAnalyticsButtonView()
-
-            }.padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
-
+                }
+                .frame(alignment: .center)
+            }
+            .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
+            .background(Color.red.opacity(0.7))
         }
     }
     }

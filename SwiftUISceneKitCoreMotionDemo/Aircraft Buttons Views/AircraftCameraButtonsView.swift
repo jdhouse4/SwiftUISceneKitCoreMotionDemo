@@ -67,6 +67,7 @@ struct AircraftCameraButtonsView: View {
                     }) {
                         Image(systemName: "airplane")
                             .imageScale(.large)
+                            .opacity(self.distantCamera == true ? 1.0 : 0.3)
                             .accessibility(label: Text("Show Distant Camera"))
                             .padding()
                     }
@@ -100,6 +101,7 @@ struct AircraftCameraButtonsView: View {
                     }) {
                         Image(systemName: "person.fill")
                             .imageScale(.large)
+                            .opacity(shipCamera == true ? 1.0 : 0.3)
                             .accessibility(label: Text("Airplane Camera"))
                             .padding()
                     }

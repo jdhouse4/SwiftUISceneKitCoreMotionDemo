@@ -41,7 +41,7 @@ struct AircraftSunlightButtonView: View {
         .background(sunlightSwitch.sunlight ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
         .clipShape(Circle())
         .background(Circle().stroke(Color.blue, lineWidth: 1))
-        .padding()
+        .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
     }
         
         
