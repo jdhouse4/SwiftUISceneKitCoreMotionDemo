@@ -34,7 +34,7 @@ struct AircraftButtonsView: View {
                 
                 //Spacer(minLength: 50)
             }
-            .background(Color.black.opacity(0.7))
+            //.background(Color.black.opacity(0.7))
 
 
             VStack {
@@ -57,8 +57,8 @@ struct AircraftButtonsView: View {
                     .frame(width: geometry.size.width, height: geometry.size.height - 50/*, alignment: .trailing*/)
                     //.padding(.bottom, 150)
                     //.padding(EdgeInsets(top: 00, leading: 5, bottom: 20, trailing: 5))
-                    .background(Color.cyan.opacity(0.95))
-                    .padding(EdgeInsets(top: 10, leading: 150, bottom: 20, trailing: 5))
+                    .padding(EdgeInsets(top: 10, leading: 135, bottom: 20, trailing: 5))
+                    //.background(Color.cyan.opacity(0.95))
                 }
                 
 
@@ -78,7 +78,7 @@ struct AircraftButtonsView: View {
                     .frame(alignment: .center)
                 }
                 .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
-                .background(Color.red.opacity(0.7))
+                //.background(Color.red.opacity(0.7))
             }
         }
     }

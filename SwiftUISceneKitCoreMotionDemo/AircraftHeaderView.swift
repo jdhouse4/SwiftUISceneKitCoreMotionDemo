@@ -23,7 +23,7 @@ struct AircraftHeaderView: View {
 
             Spacer(minLength: 3)
         }
-        .background(Color.white.opacity(0.7))
+        //.background(Color.white.opacity(0.7))
     }
 }
 
