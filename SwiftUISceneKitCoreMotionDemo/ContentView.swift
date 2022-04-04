@@ -31,21 +31,25 @@ struct ContentView: View {
 
         ZStack {
 
-            Color.black.edgesIgnoringSafeArea(.all)
+            //Color.black.edgesIgnoringSafeArea(.all)
 
             AircraftSceneView()
 
-            AircraftHeaderView()
+            //AircraftHeaderView()
             
-            TopRowButtonsView()
+            AircraftButtonsView()
+            
 
             VStack {
                 
+                TopRowButtonsView()
+                
                 Spacer()
-
-                AircraftButtonsView()
-
+                
+                BottomRowButtonsView()
+                
             }
+            //.background(Color.white.opacity(0.75))
 
         }
         .statusBar(hidden: true)

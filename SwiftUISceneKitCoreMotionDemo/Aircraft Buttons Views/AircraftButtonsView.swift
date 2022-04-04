@@ -41,9 +41,6 @@ struct AircraftButtonsView: View {
                     
                     HStack (spacing: 5) {
                         
-                        
-                        //Spacer()
-                        
                         AircraftEngineThrottleSlider()
                         
                     }
@@ -55,20 +52,20 @@ struct AircraftButtonsView: View {
 
                 //Spacer(minLength: 50)
                 
-                HStack (spacing: 5) {
+                /*HStack (spacing: 5) {
                     
                     Group {
                         
                         AircraftSunlightButtonView()
                         
-                        //AircraftCameraButtonsView()
+                        Spacer()
                         
                         AircraftAnalyticsButtonView()
                         
                     }
                     .frame(alignment: .center)
-                }
-                .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
+                }*/
+                //.padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
                 //.background(Color.red.opacity(0.7))
             }
         }

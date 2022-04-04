@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+
+
 struct TopRowButtonsView: View {
     var body: some View {
         HStack (alignment: .center) {
@@ -17,6 +20,8 @@ struct TopRowButtonsView: View {
             
             AircraftSettingsButtonView()
         }
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+        //.background(Color.brown.opacity(0.95))
     }
 }
 
