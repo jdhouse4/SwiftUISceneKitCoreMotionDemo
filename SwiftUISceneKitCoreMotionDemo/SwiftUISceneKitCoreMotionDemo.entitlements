@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.portablefrontier.SwiftUISceneKitCoreMotionDemo</string>
+		<string>group.com.portablefrontier.swiftuiscenekitcoremotiondemo</string>
 	</array>
 </dict>
 </plist>

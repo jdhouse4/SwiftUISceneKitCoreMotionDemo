@@ -36,6 +36,8 @@ struct ContentView: View {
             AircraftSceneView()
 
             AircraftHeaderView()
+            
+            TopRowButtonsView()
 
             VStack {
                 

@@ -29,7 +29,7 @@ struct AircraftCameraButtonsView: View {
 
             ZStack {
                 Button(action: {
-                    withAnimation(.ripple(buttonIndex: 2) /*.easeInOut(duration: 0.25)*/) {
+                    withAnimation(.ripple(buttonIndex: 2)) {
 
                         self.aircraftCameraButton.showCameraButtons.toggle()
                     }
@@ -42,7 +42,6 @@ struct AircraftCameraButtonsView: View {
                 .frame(
                     width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
                     height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
-                /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                 .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                 .clipShape(Circle())
                 .background(Capsule().stroke(Color.blue, lineWidth: 1))
@@ -79,8 +78,11 @@ struct AircraftCameraButtonsView: View {
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
                     .transition(moveAndFadeLeft(buttonIndex: 1))
-                    .offset(
+                    /*.offset(
                         x: sizeClass == .compact ? -( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
+                        y: 0)*/
+                    .offset(
+                        x: sizeClass == .compact ? CircleButtonSize.diameterWithRadialSpacingCompact.rawValue : CircleButtonSize.diameterWithRadialSpacing.rawValue,
                         y: 0)
                     /*.offset(x: -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)*/
                     //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
@@ -113,14 +115,20 @@ struct AircraftCameraButtonsView: View {
                     .background(shipCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                     .clipShape(Circle())
                     .background(Capsule().stroke(Color.blue, lineWidth: 1))
-                    .transition(moveAndFadeRight(buttonIndex: 1))
-                    .offset(
+                    //.transition(moveAndFadeRight(buttonIndex: 1))
+                    .transition(moveAndFadeRight(buttonIndex: 2))
+                    /*.offset(
                         x: sizeClass == .compact ? ( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : ( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
+                        y: 0)
+                     */
+                    .offset(
+                        x: sizeClass == .compact ? CircleButtonSize.diameterWithRadialSpacingCompact.rawValue * 2 : CircleButtonSize.diameterWithRadialSpacing.rawValue * 2,
                         y: 0)
                     /*.offset(x: CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue, y: 0)*/
                 }
             }
-            .frame(width: 200, height: 70, alignment: .center)
+            //.frame(width: 200, height: 70, alignment: .center)
+            .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
         }
     }
 

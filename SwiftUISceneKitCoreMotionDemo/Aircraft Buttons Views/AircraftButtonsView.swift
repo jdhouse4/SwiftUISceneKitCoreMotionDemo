@@ -61,7 +61,7 @@ struct AircraftButtonsView: View {
                         
                         AircraftSunlightButtonView()
                         
-                        AircraftCameraButtonsView()
+                        //AircraftCameraButtonsView()
                         
                         AircraftAnalyticsButtonView()
                         
