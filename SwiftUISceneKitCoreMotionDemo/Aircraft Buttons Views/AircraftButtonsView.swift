@@ -44,8 +44,8 @@ struct AircraftButtonsView: View {
                         AircraftEngineThrottleSlider()
                         
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    .padding(EdgeInsets(top: 10, leading: 135, bottom: 20, trailing: 5))
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .trailing)
+                    .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
                     //.background(Color.cyan.opacity(0.95))
                 }
                 
@@ -65,7 +65,7 @@ struct AircraftButtonsView: View {
                     }
                     .frame(alignment: .center)
                 }*/
-                //.padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 140 : 5)
+                .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 215 : 80)
                 //.background(Color.red.opacity(0.7))
             }
         }
