@@ -52,6 +52,7 @@ struct ContentView: View {
             //.background(Color.white.opacity(0.75))
 
         }
+        .background(Color.black)
         .statusBar(hidden: true)
 
         .environmentObject(aircraft)
