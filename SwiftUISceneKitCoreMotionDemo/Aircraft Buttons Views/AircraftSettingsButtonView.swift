@@ -12,40 +12,131 @@ import SwiftUI
 
 struct AircraftSettingsButtonView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
-
+    
     @EnvironmentObject var aircraftSettingsButton: AircraftSettingsButton
-    @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
-
-
+    //@EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
+    
+    @State private var gyro: Bool       = true
+    @State private var touches: Bool    = false
+    @State private var sunlight: Bool   = true
+    
+    
     var body: some View {
         
         HStack {
-            //
-            // Button to show settings.
-            //
-            Button( action: {
-                withAnimation {
-                    self.aircraftSettingsButton.settingsSwitch.toggle()
+            
+            ZStack {
+                //
+                // Button to show settings.
+                //
+                Button( action: {
+                    withAnimation {
+                        self.aircraftSettingsButton.showSettingsButtons.toggle()
+                    }
+                    
+                    //aircraftDelegate.showsStatistics.toggle()
+                    
+                }) {
+                    Image(systemName: aircraftSettingsButton.settingsSwitch ? "gearshape.fill" : "gearshape")
+                        .imageScale(.large)
+                        .accessibility(label: Text("Settings"))
                 }
+                .zIndex(3)
+                .frame(
+                    width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                    height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
+                .clipShape(Circle())
+                .background(Circle().stroke(Color.blue, lineWidth: 1))
                 
-                aircraftDelegate.showsStatistics.toggle()
                 
-            }) {
-                Image(systemName: aircraftSettingsButton.settingsSwitch ? "gearshape.fill" : "gearshape")
-                    .imageScale(.large)
-                    .accessibility(label: Text("Settings"))
+                if aircraftSettingsButton.showSettingsButtons {
+                    
+                    Group {
+                        
+                        Button(action: {
+                            
+                            self.gyro       = true
+                            self.touches    = false
+                            
+                            self.aircraftSettingsButton.gyroButtonPressed.toggle()
+                            print("The settings button pressed is \(aircraftSettingsButton.gyroButtonPressed) in \(#file) \(#function)")
+                            
+                        }) {
+                            Image(systemName: "gyroscope")
+                                .imageScale(.large)
+                                .opacity(gyro == true ? 1.0 : 0.5)
+                        }
+                        .zIndex(2)
+                        .frame(
+                            width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            alignment: .center)
+                        .background(CircleButtonColor.offWithoutBackground.rawValue)
+                        .clipShape(Circle())
+                        .background(Circle().stroke(Color.blue, lineWidth: 1))
+                        .transition(moveAndFadeLeft(buttonIndex: 1))
+                        .offset(
+                            x: sizeClass == .compact ? -( CircleButtonSize.diameterWithRadialSpacingCompact.rawValue ) : -( CircleButtonSize.diameterWithRadialSpacing.rawValue ),
+                            y: 0)
+                        
+                        
+                        
+                         // Settings button
+                         Button(action: {
+                         
+                             self.gyro       = false
+                             self.touches    = true
+                             
+                             self.aircraftSettingsButton.touchesButtonPressed.toggle()
+                             print("The settings button pressed is \(aircraftSettingsButton.touchesButtonPressed) in \(#file) \(#function)")
+                             
+                         }) {
+                         Image(systemName: "hand.point.up.left")
+                         .imageScale(.large)
+                         .opacity(touches == true ? 1.0 : 0.5)
+                         }
+                         .zIndex(1)
+                         .frame(
+                         width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                         height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                         alignment: .center)
+                         .background(CircleButtonColor.offWithoutBackground.rawValue)
+                         .clipShape(Circle())
+                         .background(Circle().stroke(Color.blue, lineWidth: 1))
+                         .transition(moveAndFadeLeft(buttonIndex: 2))
+                         .offset(
+                         x: sizeClass == .compact ? -( CircleButtonSize.diameterWithRadialSpacingCompact.rawValue * 2 ) : -( CircleButtonSize.diameterWithRadialSpacing.rawValue * 2 ),
+                         y: 0)
+                         
+                    }
+                }
             }
-            //.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue)
-            .frame(
-                width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
-            .background(aircraftSettingsButton.settingsSwitch ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
-            .clipShape(Circle())
-            .background(Capsule().stroke(Color.blue, lineWidth: 1))
-            //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0), value: aircraftSettingsButton.settingsSwitch)
-            //.animation(.ripple(buttonIndex: 2), value: aircraftSettingsButton.settingsSwitch)
+            .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
         }
-        .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
+    }
+    
+    
+    
+    /*
+     Note:
+     
+     I chose not to remove this function from the camera buttons view since they are only called here in this
+     function. Were there calls to these functions elsewhere in the code, I wuold have moved these two functions
+     to AircraftHelpers.swift
+     */
+    func moveAndFadeLeft(buttonIndex: Int) -> AnyTransition {
+        let insertion   = AnyTransition.offset(
+            x: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue * CGFloat(buttonIndex) : CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex),
+            y: 0)
+        //.combined(with: .opacity)
+        
+        let removal     = AnyTransition.offset(
+            x: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue * CGFloat(buttonIndex) : CircleButtonSize.diameter.rawValue * CGFloat(buttonIndex),
+            y: 0)
+            .combined(with: .opacity)
+        
+        return AnyTransition.asymmetric(insertion: insertion, removal: removal)
     }
 }
 

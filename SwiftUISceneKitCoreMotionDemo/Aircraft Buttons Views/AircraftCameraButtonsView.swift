@@ -28,6 +28,7 @@ struct AircraftCameraButtonsView: View {
         HStack (spacing: 5) {
 
             ZStack {
+                
                 Button(action: {
                     withAnimation(.ripple(buttonIndex: 2)) {
 
@@ -45,86 +46,85 @@ struct AircraftCameraButtonsView: View {
                 .background(self.aircraftCameraButton.showCameraButtons ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
                 .clipShape(Circle())
                 .background(Circle().stroke(Color.blue, lineWidth: 1))
-                //.animation(.ripple(buttonIndex: 2), value: aircraftCameraButton.showCameraButtons)
-                //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0), value: aircraftCameraButton.showCameraButtons)
 
 
                 if aircraftCameraButton.showCameraButtons {
+                    
+                    Group {
 
-                    //
-                    // Button for toggling distant camera.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.distantCamera  = true
-                            self.shipCamera     = false
-                            self.aircraftCameraButton.distantCameraButtonPressed.toggle()
+                        //
+                        // Button for toggling distant camera.
+                        //
+                        Button( action: {
+                            withAnimation {
+                                self.distantCamera  = true
+                                self.shipCamera     = false
+                                self.aircraftCameraButton.distantCameraButtonPressed.toggle()
+                            }
+                            
+                            self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
+                            
+                        }) {
+                            Image(systemName: "airplane")
+                                .imageScale(.large)
+                                .opacity(self.distantCamera == true ? 1.0 : 0.5)
+                                .accessibility(label: Text("Show Distant Camera"))
+                                .padding()
                         }
-
-                        self.changePOV(cameraString: self.aircraft.aircraftDistantCameraString)
-
-                    }) {
-                        Image(systemName: "airplane")
-                            .imageScale(.large)
-                            .opacity(self.distantCamera == true ? 1.0 : 0.3)
-                            .accessibility(label: Text("Show Distant Camera"))
-                            .padding()
-                    }
-                    .zIndex(2)
-                    .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                           height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
-                    /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
-                    .background(distantCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
-                    .clipShape(Circle())
-                    .background(Circle().stroke(Color.blue, lineWidth: 1))
-                    .transition(moveAndFadeRight(buttonIndex: 1))
-                    /*.offset(
-                        x: sizeClass == .compact ? -( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
-                        y: 0)*/
-                    .offset(
-                        x: sizeClass == .compact ? CircleButtonSize.diameterWithRadialSpacingCompact.rawValue : CircleButtonSize.diameterWithRadialSpacing.rawValue,
-                        y: 0)
-                    /*.offset(x: -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)*/
-                    //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
-
-
-                    //
-                    // Button for toggling ship camera.
-                    //
-                    Button( action: {
-                        withAnimation {
-                            self.shipCamera     = true
-                            self.distantCamera  = false
-                            self.aircraftCameraButton.shipCameraButtonPressed.toggle()
+                        .zIndex(2)
+                        .frame(width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                               height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                        /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
+                        .background(distantCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
+                        .clipShape(Circle())
+                        .background(Circle().stroke(Color.blue, lineWidth: 1))
+                        .transition(moveAndFadeRight(buttonIndex: 1))
+                        /*.offset(
+                         x: sizeClass == .compact ? -( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
+                         y: 0)*/
+                        .offset(
+                            x: sizeClass == .compact ? CircleButtonSize.diameterWithRadialSpacingCompact.rawValue : CircleButtonSize.diameterWithRadialSpacing.rawValue,
+                            y: 0)
+                        /*.offset(x: -( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ), y: 0)*/
+                        //.animation(.ripple(buttonIndex: 2), value: self.aircraftCameraButton.showCameraButtons)
+                        
+                        
+                        //
+                        // Button for toggling ship camera.
+                        //
+                        Button( action: {
+                            withAnimation {
+                                self.shipCamera     = true
+                                self.distantCamera  = false
+                                self.aircraftCameraButton.shipCameraButtonPressed.toggle()
+                            }
+                            
+                            self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
+                            
+                        }) {
+                            Image(systemName: "person.fill")
+                                .imageScale(.large)
+                                .opacity(shipCamera == true ? 1.0 : 0.5)
+                                .accessibility(label: Text("Airplane Camera"))
+                                .padding()
                         }
-
-                        self.changePOV(cameraString: self.aircraft.aircraftShipCameraString)
-
-                    }) {
-                        Image(systemName: "person.fill")
-                            .imageScale(.large)
-                            .opacity(shipCamera == true ? 1.0 : 0.3)
-                            .accessibility(label: Text("Airplane Camera"))
-                            .padding()
+                        .zIndex(2)
+                        .frame(
+                            width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
+                        .background(shipCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
+                        .clipShape(Circle())
+                        .background(Circle().stroke(Color.blue, lineWidth: 1))
+                        .transition(moveAndFadeRight(buttonIndex: 2))
+                        /*.offset(
+                         x: sizeClass == .compact ? ( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : ( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
+                         y: 0)
+                         */
+                        .offset(
+                            x: sizeClass == .compact ? CircleButtonSize.diameterWithRadialSpacingCompact.rawValue * 2 : CircleButtonSize.diameterWithRadialSpacing.rawValue * 2,
+                            y: 0)
+                        /*.offset(x: CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue, y: 0)*/
                     }
-                    .zIndex(2)
-                    .frame(
-                        width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                        height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue)
-                    /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
-                    .background(shipCamera ? CircleButtonColor.onWithBackground.rawValue : CircleButtonColor.offWithBackground.rawValue)
-                    .clipShape(Circle())
-                    .background(Circle().stroke(Color.blue, lineWidth: 1))
-                    //.transition(moveAndFadeRight(buttonIndex: 1))
-                    .transition(moveAndFadeRight(buttonIndex: 2))
-                    /*.offset(
-                        x: sizeClass == .compact ? ( CircleButtonSize.diameterCompact.rawValue + CircleButtonSize.spacer.rawValue ) : ( CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue ),
-                        y: 0)
-                     */
-                    .offset(
-                        x: sizeClass == .compact ? CircleButtonSize.diameterWithRadialSpacingCompact.rawValue * 2 : CircleButtonSize.diameterWithRadialSpacing.rawValue * 2,
-                        y: 0)
-                    /*.offset(x: CircleButtonSize.diameter.rawValue + CircleButtonSize.spacer.rawValue, y: 0)*/
                 }
             }
             //.frame(width: 200, height: 70, alignment: .center)
