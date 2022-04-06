@@ -66,6 +66,7 @@ struct AircraftSettingsButtonView: View {
                             Image(systemName: "gyroscope")
                                 .imageScale(.large)
                                 .opacity(gyro == true ? 1.0 : 0.5)
+                                .accessibility(label: Text("Use device motion."))
                         }
                         .zIndex(2)
                         .frame(
@@ -82,33 +83,34 @@ struct AircraftSettingsButtonView: View {
                         
                         
                         
-                         // Settings button
-                         Button(action: {
-                         
-                             self.gyro       = false
-                             self.touches    = true
-                             
-                             self.aircraftSettingsButton.touchesButtonPressed.toggle()
-                             print("The settings button pressed is \(aircraftSettingsButton.touchesButtonPressed) in \(#file) \(#function)")
-                             
-                         }) {
-                         Image(systemName: "hand.point.up.left")
-                         .imageScale(.large)
-                         .opacity(touches == true ? 1.0 : 0.5)
-                         }
-                         .zIndex(1)
-                         .frame(
-                         width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                         height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
-                         alignment: .center)
-                         .background(CircleButtonColor.offWithoutBackground.rawValue)
-                         .clipShape(Circle())
-                         .background(Circle().stroke(Color.blue, lineWidth: 1))
-                         .transition(moveAndFadeLeft(buttonIndex: 2))
-                         .offset(
-                         x: sizeClass == .compact ? -( CircleButtonSize.diameterWithRadialSpacingCompact.rawValue * 2 ) : -( CircleButtonSize.diameterWithRadialSpacing.rawValue * 2 ),
-                         y: 0)
-                         
+                        // Settings button
+                        Button(action: {
+                            
+                            self.gyro       = false
+                            self.touches    = true
+                            
+                            self.aircraftSettingsButton.touchesButtonPressed.toggle()
+                            print("The settings button pressed is \(aircraftSettingsButton.touchesButtonPressed) in \(#file) \(#function)")
+                            
+                        }) {
+                            Image(systemName: "hand.point.up.left")
+                                .imageScale(.large)
+                                .opacity(touches == true ? 1.0 : 0.5)
+                                .accessibility(label: Text("Use touches on screen."))
+                        }
+                        .zIndex(1)
+                        .frame(
+                            width: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            height: sizeClass == .compact ? CircleButtonSize.diameterCompact.rawValue : CircleButtonSize.diameter.rawValue,
+                            alignment: .center)
+                        .background(CircleButtonColor.offWithoutBackground.rawValue)
+                        .clipShape(Circle())
+                        .background(Circle().stroke(Color.blue, lineWidth: 1))
+                        .transition(moveAndFadeLeft(buttonIndex: 2))
+                        .offset(
+                            x: sizeClass == .compact ? -( CircleButtonSize.diameterWithRadialSpacingCompact.rawValue * 2 ) : -( CircleButtonSize.diameterWithRadialSpacing.rawValue * 2 ),
+                            y: 0)
+                        
                     }
                 }
             }
