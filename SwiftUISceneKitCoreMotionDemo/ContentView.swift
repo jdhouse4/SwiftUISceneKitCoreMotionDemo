@@ -31,11 +31,7 @@ struct ContentView: View {
 
         ZStack {
 
-            //Color.black.edgesIgnoringSafeArea(.all)
-
             AircraftSceneView()
-
-            //AircraftHeaderView()
             
             AircraftButtonsView()
             
@@ -64,7 +60,11 @@ struct ContentView: View {
         .environmentObject(aircraftEngineThrottle)
         .environmentObject(aircraftRotationButton)
     }
-
+    
+    
+    
+    func loadSettings() {
+    }
 }
 
 
