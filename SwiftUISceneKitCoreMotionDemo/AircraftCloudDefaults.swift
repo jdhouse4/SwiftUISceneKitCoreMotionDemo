@@ -1,5 +1,5 @@
 //
-//  AircrafCloudDefaults.swift
+//  AircraftCloudDefaults.swift
 //  SwiftUISceneKitCoreMotionDemo
 //
 //  Created by James Hillhouse IV on 4/6/22.
@@ -10,12 +10,16 @@ import Foundation
 
 
 
-final class AircrafCloudDefaults {
+final class AircraftCloudDefaults: ObservableObject {
     
-    static let shared = AircrafCloudDefaults()
+    static let shared = AircraftCloudDefaults()
     private var ignoreLocalChanges: Bool    = false
     
-    private inti() { }
+    private init() {
+        
+        self.start()
+        
+    }
     
     ///
     /// When an instance of this class starts-up, we want to monitor two notification names from Notification Center. If a singleton gets destroyed somehow, we want to
@@ -32,9 +36,12 @@ final class AircrafCloudDefaults {
     
     
     func start() {
-        NotificationCenter.default.addObserver(forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default, queue: .main, using: updateLocal())
         
-        NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main, using: updateRemote())
+        print("Now watching an instance of AircraftCloudDefaults")
+        
+        NotificationCenter.default.addObserver(forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default, queue: .main, using: updateLocal)
+        
+        NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main, using: updateRemote)
     }
     
     
