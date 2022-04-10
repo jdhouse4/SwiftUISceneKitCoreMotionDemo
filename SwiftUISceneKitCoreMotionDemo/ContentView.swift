@@ -10,7 +10,7 @@ import SceneKit
 
 
 
-
+/*
 extension UserDefaults {
     static var shared: UserDefaults {
         guard let defaults = UserDefaults(suiteName: AircraftGroupSettings.aircraftGroupSuiteName.rawValue) else {
@@ -24,7 +24,7 @@ extension UserDefaults {
         return defaults
     }
 }
-
+*/
 
 
 struct ContentView: View {
@@ -81,7 +81,7 @@ struct ContentView: View {
     
     func loadSettings() {
         let defaults = UserDefaults.standard
-        defaults.addSuite(named: AircraftUserSettings.pfGyroOrientationControl.rawValue)
+        defaults.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
         defaults.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue: "true"])
         //UserDefaults.shared.set(true, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
     }

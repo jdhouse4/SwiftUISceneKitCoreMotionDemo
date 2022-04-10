@@ -14,6 +14,7 @@ struct AircraftSettingsButtonView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
     @EnvironmentObject var aircraftSettingsButton: AircraftSettingsButton
+    @EnvironmentObject var aircraftCloudUserDefaults: AircraftCloudUserDefaults
     //@EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
     
     @State private var gyro: Bool       = true
@@ -33,6 +34,8 @@ struct AircraftSettingsButtonView: View {
                     withAnimation {
                         self.aircraftSettingsButton.showSettingsButtons.toggle()
                     }
+                    
+                    print("aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
                     
                     //aircraftDelegate.showsStatistics.toggle()
                     
@@ -56,16 +59,19 @@ struct AircraftSettingsButtonView: View {
                         
                         Button(action: {
                             
-                            self.gyro       = true
-                            self.touches    = false
+                            //self.gyro       = true
+                            //self.touches    = false
                             
                             self.aircraftSettingsButton.gyroButtonPressed.toggle()
                             print("The settings button pressed is \(aircraftSettingsButton.gyroButtonPressed) in \(#file) \(#function)")
                             
+                            self.aircraftCloudUserDefaults.gyroOrientationControl.toggle()
+                            print("aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
+                            
                         }) {
                             Image(systemName: "gyroscope")
                                 .imageScale(.large)
-                                .opacity(gyro == true ? 1.0 : 0.5)
+                                .opacity(self.aircraftCloudUserDefaults.gyroOrientationControl == true ? 1.0 : 0.4)
                                 .accessibility(label: Text("Use device motion."))
                         }
                         .zIndex(2)
@@ -95,7 +101,7 @@ struct AircraftSettingsButtonView: View {
                         }) {
                             Image(systemName: "hand.point.up.left")
                                 .imageScale(.large)
-                                .opacity(touches == true ? 1.0 : 0.5)
+                                .opacity(self.aircraftCloudUserDefaults.gyroOrientationControl == false ? 1.0 : 0.4)
                                 .accessibility(label: Text("Use touches on screen."))
                         }
                         .zIndex(1)

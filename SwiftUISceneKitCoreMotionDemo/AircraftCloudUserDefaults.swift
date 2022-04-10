@@ -1,38 +1,54 @@
 //
-//  AircraftCloudDefaults.swift
+//  AircraftCloudUserDefaults.swift
 //  SwiftUISceneKitCoreMotionDemo
 //
-//  Created by James Hillhouse IV on 4/6/22.
+//  Created by James Hillhouse IV on 4/9/22.
 //
 
-import Foundation
+import SwiftUI
 
 
 
+/*
+extension UserDefaults {
+    static var shared: UserDefaults {
+        guard let defaults = UserDefaults(suiteName: AircraftGroupSettings.aircraftGroupSuiteName.rawValue) else {
+            return UserDefaults.standard
+        }
+        
+        return defaults
+    }
+}
+*/
 
-final class AircraftCloudDefaults: ObservableObject {
+
+
+class AircraftCloudUserDefaults: ObservableObject {
+    //private var ignoreLocalChanges: Bool    = false
+    let defaults: UserDefaults
     
-    static let shared = AircraftCloudDefaults()
-    
-    private var ignoreLocalChanges: Bool    = false
     
     @Published var gyroOrientationControl: Bool {
         didSet {
             UserDefaults.standard.set(gyroOrientationControl, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
         }
     }
-
     
-    private init() {
-        
-        //AircraftCloudDefaults.shared.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
+    
+    
+    init() {
+        self.defaults = UserDefaults.standard
+        //defaults.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
+        defaults.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue : true])
+
         
         self.gyroOrientationControl = UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) as? Bool ?? true
         
         self.start()
-        
     }
     
+    ///
+    /// The following commented code is only if you're storing UserDefaults on iCloud. I'll take that up once I have standard and shared working.
     ///
     /// When an instance of this class starts-up, we want to monitor two notification names from Notification Center. If a singleton gets destroyed somehow, we want to
     /// stop watching the two names. The two one should care about are:
@@ -40,24 +56,35 @@ final class AircraftCloudDefaults: ObservableObject {
     /// 1. If the iCloud key-value store has changed remotely, i.e. another device has changed the key-store, here's a new value.
     /// 2. When user defaults is changed locally by us.
     ///
-    
+    /*
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+    */
     
     
     func start() {
+        print("Well, at least we didn't crash!")
         
-        print("Now watching an instance of AircraftCloudDefaults")
+        print("gyroOrientationControl : \(gyroOrientationControl)")
+        
+        //let defaults = UserDefaults.standard
+        //defaults.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
+        
+        //UserDefaults.standard.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue: "true"])
+
+        /*
+        print("Now watching an instance of AircraftCloudUserDefaults")
+        
         
         NotificationCenter.default.addObserver(forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default, queue: .main, using: updateLocal)
         
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main, using: updateRemote)
+         */
     }
     
     
-    
+    /*
     private func updateRemote(note: Notification) {
         
         guard ignoreLocalChanges == false else { return }
@@ -87,4 +114,5 @@ final class AircraftCloudDefaults: ObservableObject {
         
         ignoreLocalChanges = false
     }
+     */
 }
