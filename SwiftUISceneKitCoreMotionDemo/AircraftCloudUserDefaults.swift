@@ -25,7 +25,7 @@ extension UserDefaults {
 
 class AircraftCloudUserDefaults: ObservableObject {
     //private var ignoreLocalChanges: Bool    = false
-    let defaults: UserDefaults
+    //let defaults: UserDefaults
     
     
     @Published var gyroOrientationControl: Bool {
@@ -37,13 +37,13 @@ class AircraftCloudUserDefaults: ObservableObject {
     
     
     init() {
-        self.defaults = UserDefaults.standard
-        //defaults.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
-        defaults.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue : true])
-
-        
         self.gyroOrientationControl = UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) as? Bool ?? true
         
+        //self.gyroOrientationControl = true
+        
+        print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
+        print("function: \(#function), line: \(#line)– pfGyroOrientationControl is : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+
         self.start()
     }
     
@@ -64,9 +64,12 @@ class AircraftCloudUserDefaults: ObservableObject {
     
     
     func start() {
-        print("Well, at least we didn't crash!")
+        print("Well, at least we didn't crash getting to function: \(#function), line: \(#line)!")
         
-        print("gyroOrientationControl : \(gyroOrientationControl)")
+        //UserDefaults.standard.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue : true])
+        
+        print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
+        print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
         
         //let defaults = UserDefaults.standard
         //defaults.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
@@ -81,6 +84,20 @@ class AircraftCloudUserDefaults: ObservableObject {
         
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main, using: updateRemote)
          */
+        
+        loadSettings()
+    }
+    
+    
+    
+    func loadSettings() {
+        //UserDefaults.standard.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue : true])
+        
+        UserDefaults.standard.set(true, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
+
+        print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
+        print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+        
     }
     
     

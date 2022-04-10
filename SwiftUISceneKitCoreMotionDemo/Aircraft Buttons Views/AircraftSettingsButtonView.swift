@@ -63,11 +63,13 @@ struct AircraftSettingsButtonView: View {
                             //self.touches    = false
                             
                             self.aircraftSettingsButton.gyroButtonPressed.toggle()
-                            print("The settings button pressed is \(aircraftSettingsButton.gyroButtonPressed) in \(#file) \(#function)")
+                            print("The settings button pressed is \(aircraftSettingsButton.gyroButtonPressed).")
                             
-                            self.aircraftCloudUserDefaults.gyroOrientationControl.toggle()
-                            print("aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
-                            
+                            self.aircraftCloudUserDefaults.gyroOrientationControl = true
+                            print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
+                             
+                            print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+
                         }) {
                             Image(systemName: "gyroscope")
                                 .imageScale(.large)
@@ -92,12 +94,16 @@ struct AircraftSettingsButtonView: View {
                         // Settings button
                         Button(action: {
                             
-                            self.gyro       = false
-                            self.touches    = true
-                            
                             self.aircraftSettingsButton.touchesButtonPressed.toggle()
-                            print("The settings button pressed is \(aircraftSettingsButton.touchesButtonPressed) in \(#file) \(#function)")
+                            //print("The settings button pressed is \(aircraftSettingsButton.touchesButtonPressed) in \(#file) \(#function)")
                             
+                            
+                            self.aircraftCloudUserDefaults.gyroOrientationControl = false
+                            print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
+                            
+                            print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+
+
                         }) {
                             Image(systemName: "hand.point.up.left")
                                 .imageScale(.large)

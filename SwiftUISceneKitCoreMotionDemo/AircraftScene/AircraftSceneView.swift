@@ -19,7 +19,10 @@ struct AircraftSceneView: View {
     @State private var isDragging           = false
     @State private var totalChangePivot     = SCNMatrix4Identity
 
+    
     @EnvironmentObject var aircraft: AircraftSceneKitScene
+    @EnvironmentObject var aircraftCloudUserDefaults: AircraftCloudUserDefaults
+
     
     /// This contains the function
     /// `renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)`
@@ -39,12 +42,22 @@ struct AircraftSceneView: View {
             .onChanged { value in
                 self.isDragging = true
 
-                changeOrientation(of: aircraft.aircraftSceneNode, with: value.translation)
+                //changeOrientation(of: aircraft.aircraftSceneNode, with: value.translation)
+                // AircraftCamera.distantCamera.rawValue
+                
+                if !aircraftCloudUserDefaults.gyroOrientationControl {
+                    changeOrientation(of: aircraft.aircraftDistantCameraNode, with: value.translation)
+                }
+
             }
             .onEnded { value in
                 self.isDragging = false
 
-                updateOrientation(of: aircraft.aircraftSceneNode)
+                //updateOrientation(of: aircraft.aircraftSceneNode)
+                
+                if !aircraftCloudUserDefaults.gyroOrientationControl {
+                    updateOrientation(of: aircraft.aircraftDistantCameraNode)
+                }
             }
     }
 

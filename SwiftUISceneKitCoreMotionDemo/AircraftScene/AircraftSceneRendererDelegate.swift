@@ -97,7 +97,10 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         */
 
         if aircraftCamera == AircraftCamera.distantCamera.rawValue {
-            self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode)
+            
+            if UserDefaults.standard.bool(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) {
+                self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode)
+            }
         }
 
         if aircraftCamera == AircraftCamera.shipCamera.rawValue {
