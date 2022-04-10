@@ -96,7 +96,7 @@ struct AircraftSceneView: View {
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
                 resetCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!)
-                resetOrientation(of: aircraft.aircraftSceneNode)
+                resetOrientation(of: aircraft.aircraftDistantCameraNode)
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 
@@ -119,9 +119,9 @@ struct AircraftSceneView: View {
         var rotationVector = SCNVector4()
 
 
-        rotationVector.x = -y
-        rotationVector.y = x
-        rotationVector.z = 0
+        rotationVector.x =  y
+        rotationVector.y = -x
+        rotationVector.z =  0
         rotationVector.w = anglePan
 
         node.rotation = rotationVector

@@ -30,6 +30,7 @@ class AircraftCloudUserDefaults: ObservableObject {
     
     @Published var gyroOrientationControl: Bool {
         didSet {
+            print("\(#function): now setting to \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
             UserDefaults.standard.set(gyroOrientationControl, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
         }
     }
@@ -71,10 +72,6 @@ class AircraftCloudUserDefaults: ObservableObject {
         print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
         print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
         
-        //let defaults = UserDefaults.standard
-        //defaults.addSuite(named: AircraftGroupSettings.aircraftGroupSuiteName.rawValue)
-        
-        //UserDefaults.standard.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue: "true"])
 
         /*
         print("Now watching an instance of AircraftCloudUserDefaults")
@@ -91,9 +88,8 @@ class AircraftCloudUserDefaults: ObservableObject {
     
     
     func loadSettings() {
-        //UserDefaults.standard.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue : true])
-        
-        UserDefaults.standard.set(true, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
+        /// Don't do this, please! While it sets the value for this UserDefault item, that doesn't feed back into the @StateObject AircraftCloudUserDefaults.
+        //UserDefaults.standard.set(true, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
 
         print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
         print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
