@@ -46,7 +46,15 @@ struct AircraftSceneView: View {
                 // AircraftCamera.distantCamera.rawValue
                 
                 if !aircraftCloudUserDefaults.gyroOrientationControl {
-                    changeOrientation(of: aircraft.aircraftDistantCameraNode, with: value.translation)
+                    
+                    if aircraftDelegate.aircraftCamera == AircraftCamera.distantCamera.rawValue {
+                        //changeOrientation(of: aircraft.aircraftDistantCameraNode, with: value.translation)
+                        changeOrientation(of: aircraft.aircraftCurrentCameraNode, with: value.translation)
+                    }
+                    
+                    if aircraftDelegate.aircraftCamera == AircraftCamera.shipCamera.rawValue {
+                        changeOrientation(of: aircraft.aircraftCurrentCamera, with: value.translation)
+                    }
                 }
 
             }
@@ -56,7 +64,15 @@ struct AircraftSceneView: View {
                 //updateOrientation(of: aircraft.aircraftSceneNode)
                 
                 if !aircraftCloudUserDefaults.gyroOrientationControl {
-                    updateOrientation(of: aircraft.aircraftDistantCameraNode)
+                    
+                    if aircraftDelegate.aircraftCamera == AircraftCamera.distantCamera.rawValue {
+                        //updateOrientation(of: aircraft.aircraftDistantCameraNode)
+                        updateOrientation(of: aircraft.aircraftCurrentCameraNode)
+                    }
+                    
+                    if aircraftDelegate.aircraftCamera == AircraftCamera.shipCamera.rawValue {
+                        updateOrientation(of: aircraft.aircraftCurrentCamera)
+                    }
                 }
             }
     }
@@ -96,7 +112,17 @@ struct AircraftSceneView: View {
             .gesture(exclusiveGesture)
             .onTapGesture(count: 2, perform: {
                 resetCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!)
-                resetOrientation(of: aircraft.aircraftDistantCameraNode)
+                
+                
+                if aircraftDelegate.aircraftCamera == AircraftCamera.distantCamera.rawValue {
+                    resetOrientation(of: aircraft.aircraftCurrentCameraNode)
+                }
+                
+                if aircraftDelegate.aircraftCamera == AircraftCamera.shipCamera.rawValue {
+                    resetOrientation(of: aircraft.aircraftCurrentCamera)
+                }
+                
+                
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
 

@@ -27,7 +27,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     //var aircraftScene: SCNScene?
     var changeCamera: Bool                  = false
-    var cameraIndex: Int                    = 0
+    //var cameraIndex: Int                    = 0
 
     var engineThrottle: Double?
 
@@ -82,20 +82,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         
 
     
-
-        /*
-        if cameraIndex == 0 {
-            if aircraftCameraNode != nil {
-                self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode!)
-            }
-        }
-        if cameraIndex == 1 {
-            if aircraftCameraNode != nil {
-                self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode!)
-            }
-        }
-        */
-
         if aircraftCamera == AircraftCamera.distantCamera.rawValue {
             
             if UserDefaults.standard.bool(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) {
@@ -104,7 +90,9 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         }
 
         if aircraftCamera == AircraftCamera.shipCamera.rawValue {
-            self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode)
+            if UserDefaults.standard.bool(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) {
+                self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode)
+            }
         }
     }
 
@@ -122,34 +110,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     }
 
 
-    /*
-    func cycleCameras() -> Void {
-        if changeCamera == true {
-            print("\n\nAircraftSceneRendererDelegate Changing cameras")
 
-            changeCamera.toggle()
-
-            cameraIndex += 1
-            if cameraIndex > 1 {
-                cameraIndex = 0
-            }
-            print("AircraftScenekitScene camera index = \(cameraIndex)")
-
-            motionManager.resetReferenceFrame()
-
-            if cameraIndex == 0 {
-                aircraftCamera      = AircraftCamera.distantCamera.rawValue
-                print("Switching to \(AircraftCamera.distantCamera)")
-            } else if cameraIndex == 1 {
-                aircraftCamera = AircraftCamera.shipCamera.rawValue
-                print("Switching to \(AircraftCamera.shipCamera)")
-            }
-        }
-    }
-     */
-
-
-    
     func updateExteriorVehicleCameraOrientation(of node: SCNNode) -> Void {
 
         // Change Orientation with Device Motion
