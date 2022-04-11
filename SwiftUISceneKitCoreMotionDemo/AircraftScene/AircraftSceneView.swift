@@ -113,7 +113,6 @@ struct AircraftSceneView: View {
             .onTapGesture(count: 2, perform: {
                 resetCameraFOV(of: (self.aircraft.aircraftCurrentCamera.camera)!)
                 
-                
                 if aircraftDelegate.aircraftCamera == AircraftCamera.distantCamera.rawValue {
                     resetOrientation(of: aircraft.aircraftCurrentCameraNode)
                 }
@@ -121,7 +120,6 @@ struct AircraftSceneView: View {
                 if aircraftDelegate.aircraftCamera == AircraftCamera.shipCamera.rawValue {
                     resetOrientation(of: aircraft.aircraftCurrentCamera)
                 }
-                
                 
                 self.aircraftDelegate.motionManager.resetReferenceFrame()
             })
@@ -156,6 +154,11 @@ struct AircraftSceneView: View {
 
     // TODO: Move this to the state observable object when it's done.
     // TODO: Consider changing this to quaternions
+    ///
+    /// MotionManager.swift's resetReferenceFrame resets the `attitude simd_Quatertian` to the current attitude.
+    /// I'm hoping that for gestures, that will be a quaterion of (0,0,0,1).
+    /// :-/
+    ///
     private func updateOrientation(of node: SCNNode) {
         let currentPivot = node.pivot
 
