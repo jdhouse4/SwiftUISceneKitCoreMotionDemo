@@ -154,11 +154,6 @@ struct AircraftSceneView: View {
 
     // TODO: Move this to the state observable object when it's done.
     // TODO: Consider changing this to quaternions
-    ///
-    /// MotionManager.swift's resetReferenceFrame resets the `attitude simd_Quatertian` to the current attitude.
-    /// I'm hoping that for gestures, that will be a quaterion of (0,0,0,1).
-    /// :-/
-    ///
     private func updateOrientation(of node: SCNNode) {
         let currentPivot = node.pivot
 
@@ -173,6 +168,11 @@ struct AircraftSceneView: View {
 
 
 
+    ///
+    /// MotionManager.swift's resetReferenceFrame resets the `attitude simd_Quatertian` to the current attitude.
+    /// I'm hoping that for gestures, that will be a quaterion of (0,0,0,1).
+    /// :-/
+    ///
     private func resetOrientation(of node: SCNNode) {
         let currentPivot    = node.pivot
         //print("currentPivot: \(currentPivot)")
