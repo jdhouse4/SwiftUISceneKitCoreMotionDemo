@@ -23,8 +23,10 @@ extension UserDefaults {
 
 
 
-class AircraftCloudUserDefaults: ObservableObject {
-    //private var ignoreLocalChanges: Bool    = false
+final class AircraftCloudUserDefaults: ObservableObject {
+    static let shared = AircraftCloudUserDefaults()
+    
+    private var ignoreLocalChanges: Bool    = false
     //let defaults: UserDefaults
     
     
@@ -37,7 +39,7 @@ class AircraftCloudUserDefaults: ObservableObject {
     
     
     
-    init() {
+    private init() {
         self.gyroOrientationControl = UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) as? Bool ?? true
         
         //self.gyroOrientationControl = true
@@ -87,7 +89,7 @@ class AircraftCloudUserDefaults: ObservableObject {
     
     
     
-    func loadSettings() {
+    private func loadSettings() {
         /// Don't do this, please! While it sets the value for this UserDefault item, that doesn't feed back into the @StateObject AircraftCloudUserDefaults.
         //UserDefaults.standard.set(true, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
 
@@ -97,7 +99,7 @@ class AircraftCloudUserDefaults: ObservableObject {
     }
     
     
-    /*
+    
     private func updateRemote(note: Notification) {
         
         guard ignoreLocalChanges == false else { return }
@@ -127,5 +129,5 @@ class AircraftCloudUserDefaults: ObservableObject {
         
         ignoreLocalChanges = false
     }
-     */
+
 }
