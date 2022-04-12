@@ -17,7 +17,7 @@ import Foundation
 ///
 
 enum AircraftUserSettings: String {
-    case pfGyroOrientationControl
+    case pfGyroOrientationControl /* = "pf-GyroOrientationControl"*/
 
 }
 

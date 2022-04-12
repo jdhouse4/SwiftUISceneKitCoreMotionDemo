@@ -9,25 +9,33 @@ import SwiftUI
 
 
 
-/*
-extension UserDefaults {
-    static var shared: UserDefaults {
-        guard let defaults = UserDefaults(suiteName: AircraftGroupSettings.aircraftGroupSuiteName.rawValue) else {
-            return UserDefaults.standard
-        }
-        
-        return defaults
-    }
-}
-*/
-
-
-
+///
+///  From Paul Hudson's
+///
+///  [Storing user settings with UserDefaults](https://www.hackingwithswift.com/books/ios-swiftui/storing-user-settings-with-userdefaults)
+///
+///  This allows user settings to be stored on iCloud and when changed locally, that is pushed there and to the remote user's app when it opens.
+///
+///  I modified it a little to conform it to ObservableObject and an @Published variable parameter, as written about on the blog [Simple Swift Guide](https://simpleswiftguide.com) in the post [How to use UserDefaults in Swift](https://www.simpleswiftguide.com/how-to-use-userdefaults-in-swiftui/).
+///
+///  This offers the best of both worlds.
+///
+///  1. There is a singleton that is posting UserDefaults changes remotely and locally as needed.
+///  2. Conforming to ObservableObject means an instance of this singleton can be wrapped in an @StateObject property wrapper
+///
+///  I've used it as follows:
+///
+///  1. The instance of this singleton is wrapped in the @main App struct as an @StateObject variable and declared as an .environmentObject.
+///  2. There is an @Published variable that will have its state value kept.
+///  3. The @EnvironmentObject property wrapped variable parameter is used where needed.
+///
+///  To my mind, this gives the app a great deal of flexibility with no downside, other than the time it took my tiny brain to wrap itselft around the whole
+///  UserDefaults concept.
+///
 final class AircraftCloudUserDefaults: ObservableObject {
     static let shared = AircraftCloudUserDefaults()
     
     private var ignoreLocalChanges: Bool    = false
-    //let defaults: UserDefaults
     
     
     @Published var gyroOrientationControl: Bool {
@@ -41,11 +49,9 @@ final class AircraftCloudUserDefaults: ObservableObject {
     
     private init() {
         self.gyroOrientationControl = UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) as? Bool ?? true
-        
-        //self.gyroOrientationControl = true
-        
-        print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
-        print("function: \(#function), line: \(#line)– pfGyroOrientationControl is : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+                
+        //print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
+        //print("function: \(#function), line: \(#line)– pfGyroOrientationControl is : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
 
         self.start()
     }
@@ -66,38 +72,18 @@ final class AircraftCloudUserDefaults: ObservableObject {
     
     
     func start() {
-        print("Well, at least we didn't crash getting to function: \(#function), line: \(#line)!")
-        
-        //UserDefaults.standard.register(defaults: [AircraftUserSettings.pfGyroOrientationControl.rawValue : true])
-        
         print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
         print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
-        
 
-        
-        print("Now watching an instance of AircraftCloudUserDefaults")
-        
+        print("Now watching an singleton of AircraftCloudUserDefaults")
         
         NotificationCenter.default.addObserver(forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default, queue: .main, using: updateLocal)
         
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main, using: updateRemote)
-        
-        loadSettings()
     }
     
     
-    
-    private func loadSettings() {
-        /// Don't do this, please! While it sets the value for this UserDefault item, that doesn't feed back into the @StateObject AircraftCloudUserDefaults.
-        //UserDefaults.standard.set(true, forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)
 
-        print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
-        print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
-        
-    }
-    
-    
-    
     private func updateRemote(note: Notification) {
         
         print("\n\(#function) Line: \(#line)")
@@ -108,10 +94,6 @@ final class AircraftCloudUserDefaults: ObservableObject {
         
 
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-            
-            if key.hasPrefix("pf") {
-                print("\(#function): key is \(key) and value is \(value)")
-            }
             
             guard key.hasPrefix("pf") else { continue }
             
@@ -131,13 +113,9 @@ final class AircraftCloudUserDefaults: ObservableObject {
         
         for (key, value)  in NSUbiquitousKeyValueStore.default.dictionaryRepresentation {
             
-            if key.hasPrefix("pf") {
-                print("\(#function): key is \(key) and value is \(value)")
-            }
-            
             guard key.hasPrefix("pf") else { continue }
             
-            print("Updating remove value of \(key) to \(value)")
+            print("\(#function): Updating local value of \(key) to \(value)")
             
             UserDefaults.standard.set(value, forKey: key)
         }
