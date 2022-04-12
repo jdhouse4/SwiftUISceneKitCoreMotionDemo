@@ -12,9 +12,9 @@ import SwiftUI
 ///
 ///  From Paul Hudson's
 ///
-///  [Storing user settings with UserDefaults](https://www.hackingwithswift.com/books/ios-swiftui/storing-user-settings-with-userdefaults)
+///  [Storing preferences efficiently](https://www.hackingwithswift.com/plus/making-the-most-of-foundation/storing-preferences-efficiently)
 ///
-///  This allows user settings to be stored on iCloud and when changed locally, that is pushed there and to the remote user's app when it opens.
+///  Paul shows a way for storing user preferences in UserDefaults that stores them on iCloud and, when changed locally, pushes them to the remote user's app when it opens.
 ///
 ///  I modified it a little to conform it to ObservableObject and an @Published variable parameter, as written about on the blog [Simple Swift Guide](https://simpleswiftguide.com) in the post [How to use UserDefaults in Swift](https://www.simpleswiftguide.com/how-to-use-userdefaults-in-swiftui/).
 ///
@@ -25,9 +25,10 @@ import SwiftUI
 ///
 ///  I've used it as follows:
 ///
-///  1. The instance of this singleton is wrapped in the @main App struct as an @StateObject variable and declared as an .environmentObject.
-///  2. There is an @Published variable that will have its state value kept.
-///  3. The @EnvironmentObject property wrapped variable parameter is used where needed.
+///  1. The instance of this singleton is wrapped in the @main App struct as an @StateObject variable property and declared as an .environmentObject.
+///  2. AircraftCloudUserDefaults is wrapped as an @EnvironmentObject property and is available where needed.
+///  3. In AircraftCloudUserDefaults, user preferences are wrapped as @Published property variables.
+///  4. Since the user preferences are wrapped as an @Published properties, changes via, say, in clicking a button, will automatically update.
 ///
 ///  To my mind, this gives the app a great deal of flexibility with no downside, other than the time it took my tiny brain to wrap itselft around the whole
 ///  UserDefaults concept.
@@ -50,9 +51,6 @@ final class AircraftCloudUserDefaults: ObservableObject {
     private init() {
         self.gyroOrientationControl = UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) as? Bool ?? true
                 
-        //print("function: \(#function), line: \(#line)– gyroOrientationControl : \(gyroOrientationControl)")
-        //print("function: \(#function), line: \(#line)– pfGyroOrientationControl is : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
-
         self.start()
     }
     
@@ -89,9 +87,6 @@ final class AircraftCloudUserDefaults: ObservableObject {
         print("\n\(#function) Line: \(#line)")
         
         guard ignoreLocalChanges == false else { return }
-        
-        print("\(#function): ignoreLocalChanges is \(ignoreLocalChanges)")
-        
 
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
             
