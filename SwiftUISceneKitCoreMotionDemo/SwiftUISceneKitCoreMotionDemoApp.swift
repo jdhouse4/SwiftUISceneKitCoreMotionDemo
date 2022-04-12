@@ -17,11 +17,12 @@ struct SwiftUISceneKitCoreMotionDemoApp: App {
     // This alone is just a StateObject struct with aircraftCloudDefaults declared within it.
     //@StateObject var aircraftCloudDefaults = AircraftCloudDefaults.shared
 
-    @StateObject var aircraftCloudUserDefaults = AircraftCloudUserDefaults()
+    @StateObject var aircraftCloudUserDefaults = AircraftCloudUserDefaults.shared
     
     /*
     @StateObject var aircraftCloudDefaults = AircraftCloudDefaults
     */
+    /*
     // Step 2: Create an initializer to create the aircraftCloudDefaults and place it into the StateObject.
     init() {
         // Step 3: Create an instance of aircraftCloudDefaults.
@@ -30,7 +31,7 @@ struct SwiftUISceneKitCoreMotionDemoApp: App {
         // Step 4: Assign the @StateObject var aircraftCloudUserDefaults as a wrapped value of the instance of AircraftCloudUserDefaults.
         _aircraftCloudUserDefaults      = StateObject(wrappedValue: aircraftCloudUserDefaults)
     }
-    
+    */
 
     var body: some Scene {
        

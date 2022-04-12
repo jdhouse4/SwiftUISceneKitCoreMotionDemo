@@ -59,11 +59,10 @@ final class AircraftCloudUserDefaults: ObservableObject {
     /// 1. If the iCloud key-value store has changed remotely, i.e. another device has changed the key-store, here's a new value.
     /// 2. When user defaults is changed locally by us.
     ///
-    /*
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    */
+    
     
     
     func start() {
@@ -75,14 +74,13 @@ final class AircraftCloudUserDefaults: ObservableObject {
         print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
         
 
-        /*
+        
         print("Now watching an instance of AircraftCloudUserDefaults")
         
         
         NotificationCenter.default.addObserver(forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default, queue: .main, using: updateLocal)
         
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main, using: updateRemote)
-         */
         
         loadSettings()
     }
@@ -102,12 +100,22 @@ final class AircraftCloudUserDefaults: ObservableObject {
     
     private func updateRemote(note: Notification) {
         
+        print("\n\(#function) Line: \(#line)")
+        
         guard ignoreLocalChanges == false else { return }
         
+        print("\(#function): ignoreLocalChanges is \(ignoreLocalChanges)")
+        
+
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-            guard key.hasPrefix("pf-") else { continue }
             
-            print("Updating remove value of \(key) to \(value)")
+            if key.hasPrefix("pf") {
+                print("\(#function): key is \(key) and value is \(value)")
+            }
+            
+            guard key.hasPrefix("pf") else { continue }
+            
+            print("\(#function): Updating remove value of \(key) to \(value)")
             
             NSUbiquitousKeyValueStore.default.set(value, forKey: key)
         }
@@ -116,11 +124,18 @@ final class AircraftCloudUserDefaults: ObservableObject {
     
     
     private func updateLocal(note: Notification) {
-        
+ 
+        print("\n\(#function) Line: \(#line)")
+
         ignoreLocalChanges = true
         
         for (key, value)  in NSUbiquitousKeyValueStore.default.dictionaryRepresentation {
-            guard key.hasPrefix("pf-") else { continue }
+            
+            if key.hasPrefix("pf") {
+                print("\(#function): key is \(key) and value is \(value)")
+            }
+            
+            guard key.hasPrefix("pf") else { continue }
             
             print("Updating remove value of \(key) to \(value)")
             
