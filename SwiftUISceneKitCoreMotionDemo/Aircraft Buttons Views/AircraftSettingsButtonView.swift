@@ -66,9 +66,9 @@ struct AircraftSettingsButtonView: View {
                             print("The settings button pressed is \(aircraftSettingsButton.gyroButtonPressed).")
                             
                             self.aircraftCloudUserDefaults.gyroOrientationControl = true
-                            print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
+                            //print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
                              
-                            print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+                            //print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
 
                         }) {
                             Image(systemName: "gyroscope")
