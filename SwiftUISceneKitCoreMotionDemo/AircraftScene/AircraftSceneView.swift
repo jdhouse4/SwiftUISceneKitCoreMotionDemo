@@ -41,6 +41,8 @@ struct AircraftSceneView: View {
         DragGesture()
             .onChanged { value in
                 self.isDragging = true
+                
+            
 
                 //changeOrientation(of: aircraft.aircraftSceneNode, with: value.translation)
                 // AircraftCamera.distantCamera.rawValue
@@ -48,7 +50,7 @@ struct AircraftSceneView: View {
                 if !aircraftCloudUserDefaults.gyroOrientationControl {
                     
                     if aircraftDelegate.aircraftCamera == AircraftCamera.distantCamera.rawValue {
-                        //changeOrientation(of: aircraft.aircraftDistantCameraNode, with: value.translation)
+                        changed(of: aircraft.aircraftCurrentCameraNode, with: value)
                         changeOrientation(of: aircraft.aircraftCurrentCameraNode, with: value.translation)
                     }
                     
@@ -130,18 +132,82 @@ struct AircraftSceneView: View {
             aircraftDelegate.motionManager.resetReferenceFrame()
         }
     }
+    
+    
+    
+    private func changed(of node: SCNNode, with value: DragGesture.Value) {
+        print("\n\(#function) startLocation: \(value.startLocation)")
+        print("\(#function) currentLocation: \(value.location)")
+        
+        var startVector3    = simd_float3()
+        var startNorm3      = simd_float3()
+        var endVector3      = simd_float3()
+        var endNorm3        = simd_float3()
+        var axis            = simd_float3()
+        
+        
+        /// So, I'm going to simulate that I have a hit test result that is the camera node passed-in.
+        //let cameraHit = node as SCNHitTestResult()
+    
+        
+        
+        ///
+        /// Hard-setting z to 1.0 ensures that when taking the cross, or vector, product of startVector3 and endVector3 that the z-axis is 0.
+        if let start = value.startLocation as CGPoint? {
+            startVector3 = simd_float3(x: Float(start.x), y: Float(start.y), z: 0.0)
+            print("\(#function) startVector3: \(startVector3)")
+            
+            startNorm3 = simd_normalize(startVector3)
+        }
+        
+        if let end = value.location as CGPoint? {
+            endVector3 = simd_float3(x: Float(end.x), y: Float(end.y), z: 0.0)
+            print("\(#function) endVector3: \(endVector3)")
+            
+            endNorm3 = simd_normalize(endVector3)
+        }
+        
+        print("\(#function) node.simdWorldPosition: \(node.simdWorldPosition)")
+        print("\(#function) node.simdWorldOrientation: \(node.simdWorldOrientation)")
+        
+        let angle = acosf(simd_dot(startNorm3, endNorm3))
+        print("\(#function) angle (in degrees): \(angle * 180.0 / .pi)")
+
+        /// Modify startVector3 and endVector3 so that the cross, or vector, product isn't only about the z-axis.
+        startVector3    = simd_normalize(simd_float3(x: startVector3.x, y: startVector3.y, z: node.position.z))
+        endVector3      = simd_normalize(simd_float3(x: endVector3.x, y: endVector3.y, z: node.position.z))
+        
+        axis = simd_normalize(simd_cross(startVector3, endVector3))
+        print("\(#function) axis: \(axis)")
+        
+        /// Remove the z-component because rotation about the z-axis is not desired.
+        //axis = simd_normalize(simd_float3(x: axis.x, y: -axis.y, z: 0.0))
+        //print("\(#function) Revised axis (removed z-component): \(axis)")
+
+        let newOrientation: simd_quatf = simd_quatf(angle: -angle, axis: axis).normalized
+        print("\(#function) newOrientation: \(newOrientation)")
+        
+        let currentOrientation = node.simdOrientation
+        print("\(#function) currentOrientation = \(currentOrientation)\n")
+        
+        print("\(#function) node.simdOrientation: \(node.simdOrientation)")
+        //node.simdOrientation = simd_normalize(newOrientation * currentOrientation)
+        print("\(#function) node.simdOrientation: \(node.simdOrientation)")
+    }
 
 
 
     private func changeOrientation(of node: SCNNode, with translation: CGSize) {
+        //print("\n\(#function) translation: \(translation)")
+        
         let x = Float(translation.width)
         let y = Float(-translation.height)
 
         let anglePan = sqrt(pow(x,2)+pow(y,2)) * (Float)(Double.pi) / 180.0
+        //print("\(#function) anglePan (in degrees): \(anglePan * 180.0 / .pi)")
         //let anglePan = sqrt(pow((x * .pi / 180.0), 2) + pow((y * .pi / 180.0), 2))
 
         var rotationVector = SCNVector4()
-
 
         rotationVector.x =  y
         rotationVector.y = -x
@@ -149,21 +215,33 @@ struct AircraftSceneView: View {
         rotationVector.w = anglePan
 
         node.rotation = rotationVector
+        //print("\(#function) rotationVector: \(rotationVector)")
+        
+        let rotationQuaternion = simd_quatf(ix: y, iy: -x, iz: 0, r: anglePan).normalized
+        //print("\(#function) rotationQuaternion: \(rotationQuaternion)\n")
     }
 
 
     // TODO: Move this to the state observable object when it's done.
     // TODO: Consider changing this to quaternions
     private func updateOrientation(of node: SCNNode) {
+        
+        //print("\n\(#function) currentOrientation: \(node.orientation)")
+        
         let currentPivot = node.pivot
+        //print("currentPivot: \(currentPivot)")
 
         let changePivot = SCNMatrix4Invert(node.transform)
-
+        //print("changePivot: \(changePivot)")
+        
         totalChangePivot = SCNMatrix4Mult(changePivot, currentPivot)
-
+        //print("totalChangePivot: \(totalChangePivot)")
+        
         node.pivot = SCNMatrix4Mult(changePivot, currentPivot)
-
+        //print("node.pivot: \(node.pivot)")
+        
         node.transform = SCNMatrix4Identity
+        //print("node.transform: \(node.transform)")
     }
 
 
