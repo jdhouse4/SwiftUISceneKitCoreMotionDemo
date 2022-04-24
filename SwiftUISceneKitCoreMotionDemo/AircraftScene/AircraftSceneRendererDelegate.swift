@@ -24,10 +24,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     @Published var aircraftCamera: String       = AircraftCamera.distantCamera.rawValue
     @Published var aircraftCameraNode: SCNNode  = SCNNode()
     @Published var aircraftEngineNode: SCNNode  = SCNNode()
+    
+    /// Prepare to DELETE
+    @Published var nearPoint: SCNVector3        = SCNVector3()
+    @Published var farPoint: SCNVector3         = SCNVector3()
 
     //var aircraftScene: SCNScene?
     var changeCamera: Bool                  = false
-    //var cameraIndex: Int                    = 0
 
     var engineThrottle: Double?
 

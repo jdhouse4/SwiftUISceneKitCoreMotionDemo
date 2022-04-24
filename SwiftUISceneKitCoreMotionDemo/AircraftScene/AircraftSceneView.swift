@@ -42,15 +42,9 @@ struct AircraftSceneView: View {
             .onChanged { value in
                 self.isDragging = true
                 
-            
-
-                //changeOrientation(of: aircraft.aircraftSceneNode, with: value.translation)
-                // AircraftCamera.distantCamera.rawValue
-                
                 if !aircraftCloudUserDefaults.gyroOrientationControl {
                     
                     if aircraftDelegate.aircraftCamera == AircraftCamera.distantCamera.rawValue {
-                        changed(of: aircraft.aircraftCurrentCameraNode, with: value)
                         changeOrientation(of: aircraft.aircraftCurrentCameraNode, with: value.translation)
                     }
                     
@@ -136,6 +130,43 @@ struct AircraftSceneView: View {
     
     
     private func changed(of node: SCNNode, with value: DragGesture.Value) {
+        
+        ///
+        /// Someday, use the example in the Medium post, "[SceneKit Rotations with Quaternions]"(https://medium.com/@jacob.waechter/scenekit-rotations-with-quaternions-d74dc6ba68c6)
+        ///
+        /// and https://stackoverflow.com/questions/44991038/get-vector-in-scnnode-environment-from-touch-location-swift.
+        ///
+        /// But Apple's SwiftUI and SceneKit people will need to resolve a few things, which they haven't done for two years.
+        ///
+        /// Either SceneView needs to be able to be accessed as a, say, `self.sceneView` within the SCNSceneRendererDelegate or, better yet,
+        /// within the Struct in which the SceneView is declared and defined so that one might be able to do, you know,
+        /// ```
+        /// func getDirection(for point: CGPoint, in view: SCNView) -> SCNVector3 {
+        ///     let farPoint  = view.unprojectPoint(SCNVector3Make(point.x, point.y, 1))
+        ///     let nearPoint = view.unprojectPoint(SCNVector3Make(point.x, point.y, 0))
+        ///
+        ///     return SCNVector3Make(farPoint.x - nearPoint.x, farPoint.y - nearPoint.y, farPoint.z - nearPoint.z)
+        /// }```
+        ///
+        /// Or gosh, even, in a DragGesture or TapGesture,
+        /// ```
+        /// let scneneView = recognizer.view as! SCNView
+        /// let p          = recognizer.location(in: scnView)
+        /// let hitResults = scnView.hitTest(p, options: [:])
+        ///
+        /// if let hit = hitResults.first{
+        ///     let worldTouch = simd_float3(result.worldCoordinates)
+        ///     ...
+        /// }
+        /// ```
+        ///
+        /// I write this because, as of April 2022, nearly two full years since SceneView was introduced in SwiftUI, one can do any of these.
+        ///
+        /// That sorta sucks because it takes a whole host of things off the table that are commonly used SceneKit techniques for performing hit testing or
+        /// just trying to get the worldLocation and localLocation of nodes.
+        ///
+        /// To do these things now requires using UIViewRepresentable and just the usual crap code that SwiftUI was supposed to take-away from us.
+        ///
         print("\n\(#function) startLocation: \(value.startLocation)")
         print("\(#function) currentLocation: \(value.location)")
         
@@ -145,24 +176,16 @@ struct AircraftSceneView: View {
         var endNorm3        = simd_float3()
         var axis            = simd_float3()
         
-        
-        /// So, I'm going to simulate that I have a hit test result that is the camera node passed-in.
-        //let cameraHit = node as SCNHitTestResult()
-    
-        
-        
-        ///
-        /// Hard-setting z to 1.0 ensures that when taking the cross, or vector, product of startVector3 and endVector3 that the z-axis is 0.
         if let start = value.startLocation as CGPoint? {
             startVector3 = simd_float3(x: Float(start.x), y: Float(start.y), z: 0.0)
-            print("\(#function) startVector3: \(startVector3)")
+            //print("\(#function) startVector3: \(startVector3)")
             
             startNorm3 = simd_normalize(startVector3)
         }
         
         if let end = value.location as CGPoint? {
             endVector3 = simd_float3(x: Float(end.x), y: Float(end.y), z: 0.0)
-            print("\(#function) endVector3: \(endVector3)")
+            //print("\(#function) endVector3: \(endVector3)")
             
             endNorm3 = simd_normalize(endVector3)
         }
@@ -217,13 +240,12 @@ struct AircraftSceneView: View {
         node.rotation = rotationVector
         //print("\(#function) rotationVector: \(rotationVector)")
         
-        let rotationQuaternion = simd_quatf(ix: y, iy: -x, iz: 0, r: anglePan).normalized
+        //let rotationQuaternion = simd_quatf(ix: y, iy: -x, iz: 0, r: anglePan).normalized
         //print("\(#function) rotationQuaternion: \(rotationQuaternion)\n")
     }
 
 
-    // TODO: Move this to the state observable object when it's done.
-    // TODO: Consider changing this to quaternions
+    // TODO: Consider changing this to quaternions when SceneView content can be accessed.
     private func updateOrientation(of node: SCNNode) {
         
         //print("\n\(#function) currentOrientation: \(node.orientation)")
