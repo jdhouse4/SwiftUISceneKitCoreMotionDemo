@@ -38,22 +38,28 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftDistantCameraNode: SCNNode
     @Published var aircraftShipCameraNode: SCNNode
 
-    /// Aircraft engine nodes
+    /// Aircraft engine particle system nodes and and particles
     @Published var aircraftEnginesNode: SCNNode
     @Published var aircraftEngine: SCNParticleSystem
 
-    /// Aircraft RCS nodes
+    /// Aircraft RCS particle system nodes
     @Published var rcsNode: SCNNode
     @Published var rcsRollPortUpNode: SCNNode
     @Published var rcsRollPortDownNode: SCNNode
     @Published var rcsRollStarboardUpNode: SCNNode
     @Published var rcsRollStarboardDownNode: SCNNode
 
-    /// RCS roll motion
+    /// RCS roll motion particle system
     @Published var rcsRollPortUp: SCNParticleSystem
     @Published var rcsRollPortDown: SCNParticleSystem
     @Published var rcsRollStarboardUp: SCNParticleSystem
     @Published var rcsRollStarboardDown: SCNParticleSystem
+    
+    /// Orientation
+    @Published var aircraftQuaternion: simd_quatf   = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
+    @Published var deltaQuaternion: simd_quatf      = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
+    
+    
 
     override init() {
         print("AircraftScenekitScene override initialized")
@@ -98,7 +104,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
 
     required init?(coder: NSCoder) {
-        print("AircraftScenekitScene initialized")
+        print("AircraftScenekitScene required initializer")
         self.aircraftSceneNode          = aircraftScene.rootNode.childNode(withName: "shipSceneNode", recursively: true)!
         
         self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
@@ -139,6 +145,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
 
 
+    // This is just for the particle system for the jet exhaust.
     func setAircraftEngine() {
         aircraftEngine  = aircraftEnginesNode.particleSystems![0]
         //print("aircraftEngine: \(String(describing: aircraftEnginesNode.particleSystems![0]))")
@@ -146,10 +153,20 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
     
     
+    // This is just for the particle system, not the action that sets the roll rotation.
     func setAircraftRCS() {
         rcsRollPortUp           = rcsRollPortUpNode.particleSystems![0]
         rcsRollPortDown         = rcsRollPortDownNode.particleSystems![0]
         rcsRollStarboardUp      = rcsRollStarboardUpNode.particleSystems![0]
         rcsRollStarboardDown    = rcsRollStarboardDownNode.particleSystems![0]
+    }
+    
+    
+    
+    func rollStarboard() {
+        
+        let rollAngle: Float   = 0.025 * .pi / 180.0
+        
+        let rollQuaternion: simd_quatf  = simd_quatf(ix: 0.0, iy: 0.0, iz: 1.0, r: rollAngle)
     }
 }
