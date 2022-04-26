@@ -103,6 +103,9 @@ struct AircraftRCSButtonsView: View {
                                 
                             }
                             
+                            aircraft.rollStarboard()
+                            
+                            /*
                             // Code to do something goes here
                             aircraft.rcsRollStarboardUp.birthRate   = rcsButtons.aircraftRCSDefaultBirthrate
                             aircraft.rcsRollPortDown.birthRate      = rcsButtons.aircraftRCSDefaultBirthrate
@@ -112,7 +115,7 @@ struct AircraftRCSButtonsView: View {
                                 aircraft.rcsRollStarboardUp.birthRate   = 0
                                 aircraft.rcsRollPortDown.birthRate      = 0
                             }
-
+                             */
                         }) {
                             Image(systemName: "arrow.clockwise")
                                 /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
@@ -232,6 +235,9 @@ struct AircraftRCSButtonsView: View {
                                 print("Roll Port")
                             }
                             
+                            aircraft.rollPort()
+                            
+                            /*
                             // Code to do something goes here
                             aircraft.rcsRollPortUp.birthRate        = rcsButtons.aircraftRCSDefaultBirthrate
                             aircraft.rcsRollStarboardDown.birthRate = rcsButtons.aircraftRCSDefaultBirthrate
@@ -241,6 +247,7 @@ struct AircraftRCSButtonsView: View {
                                 aircraft.rcsRollPortUp.birthRate        = 0
                                 aircraft.rcsRollStarboardDown.birthRate = 0
                             }
+                             */
 
                         }) {
                             Image(systemName: "arrow.counterclockwise")

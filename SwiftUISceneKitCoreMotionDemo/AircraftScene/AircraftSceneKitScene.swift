@@ -165,8 +165,42 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     func rollStarboard() {
         
+        let rollAngle: Float   = 45 * .pi / 180.0
+        
+        let rollQuaternion: simd_quatf  = simd_quatf(angle: rollAngle, axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
+        
+        aircraftNode.simdOrientation *= rollQuaternion
+        
+        // Particle emitter effects
+        // Code to do something goes here
+        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
+        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
+
+        // Milliseconds of duration for firing
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
+            self.rcsRollStarboardUp.birthRate   = 0
+            self.rcsRollPortDown.birthRate      = 0
+        }
+
+    }
+    
+    
+    
+    func rollPort() {
+        
         let rollAngle: Float   = 0.025 * .pi / 180.0
         
         let rollQuaternion: simd_quatf  = simd_quatf(ix: 0.0, iy: 0.0, iz: 1.0, r: rollAngle)
+        
+        // Code to do something goes here
+        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
+        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
+
+        // Milliseconds of duration for firing
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
+            self.rcsRollPortUp.birthRate        = 0
+            self.rcsRollStarboardDown.birthRate = 0
+        }
+
     }
 }
