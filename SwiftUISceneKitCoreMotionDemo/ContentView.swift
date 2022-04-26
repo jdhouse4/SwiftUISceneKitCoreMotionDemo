@@ -49,7 +49,7 @@ struct ContentView: View {
 
             AircraftSceneView()
             
-            AircraftButtonsView()
+            AircraftEngineAndRCSControlsView()
             
 
             VStack {

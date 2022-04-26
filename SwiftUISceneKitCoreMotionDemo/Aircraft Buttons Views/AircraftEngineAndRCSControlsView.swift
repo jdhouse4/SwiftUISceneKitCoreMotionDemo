@@ -1,5 +1,5 @@
 //
-//  AircraftButtonsView.swift
+//  AircraftEngineAndRCSControlsView.swift
 //  SwiftUISceneKitCoreMotionDemo
 //
 //  Created by James Hillhouse IV on 7/13/21.
@@ -10,11 +10,11 @@ import SwiftUI
 
 
 
-struct AircraftButtonsView: View {
-    @EnvironmentObject var aircraft: AircraftSceneKitScene
-    @EnvironmentObject var aircraftCameraButton: AircraftCameraButton
+struct AircraftEngineAndRCSControlsView: View {
+    //@EnvironmentObject var aircraft: AircraftSceneKitScene
+    //@EnvironmentObject var aircraftCameraButton: AircraftCameraButton
     @EnvironmentObject var aircraftAnalyticsButton: AircraftAnalyticsButton
-    @EnvironmentObject var sunlightSwitch: AircraftSunlightButton
+    //@EnvironmentObject var sunlightSwitch: AircraftSunlightButton
 
 
 
@@ -48,23 +48,6 @@ struct AircraftButtonsView: View {
                     .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
                     //.background(Color.cyan.opacity(0.95))
                 }
-                
-
-                //Spacer(minLength: 50)
-                
-                /*HStack (spacing: 5) {
-                    
-                    Group {
-                        
-                        AircraftSunlightButtonView()
-                        
-                        Spacer()
-                        
-                        AircraftAnalyticsButtonView()
-                        
-                    }
-                    .frame(alignment: .center)
-                }*/
                 .padding(.bottom, aircraftAnalyticsButton.analyticsSwitch ? 215 : 80)
                 //.background(Color.red.opacity(0.7))
             }
@@ -77,6 +60,6 @@ struct AircraftButtonsView: View {
 
 struct AircraftButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        AircraftButtonsView()
+        AircraftEngineAndRCSControlsView()
     }
 }
