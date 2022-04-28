@@ -14,6 +14,7 @@ struct AircraftRCSButtonsView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
     @EnvironmentObject var aircraft: AircraftSceneKitScene
+    @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
 
     let buttonAnimationTime = 0.25
@@ -98,12 +99,13 @@ struct AircraftRCSButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rcsButtons.rollStarboardButtonPressed.toggle()
-                                print("Rolling Starboard")
+                                rcsButtons.rollStarboardButtonPressed = true
+                                //print("Rolling Starboard")
                                 
                             }
                             
-                            aircraft.rollStarboard()
+                            //aircraft.rollStarboard()
+                            self.changeOrientation()
                             
                             /*
                             // Code to do something goes here
@@ -116,6 +118,7 @@ struct AircraftRCSButtonsView: View {
                                 aircraft.rcsRollPortDown.birthRate      = 0
                             }
                              */
+                            
                         }) {
                             Image(systemName: "arrow.clockwise")
                                 /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
@@ -231,11 +234,12 @@ struct AircraftRCSButtonsView: View {
                         Button( action: {
                             withAnimation {
                                 
-                                self.rcsButtons.rollPortButtonPressed.toggle()
+                                self.rcsButtons.rollPortButtonPressed = true
                                 print("Roll Port")
                             }
                             
-                            aircraft.rollPort()
+                            //aircraft.rollPort()
+                            self.changeOrientation()
                             
                             /*
                             // Code to do something goes here
@@ -248,7 +252,6 @@ struct AircraftRCSButtonsView: View {
                                 aircraft.rcsRollStarboardDown.birthRate = 0
                             }
                              */
-
                         }) {
                             Image(systemName: "arrow.counterclockwise")
                                 /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
@@ -291,6 +294,42 @@ struct AircraftRCSButtonsView: View {
 
     }
 
+
+    
+    //
+    // Escaping closure to push change from the AircraftSceneRendererDelegate functions to set camera name and node.
+    //
+    // Because of the way SwiftUI works, AircraftSceneRendererDelegate functions can't call the SwiftUI SceneView
+    // SCNScene parameters. It's a real pain!
+    //
+    func modifyOrientation(closure: @escaping () -> Void) {
+        closure()
+    }
+    
+    
+    
+    private func changeOrientation() -> Void {
+        print("\n(#function)")
+
+        modifyOrientation { [self] in
+
+            print("Changing orientation of aircraft.")
+
+            if rcsButtons.rollStarboardButtonPressed {
+                print("rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
+                self.aircraft.rollStarboard()
+                self.aircraftDelegate.updateOrientation(of: aircraft.aircraftNode, quaternion: aircraft.deltaQuaternion)
+            }
+
+            if rcsButtons.rollPortButtonPressed {
+                print("rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
+                self.aircraft.rollPort()
+                self.aircraftDelegate.updateOrientation(of: aircraft.aircraftNode, quaternion: aircraft.deltaQuaternion)
+            }
+        }
+        rcsButtons.rollStarboardButtonPressed   = false
+        rcsButtons.rollPortButtonPressed        = false
+    }
 }
 
 

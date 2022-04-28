@@ -20,29 +20,32 @@ import SceneKit
  say due to firing of the aircraft's RCS, to be displayed. Another would be to update the position after Runge-Kutta45 integration the state vector.
  */
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
+    
+    @Published var aircraftNode: SCNNode            = SCNNode()
+    @Published var aircraftOrientation: simd_quatf  = simd_quatf()
 
-    @Published var aircraftCamera: String       = AircraftCamera.distantCamera.rawValue
-    @Published var aircraftCameraNode: SCNNode  = SCNNode()
-    @Published var aircraftEngineNode: SCNNode  = SCNNode()
+    @Published var aircraftCamera: String           = AircraftCamera.distantCamera.rawValue
+    @Published var aircraftCameraNode: SCNNode      = SCNNode()
+    @Published var aircraftEngineNode: SCNNode      = SCNNode()
     
     /// Prepare to DELETE
-    @Published var nearPoint: SCNVector3        = SCNVector3()
-    @Published var farPoint: SCNVector3         = SCNVector3()
+    @Published var nearPoint: SCNVector3            = SCNVector3()
+    @Published var farPoint: SCNVector3             = SCNVector3()
 
     //var aircraftScene: SCNScene?
-    var changeCamera: Bool                  = false
+    var changeCamera: Bool                          = false
 
     var engineThrottle: Double?
 
-    var showsStatistics: Bool               = false
+    var showsStatistics: Bool                       = false
 
-    var motionManager: MotionManager        = MotionManager()
+    var motionManager: MotionManager                = MotionManager()
     var sceneQuaternion: simd_quatf?
 
-    var _previousUpdateTime: TimeInterval   = 0.0
-    var _deltaTime: TimeInterval            = 0.0
+    var _previousUpdateTime: TimeInterval           = 0.0
+    var _deltaTime: TimeInterval                    = 0.0
 
-    var gyroReset: Bool                     = false
+    var gyroReset: Bool                             = false
 
 
     override init() {
@@ -82,8 +85,9 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         
         
         // MARK: Update the orientation due to RCS activity
+        self.updateOrientation(of: aircraftNode, quaternion: aircraftOrientation)
         
-
+        
     
         if aircraftCamera == AircraftCamera.distantCamera.rawValue {
             
@@ -138,5 +142,11 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                                              r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
 
         node.simdOrientation   = simd_mul(node.simdOrientation, motionSimdQuatf).normalized
+    }
+    
+    
+    
+    func updateOrientation(of node: SCNNode, quaternion: simd_quatf) -> Void {
+        node.simdOrientation = simd_mul(node.simdOrientation, quaternion).normalized
     }
 }

@@ -165,11 +165,14 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     func rollStarboard() {
         
-        let rollAngle: Float   = 45 * .pi / 180.0
+        let rollAngle: Float   = 0.025 * .pi / 180.0
         
-        let rollQuaternion: simd_quatf  = simd_quatf(angle: rollAngle, axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
+        let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
+                                                             axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
-        aircraftNode.simdOrientation *= rollQuaternion
+        deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion).normalized
+        
+        //aircraftNode.simdOrientation *= rollQuaternion
         
         // Particle emitter effects
         // Code to do something goes here
@@ -190,7 +193,12 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         
         let rollAngle: Float   = 0.025 * .pi / 180.0
         
-        let rollQuaternion: simd_quatf  = simd_quatf(ix: 0.0, iy: 0.0, iz: 1.0, r: rollAngle)
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: -rollAngle,
+                                                        axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
+        
+        deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion).normalized
+        
+        //node.simdOrientation *= rollQuaternion
         
         // Code to do something goes here
         rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
