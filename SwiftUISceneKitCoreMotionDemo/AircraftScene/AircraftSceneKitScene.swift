@@ -173,7 +173,8 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
-        deltaQuaternion     = rollStarboardQuaternion
+        //deltaQuaternion     = rollStarboardQuaternion
+        deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion)
         print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
 
                 
@@ -199,7 +200,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         let rollPortQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
                                                         axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
         
-        deltaQuaternion = rollPortQuaternion
+        deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion)
         print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
 
         
