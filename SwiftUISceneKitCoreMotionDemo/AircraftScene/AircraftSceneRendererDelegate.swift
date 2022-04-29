@@ -19,9 +19,11 @@ import SceneKit
  that allows for changes of the Scene to be rendereed on a reglar time interval. For our purposes, this will allow for the physics-based motion
  say due to firing of the aircraft's RCS, to be displayed. Another would be to update the position after Runge-Kutta45 integration the state vector.
  */
-class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
+@MainActor class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
     
     @Published var aircraftNode: SCNNode            = SCNNode()
+    @Published var aircraftNodeString: String       = "shipNode"
+    @Published var aircraftDeltaQuaternion: simd_quatf  = simd_quatf()
     @Published var aircraftOrientation: simd_quatf  = simd_quatf()
 
     @Published var aircraftCamera: String           = AircraftCamera.distantCamera.rawValue
@@ -85,7 +87,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         
         
         // MARK: Update the orientation due to RCS activity
-        self.updateOrientation(of: aircraftNode, quaternion: aircraftOrientation)
+        self.updateOrientation(of: aircraftNode, quaternion: aircraftDeltaQuaternion)
+        //print("aircraftNode.simdOrientation: \(aircraftNode.simdOrientation.debugDescription)")
         
         
     
@@ -115,6 +118,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         aircraftCameraNode = node
         motionManager.resetReferenceFrame()
     }
+    
+    
+    
+    func setAircraftNode(node: SCNNode) {
+        aircraftNode = node
+    }
 
 
 
@@ -125,7 +134,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                                              iy: Float(motionManager.deviceMotion!.attitude.quaternion.y),
                                              iz: Float(motionManager.deviceMotion!.attitude.quaternion.z),
                                              r:  Float(motionManager.deviceMotion!.attitude.quaternion.w)).normalized
-
     }
 
 
@@ -147,6 +155,19 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     
     
     func updateOrientation(of node: SCNNode, quaternion: simd_quatf) -> Void {
-        node.simdOrientation = simd_mul(node.simdOrientation, quaternion).normalized
+        ///
+        /// This needs to be rethought!
+        ///
+        /// I think I need to either make AircraftSceneKitScene a singleton or with  AircraftSceneRendererDelegate.
+        ///
+        //print("\n\(#function): node.name: \(String(describing: node.name))")
+        //print("\(#function): node.simdOrientation: \(node.simdOrientation.debugDescription)")
+        //print("\(#function): quaternion: \(quaternion.debugDescription)\n")
+        //self.aircraftDeltaQuaternion = quaternion
+        //node.simdOrientation = simd_mul(node.simdOrientation, aircraftDeltaQuaternion).normalized
+        //print("\(#function): self.aircraftNode.simdOrientation = quaternion: \(self.aircraftNode.simdOrientation.debugDescription)")
+        //print("\(#function): self.aircraftNode.simdOrientation: \(self.aircraftNode.simdOrientation.debugDescription)\n")
+        
+        self.aircraftNode.simdOrientation = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
     }
 }

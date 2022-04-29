@@ -23,6 +23,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     var aircraftNode            = SCNNode()
 
     /// Aircraft camera strings (This should be an enum)
+    @Published var aircraftNodeString           = "shipNode"
     @Published var aircraftDistantCameraString  = AircraftCamera.distantCamera.rawValue
     @Published var aircraftShipCameraString     = AircraftCamera.shipCamera.rawValue
 
@@ -164,16 +165,18 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     
     func rollStarboard() {
+        print("\(#function)")
         
         let rollAngle: Float   = 0.025 * .pi / 180.0
-        
+        //let rollAngle: Float   = 10.0 * .pi / 180.0
+
         let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
-        deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion).normalized
-        
-        //aircraftNode.simdOrientation *= rollQuaternion
-        
+        deltaQuaternion     = rollStarboardQuaternion
+        print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
+
+                
         // Particle emitter effects
         // Code to do something goes here
         rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
@@ -193,12 +196,12 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         
         let rollAngle: Float   = 0.025 * .pi / 180.0
         
-        let rollPortQuaternion: simd_quatf = simd_quatf(angle: -rollAngle,
-                                                        axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
+                                                        axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
         
-        deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion).normalized
-        
-        //node.simdOrientation *= rollQuaternion
+        deltaQuaternion = rollPortQuaternion
+        print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
+
         
         // Code to do something goes here
         rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
