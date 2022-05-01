@@ -16,6 +16,7 @@ struct AircraftRCSButtonsView: View {
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
+    
 
     let buttonAnimationTime = 0.25
 

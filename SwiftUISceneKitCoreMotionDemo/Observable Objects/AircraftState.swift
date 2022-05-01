@@ -11,9 +11,13 @@ import simd
 
 
 class AircraftState: ObservableObject {
+    
+    static let shared = AircraftState()
+    
+    
     /// This is a place where the position, velocity, orientation, delta-orientation, and translation data is stored and managed.
-    var deltaRollPort: Float = 0.0
-    var deltaRollStarboard: Float = 0.0
+    let deltaOrientationAngle: Float = 0.025 * .pi / 180.0
+    
     
     
     /// Aircraft Position
@@ -23,18 +27,22 @@ class AircraftState: ObservableObject {
     /// Aircraft Orientation
     @Published var aircraftOrientation: simd_quatf  // Do this as a computed property
     
-    @Published var deltaRollEulerAngle: Float
+    @Published var aircraftDeltaQuaternion: simd_quatf
     
-    var deltaRotationEulerAngle: Float = 0.025 * .pi / 180.0
+    @Published var deltaRollEulerAngle: Float
     
     @Published var orientationEulerAngles: simd_float3
     
     
     init() {
-        self.aircraftOrientation    = simd_quatf().normalized
+        self.aircraftOrientation        = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
+        
+        self.aircraftDeltaQuaternion    = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
+
         
         /// x: pitch, y: yaw, z: roll
-        self.orientationEulerAngles      = simd_float3(x: 0.0, y: 0.0, z: 0.0)
+        self.orientationEulerAngles     = simd_float3(x: 0.0, y: 0.0, z: 0.0)
+        
         self.deltaRollEulerAngle = 0.0
     }
     
@@ -52,33 +60,53 @@ class AircraftState: ObservableObject {
     
     
     
-    func impulseRollPort() {
+    func singleImpulseRollPort() {
         print("AircraftState impulsePort()")
-        deltaRollEulerAngle -= deltaRotationEulerAngle
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
+                                                        axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
+        
+        aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollPortQuaternion)
+        //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
 
         let totalRollRate = radians2Degrees(deltaRollEulerAngle)
         print("Roll Rate (degrees): \(totalRollRate)")
         
-        addOrientationEulerAngleChanges()
+        
+        
+        //addOrientationEulerAngleChanges()
     }
     
     
     
-    func impulseRollStarboard() {
+    func singleImpulseRollStarboard() {
         print("AircraftState impulseStarboard()")
-        deltaRollEulerAngle += deltaRotationEulerAngle
+        let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
+                                                             axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
+        aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollStarboardQuaternion)
+        //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
+
+
         let totalRollRate = radians2Degrees(deltaRollEulerAngle)
         print("Roll Rate (degrees): \(totalRollRate)")
 
-        addOrientationEulerAngleChanges()
+        //addOrientationEulerAngleChanges()
+    }
+    
+    
+    
+    func aircraftEulerAngles(_ quaternion: simd_quatf) -> SIMD3<Float> {
+        let node = SCNNode()
+        node.simdOrientation = quaternion
+        
+        return node.simdEulerAngles
     }
     
     
     
     func addOrientationEulerAngleChanges() {
         /// Roll change
-        orientationEulerAngles.z += deltaRotationEulerAngle
+        //orientationEulerAngles.z += deltaRotationEulerAngle
     }
     
     
@@ -92,6 +120,6 @@ class AircraftState: ObservableObject {
     
     
     func resetOrientation() -> simd_quatf {
-        return simd_quatf(angle: 0, axis: simd_float3())
+        return simd_quatf(angle: 0, axis: simd_float3(x: 0.0, y: 0.0, z: 0.0))
     }
 }

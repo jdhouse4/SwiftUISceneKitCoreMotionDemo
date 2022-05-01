@@ -19,7 +19,9 @@ import SceneKit
  that allows for changes of the Scene to be rendereed on a reglar time interval. For our purposes, this will allow for the physics-based motion
  say due to firing of the aircraft's RCS, to be displayed. Another would be to update the position after Runge-Kutta45 integration the state vector.
  */
-@MainActor class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
+class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
+    
+    var aircraftState                               = AircraftState.shared
     
     @Published var aircraftNode: SCNNode            = SCNNode()
     @Published var aircraftNodeString: String       = "shipNode"
@@ -155,19 +157,21 @@ import SceneKit
     
     
     func updateOrientation(of node: SCNNode, quaternion: simd_quatf) -> Void {
-        ///
-        /// This needs to be rethought!
-        ///
-        /// I think I need to either make AircraftSceneKitScene a singleton or with  AircraftSceneRendererDelegate.
-        ///
-        //print("\n\(#function): node.name: \(String(describing: node.name))")
-        //print("\(#function): node.simdOrientation: \(node.simdOrientation.debugDescription)")
-        //print("\(#function): quaternion: \(quaternion.debugDescription)\n")
-        //self.aircraftDeltaQuaternion = quaternion
-        //node.simdOrientation = simd_mul(node.simdOrientation, aircraftDeltaQuaternion).normalized
-        //print("\(#function): self.aircraftNode.simdOrientation = quaternion: \(self.aircraftNode.simdOrientation.debugDescription)")
-        //print("\(#function): self.aircraftNode.simdOrientation: \(self.aircraftNode.simdOrientation.debugDescription)\n")
-        
         self.aircraftNode.simdOrientation = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
+        
+        let eulerAngles: simd_float3 = aircraftState.aircraftEulerAngles(aircraftNode.simdOrientation)
+        print("""
+              \nAircraft Euler Angles:
+              pitch: \(self.radians2Degrees(eulerAngles.x)),
+              yaw: \(self.radians2Degrees(eulerAngles.y)),
+              roll: \(self.radians2Degrees(eulerAngles.z))
+        """)
     }
+    
+    
+    
+    func radians2Degrees(_ number: Float) -> Float {
+        return number * 180.0 / .pi
+    }
+
 }

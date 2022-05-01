@@ -35,6 +35,7 @@ struct ContentView: View {
     //
     @StateObject var aircraft                   = AircraftSceneKitScene()
     @StateObject var aircraftDelegate           = AircraftSceneRendererDelegate()
+    @StateObject var aircraftState              = AircraftState()
     @StateObject var aircraftSunlightButton     = AircraftSunlightButton()
     @StateObject var aircraftCameraButton       = AircraftCameraButton()
     @StateObject var aircraftSettingsButton     = AircraftSettingsButton()
@@ -69,6 +70,7 @@ struct ContentView: View {
 
         .environmentObject(aircraft)
         .environmentObject(aircraftDelegate)
+        .environmentObject(aircraftState)
         .environmentObject(aircraftSunlightButton)
         .environmentObject(aircraftCameraButton)
         .environmentObject(aircraftAnalyticsButton)

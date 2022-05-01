@@ -168,14 +168,12 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         print("\(#function)")
         
         let rollAngle: Float   = 0.025 * .pi / 180.0
-        //let rollAngle: Float   = 10.0 * .pi / 180.0
 
         let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
-        //deltaQuaternion     = rollStarboardQuaternion
         deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion)
-        print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
+        //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
 
                 
         // Particle emitter effects
@@ -201,7 +199,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
                                                         axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
         
         deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion)
-        print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
+        //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
 
         
         // Code to do something goes here
