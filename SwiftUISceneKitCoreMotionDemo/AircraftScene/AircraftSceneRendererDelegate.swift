@@ -80,6 +80,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         if _previousUpdateTime == 0.0
         {
             _previousUpdateTime     = time
+            
+            print("aircraftNode.name: \(aircraftNode.name?.debugDescription)")
         }
 
         //print("\(time)")
@@ -167,7 +169,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     func updateOrientation(of node: SCNNode, quaternion: simd_quatf) -> Void {
         self.aircraftNode.simdOrientation = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
         
-        /*
+        
         ///
         /// Thanks go to Thilo (https://stackoverflow.com/users/11655730/thilo) for this simple way of obtaining Euler angles
         /// of a node.
@@ -181,7 +183,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                 yaw: \(self.radians2Degrees(eulerAngles.y)),
                 roll: \(self.radians2Degrees(eulerAngles.z))
         """)
-         */
+         
     }
     
     
