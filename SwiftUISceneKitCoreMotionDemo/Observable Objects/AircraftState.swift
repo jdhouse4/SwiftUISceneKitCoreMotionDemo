@@ -29,21 +29,11 @@ class AircraftState: ObservableObject {
     
     @Published var aircraftDeltaQuaternion: simd_quatf
     
-    @Published var deltaRollEulerAngle: Float
-    
-    @Published var orientationEulerAngles: simd_float3
-    
     
     init() {
         self.aircraftOrientation        = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
         
         self.aircraftDeltaQuaternion    = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
-
-        
-        /// x: pitch, y: yaw, z: roll
-        self.orientationEulerAngles     = simd_float3(x: 0.0, y: 0.0, z: 0.0)
-        
-        self.deltaRollEulerAngle = 0.0
     }
     
     
@@ -67,13 +57,6 @@ class AircraftState: ObservableObject {
         
         aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollPortQuaternion)
         //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
-
-        let totalRollRate = radians2Degrees(deltaRollEulerAngle)
-        print("Roll Rate (degrees): \(totalRollRate)")
-        
-        
-        
-        //addOrientationEulerAngleChanges()
     }
     
     
@@ -85,12 +68,6 @@ class AircraftState: ObservableObject {
         
         aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollStarboardQuaternion)
         //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
-
-
-        let totalRollRate = radians2Degrees(deltaRollEulerAngle)
-        print("Roll Rate (degrees): \(totalRollRate)")
-
-        //addOrientationEulerAngleChanges()
     }
     
     
@@ -100,21 +77,6 @@ class AircraftState: ObservableObject {
         node.simdOrientation = quaternion
         
         return node.simdEulerAngles
-    }
-    
-    
-    
-    func addOrientationEulerAngleChanges() {
-        /// Roll change
-        //orientationEulerAngles.z += deltaRotationEulerAngle
-    }
-    
-    
-    
-    func updateAircraftOrientation() {
-        /// Handling only roll at this time
-        let newRollRateQuatf = simd_quatf(angle: orientationEulerAngles.z, axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
-        aircraftOrientation = simd_mul(aircraftOrientation, newRollRateQuatf).normalized
     }
     
     

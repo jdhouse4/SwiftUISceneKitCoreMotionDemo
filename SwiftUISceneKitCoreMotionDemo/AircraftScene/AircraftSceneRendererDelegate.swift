@@ -21,10 +21,12 @@ import SceneKit
  */
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
     
+    //var aircraftScene: SCNScene                     //= AircraftSceneKitScene.shared
     var aircraftState                               = AircraftState.shared
     
     @Published var aircraftNode: SCNNode            = SCNNode()
     @Published var aircraftNodeString: String       = "shipNode"
+    
     @Published var aircraftDeltaQuaternion: simd_quatf  = simd_quatf()
     @Published var aircraftOrientation: simd_quatf  = simd_quatf()
 
@@ -36,7 +38,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     @Published var nearPoint: SCNVector3            = SCNVector3()
     @Published var farPoint: SCNVector3             = SCNVector3()
 
-    //var aircraftScene: SCNScene?
     var changeCamera: Bool                          = false
 
     var engineThrottle: Double?
@@ -56,6 +57,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         print("AircraftSceneRendererDelegate override initialized")
         self.motionManager.setupDeviceMotion()
         self.sceneQuaternion    = self.motionManager.motionQuaternion
+        
+        //self.aircraftScene      = AircraftSceneKitScene.shared
+        //print("\(#function) aircraftScene: \(aircraftScene)")
+        
+        //self.aircraftNode       = AircraftSceneKitScene.shared.aircraftNode
+        //print("\(#function) aircraftNode: \(AircraftSceneKitScene.shared.aircraftNode)")
 
 
         super.init()
@@ -159,13 +166,15 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     func updateOrientation(of node: SCNNode, quaternion: simd_quatf) -> Void {
         self.aircraftNode.simdOrientation = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
         
+        /*
         let eulerAngles: simd_float3 = aircraftState.aircraftEulerAngles(aircraftNode.simdOrientation)
         print("""
               \nAircraft Euler Angles:
-              pitch: \(self.radians2Degrees(eulerAngles.x)),
-              yaw: \(self.radians2Degrees(eulerAngles.y)),
-              roll: \(self.radians2Degrees(eulerAngles.z))
+                pitch: \(self.radians2Degrees(eulerAngles.x)),
+                yaw: \(self.radians2Degrees(eulerAngles.y)),
+                roll: \(self.radians2Degrees(eulerAngles.z))
         """)
+         */
     }
     
     

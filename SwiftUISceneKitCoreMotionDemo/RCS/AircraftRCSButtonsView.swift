@@ -15,6 +15,7 @@ struct AircraftRCSButtonsView: View {
     
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
+    @EnvironmentObject var aircraftState: AircraftState
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
     
 

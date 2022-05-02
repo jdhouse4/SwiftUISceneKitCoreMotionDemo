@@ -15,6 +15,8 @@ import SceneKit
  This is the SceneKit Model for the  of the SwiftUISceneKitCoreMotionDemo app.
  */
 class AircraftSceneKitScene: SCNScene, ObservableObject {
+    
+    static var shared           = AircraftSceneKitScene()
 
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
     
