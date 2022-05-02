@@ -21,11 +21,12 @@ import SceneKit
  */
 class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, ObservableObject {
     
-    //var aircraftScene: SCNScene                     //= AircraftSceneKitScene.shared
+    var aircraftScene: SCNScene                     = AircraftSceneKitScene.shared
     var aircraftState                               = AircraftState.shared
     
     @Published var aircraftNode: SCNNode            = SCNNode()
     @Published var aircraftNodeString: String       = "shipNode"
+    //@Published var otherNode: SCNNode
     
     @Published var aircraftDeltaQuaternion: simd_quatf  = simd_quatf()
     @Published var aircraftOrientation: simd_quatf  = simd_quatf()
@@ -59,14 +60,14 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         self.sceneQuaternion    = self.motionManager.motionQuaternion
         
         //self.aircraftScene      = AircraftSceneKitScene.shared
-        //print("\(#function) aircraftScene: \(aircraftScene)")
-        
-        //self.aircraftNode       = AircraftSceneKitScene.shared.aircraftNode
-        //print("\(#function) aircraftNode: \(AircraftSceneKitScene.shared.aircraftNode)")
 
+        self.aircraftNode       = AircraftSceneKitScene.shared.aircraftNode
 
         super.init()
-    }
+        
+        print("AircraftSceneRendererDelegate \(#function) aircraftScene: \(aircraftScene)")
+        print("AircraftSceneRendererDelegate \(#function) aircraftNode: \(aircraftNode.name)")
+}
 
 
 
@@ -167,6 +168,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         self.aircraftNode.simdOrientation = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
         
         /*
+        ///
+        /// Thanks go to Thilo (https://stackoverflow.com/users/11655730/thilo) for this simple way of obtaining Euler angles
+        /// of a node.
+        ///
+        /// for his post on Stack Overflow, (https://stackoverflow.com/a/71344720/1518544)
+        ///
         let eulerAngles: simd_float3 = aircraftState.aircraftEulerAngles(aircraftNode.simdOrientation)
         print("""
               \nAircraft Euler Angles:

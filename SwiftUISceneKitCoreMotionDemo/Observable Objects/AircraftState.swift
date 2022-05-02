@@ -30,7 +30,7 @@ class AircraftState: ObservableObject {
     @Published var aircraftDeltaQuaternion: simd_quatf
     
     
-    init() {
+    private init() {
         self.aircraftOrientation        = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
         
         self.aircraftDeltaQuaternion    = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)

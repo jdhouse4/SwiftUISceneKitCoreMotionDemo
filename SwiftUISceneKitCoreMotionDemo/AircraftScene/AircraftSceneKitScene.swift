@@ -14,9 +14,9 @@ import SceneKit
 /**
  This is the SceneKit Model for the  of the SwiftUISceneKitCoreMotionDemo app.
  */
-class AircraftSceneKitScene: SCNScene, ObservableObject {
+final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
-    static var shared           = AircraftSceneKitScene()
+    static let shared           = AircraftSceneKitScene()
 
     var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
     
@@ -64,8 +64,8 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     
 
-    override init() {
-        print("AircraftScenekitScene override initialized")
+    private override init() {
+        print("AircraftScenekitScene private override initialized")
         self.aircraftSceneNode          = aircraftScene.rootNode.childNode(withName: "shipSceneNode", recursively: true)!
         
         self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
@@ -104,8 +104,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
         setAircraftRCS()
     }
 
-
-
+    
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene required initializer")
         self.aircraftSceneNode          = aircraftScene.rootNode.childNode(withName: "shipSceneNode", recursively: true)!
@@ -145,7 +144,7 @@ class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         setAircraftRCS()
     }
-
+    
 
 
     // This is just for the particle system for the jet exhaust.

@@ -33,9 +33,9 @@ struct ContentView: View {
     //
     // @StateObject is a property wrapper type that instantiates an observable object.
     //
-    @StateObject var aircraft                   = AircraftSceneKitScene()
+    @StateObject var aircraft                   = AircraftSceneKitScene.shared
     @StateObject var aircraftDelegate           = AircraftSceneRendererDelegate()
-    @StateObject var aircraftState              = AircraftState()
+    @StateObject var aircraftState              = AircraftState.shared
     @StateObject var aircraftSunlightButton     = AircraftSunlightButton()
     @StateObject var aircraftCameraButton       = AircraftCameraButton()
     @StateObject var aircraftSettingsButton     = AircraftSettingsButton()
