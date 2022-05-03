@@ -39,7 +39,7 @@ struct AircraftEngineThrottleSlider: View {
             Text(throttle)
                 .foregroundColor(Color.black)
                 .opacity(CircleButtonSize.primaryOpacity.rawValue)
-                .font(.title3)
+                .font(.title3.monospaced())
                 //.background(Color.red.opacity(0.9))
 
             Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)

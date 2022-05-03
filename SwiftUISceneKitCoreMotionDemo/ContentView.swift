@@ -63,6 +63,15 @@ struct ContentView: View {
                 
             }
             //.background(Color.white.opacity(0.75))
+            
+            
+            VStack {
+                
+                AircraftAtittudeView()
+                            
+                Spacer()
+            }
+            //.background(Color.blue)
 
         }
         .background(Color.black)

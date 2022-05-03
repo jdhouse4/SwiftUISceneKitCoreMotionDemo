@@ -40,6 +40,7 @@ class AircraftState: ObservableObject {
     
     
     private init() {
+        print("AircraftState \(#function)")
         self.aircraftOrientation        = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
         
         self.aircraftDeltaQuaternion    = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
@@ -89,10 +90,22 @@ class AircraftState: ObservableObject {
     
     
     
-    func aircraftEulerAngles(_ quaternion: simd_quatf) -> SIMD3<Float> {
-        aircraftNode.simdOrientation = quaternion
+    func aircraftEulerAngles(from quaternion: simd_quatf) {
+        print("AircraftState \(#function)")
         
-        return aircraftNode.simdEulerAngles
+        ///
+        /// Thanks go to Thilo (https://stackoverflow.com/users/11655730/thilo) for this simple way of obtaining Euler angles
+        /// of a node.
+        ///
+        /// for his post on Stack Overflow, (https://stackoverflow.com/a/71344720/1518544)
+        ///
+        let node = SCNNode()
+        node.simdOrientation    = quaternion
+        self.aircraftEulerAngles = node.simdEulerAngles
+        
+        //aircraftNode.simdOrientation = quaternion
+        
+        //return aircraftNode.simdEulerAngles
     }
     
     

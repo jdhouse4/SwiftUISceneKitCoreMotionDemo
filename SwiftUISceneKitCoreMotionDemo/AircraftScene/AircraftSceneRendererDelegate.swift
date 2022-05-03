@@ -29,7 +29,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     //@Published var otherNode: SCNNode
     
     @Published var aircraftDeltaQuaternion: simd_quatf  = simd_quatf()
-    @Published var aircraftOrientation: simd_quatf  = simd_quatf()
+    @Published var aircraftOrientation: simd_quatf      = simd_quatf()
+    @Published var aircraftEulerAngles: SIMD3<Float>    = simd_float3()
 
     @Published var aircraftCamera: String           = AircraftCamera.distantCamera.rawValue
     @Published var aircraftCameraNode: SCNNode      = SCNNode()
@@ -76,12 +77,11 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         renderer.showsStatistics = showsStatistics
 
 
-        // The main input pump for the simulator.
+        // This is to ensure that the time is initialized properly for the simulator.
         if _previousUpdateTime == 0.0
         {
             _previousUpdateTime     = time
-            
-            print("aircraftNode.name: \(aircraftNode.name?.debugDescription)")
+                        
         }
 
         //print("\(time)")
@@ -99,8 +99,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         
         
         // MARK: Update the orientation due to RCS activity
-        self.updateOrientation(of: aircraftNode, quaternion: aircraftDeltaQuaternion)
-        //print("aircraftNode.simdOrientation: \(aircraftNode.simdOrientation.debugDescription)")
+        self.updateOrientation()
         
         
     
@@ -166,24 +165,43 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     
     
     
-    func updateOrientation(of node: SCNNode, quaternion: simd_quatf) -> Void {
-        self.aircraftNode.simdOrientation = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
+    func updateOrientation() -> Void {
+        self.aircraftNode.simdOrientation   = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
         
         
         ///
-        /// Thanks go to Thilo (https://stackoverflow.com/users/11655730/thilo) for this simple way of obtaining Euler angles
-        /// of a node.
+        /// Thank you [Rob Napier](https://stackoverflow.com/users/97337/rob-napier) for answering the
+        /// StackOverflow thread on,
+        /// [SwiftUI - make sure to publish values from the main thread (via operators like receive(on:)) on model updates](https://stackoverflow.com/a/64404137/1518544)
         ///
-        /// for his post on Stack Overflow, (https://stackoverflow.com/a/71344720/1518544)
-        ///
-        let eulerAngles: simd_float3 = aircraftState.aircraftEulerAngles(aircraftNode.simdOrientation)
+        /// This really blows-up the memory footprint.
+        
+        DispatchQueue.main.async {
+            
+            ///
+            /// Thanks go to Thilo (https://stackoverflow.com/users/11655730/thilo) for this simple way of obtaining Euler angles
+            /// of a node.
+            ///
+            /// for his post on Stack Overflow, (https://stackoverflow.com/a/71344720/1518544)
+            ///
+            
+            /// Beginning to wonder if AircraftState shouldn't be renamed AircraftControl or ...Controller and be used to generate the impulses for the RCS systems.
+            //self.aircraftState.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+            self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+              }
+        
+
+        /*
+        //self.aircraftEulerAngles        = aircraftNode.simdEulerAngles
+        let eulerAngles: simd_float3    = aircraftNode.simdEulerAngles
+        
         print("""
               \nAircraft Euler Angles:
                 pitch: \(self.radians2Degrees(eulerAngles.x)),
                 yaw: \(self.radians2Degrees(eulerAngles.y)),
                 roll: \(self.radians2Degrees(eulerAngles.z))
         """)
-         
+        */
     }
     
     

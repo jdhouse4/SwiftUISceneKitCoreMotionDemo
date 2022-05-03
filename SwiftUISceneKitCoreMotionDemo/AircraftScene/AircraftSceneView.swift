@@ -103,6 +103,7 @@ struct AircraftSceneView: View {
             SceneView (
                 scene: aircraft.aircraftScene,
                 pointOfView: aircraft.aircraftCurrentCamera,
+                options: [.rendersContinuously],
                 delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)
