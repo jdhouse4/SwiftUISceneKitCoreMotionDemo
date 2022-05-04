@@ -318,35 +318,22 @@ struct AircraftRCSButtonsView: View {
             //print("Changing orientation of aircraft.")
 
             if rcsButtons.rollStarboardButtonPressed {
-                print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
+                //print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
                 //self.aircraftDelegate.setAircraftNode(node: aircraft.aircraftNode)
                 //self.aircraftDelegate.aircraftNode            = aircraft.aircraftNode
                 
                 self.aircraft.rollStarboard()
-                //self.aircraftDelegate.aircraftDeltaQuaternion   = aircraft.deltaQuaternion
                 
                 self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollStarboard()
-                
-                print("\(#function): aircraft.aircraftNode: \(String(describing: aircraft.aircraftNode.name))")
-                print("\(#function): aircraft.deltaquaternion: \(aircraft.deltaQuaternion.debugDescription)")
-                print("\(#function): aircraftDelegate.aircraftNode: \(String(describing: aircraftDelegate.aircraftNode.name))")
-                print("\(#function): aircraftDelegate.aircraftDeltaQuaternion: \(String(describing: aircraftDelegate.aircraftDeltaQuaternion))")
-                //self.aircraftDelegate.updateOrientation(of: aircraft.aircraftNode, quaternion: aircraft.deltaQuaternion)
             }
 
             if rcsButtons.rollPortButtonPressed {
-                print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
+                //print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
                 //self.aircraftDelegate.aircraftNode            = aircraft.aircraftNode
                 
                 self.aircraft.rollPort()
                 
                 self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollPort()
-                
-                print("\(#function): aircraft.aircraftNode: \(String(describing: aircraft.aircraftNode.name))")
-                print("\(#function): aircraft.deltaquaternion: \(aircraft.deltaQuaternion.debugDescription)")
-                print("\(#function): aircraftDelegate.aircraftNode: \(String(describing: aircraftDelegate.aircraftNode.name))")
-                print("\(#function): aircraftDelegate.aircraftDeltaQuaternion: \(String(describing: aircraftDelegate.aircraftDeltaQuaternion))")
-                //self.aircraftDelegate.updateOrientation(of: aircraft.aircraftNode, quaternion: aircraft.deltaQuaternion)
             }
         }
         rcsButtons.rollStarboardButtonPressed   = false

@@ -11,9 +11,9 @@ import SwiftUI
 
 
 struct AircraftAtittudeView: View {
-    @Environment(\.horizontalSizeClass) var sizeClass
+    //@Environment(\.horizontalSizeClass) var sizeClass
 
-    @EnvironmentObject var aircraftState: AircraftState
+    //@EnvironmentObject var aircraftState: AircraftState
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
     let angleFont = Font
