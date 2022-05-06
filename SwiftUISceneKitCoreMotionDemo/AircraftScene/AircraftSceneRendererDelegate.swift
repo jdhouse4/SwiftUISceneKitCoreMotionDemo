@@ -176,6 +176,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         ///
         /// This really blows-up the memory footprint.
         
+        
+        /*
         DispatchQueue.main.async {
             
             ///
@@ -190,8 +192,21 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
         
         }
+        */
         
-
+        Task {
+            await MainActor.run {
+                self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+            }
+        }
+        
+        /*
+        async {
+            await MainActor.run {
+                self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+            }
+        }
+         */
         /*
         //self.aircraftEulerAngles        = aircraftNode.simdEulerAngles
         let eulerAngles: simd_float3    = aircraftNode.simdEulerAngles
