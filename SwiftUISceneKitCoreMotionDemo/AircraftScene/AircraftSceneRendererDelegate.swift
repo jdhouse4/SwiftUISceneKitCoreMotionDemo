@@ -188,7 +188,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             /// Beginning to wonder if AircraftState shouldn't be renamed AircraftControl or ...Controller and be used to generate the impulses for the RCS systems.
             //self.aircraftState.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
             self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
-              }
+        
+        }
         
 
         /*
