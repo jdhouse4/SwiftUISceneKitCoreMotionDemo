@@ -50,6 +50,7 @@ struct AircraftAtittudeView: View {
                 }
                 .frame(width: 90, /*height: 60,*/ alignment: .trailing)
                 //.background(Color.blue)
+                
             }
         }
         .frame(alignment: .top)
