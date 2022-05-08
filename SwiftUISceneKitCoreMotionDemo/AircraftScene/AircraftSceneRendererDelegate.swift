@@ -100,7 +100,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         
         // MARK: Update the orientation due to RCS activity
         self.updateOrientation()
-        
+            
         
     
         if aircraftCamera == AircraftCamera.distantCamera.rawValue {
@@ -168,6 +168,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     func updateOrientation() -> Void {
         self.aircraftNode.simdOrientation   = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
         
+        //node.simdOrientation   = simd_mul(node.simdOrientation, aircraftDeltaQuaternion).normalized
         
         ///
         /// Thank you [Rob Napier](https://stackoverflow.com/users/97337/rob-napier) for answering the
@@ -194,12 +195,14 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         }
         */
         
-        Task {
-            await MainActor.run {
-                self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
-            }
-        }
         
+        ///
+        /// Antoine van der Lee had a post on his site, [SwiftLee](https://avanderlee.com),
+        ///
+        /// [MainActor usage in Swift explained to dispatch to the main thread](https://www.avanderlee.com/swift/mainactor-dispatch-main-thread/)
+        ///
+        /// on using Apple's then-new concurrency that came with Swift 5.5.
+        ///
         /*
         async {
             await MainActor.run {
@@ -207,19 +210,26 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             }
         }
          */
-        /*
-        //self.aircraftEulerAngles        = aircraftNode.simdEulerAngles
-        let eulerAngles: simd_float3    = aircraftNode.simdEulerAngles
         
-        print("""
-              \nAircraft Euler Angles:
-                pitch: \(self.radians2Degrees(eulerAngles.x)),
-                yaw: \(self.radians2Degrees(eulerAngles.y)),
-                roll: \(self.radians2Degrees(eulerAngles.z))
-        """)
-        */
+        ///
+        ///
+        /// With Swift 5.6, async(priority:operation:) has been depricated and replaced with Task.init.
+        ///
+        
+        Task {
+            await MainActor.run {
+                self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+            }
+        }
+         
     }
     
+    
+    /*
+    func updateEulerAngles(for angles: inout SIMD3<Float>, node: SCNNode) -> Void {
+        angles = node.simdEulerAngles
+    }
+    */
     
     
     func radians2Degrees(_ number: Float) -> Float {
