@@ -87,8 +87,26 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         //print("\(time)")
 
 
-        _deltaTime                  = time - _previousUpdateTime
-        _previousUpdateTime         = time
+        if _deltaTime > 0.2 {
+            
+            _deltaTime  = 0.0
+            //print("_deltaTime: \(_deltaTime)")
+            
+            _previousUpdateTime         = time
+            //print("_previousTime: \(_previousUpdateTime)")
+            
+            Task {
+                await MainActor.run {
+                    self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+                }
+            }
+             
+        } else {
+            
+            _deltaTime                  = time - _previousUpdateTime
+            //print("_deltaTime: \(_deltaTime)")
+
+        }
 
 
         ///
@@ -215,13 +233,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         ///
         /// With Swift 5.6, async(priority:operation:) has been depricated and replaced with Task.init.
         ///
-        
+        /*
         Task {
             await MainActor.run {
                 self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
             }
         }
-         
+         */
     }
     
     
