@@ -58,6 +58,10 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var rcsRollStarboardUp: SCNParticleSystem
     @Published var rcsRollStarboardDown: SCNParticleSystem
     
+    /// SCNText
+    var rollText: SCNText
+    var rollTextNode: SCNNode
+    
     /// Orientation
     @Published var aircraftQuaternion: simd_quatf   = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
     @Published var deltaQuaternion: simd_quatf      = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
@@ -96,6 +100,14 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
         rcsRollPortDown                 = SCNParticleSystem()
         rcsRollStarboardUp              = SCNParticleSystem()
         rcsRollStarboardDown            = SCNParticleSystem()
+        
+        rollText                        = SCNText(string: "Big Long Text", extrusionDepth: 0.0)
+        rollText.name                   = "rollOrientationText"
+        rollText.font                   = UIFont(name: "Futura", size: 1)
+        
+        rollTextNode                    = aircraftScene.rootNode.childNode(withName: "rollTextNode", recursively: true)!
+        rollTextNode.geometry           = rollText
+        rollTextNode.simdPosition       = simd_float3(x: -2.0, y: 2.0, z: -5.0)
 
         super.init()
 
@@ -138,6 +150,19 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
         rcsRollStarboardUp              = SCNParticleSystem()
         rcsRollStarboardDown            = SCNParticleSystem()
 
+        rollText                        = SCNText(string: "Big Long Text", extrusionDepth: 0.0)
+        rollText.name                   = "rollOrientationText"
+        rollText.font                   = UIFont(name: "Futura", size: 1)
+
+        rollTextNode                    = aircraftScene.rootNode.childNode(withName: "rollTextNode", recursively: true)!
+        rollTextNode.geometry           = rollText
+        rollTextNode.simdPosition       = simd_float3(x: -2.0, y: 2.0, z: -5.0)
+        rollTextNode.constraints        = [SCNTransformConstraint.orientationConstraint(inWorldSpace: false, with: { (node, orientation) -> SCNQuaternion  in
+            let quaternion = SCNQuaternion(0, 1, 0, 1)
+            //quaternion = Normalize(SCNQuaternion(0, 1, 0, 1))
+            return quaternion
+        })]
+        
         super.init(coder: coder)
 
         setAircraftEngine()
