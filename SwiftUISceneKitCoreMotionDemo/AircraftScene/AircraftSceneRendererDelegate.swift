@@ -95,6 +95,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             _previousUpdateTime         = time
             //print("_previousTime: \(_previousUpdateTime)")
             
+            
             Task {
                 await MainActor.run {
                     self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles

@@ -84,7 +84,7 @@ final class AircraftCloudUserDefaults: ObservableObject {
     
     
 
-    private func updateRemote(note: Notification) {
+    private func updateRemote(notification: Notification) {
         
         print("\n\(#function) Line: \(#line)")
         
