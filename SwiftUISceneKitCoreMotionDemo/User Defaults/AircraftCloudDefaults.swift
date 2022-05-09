@@ -58,7 +58,7 @@ final class AircraftCloudDefaults: ObservableObject {
     
     
     
-    private func updateRemote(note: Notification) {
+    private func updateRemote(notification: Notification) {
         
         guard ignoreLocalChanges == false else { return }
         
