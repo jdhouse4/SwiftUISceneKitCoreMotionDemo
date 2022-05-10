@@ -302,10 +302,34 @@ struct AircraftRCSButtonsView: View {
     // Escaping closure to push change from the AircraftSceneRendererDelegate functions to set camera name and node.
     //
     // Because of the way SwiftUI works, AircraftSceneRendererDelegate functions can't call the SwiftUI SceneView
-    // SCNScene parameters. It's a real pain! 
+    // SCNScene parameters. It's a real pain!
     //
-    func modifyOrientation(closure: @escaping () -> Void) {
+    fileprivate func modifyOrientation(closure: @escaping () -> Void) {
         closure()
+    }
+    
+    
+    
+    fileprivate func fireRCSThrusters() {
+        if rcsButtons.rollStarboardButtonPressed {
+            print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
+            
+            /// Firing the RCS thrusters.
+            self.aircraft.rollStarboard()
+            
+            /// Changing the aircraft's orientation.
+            self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollStarboard()
+        }
+        
+        if rcsButtons.rollPortButtonPressed {
+            print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
+            
+            /// Firing the RCS thrusters
+            self.aircraft.rollPort()
+            
+            /// Changing the aircraft's orientation.
+            self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollPort()
+        }
     }
     
     
@@ -315,27 +339,9 @@ struct AircraftRCSButtonsView: View {
 
         modifyOrientation { [self] in
 
-            //print("Changing orientation of aircraft.")
+            print("Changing orientation of aircraft.")
 
-            if rcsButtons.rollStarboardButtonPressed {
-                //print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
-                
-                /// Firing the RCS thrusters.
-                self.aircraft.rollStarboard()
-                
-                /// Changing the aircraft's orientation.
-                self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollStarboard()
-            }
-
-            if rcsButtons.rollPortButtonPressed {
-                //print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
-                
-                /// Firing the RCS thrusters
-                self.aircraft.rollPort()
-                
-                /// Changing the aircraft's orientation.
-                self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollPort()
-            }
+            fireRCSThrusters()
         }
         rcsButtons.rollStarboardButtonPressed   = false
         rcsButtons.rollPortButtonPressed        = false
