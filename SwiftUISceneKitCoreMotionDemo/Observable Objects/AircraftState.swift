@@ -16,7 +16,7 @@ class AircraftState: ObservableObject {
     
     
     /// This is a place where the position, velocity, orientation, delta-orientation, and translation data is stored and managed.
-    let deltaOrientationAngle: Float    = 0.025 * .pi / 180.0
+    let deltaOrientationAngle: Float    = 0.0078125 * .pi / 180.0 // This results in a 0.5°/s attitude change. 0.015625 = 1°/s
     
     ///
     /// The scene for the aircraft scn

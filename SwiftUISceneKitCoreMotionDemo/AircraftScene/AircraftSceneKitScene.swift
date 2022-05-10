@@ -16,13 +16,12 @@ import SceneKit
  */
 final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
-    static let shared           = AircraftSceneKitScene()
+    static let shared                           = AircraftSceneKitScene()
 
-    var aircraftScene           = SCNScene(named: "art.scnassets/ship.scn")!
-    
+    var aircraftScene                           = SCNScene(named: "art.scnassets/ship.scn")!
     var aircraftSceneNode: SCNNode
     
-    var aircraftNode            = SCNNode()
+    var aircraftNode                            = SCNNode()
 
     /// Aircraft camera strings (This should be an enum)
     @Published var aircraftNodeString           = "shipNode"
@@ -62,6 +61,8 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     @Published var aircraftQuaternion: simd_quatf   = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
     @Published var deltaQuaternion: simd_quatf      = simd_quatf(ix: 0.0, iy: 0.0, iz: 0.0, r: 1.0)
     
+    let deltaOrientationAngle: Float                = 0.0078125 * .pi / 180.0 // This results in a 0.5°/s attitude change. 0.015625 = 1°/s
+
     
 
     private override init() {
@@ -168,9 +169,7 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     func rollStarboard() {
         print("\(#function)")
         
-        let rollAngle: Float   = 0.025 * .pi / 180.0
-
-        let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
+        let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
         deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion)
@@ -194,9 +193,7 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     func rollPort() {
         
-        let rollAngle: Float   = 0.025 * .pi / 180.0
-        
-        let rollPortQuaternion: simd_quatf = simd_quatf(angle: rollAngle,
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                         axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
         
         deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion)

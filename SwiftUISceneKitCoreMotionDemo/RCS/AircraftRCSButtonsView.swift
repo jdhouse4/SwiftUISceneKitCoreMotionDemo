@@ -302,7 +302,7 @@ struct AircraftRCSButtonsView: View {
     // Escaping closure to push change from the AircraftSceneRendererDelegate functions to set camera name and node.
     //
     // Because of the way SwiftUI works, AircraftSceneRendererDelegate functions can't call the SwiftUI SceneView
-    // SCNScene parameters. It's a real pain!
+    // SCNScene parameters. It's a real pain! 
     //
     func modifyOrientation(closure: @escaping () -> Void) {
         closure()
@@ -319,20 +319,21 @@ struct AircraftRCSButtonsView: View {
 
             if rcsButtons.rollStarboardButtonPressed {
                 //print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
-                //self.aircraftDelegate.setAircraftNode(node: aircraft.aircraftNode)
-                //self.aircraftDelegate.aircraftNode            = aircraft.aircraftNode
                 
+                /// Firing the RCS thrusters.
                 self.aircraft.rollStarboard()
                 
+                /// Changing the aircraft's orientation.
                 self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollStarboard()
             }
 
             if rcsButtons.rollPortButtonPressed {
                 //print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
-                //self.aircraftDelegate.aircraftNode            = aircraft.aircraftNode
                 
+                /// Firing the RCS thrusters
                 self.aircraft.rollPort()
                 
+                /// Changing the aircraft's orientation.
                 self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollPort()
             }
         }

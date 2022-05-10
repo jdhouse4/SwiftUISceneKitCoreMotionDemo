@@ -23,7 +23,7 @@ struct AircraftAtittudeView: View {
 
     var body: some View {
         Group {
-            HStack {
+            HStack(spacing: 0) {
 
                 VStack (alignment: .leading) {
                     Text("Pitch: ")
@@ -35,7 +35,7 @@ struct AircraftAtittudeView: View {
                     Text("Roll: ")
                         .font(.body.monospaced())
                 }
-                .padding(5)
+                //.background(Color.cyan)
                 
                 
                 VStack (alignment: .trailing) {
@@ -48,9 +48,9 @@ struct AircraftAtittudeView: View {
                     Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z) >= 0.0 ? self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z) : -self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z), specifier: "%.2f")°")
                         .font(angleFont)
                 }
-                .frame(width: 100)
+                .frame(width: 100, alignment: .trailing)
                 //.background(Color.red)
-                .padding(5)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
                 
                 VStack {
                     Text("∆: ")
@@ -63,7 +63,8 @@ struct AircraftAtittudeView: View {
                         .font(.body.monospaced())
 
                 }
-                .padding(5)
+                //.background(Color.yellow)
+                //.padding(5)
 
                 VStack (alignment: .trailing) {
                     Text("0.0°/s")
