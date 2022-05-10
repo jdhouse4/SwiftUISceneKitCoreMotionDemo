@@ -31,7 +31,7 @@ struct AircraftRCSButtonsView: View {
                 
                 longRCSFiring = true
                 
-                let impactHeavy = UIImpactFeedbackGenerator(style: .light)
+                let impactHeavy = UIImpactFeedbackGenerator(style: .medium)
                     impactHeavy.impactOccurred()
                 
                 //print("\(#function)")
