@@ -26,10 +26,13 @@ struct AircraftRCSButtonsView: View {
     
     
     var longRCSButtonPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.25)
+        LongPressGesture(minimumDuration: 0.5)
             .onEnded { _ in
                 
                 longRCSFiring = true
+                
+                let impactHeavy = UIImpactFeedbackGenerator(style: .light)
+                    impactHeavy.impactOccurred()
                 
                 //print("\(#function)")
             }
