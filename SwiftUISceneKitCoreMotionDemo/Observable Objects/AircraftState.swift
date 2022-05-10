@@ -61,24 +61,11 @@ class AircraftState: ObservableObject {
     func radians2Degrees(_ number: Float) -> Float {
         return number * 180.0 / .pi
     }
-    
-    
-    
-    func singleImpulseRollPort() -> simd_quatf {
-        print("AircraftState impulsePort()")
-        let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
-                                                        axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
-        
-        aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollPortQuaternion)
-        //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
-        
-        return aircraftDeltaQuaternion
-    }
-    
+
     
     
     func singleImpulseRollStarboard() -> simd_quatf {
-        print("AircraftState impulseStarboard()")
+        print("AircraftState singleImpulseStarboard()")
         let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
@@ -90,7 +77,46 @@ class AircraftState: ObservableObject {
     
     
     
-    func aircraftEulerAngles(from quaternion: simd_quatf) {
+    func doubleImpulseRollStarboard() -> simd_quatf {
+        print("AircraftState singleImpulseStarboard()")
+        let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle * 2.0,
+                                                             axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
+        
+        aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollStarboardQuaternion)
+        //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
+        
+        return aircraftDeltaQuaternion
+    }
+    
+    
+    
+    func singleImpulseRollPort() -> simd_quatf {
+        print("AircraftState singleImpulsePort()")
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
+                                                        axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
+        
+        aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollPortQuaternion)
+        //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
+        
+        return aircraftDeltaQuaternion
+    }
+
+    
+    
+    func doubleImpulseRollPort() -> simd_quatf {
+        print("AircraftState singleImpulsePort()")
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle * 2.0,
+                                                        axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
+        
+        aircraftDeltaQuaternion = simd_mul(aircraftDeltaQuaternion, rollPortQuaternion)
+        //print("\(#function): aircraftDeltaQuaternion: \(aircraftDeltaQuaternion.debugDescription)")
+        
+        return aircraftDeltaQuaternion
+    }
+
+    
+    
+   func aircraftEulerAngles(from quaternion: simd_quatf) {
         print("AircraftState \(#function)")
         
         ///

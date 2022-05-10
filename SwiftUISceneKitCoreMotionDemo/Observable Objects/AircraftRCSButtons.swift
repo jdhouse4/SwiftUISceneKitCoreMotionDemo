@@ -18,19 +18,14 @@ class AircraftRCSButtons: ObservableObject {
     @Published var rollStarboardButtonPressed: Bool     = false
     @Published var yawPortButtonPressed: Bool           = false
     @Published var yawStarboardButtonPressed: Bool      = false
-
-    /*
-    let aircraftRCSDefaultBirthrate: Int                = 500
-    let aircraftRCSMinDuration: Int                     = 150 // milliseconds
-    let aircraftRCSMaxDuration: Int                     = 300 // milliseconds
-     */
 }
 
 
 
 enum AircraftRCSTiming: Int {
-    case aircraftRCSDefaultBirthrate    = 500
-    case aircraftRCSMinDuration         = 150 // milliseconds
-    case aircraftRCSMaxDuration         = 300 // milliseconds
+    case aircraftRCSSingleImpulseBirthrate  = 500
+    case aircraftRCSDoubleImpulseBirthrate  = 1000
+    case aircraftRCSMinDuration             = 150 // milliseconds
+    case aircraftRCSMaxDuration             = 300 // milliseconds
 }
 

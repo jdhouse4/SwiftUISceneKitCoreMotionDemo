@@ -166,20 +166,20 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     
     
-    func rollStarboard() {
+    func singleImpulseRollStarboard() {
         print("\(#function)")
-        
+        /*
         let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
         deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion)
         //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
-
+         */
                 
         // Particle emitter effects
         // Code to do something goes here
-        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
-        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
+        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
+        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
 
         // Milliseconds of duration for firing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
@@ -191,24 +191,69 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     
     
-    func rollPort() {
+    func doubleImpulseRollStarboard() {
+        print("\(#function)")
+        /*
+        let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
+                                                             axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
         
+        deltaQuaternion = simd_mul(deltaQuaternion, rollStarboardQuaternion)
+        //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
+         */
+                
+        // Particle emitter effects
+        // Code to do something goes here
+        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
+        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
+
+        // Milliseconds of duration for firing
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
+            self.rcsRollStarboardUp.birthRate   = 0
+            self.rcsRollPortDown.birthRate      = 0
+        }
+    }
+    
+    
+    
+    func singleImpulseRollPort() {
+        /*
         let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                         axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
         
         deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion)
         //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
-
+         */
         
         // Code to do something goes here
-        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
-        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSDefaultBirthrate.rawValue)
+        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
+        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
 
         // Milliseconds of duration for firing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
             self.rcsRollPortUp.birthRate        = 0
             self.rcsRollStarboardDown.birthRate = 0
         }
+    }
 
+
+
+    func doubleImpulseRollPort() {
+        /*
+        let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
+                                                        axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
+        
+        deltaQuaternion = simd_mul(deltaQuaternion, rollPortQuaternion)
+        //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
+         */
+        
+        // Code to do something goes here
+        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
+        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
+
+        // Milliseconds of duration for firing
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
+            self.rcsRollPortUp.birthRate        = 0
+            self.rcsRollStarboardDown.birthRate = 0
+        }
     }
 }

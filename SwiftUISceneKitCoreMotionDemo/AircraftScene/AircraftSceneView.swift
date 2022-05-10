@@ -102,8 +102,7 @@ struct AircraftSceneView: View {
         ZStack {
             SceneView (
                 scene: aircraft.aircraftScene,
-                pointOfView: aircraft.aircraftCurrentCamera/*,
-                options: [.rendersContinuously]*/,
+                pointOfView: aircraft.aircraftCurrentCamera,
                 delegate: aircraftDelegate
             )
             .gesture(exclusiveGesture)

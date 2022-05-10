@@ -18,9 +18,23 @@ struct AircraftRCSButtonsView: View {
     @EnvironmentObject var aircraftState: AircraftState
     @EnvironmentObject var rcsButtons: AircraftRCSButtons
     
+    
+    @State var longRCSFiring: Bool  = false
+    
 
     let buttonAnimationTime = 0.25
-
+    
+    
+    var longRCSButtonPress: some Gesture {
+        LongPressGesture(minimumDuration: 1.0)
+            .onEnded { _ in
+                
+                longRCSFiring = true
+                
+                print("\(#function)")
+            }
+    }
+    
 
     var body: some View {
         HStack (spacing: 5) {
@@ -47,7 +61,6 @@ struct AircraftRCSButtonsView: View {
                     }
                 }) {
                     Image(systemName: "rotate.3d")
-                        /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                         .imageScale(.large)
                 }
                 .zIndex(3)
@@ -106,7 +119,7 @@ struct AircraftRCSButtonsView: View {
                                 
                             }
                             
-                            //aircraft.rollStarboard()
+                            //aircraft.singleImpulseRollStarboard()
                             self.changeOrientation()
                             
                             /*
@@ -123,7 +136,6 @@ struct AircraftRCSButtonsView: View {
                             
                         }) {
                             Image(systemName: "arrow.clockwise")
-                                /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                                 .imageScale(.large)
                                 .accessibility(label: Text("Roll starboard."))
                         }
@@ -139,9 +151,7 @@ struct AircraftRCSButtonsView: View {
                             x: sizeClass == .compact ? CircleButtonHelper.position60DegreeButtonCompact().x : CircleButtonHelper.position60DegreeButton().x ,
                             y: sizeClass == .compact ? CircleButtonHelper.position60DegreeButtonCompact().y : CircleButtonHelper.position60DegreeButton().y )
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
-                        
-                        
+                        .simultaneousGesture(longRCSButtonPress)
                         /*
                         //
                         // Button for yawing starboard.
@@ -237,10 +247,10 @@ struct AircraftRCSButtonsView: View {
                             withAnimation {
                                 
                                 self.rcsButtons.rollPortButtonPressed = true
-                                print("Roll Port")
+                                //print("Roll Port")
                             }
                             
-                            //aircraft.rollPort()
+                            //aircraft.singleImpulseRollPort()
                             self.changeOrientation()
                             
                             /*
@@ -256,7 +266,6 @@ struct AircraftRCSButtonsView: View {
                              */
                         }) {
                             Image(systemName: "arrow.counterclockwise")
-                                /*.frame(width: CircleButtonSize.diameter.rawValue, height: CircleButtonSize.diameter.rawValue, alignment: .center)*/
                                 .imageScale(.large)
                                 .accessibility(label: Text("Rolling port."))
                         }
@@ -272,7 +281,7 @@ struct AircraftRCSButtonsView: View {
                             x: sizeClass == .compact ? CircleButtonHelper.position300DegreeButtonCompact().x : CircleButtonHelper.position300DegreeButton().x,
                             y: sizeClass == .compact ? CircleButtonHelper.position300DegreeButtonCompact().y : CircleButtonHelper.position300DegreeButton().y)
                         .animation(.ripple(buttonIndex: 2), value: rcsButtons.showRotationButtons)
-                        //.animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0))
+                        .simultaneousGesture(longRCSButtonPress)
                         
                 }
                     .animation(.easeInOut(duration: Double( CircleButtonSize.animationFast.rawValue) ).delay(0.0), value: rcsButtons.showRotationButtons)
@@ -295,8 +304,8 @@ struct AircraftRCSButtonsView: View {
         //.background(Color.red)
 
     }
-
-
+    
+    
     
     //
     // Escaping closure to push change from the AircraftSceneRendererDelegate functions to set camera name and node.
@@ -310,12 +319,12 @@ struct AircraftRCSButtonsView: View {
     
     
     
-    fileprivate func fireRCSThrusters() {
+    fileprivate func fireSingleImpulseRCSThrusters() {
         if rcsButtons.rollStarboardButtonPressed {
             print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
             
             /// Firing the RCS thrusters.
-            self.aircraft.rollStarboard()
+            self.aircraft.singleImpulseRollStarboard()
             
             /// Changing the aircraft's orientation.
             self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollStarboard()
@@ -325,10 +334,34 @@ struct AircraftRCSButtonsView: View {
             print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
             
             /// Firing the RCS thrusters
-            self.aircraft.rollPort()
+            self.aircraft.singleImpulseRollPort()
             
             /// Changing the aircraft's orientation.
             self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.singleImpulseRollPort()
+        }
+    }
+    
+    
+    
+    fileprivate func fireDoubleImpulseRCSThrusters() {
+        if rcsButtons.rollStarboardButtonPressed {
+            print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
+            
+            /// Firing the RCS thrusters.
+            self.aircraft.doubleImpulseRollStarboard()
+            
+            /// Changing the aircraft's orientation.
+            self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.doubleImpulseRollStarboard()
+        }
+        
+        if rcsButtons.rollPortButtonPressed {
+            print("\(#function): rcsButtons.rollPortButtonPressed: \(rcsButtons.rollPortButtonPressed)")
+            
+            /// Firing the RCS thrusters
+            self.aircraft.doubleImpulseRollPort()
+            
+            /// Changing the aircraft's orientation.
+            self.aircraftDelegate.aircraftDeltaQuaternion   = aircraftState.doubleImpulseRollPort()
         }
     }
     
@@ -341,8 +374,13 @@ struct AircraftRCSButtonsView: View {
 
             print("Changing orientation of aircraft.")
 
-            fireRCSThrusters()
+            if longRCSFiring {
+                fireDoubleImpulseRCSThrusters()
+            } else {
+                fireSingleImpulseRCSThrusters()
+            }
         }
+        longRCSFiring                           = false
         rcsButtons.rollStarboardButtonPressed   = false
         rcsButtons.rollPortButtonPressed        = false
     }
