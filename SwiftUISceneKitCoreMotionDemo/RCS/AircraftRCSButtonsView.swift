@@ -26,12 +26,12 @@ struct AircraftRCSButtonsView: View {
     
     
     var longRCSButtonPress: some Gesture {
-        LongPressGesture(minimumDuration: 1.0)
+        LongPressGesture(minimumDuration: 0.25)
             .onEnded { _ in
                 
                 longRCSFiring = true
                 
-                print("\(#function)")
+                //print("\(#function)")
             }
     }
     

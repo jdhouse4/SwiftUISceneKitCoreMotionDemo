@@ -203,11 +203,11 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
                 
         // Particle emitter effects
         // Code to do something goes here
-        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
-        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
+        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
+        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
 
         // Milliseconds of duration for firing
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMaxDuration.rawValue)) {
             self.rcsRollStarboardUp.birthRate   = 0
             self.rcsRollPortDown.birthRate      = 0
         }
@@ -247,11 +247,11 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
          */
         
         // Code to do something goes here
-        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
-        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrate.rawValue)
+        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
+        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
 
         // Milliseconds of duration for firing
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMaxDuration.rawValue)) {
             self.rcsRollPortUp.birthRate        = 0
             self.rcsRollStarboardDown.birthRate = 0
         }
