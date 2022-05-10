@@ -31,6 +31,10 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     @Published var aircraftDeltaQuaternion: simd_quatf  = simd_quatf()
     @Published var aircraftOrientation: simd_quatf      = simd_quatf()
     @Published var aircraftEulerAngles: SIMD3<Float>    = simd_float3()
+    var aircraftPreviousEulerAngles: SIMD3<Float>       = simd_float3()
+    var aircraftCurrentEulerAngles: SIMD3<Float>        = simd_float3()
+    @Published var deltaRollRate:Float                  = 0.0
+
 
     @Published var aircraftCamera: String           = AircraftCamera.distantCamera.rawValue
     @Published var aircraftCameraNode: SCNNode      = SCNNode()
@@ -85,29 +89,68 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         }
 
         //print("\(time)")
-
+        
+        /*
+        self.aircraftPreviousEulerAngles = self.aircraftEulerAngles
+        print("\(#function) prevEuler.z: \(self.aircraftPreviousEulerAngles)")
+        */
 
         if _deltaTime > 0.2 {
-            
-            _deltaTime  = 0.0
-            //print("_deltaTime: \(_deltaTime)")
+            print("\nTime to calculate eulers and roll rates.")
             
             _previousUpdateTime         = time
             //print("_previousTime: \(_previousUpdateTime)")
             
+            self.aircraftPreviousEulerAngles        = self.aircraftCurrentEulerAngles
+            let aircraftPreviousRollAngle: Float    = radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : 360.0 + radians2Degrees(self.aircraftPreviousEulerAngles.z)
+            print("\(#function) aircraftPreviousRollAngle: \(aircraftPreviousRollAngle)")
+            //print("\(#function) self.aircraftPreviousEulerAngles.z: \((radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : -radians2Degrees(self.aircraftPreviousEulerAngles.z)))")
+
+            self.aircraftCurrentEulerAngles = self.aircraftNode.simdEulerAngles
+            let aircraftCurrentRollAngle: Float = radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : 360.0 + radians2Degrees(self.aircraftCurrentEulerAngles.z)
+            print("\(#function) aircraftCurrentRollAngle: \(aircraftCurrentRollAngle)")
+            //print("\(#function) self.aircraftCurrentEulerAngles.z: \((radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : -radians2Degrees(self.aircraftCurrentEulerAngles.z)))")
+
+            //let deltaRoll = abs(radians2Degrees((self.aircraftCurrentEulerAngles.z - self.aircraftPreviousEulerAngles.z)))
+            let deltaRoll = abs(aircraftCurrentRollAngle - aircraftPreviousRollAngle)
+            print("\(#function) deltaRoll: \(deltaRoll)")
+            
+            let rollRate = deltaRoll / Float(_deltaTime)
+            
             Task {
                 await MainActor.run {
-                    self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
+                    
+                    //print("Calling MainActor.run @ time: \(time)")
+
+                    self.aircraftEulerAngles    = self.aircraftNode.simdEulerAngles
+
+                    self.deltaRollRate          = rollRate
+                    print("\(#function) self.deltaRollRate: \(self.deltaRollRate)")
+                    
                 }
             }
-             
+            
+
+            
+            _deltaTime  = 0.0
+            //print("_deltaTime: \(_deltaTime)")
+
         } else {
             
             _deltaTime                  = time - _previousUpdateTime
             //print("_deltaTime: \(_deltaTime)")
-
+            
         }
-
+        /*
+        if Int(_deltaTime * 100) == 0 {
+            //print("\nThis is the beginning!")
+            
+            self.aircraftPreviousEulerAngles = aircraftNode.simdEulerAngles
+            print("\(#function) aircraftNode.simdEulerAngles.z: \(aircraftNode.simdEulerAngles.z)")
+            print("\(#function) aircraftPreviousEulerAngles.z: \(aircraftPreviousEulerAngles.z)")
+            //print("\n")
+        }
+         */
 
         ///
         // MARK: Update the attitude.quaternion from device manager
@@ -185,69 +228,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     
     func updateOrientation() -> Void {
         self.aircraftNode.simdOrientation   = simd_mul(aircraftNode.simdOrientation, aircraftDeltaQuaternion).normalized
-        
-        //node.simdOrientation   = simd_mul(node.simdOrientation, aircraftDeltaQuaternion).normalized
-        
-        ///
-        /// Thank you [Rob Napier](https://stackoverflow.com/users/97337/rob-napier) for answering the
-        /// StackOverflow thread on,
-        /// [SwiftUI - make sure to publish values from the main thread (via operators like receive(on:)) on model updates](https://stackoverflow.com/a/64404137/1518544)
-        ///
-        /// This really blows-up the memory footprint.
-        
-        
-        /*
-        DispatchQueue.main.async {
-            
-            ///
-            /// Thanks go to Thilo (https://stackoverflow.com/users/11655730/thilo) for this simple way of obtaining Euler angles
-            /// of a node.
-            ///
-            /// for his post on Stack Overflow, (https://stackoverflow.com/a/71344720/1518544)
-            ///
-            
-            /// Beginning to wonder if AircraftState shouldn't be renamed AircraftControl or ...Controller and be used to generate the impulses for the RCS systems.
-            //self.aircraftState.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
-            self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
-        
-        }
-        */
-        
-        
-        ///
-        /// Antoine van der Lee had a post on his site, [SwiftLee](https://avanderlee.com),
-        ///
-        /// [MainActor usage in Swift explained to dispatch to the main thread](https://www.avanderlee.com/swift/mainactor-dispatch-main-thread/)
-        ///
-        /// on using Apple's then-new concurrency that came with Swift 5.5.
-        ///
-        /*
-        async {
-            await MainActor.run {
-                self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
-            }
-        }
-         */
-        
-        ///
-        ///
-        /// With Swift 5.6, async(priority:operation:) has been depricated and replaced with Task.init.
-        ///
-        /*
-        Task {
-            await MainActor.run {
-                self.aircraftEulerAngles = self.aircraftNode.simdEulerAngles
-            }
-        }
-         */
     }
-    
-    
-    /*
-    func updateEulerAngles(for angles: inout SIMD3<Float>, node: SCNNode) -> Void {
-        angles = node.simdEulerAngles
-    }
-    */
     
     
     func radians2Degrees(_ number: Float) -> Float {
