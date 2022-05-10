@@ -102,12 +102,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             //print("_previousTime: \(_previousUpdateTime)")
             
             self.aircraftPreviousEulerAngles        = self.aircraftCurrentEulerAngles
-            let aircraftPreviousRollAngle: Float    = radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : 360.0 + radians2Degrees(self.aircraftPreviousEulerAngles.z)
+            let aircraftPreviousRollAngle: Float    = radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : -radians2Degrees(self.aircraftPreviousEulerAngles.z)
             print("\(#function) aircraftPreviousRollAngle: \(aircraftPreviousRollAngle)")
             //print("\(#function) self.aircraftPreviousEulerAngles.z: \((radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : -radians2Degrees(self.aircraftPreviousEulerAngles.z)))")
 
             self.aircraftCurrentEulerAngles = self.aircraftNode.simdEulerAngles
-            let aircraftCurrentRollAngle: Float = radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : 360.0 + radians2Degrees(self.aircraftCurrentEulerAngles.z)
+            let aircraftCurrentRollAngle: Float = radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : -radians2Degrees(self.aircraftCurrentEulerAngles.z)
             print("\(#function) aircraftCurrentRollAngle: \(aircraftCurrentRollAngle)")
             //print("\(#function) self.aircraftCurrentEulerAngles.z: \((radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : -radians2Degrees(self.aircraftCurrentEulerAngles.z)))")
 
@@ -123,14 +123,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                     //print("Calling MainActor.run @ time: \(time)")
 
                     self.aircraftEulerAngles    = self.aircraftNode.simdEulerAngles
+                    print("\(#function) self.aircraftEulerAngles: \(self.aircraftEulerAngles)")
 
                     self.deltaRollRate          = rollRate
-                    print("\(#function) self.deltaRollRate: \(self.deltaRollRate)")
+                    //print("\(#function) self.deltaRollRate: \(self.deltaRollRate)")
                     
                 }
             }
-            
-
             
             _deltaTime  = 0.0
             //print("_deltaTime: \(_deltaTime)")
@@ -141,17 +140,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             //print("_deltaTime: \(_deltaTime)")
             
         }
-        /*
-        if Int(_deltaTime * 100) == 0 {
-            //print("\nThis is the beginning!")
-            
-            self.aircraftPreviousEulerAngles = aircraftNode.simdEulerAngles
-            print("\(#function) aircraftNode.simdEulerAngles.z: \(aircraftNode.simdEulerAngles.z)")
-            print("\(#function) aircraftPreviousEulerAngles.z: \(aircraftPreviousEulerAngles.z)")
-            //print("\n")
-        }
-         */
 
+        
         ///
         // MARK: Update the attitude.quaternion from device manager
         ///

@@ -39,16 +39,44 @@ struct AircraftAtittudeView: View {
                 
                 
                 VStack (alignment: .trailing) {
-                    Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.x), specifier: "%.2f")°")
+                    Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.x) >= 0.0 ? self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.x) : -self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.x), specifier: "%.2f")°")
                         .font(angleFont)
                     
-                    Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y), specifier: "%.2f")°")
+                    Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y) >= 0.0 ? self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y) : -self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y), specifier: "%.2f")°")
                         .font(angleFont)
                     
-                    Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z), specifier: "%.2f")°")
+                    Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z) >= 0.0 ? self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z) : -self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z), specifier: "%.2f")°")
                         .font(angleFont)
                 }
-                .frame(width: 90, /*height: 60,*/ alignment: .trailing)
+                .frame(width: 100)
+                //.background(Color.red)
+                .padding(5)
+                
+                VStack {
+                    Text("∆: ")
+                        .font(.body.monospaced())
+                    
+                    Text( "∆: ")
+                        .font(.body.monospaced())
+                    
+                    Text("∆: ")
+                        .font(.body.monospaced())
+
+                }
+                .padding(5)
+
+                VStack (alignment: .trailing) {
+                    Text("0.0°/s")
+                        .font(angleFont)
+                    
+                    Text("0.0°/s")
+                        .font(angleFont)
+                    
+                    Text("\(aircraftDelegate.deltaRollRate, specifier: "%.1f")°/s")
+                        .font(angleFont)
+                }
+
+                .frame(width: 100, /*height: 60,*/ alignment: .trailing)
                 //.background(Color.blue)
                 
             }
