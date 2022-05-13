@@ -103,19 +103,14 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             
             self.aircraftPreviousEulerAngles        = self.aircraftCurrentEulerAngles
             let aircraftPreviousRollAngle: Float    = radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : -radians2Degrees(self.aircraftPreviousEulerAngles.z)
-            //print("\(#function) aircraftPreviousRollAngle: \(aircraftPreviousRollAngle)")
-            //print("\(#function) self.aircraftPreviousEulerAngles.z: \((radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : -radians2Degrees(self.aircraftPreviousEulerAngles.z)))")
 
             self.aircraftCurrentEulerAngles = self.aircraftNode.simdEulerAngles
             let aircraftCurrentRollAngle: Float = radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : -radians2Degrees(self.aircraftCurrentEulerAngles.z)
-            //print("\(#function) aircraftCurrentRollAngle: \(aircraftCurrentRollAngle)")
-            //print("\(#function) self.aircraftCurrentEulerAngles.z: \((radians2Degrees(self.aircraftCurrentEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftCurrentEulerAngles.z) : -radians2Degrees(self.aircraftCurrentEulerAngles.z)))")
 
-            //let deltaRoll = abs(radians2Degrees((self.aircraftCurrentEulerAngles.z - self.aircraftPreviousEulerAngles.z)))
             let deltaRoll = abs(aircraftCurrentRollAngle - aircraftPreviousRollAngle)
-            //print("\(#function) deltaRoll: \(deltaRoll)")
             
             let rollRate = deltaRoll / Float(_deltaTime)
+            
             
             Task {
                 await MainActor.run {
@@ -130,6 +125,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                     
                 }
             }
+            
             
             _deltaTime  = 0.0
             //print("_deltaTime: \(_deltaTime)")

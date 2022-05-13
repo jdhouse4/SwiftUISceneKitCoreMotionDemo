@@ -122,7 +122,6 @@ struct AircraftRCSButtonsView: View {
                                 
                             }
                             
-                            //aircraft.singleImpulseRollStarboard()
                             self.changeOrientation()
                             
                             /*
@@ -316,7 +315,9 @@ struct AircraftRCSButtonsView: View {
     // Because of the way SwiftUI works, AircraftSceneRendererDelegate functions can't call the SwiftUI SceneView
     // SCNScene parameters. It's a real pain!
     //
+    
     fileprivate func modifyOrientation(closure: @escaping () -> Void) {
+        print("\(#function)")
         closure()
     }
     
@@ -374,9 +375,7 @@ struct AircraftRCSButtonsView: View {
         print("\n\(#function)")
 
         modifyOrientation { [self] in
-
-            print("Changing orientation of aircraft.")
-
+            
             if longRCSFiring {
                 fireDoubleImpulseRCSThrusters()
             } else {

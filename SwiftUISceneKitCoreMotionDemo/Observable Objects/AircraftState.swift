@@ -38,6 +38,7 @@ class AircraftState: ObservableObject {
     
     @Published var aircraftEulerAngles: SIMD3<Float>
     
+    var aircraftRollAngle: Float = 0.0
     
     private init() {
         print("AircraftState \(#function)")

@@ -13,7 +13,7 @@ import SwiftUI
 struct AircraftAtittudeView: View {
     //@Environment(\.horizontalSizeClass) var sizeClass
 
-    //@EnvironmentObject var aircraftState: AircraftState
+    @EnvironmentObject var aircraftState: AircraftState
     @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
 
     let angleFont = Font
@@ -45,8 +45,10 @@ struct AircraftAtittudeView: View {
                     Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y) >= 0.0 ? self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y) : -self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.y), specifier: "%.2f")°")
                         .font(angleFont)
                     
+                    
                     Text("\(self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z) >= 0.0 ? self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z) : -self.radians2Degrees(aircraftDelegate.aircraftEulerAngles.z), specifier: "%.2f")°")
                         .font(angleFont)
+                     
                 }
                 .frame(width: 100, alignment: .trailing)
                 //.background(Color.red)
