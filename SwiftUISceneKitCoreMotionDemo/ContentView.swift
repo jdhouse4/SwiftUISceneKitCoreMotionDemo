@@ -42,6 +42,8 @@ struct ContentView: View {
     @StateObject var aircraftAnalyticsButton    = AircraftAnalyticsButton()
     @StateObject var aircraftEngineThrottle     = AircraftEngineThrottle()
     @StateObject var aircraftRotationButton     = AircraftRCSButtons()
+    
+    @State var showOrientationSheet: Bool       = false
 
 
     var body: some View {
@@ -68,8 +70,25 @@ struct ContentView: View {
             VStack {
                 
                 AircraftAtittudeView()
-                            
+                    .padding(30)
+                
+                
+                Button {
+                    
+                    showOrientationSheet.toggle()
+                
+                } label: {
+                    
+                    Image(systemName: "keyboard")
+                        .imageScale(.large)
+                }
+                .frame(alignment: .leading)
+                .sheet(isPresented: $showOrientationSheet) {
+                    AircraftOrientationControlView()
+                }
+                
                 Spacer()
+
             }
             //.background(Color.blue)
 

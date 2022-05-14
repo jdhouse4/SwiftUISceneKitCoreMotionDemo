@@ -42,6 +42,8 @@
 		E6B6318126C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B6318026C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift */; };
 		E6FE1A3727EBB252001A901D /* AircraftAnalyticsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE1A3627EBB252001A901D /* AircraftAnalyticsButton.swift */; };
 		E6FE1A3927EBB2E6001A901D /* AircraftAnalyticsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE1A3827EBB2E6001A901D /* AircraftAnalyticsButtonView.swift */; };
+		E6FE9B01282EFCCC009625E5 /* NumericEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE9B00282EFCCC009625E5 /* NumericEntryController.swift */; };
+		E6FE9B03282EFE3D009625E5 /* AircraftOrientationControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE9B02282EFE3D009625E5 /* AircraftOrientationControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,8 @@
 		E6B6318026C2EF7F00E94CDC /* AircraftEngineThrottleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftEngineThrottleSlider.swift; sourceTree = "<group>"; };
 		E6FE1A3627EBB252001A901D /* AircraftAnalyticsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnalyticsButton.swift; sourceTree = "<group>"; };
 		E6FE1A3827EBB2E6001A901D /* AircraftAnalyticsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnalyticsButtonView.swift; sourceTree = "<group>"; };
+		E6FE9B00282EFCCC009625E5 /* NumericEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NumericEntryController.swift; path = "SwiftUISceneKitCoreMotionDemo/Observable Objects/NumericEntryController.swift"; sourceTree = "<group>"; };
+		E6FE9B02282EFE3D009625E5 /* AircraftOrientationControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AircraftOrientationControlView.swift; path = SwiftUISceneKitCoreMotionDemo/AircraftOrientationControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 		E68406F3253CE69800E621F1 = {
 			isa = PBXGroup;
 			children = (
+				E6FE9B00282EFCCC009625E5 /* NumericEntryController.swift */,
+				E6FE9B02282EFE3D009625E5 /* AircraftOrientationControlView.swift */,
 				E68406FE253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemo */,
 				E68406FD253CE69800E621F1 /* Products */,
 			);
@@ -290,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FE9B01282EFCCC009625E5 /* NumericEntryController.swift in Sources */,
 				E641BA81282080A9007A4236 /* AircraftAtittudeView.swift in Sources */,
 				E646891A253CFAD4008BE1CC /* AircraftSceneKitScene.swift in Sources */,
 				E677768B269D57E5004BE5EB /* AircraftEngineAndRCSControlsView.swift in Sources */,
@@ -320,6 +327,7 @@
 				E64B1A6C27DFFE3900B0C7C7 /* AircraftState.swift in Sources */,
 				E62EA57F26EA9C8B0056C866 /* AircraftRCSButtons.swift in Sources */,
 				E6840700253CE69800E621F1 /* SwiftUISceneKitCoreMotionDemoApp.swift in Sources */,
+				E6FE9B03282EFE3D009625E5 /* AircraftOrientationControlView.swift in Sources */,
 				E60904042613CC1300C8ABF8 /* AircraftCamera.swift in Sources */,
 				E60904062613D4F100C8ABF8 /* AircraftSceneView.swift in Sources */,
 			);
