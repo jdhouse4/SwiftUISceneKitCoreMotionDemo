@@ -51,6 +51,7 @@ struct ContentView: View {
         ZStack {
 
             AircraftSceneView()
+                //.overlay(Circle().opacity(0.5))
             
             AircraftEngineAndRCSControlsView()
             
@@ -76,7 +77,7 @@ struct ContentView: View {
                 Button {
                     
                     showOrientationSheet.toggle()
-                
+                    
                 } label: {
                     
                     Image(systemName: "keyboard")
