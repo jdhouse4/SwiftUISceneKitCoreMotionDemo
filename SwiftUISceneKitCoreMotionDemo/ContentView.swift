@@ -70,7 +70,7 @@ struct ContentView: View {
             VStack {
                 
                 AircraftAtittudeView()
-                    .padding(30)
+                    .padding(10)
                 
                 
                 Button {
