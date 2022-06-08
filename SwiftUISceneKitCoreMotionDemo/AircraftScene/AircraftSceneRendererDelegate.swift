@@ -70,8 +70,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
         super.init()
         
+        ///
+        /// Just making sure here that the aircraftScene and aircraftNode are what I want them to be.
+        /// 
+        
         print("AircraftSceneRendererDelegate \(#function) aircraftScene: \(aircraftScene)")
-        print("AircraftSceneRendererDelegate \(#function) aircraftNode: \(String(describing: aircraftNode.name))")
+        print("AircraftSceneRendererDelegate \(#function) aircraftNode: \(aircraftNode.name)")
 }
 
 
@@ -95,12 +99,17 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         print("\(#function) prevEuler.z: \(self.aircraftPreviousEulerAngles)")
         */
 
+        
         if _deltaTime > 0.2 {
             //print("\nTime to calculate eulers and roll rates.")
             
             _previousUpdateTime         = time
             //print("_previousTime: \(_previousUpdateTime)")
             
+            ///
+            /// This calculates the delta-roll euler angle by taking the difference of the current and previous roll angles
+            /// and dividing by the elapsed time. This is not meant as final code and will be refined later.
+            ///
             self.aircraftPreviousEulerAngles        = self.aircraftCurrentEulerAngles
             let aircraftPreviousRollAngle: Float    = radians2Degrees(self.aircraftPreviousEulerAngles.z) > 0.0 ? radians2Degrees(self.aircraftPreviousEulerAngles.z) : -radians2Degrees(self.aircraftPreviousEulerAngles.z)
 
@@ -111,7 +120,15 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             
             let rollRate = deltaRoll / Float(_deltaTime)
             
-            
+            ///
+            /// This main actor task gets assignments for Published vars for:
+            ///
+            ///  1. aircraftEularAngles
+            ///  2. deltaRollRate
+            ///
+            /// off of whatever thread SCNSceneRenderDelegate is rendering and onto the Main thread, as needed
+            /// for assigning published vars.
+            ///
             Task {
                 await MainActor.run {
                     

@@ -310,19 +310,16 @@ struct AircraftRCSButtonsView: View {
     
     
     //
-    // Escaping closure to push change from the AircraftSceneRendererDelegate functions to set camera name and node.
+    /// These methods do two things:
+    //     1. The aircraft object calls the instance function singleImpulseRollStarboard( ) or other orientation
+    //     change visualization function. These instance functions toggle the birthRate of the RCS particle effects between
+    //     0 and 500 to give a visual effect of RCS thruster firings to affect orientation (attitude) change.
     //
-    // Because of the way SwiftUI works, AircraftSceneRendererDelegate functions can't call the SwiftUI SceneView
-    // SCNScene parameters. It's a real pain!
+    //     2. Assigns a quaternion for the attitude change to the aircraftDelegate ObservableObject published property
+    //     aircraftDeltaQuaternion of type simd_quatf. aircraftDelegate is an AircraftSceneRendererDelegate that conforms to the
+    //     SCNSceneRendererDelegate protocol. The quaternion assigned originates from the aircraftState ObservableObject AircraftState
+    //     type instance function that returns a simd_quatf.
     //
-    
-    fileprivate func modifyOrientation(closure: @escaping () -> Void) {
-        print("\(#function)")
-        closure()
-    }
-    
-    
-    
     fileprivate func fireSingleImpulseRCSThrusters() {
         if rcsButtons.rollStarboardButtonPressed {
             print("\(#function): rcsButtons.rollStarboardButtonPressed: \(rcsButtons.rollStarboardButtonPressed)")
@@ -371,16 +368,48 @@ struct AircraftRCSButtonsView: View {
     
     
     
+    //
+    // Escaping closure to modify the AircraftSceneRendererDelegate functions for orientation change.
+    //
+    // Because of the way SwiftUI works, AircraftSceneRendererDelegate functions can't call the SwiftUI SceneView
+    // SCNScene parameters. It's a real pain!
+    //
+    // The change of state objects and their published properties causes the SwiftUI view structs to be redrawn,
+    // this one, non-escaping calls to other state object published properties might not survive. In this case, the
+    // actual orientation change of the aircraftDelegate might make it, but the call to the aircraft state object's
+    // functions to toggle the birthRate of the RCS particle effects won't. Without this visual feedback, users aren't
+    // sure they have affect an orientation change.
+    //
+    // Will async/await save me? 🥲
+    //
+    fileprivate func modifyOrientation(closure: @escaping () -> Void) {
+        print("\(#function)")
+        closure()
+    }
+    
+    
+    
+    //
+    // This is the function called when a attitude rcs button is pressed and determines whether that's for a single or double
+    // RCS burn.
+    //
     private func changeOrientation() -> Void {
         print("\n\(#function)")
 
+        //
+        // This where the escaping closure is called. It is neither a trailing or completionHandler closure.
+        //
         modifyOrientation { [self] in
             
+            ///
+            /// These methods are explained above.
+            ///
             if longRCSFiring {
                 fireDoubleImpulseRCSThrusters()
             } else {
                 fireSingleImpulseRCSThrusters()
             }
+            
         }
         longRCSFiring                           = false
         rcsButtons.rollStarboardButtonPressed   = false
