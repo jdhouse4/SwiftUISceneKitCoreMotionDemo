@@ -71,7 +71,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         super.init()
         
         print("AircraftSceneRendererDelegate \(#function) aircraftScene: \(aircraftScene)")
-        print("AircraftSceneRendererDelegate \(#function) aircraftNode: \(aircraftNode.name)")
+        print("AircraftSceneRendererDelegate \(#function) aircraftNode: \(String(describing: aircraftNode.name))")
 }
 
 
