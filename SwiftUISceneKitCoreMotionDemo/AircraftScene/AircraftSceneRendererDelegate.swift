@@ -28,6 +28,10 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     @Published var aircraftNodeString: String       = "shipNode"
     //@Published var otherNode: SCNNode
     
+    //
+    // Orientation properties
+    //
+    //var sceneQuaternion: simd_quatf?
     @Published var aircraftDeltaQuaternion: simd_quatf  = simd_quatf()
     @Published var aircraftOrientation: simd_quatf      = simd_quatf()
     @Published var aircraftEulerAngles: SIMD3<Float>    = simd_float3()
@@ -35,15 +39,18 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     var aircraftCurrentEulerAngles: SIMD3<Float>        = simd_float3()
     @Published var deltaRollRate:Float                  = 0.0
 
-
+    //
+    // For switching cameras in the scene.
+    //
     @Published var aircraftCamera: String           = AircraftCamera.distantCamera.rawValue
     @Published var aircraftCameraNode: SCNNode      = SCNNode()
     @Published var aircraftEngineNode: SCNNode      = SCNNode()
     
-    /// Prepare to DELETE
+    // TODO: Prepare to DELETE
     @Published var nearPoint: SCNVector3            = SCNVector3()
     @Published var farPoint: SCNVector3             = SCNVector3()
 
+    
     var changeCamera: Bool                          = false
 
     var engineThrottle: Double?
@@ -51,18 +58,19 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     var showsStatistics: Bool                       = false
 
     var motionManager: MotionManager                = MotionManager()
-    var sceneQuaternion: simd_quatf?
+    var gyroReset: Bool                             = false
 
+    //
+    // Time, oh time...
     var _previousUpdateTime: TimeInterval           = 0.0
     var _deltaTime: TimeInterval                    = 0.0
 
-    var gyroReset: Bool                             = false
 
 
     override init() {
         print("AircraftSceneRendererDelegate override initialized")
         self.motionManager.setupDeviceMotion()
-        self.sceneQuaternion    = self.motionManager.motionQuaternion
+        //self.sceneQuaternion    = self.motionManager.motionQuaternion
         
         //self.aircraftScene      = AircraftSceneKitScene.shared
 
