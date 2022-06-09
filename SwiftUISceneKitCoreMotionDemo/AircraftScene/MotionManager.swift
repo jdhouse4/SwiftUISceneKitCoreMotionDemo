@@ -11,10 +11,15 @@ import simd
 
 
 
-class MotionManager: ObservableObject {
+final class MotionManager: ObservableObject {
+    
+    //
+    // Setup MotionManager singleton shared instance.
+    static let shared                   = MotionManager()
+    
     private var motionManager: CMMotionManager
 
-    var motionQuaternion: simd_quatf = simd_quatf()
+    var motionQuaternion: simd_quatf    = simd_quatf()
 
     var referenceFrame: CMAttitude?
     var motionTimer: Timer?
@@ -26,9 +31,8 @@ class MotionManager: ObservableObject {
 
 
     init() {
-        print("MotionManager initialized")
+        print("\(#function): MotionManager initialized")
         self.motionManager = CMMotionManager()
-        //self.setupDeviceMotion()
     }
 
 
@@ -37,17 +41,20 @@ class MotionManager: ObservableObject {
         print("\(#function): setupDeviceMotion (spinning-up the gyro platform 🍾🥂🥳")
 
         if motionManager.isDeviceMotionAvailable {
+            
             self.motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
             self.motionManager.startDeviceMotionUpdates()
 
 
             while motionQuaterionAvailable == false {
+                
                 if self.motionManager.deviceMotion != nil {
+                    
                     if self.motionManager.isDeviceMotionActive {
 
                         self.deviceMotion = self.motionManager.deviceMotion
 
-                        if motionManager.isGyroAvailable {
+                        //if motionManager.isGyroAvailable {
                             
                             if motionManager.deviceMotion?.attitude != nil {
 
@@ -58,7 +65,7 @@ class MotionManager: ObservableObject {
                                 self.motionQuaterionAvailable = true
                             
                             }
-                        }
+                        //}
                     }
                 }
             }
@@ -102,7 +109,8 @@ class MotionManager: ObservableObject {
 
     func resetReferenceFrame() {
         //print("MotionManager resetReferenceFrame()")
-        if motionManager.isDeviceMotionAvailable
+        //if motionManager.isDeviceMotionAvailable
+        if motionManager.isDeviceMotionActive
         {
             //print("MotionManager device motion is available.")
             referenceFrame          = motionManager.deviceMotion!.attitude

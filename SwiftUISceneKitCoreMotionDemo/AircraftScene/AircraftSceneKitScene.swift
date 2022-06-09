@@ -178,8 +178,8 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
                 
         // Particle emitter effects
         // Code to do something goes here
-        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
-        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
+        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForDistantCamera.rawValue)
+        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForDistantCamera.rawValue)
 
         // Milliseconds of duration for firing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
@@ -193,6 +193,8 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     func doubleImpulseRollStarboard() {
         print("\(#function)")
+        print("\(#function): Current camera is \(aircraftCurrentCamera).")
+        
         /*
         let rollStarboardQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                              axis: simd_float3(x: 0.0, y: 0.0, z: 1.0)).normalized
@@ -203,8 +205,8 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
                 
         // Particle emitter effects
         // Code to do something goes here
-        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
-        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
+        rcsRollStarboardUp.birthRate    = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForDistantCamera.rawValue)
+        rcsRollPortDown.birthRate       = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForDistantCamera.rawValue)
 
         // Milliseconds of duration for firing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMaxDuration.rawValue)) {
@@ -216,6 +218,9 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     
     func singleImpulseRollPort() {
+        print("\(#function)")
+        print("\(#function): Current camera is \(aircraftCurrentCamera).")
+        
         /*
         let rollPortQuaternion: simd_quatf = simd_quatf(angle: deltaOrientationAngle,
                                                         axis: simd_float3(x: 0.0, y: 0.0, z: -1.0)).normalized
@@ -224,10 +229,15 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
         //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
          */
         
-        // Code to do something goes here
-        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
-        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
-
+        // Code to toggle RCS particle birthrate based on whether a camer is near or far.
+        if aircraftCurrentCamera.name == AircraftCamera.distantCamera.rawValue {
+            rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForDistantCamera.rawValue)
+            rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForDistantCamera.rawValue)
+        } else if aircraftCurrentCamera.name == AircraftCamera.shipCamera.rawValue {
+            rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForNearCamera.rawValue)
+            rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrateForNearCamera.rawValue)
+        }
+        
         // Milliseconds of duration for firing
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
             self.rcsRollPortUp.birthRate        = 0
@@ -246,12 +256,17 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
         //print("\(#function): deltaQuaternion: \(deltaQuaternion.debugDescription)")
          */
         
-        // Code to do something goes here
-        rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
-        rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSSingleImpulseBirthrate.rawValue)
-
+        // Code to toggle RCS particle birthrate based on whether a camer is near or far.
+        if aircraftCurrentCamera.name == AircraftCamera.distantCamera.rawValue {
+            rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrateForDistantCamera.rawValue)
+            rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrateForDistantCamera.rawValue)
+        } else if aircraftCurrentCamera.name == AircraftCamera.shipCamera.rawValue {
+            rcsRollPortUp.birthRate        = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrateForNearCamera.rawValue)
+            rcsRollStarboardDown.birthRate = CGFloat(AircraftRCSTiming.aircraftRCSDoubleImpulseBirthrateForNearCamera.rawValue)
+        }
+        
         // Milliseconds of duration for firing
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMaxDuration.rawValue)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(AircraftRCSTiming.aircraftRCSMinDuration.rawValue)) {
             self.rcsRollPortUp.birthRate        = 0
             self.rcsRollStarboardDown.birthRate = 0
         }

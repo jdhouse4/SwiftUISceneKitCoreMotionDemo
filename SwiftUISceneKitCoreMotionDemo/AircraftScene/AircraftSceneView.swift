@@ -15,11 +15,11 @@ import SceneKit
  This view contains all of the code for the SceneView() for the primary scene.
  */
 struct AircraftSceneView: View {
-    @State private var magnification        = CGFloat(1.0)
     @State private var isDragging           = false
+    @State private var magnification        = CGFloat(1.0)
     @State private var totalChangePivot     = SCNMatrix4Identity
 
-    
+    @EnvironmentObject var motionManager: MotionManager
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftCloudUserDefaults: AircraftCloudUserDefaults
 
@@ -117,13 +117,15 @@ struct AircraftSceneView: View {
                     resetOrientation(of: aircraft.aircraftCurrentCamera)
                 }
                 
-                self.aircraftDelegate.motionManager.resetReferenceFrame()
+                //self.aircraftDelegate.motionManager.resetReferenceFrame()
+                motionManager.resetReferenceFrame()
             })
 
         }
         .onAppear {
             aircraftDelegate.aircraftCameraNode = aircraft.aircraftDistantCameraNode
-            aircraftDelegate.motionManager.resetReferenceFrame()
+            //aircraftDelegate.motionManager.resetReferenceFrame()
+            motionManager.resetReferenceFrame()
         }
     }
     

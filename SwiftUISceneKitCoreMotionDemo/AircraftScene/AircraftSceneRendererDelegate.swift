@@ -57,7 +57,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     var showsStatistics: Bool                       = false
 
-    var motionManager: MotionManager                = MotionManager()
+    var motionManager: MotionManager                = MotionManager.shared
     var gyroReset: Bool                             = false
 
     //
@@ -69,7 +69,12 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
     override init() {
         print("AircraftSceneRendererDelegate override initialized")
-        self.motionManager.setupDeviceMotion()
+        
+        //
+        // This call has been moved to the App protocol, SwiftUISceneKitCoreMotionDemoApp.swift.
+        //
+        //self.motionManager.setupDeviceMotion()
+        
         //self.sceneQuaternion    = self.motionManager.motionQuaternion
         
         //self.aircraftScene      = AircraftSceneKitScene.shared

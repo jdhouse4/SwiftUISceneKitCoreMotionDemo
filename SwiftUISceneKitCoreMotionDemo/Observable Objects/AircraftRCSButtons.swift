@@ -23,9 +23,11 @@ class AircraftRCSButtons: ObservableObject {
 
 
 enum AircraftRCSTiming: Int {
-    case aircraftRCSSingleImpulseBirthrate  = 750
-    case aircraftRCSDoubleImpulseBirthrate  = 1500
     case aircraftRCSMinDuration             = 150 // milliseconds
     case aircraftRCSMaxDuration             = 300 // milliseconds
+    case aircraftRCSSingleImpulseBirthrateForNearCamera     = 10000
+    case aircraftRCSDoubleImpulseBirthrateForNearCamera     = 20000
+    case aircraftRCSSingleImpulseBirthrateForDistantCamera  = 1000
+    case aircraftRCSDoubleImpulseBirthrateForDistantCamera  = 2000
 }
 
