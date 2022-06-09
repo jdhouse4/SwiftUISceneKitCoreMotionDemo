@@ -53,18 +53,21 @@ struct ContentView: View {
             AircraftSceneView()
                 //.overlay(Circle().opacity(0.5))
             
+            /*
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(.white)
                 .frame(width: 250, height: 250)
                 .offset(x: 0, y: -100)
                 .opacity(0.4)
             
+            
             Circle()
                 .fill(.gray)
                 .frame(width: 225, height: 225)
                 .offset(x: 0, y: -100)
                 .opacity(0.4)
-
+            */
+            
             AircraftEngineAndRCSControlsView()
             
 
