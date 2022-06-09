@@ -399,7 +399,7 @@ struct AircraftRCSButtonsView: View {
         //
         // This where the escaping closure is called. It is neither a trailing or completionHandler closure.
         //
-        modifyOrientation { [self] in
+        //modifyOrientation { [self] in
             
             ///
             /// These methods are explained above.
@@ -410,7 +410,7 @@ struct AircraftRCSButtonsView: View {
                 fireSingleImpulseRCSThrusters()
             }
             
-        }
+        //}
         longRCSFiring                           = false
         rcsButtons.rollStarboardButtonPressed   = false
         rcsButtons.rollPortButtonPressed        = false

@@ -34,7 +34,8 @@ class MotionManager: ObservableObject {
 
 
     func setupDeviceMotion() {
-        //var cycles: Int = 1
+        print("\(#function): setupDeviceMotion (spinning-up the gyro platform 🍾🥂🥳")
+
         if motionManager.isDeviceMotionAvailable {
             self.motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
             self.motionManager.startDeviceMotionUpdates()
@@ -47,6 +48,7 @@ class MotionManager: ObservableObject {
                         self.deviceMotion = self.motionManager.deviceMotion
 
                         if motionManager.isGyroAvailable {
+                            
                             if motionManager.deviceMotion?.attitude != nil {
 
                                 self.referenceFrame = self.deviceMotion?.attitude
@@ -54,12 +56,11 @@ class MotionManager: ObservableObject {
                                 self.deviceMotion?.attitude.multiply(byInverseOf: self.referenceFrame!)
 
                                 self.motionQuaterionAvailable = true
+                            
                             }
                         }
                     }
                 }
-                //cycles += 1
-                //print("cycles: \(cycles)") // Usually takes between 1,800 to 2,000 cycles before gyro is available.
             }
         }
         //print("deviceMotion: \(String(describing: self.deviceMotion))")
@@ -71,7 +72,7 @@ class MotionManager: ObservableObject {
 
 
     func startDeviceMotion() {
-        print("motion startDeviceMotion()")
+        print("\(#function): startDeviceMotion()")
         self.motionTimer = Timer(fire: Date(), interval: (1.0 / 60.0), repeats: true,
                                  block: { (motionTimer) in
                                     if self.deviceMotion != nil {
