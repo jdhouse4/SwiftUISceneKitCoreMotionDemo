@@ -21,10 +21,11 @@ final class MotionManager: ObservableObject {
 
     var motionQuaternion: simd_quatf    = simd_quatf()
 
+    var motionQuaterionAvailable: Bool  = false
+    
     var referenceFrame: CMAttitude?
     var motionTimer: Timer?
     var deviceMotion: CMDeviceMotion?
-    var motionQuaterionAvailable: Bool = false
     var resetFrame: Bool = false
 
 
