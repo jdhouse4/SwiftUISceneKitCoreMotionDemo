@@ -42,8 +42,8 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
     //
     // For switching cameras in the scene.
     //
-    @Published var aircraftCamera: String           = AircraftCamera.distantCamera.rawValue
-    @Published var aircraftCameraNode: SCNNode      = SCNNode()
+    @Published var aircraftCurrentCamera: String           = AircraftCamera.distantCamera.rawValue
+    @Published var aircraftCurrentCameraNode: SCNNode      = SCNNode()
     @Published var aircraftEngineNode: SCNNode      = SCNNode()
     
     // TODO: Prepare to DELETE
@@ -179,17 +179,22 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
         self.updateOrientation()
             
         
-    
-        if aircraftCamera == AircraftCamera.distantCamera.rawValue {
+        //
+        // Determine whether to let the motion manager update the camera orientation based on whether
+        // the user is currently using the gyro features or not.
+        //
+        if UserDefaults.standard.bool(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) {
             
-            if UserDefaults.standard.bool(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) {
-                self.updateExteriorVehicleCameraOrientation(of: aircraftCameraNode)
+            if aircraftCurrentCamera == AircraftCamera.distantCamera.rawValue {
+                            
+                    self.updateExteriorVehicleCameraOrientation(of: aircraftCurrentCameraNode)
+                
             }
-        }
 
-        if aircraftCamera == AircraftCamera.shipCamera.rawValue {
-            if UserDefaults.standard.bool(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue) {
-                self.updateInteriorVehicleCameraOrientation(of: aircraftCameraNode)
+            if aircraftCurrentCamera == AircraftCamera.shipCamera.rawValue {
+                
+                    self.updateInteriorVehicleCameraOrientation(of: aircraftCurrentCameraNode)
+            
             }
         }
     }
@@ -197,13 +202,13 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
 
     func setCameraName(name: String) {
-        aircraftCamera = name
+        aircraftCurrentCamera = name
     }
 
 
 
     func setCameraNode(node: SCNNode) {
-        aircraftCameraNode = node
+        aircraftCurrentCameraNode = node
         motionManager.resetReferenceFrame()
     }
     

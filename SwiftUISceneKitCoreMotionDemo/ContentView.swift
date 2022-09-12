@@ -10,22 +10,6 @@ import SceneKit
 
 
 
-/*
-extension UserDefaults {
-    static var shared: UserDefaults {
-        guard let defaults = UserDefaults(suiteName: AircraftGroupSettings.aircraftGroupSuiteName.rawValue) else {
-            
-            print("Oops, no group user settings")
-            
-            fatalError("Missing app group!")
-            //return UserDefaults.standard
-        }
-        
-        return defaults
-    }
-}
-*/
-
 
 struct ContentView: View {
 
@@ -42,6 +26,7 @@ struct ContentView: View {
     @StateObject var aircraftAnalyticsButton    = AircraftAnalyticsButton()
     @StateObject var aircraftEngineThrottle     = AircraftEngineThrottle()
     @StateObject var aircraftRotationButton     = AircraftRCSButtons()
+    @StateObject var aircraftCameraState        = AircraftCameraState()
     
     @State var showOrientationSheet: Bool       = false
 
@@ -121,6 +106,7 @@ struct ContentView: View {
         .environmentObject(aircraftSettingsButton)
         .environmentObject(aircraftEngineThrottle)
         .environmentObject(aircraftRotationButton)
+        .environmentObject(aircraftCameraState)
     }
     
     

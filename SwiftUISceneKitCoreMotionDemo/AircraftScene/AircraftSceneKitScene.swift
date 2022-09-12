@@ -37,6 +37,7 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     /// Aircraft camera nodes
     //var frontCameraNode: SCNNode
     @Published var aircraftCurrentCameraNode: SCNNode
+    
     @Published var aircraftDistantCameraNode: SCNNode
     @Published var aircraftShipCameraNode: SCNNode
 

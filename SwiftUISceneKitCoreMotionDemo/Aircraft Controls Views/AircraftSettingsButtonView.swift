@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SceneKit
 
 
 
@@ -13,10 +14,12 @@ import SwiftUI
 struct AircraftSettingsButtonView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
+    @EnvironmentObject var aircraft: AircraftSceneKitScene
+    @EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
+    @EnvironmentObject var aircraftCameraState: AircraftCameraState
     @EnvironmentObject var aircraftSettingsButton: AircraftSettingsButton
     @EnvironmentObject var aircraftCloudUserDefaults: AircraftCloudUserDefaults
-    //@EnvironmentObject var aircraftDelegate: AircraftSceneRendererDelegate
-    
+
     @State private var gyro: Bool       = true
     @State private var touches: Bool    = false
     @State private var sunlight: Bool   = true
@@ -37,8 +40,6 @@ struct AircraftSettingsButtonView: View {
                     
                     print("aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
                     
-                    //aircraftDelegate.showsStatistics.toggle()
-                    
                 }) {
                     Image(systemName: aircraftSettingsButton.settingsSwitch ? "gearshape.fill" : "gearshape")
                         .imageScale(.large)
@@ -57,6 +58,9 @@ struct AircraftSettingsButtonView: View {
                     
                     Group {
                         
+                        //
+                        // Switching to motion manager's device motion, or "gyro mode", for camera orientation.
+                        //
                         Button(action: {
                             
                             //self.gyro       = true
@@ -69,6 +73,25 @@ struct AircraftSettingsButtonView: View {
                             //print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
                              
                             //print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+                            
+                            //
+                            // This re-orients the camera when switching from Gestures (touch) mode to Device Motion (gyro) mode.
+                            //
+                            if aircraftDelegate.aircraftCurrentCamera == AircraftCamera.distantCamera.rawValue {
+                                
+                                aircraftCameraState.resetCameraOrientation(of: aircraft.aircraftCurrentCameraNode)
+                                
+                            }
+                            
+                            if aircraftDelegate.aircraftCurrentCamera == AircraftCamera.shipCamera.rawValue {
+                                
+                                //
+                                // This might be a bug in how I've set-up the interior camera and the node that "contains" it.
+                                //
+                                aircraftCameraState.resetCameraOrientation(of: aircraft.aircraftCurrentCamera)
+                                
+                            }
+
 
                         }) {
                             Image(systemName: "gyroscope")
@@ -91,7 +114,9 @@ struct AircraftSettingsButtonView: View {
                         
                         
                         
-                        // Settings button
+                        //
+                        // Switching to gestures touches, or "touches mode", for camera orientation.
+                        //
                         Button(action: {
                             
                             self.aircraftSettingsButton.touchesButtonPressed.toggle()
@@ -99,10 +124,16 @@ struct AircraftSettingsButtonView: View {
                             
                             
                             self.aircraftCloudUserDefaults.gyroOrientationControl = false
-                            print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
+                            //print("function: \(#function), line: \(#line)– aircraftCloudUserDefaults.gyroOrientationControl : \(self.aircraftCloudUserDefaults.gyroOrientationControl)")
                             
-                            print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
+                            //print("function: \(#function), line: \(#line)– pfGyroOrientationControl : \(String(describing: UserDefaults.standard.object(forKey: AircraftUserSettings.pfGyroOrientationControl.rawValue)))")
 
+                            
+                            //
+                            // This re-orients the camera when switching from Device Motion (gyro) to Gestures (touch) mode.
+                            //
+                            aircraftDelegate.aircraftCurrentCameraNode.simdOrientation = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1).normalized
+                            
 
                         }) {
                             Image(systemName: "hand.point.up.left")

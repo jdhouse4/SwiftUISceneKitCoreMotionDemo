@@ -117,6 +117,7 @@ final class MotionManager: ObservableObject {
             referenceFrame          = motionManager.deviceMotion!.attitude
             resetFrame.toggle()
             //print("resetFrame: \(resetFrame)")
+            //print("deviceMotion.attitude: \(referenceFrame?.quaternion)")
         }
     }
 
