@@ -14,11 +14,11 @@ import SceneKit
 /**
  This is the SceneKit Model for the  of the SwiftUISceneKitCoreMotionDemo app.
  */
-final class AircraftSceneKitScene: SCNScene, ObservableObject {
+final public class AircraftSceneKitScene: SCNScene, ObservableObject {
     
-    static let shared                           = AircraftSceneKitScene()
+    public static let shared                           = AircraftSceneKitScene()
 
-    var aircraftScene                           = SCNScene(named: "art.scnassets/ship.scn")!
+    private var aircraftScene                           = SCNScene(named: "art.scnassets/ship.scn")!
     var aircraftSceneNode: SCNNode
     
     var aircraftNode                            = SCNNode()
@@ -64,7 +64,7 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
     
     let deltaOrientationAngle: Float                = 0.0078125 * .pi / 180.0 // This results in a 0.5°/s attitude change. 0.015625 = 1°/s
 
-    
+    //private init() {}
 
     private override init() {
         print("AircraftScenekitScene private override initialized")
@@ -106,7 +106,7 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
         setAircraftRCS()
     }
 
-    
+    /*
     required init?(coder: NSCoder) {
         print("AircraftScenekitScene required initializer")
         self.aircraftSceneNode          = aircraftScene.rootNode.childNode(withName: "shipSceneNode", recursively: true)!
@@ -146,7 +146,7 @@ final class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         setAircraftRCS()
     }
-    
+    */
 
 
     // This is just for the particle system for the jet exhaust.

@@ -93,7 +93,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
 
 
 
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
+    func renderer(_ renderer: any SCNSceneRenderer, updateAtTime time: TimeInterval)
     {
         renderer.showsStatistics = showsStatistics
 
