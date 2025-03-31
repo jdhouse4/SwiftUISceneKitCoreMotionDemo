@@ -95,12 +95,10 @@ struct AircraftAtittudeView: View {
                 }
             }
             .frame(alignment: .top)
-            //.foregroundColor(Color.init(red: 0.3, green: 0.3, blue: 0.3))
             .foregroundColor(.accentColor)
             //.background(.blue)
         }
-        //.frame(width: 350, height: 80)
-        .padding(EdgeInsets(top: 70, leading: 5, bottom: 5, trailing: 5))
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
         //.background(Color.red)
     }
     

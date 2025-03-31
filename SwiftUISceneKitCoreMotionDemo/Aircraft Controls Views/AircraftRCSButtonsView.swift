@@ -11,6 +11,7 @@ import SwiftUI
 
 
 struct AircraftRCSButtonsView: View {
+
     @Environment(\.horizontalSizeClass) var sizeClass
     
     @EnvironmentObject var aircraft: AircraftSceneKitScene
@@ -122,19 +123,7 @@ struct AircraftRCSButtonsView: View {
                             }
                             
                             self.changeOrientation()
-                            
-                            /*
-                            // Code to do something goes here
-                            aircraft.rcsRollStarboardUp.birthRate   = rcsButtons.aircraftRCSDefaultBirthrate
-                            aircraft.rcsRollPortDown.birthRate      = rcsButtons.aircraftRCSDefaultBirthrate
-
-                            // Milliseconds of duration for firing
-                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rcsButtons.aircraftRCSMinDuration)) {
-                                aircraft.rcsRollStarboardUp.birthRate   = 0
-                                aircraft.rcsRollPortDown.birthRate      = 0
-                            }
-                             */
-                            
+                                                        
                         }) {
                             Image(systemName: "arrow.clockwise")
                                 .imageScale(.large)
@@ -254,17 +243,6 @@ struct AircraftRCSButtonsView: View {
                             //aircraft.singleImpulseRollPort()
                             self.changeOrientation()
                             
-                            /*
-                            // Code to do something goes here
-                            aircraft.rcsRollPortUp.birthRate        = rcsButtons.aircraftRCSDefaultBirthrate
-                            aircraft.rcsRollStarboardDown.birthRate = rcsButtons.aircraftRCSDefaultBirthrate
-
-                            // Milliseconds of duration for firing
-                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(rcsButtons.aircraftRCSMinDuration)) {
-                                aircraft.rcsRollPortUp.birthRate        = 0
-                                aircraft.rcsRollStarboardDown.birthRate = 0
-                            }
-                             */
                         }) {
                             Image(systemName: "arrow.counterclockwise")
                                 .imageScale(.large)
@@ -293,9 +271,9 @@ struct AircraftRCSButtonsView: View {
             .frame(
                 width: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
                 height: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
-                alignment: .bottomTrailing)
-                .padding(.init(top: 5, leading: 5, bottom: 10, trailing: 5))
-            //.background(Color.blue)
+                alignment: .center)
+                .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
+                //.background(Color.yellow.opacity(0.7))
 
 //        //.background(Color.red)
 

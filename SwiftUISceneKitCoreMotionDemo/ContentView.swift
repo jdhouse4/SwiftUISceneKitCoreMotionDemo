@@ -45,16 +45,9 @@ struct ContentView: View {
                 TopRowButtonsView()
                 
                 Spacer()
-                
                     
                 AircraftEngineAndRCSControlsView()
                 
-                //Spacer()
-                
-                //BottomRowButtonsView()
-                
-                
-
             }
             //.background(Color.white.opacity(0.75))
             
@@ -62,24 +55,11 @@ struct ContentView: View {
             VStack {
                 
                 AircraftAtittudeView()
-                    .padding(10)
+                    .padding(5)
                 
                 Spacer()
 
-                
-                Button {
-                    
-                    showOrientationSheet.toggle()
-                    
-                } label: {
-                    
-                    Image(systemName: "keyboard")
-                        .imageScale(.large)
-                }
-                .frame(alignment: .leading)
-                .sheet(isPresented: $showOrientationSheet) {
-                    AircraftOrientationControlView()
-                }
+                AircraftAnalyticsButtonView()
 
             }
             //.background(Color.blue)

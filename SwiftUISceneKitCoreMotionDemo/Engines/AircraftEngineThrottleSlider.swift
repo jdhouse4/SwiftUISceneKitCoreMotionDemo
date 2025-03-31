@@ -20,7 +20,7 @@ struct AircraftEngineThrottleSlider: View {
     @EnvironmentObject var aircraftEngineThrottle: AircraftEngineThrottle
 
 
-    var sliderHeight: CGFloat = 175
+    var sliderHeight: CGFloat = 125
 
     var throttle: String {
         let formatter = NumberFormatter()
@@ -35,24 +35,33 @@ struct AircraftEngineThrottleSlider: View {
 
     var body: some View {
 
-        VStack(/*alignment: .trailing*/) {
-            
+        VStack {
 
+
+        
             Text(throttle)
+                .frame(width: 75, height: 40)
                 .foregroundColor(Color.black)
                 .opacity(CircleButtonSize.primaryOpacity.rawValue)
                 .font(.title3.monospaced())
-                .padding(EdgeInsets(top: 5, leading: 5, bottom: 40, trailing: 5))
-                .background(Color.red.opacity(0.7))
+                .padding(EdgeInsets(top: 15, leading: 5, bottom: 5, trailing: 5))
+                //.background(Color.red.opacity(0.7))
+            
+            Spacer()
 
             Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
                 .frame(width: sliderHeight)
+                //.background(Color.yellow.opacity(0.7))
                 .rotationEffect(.degrees(-90), anchor: .center)
-                .padding(EdgeInsets(top: 30, leading: 5, bottom: 5, trailing: 5))
-                .background(Color.yellow.opacity(0.7))
+                .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+            
+            Spacer()
         }
-        .frame(alignment: .center)
-        .padding(EdgeInsets(top: 5, leading: 5, bottom: 100, trailing: 5))
+        .frame(
+            width: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
+            height: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
+            alignment: .center)
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
         //.background(Color.green.opacity(0.7))
     }
 
