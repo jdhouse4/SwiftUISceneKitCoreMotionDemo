@@ -42,7 +42,6 @@ struct ContentView: View {
 
             VStack {
                 
-                TopRowButtonsView()
                 
                 Spacer()
                     
@@ -59,10 +58,18 @@ struct ContentView: View {
                 
                 Spacer()
 
-                AircraftAnalyticsButtonView()
+                BottomButtonsView()
 
             }
             //.background(Color.blue)
+            
+            VStack {
+                
+                TopRowButtonsView()
+                
+                Spacer()
+                
+            }
 
         }
         .background(Color.black)
