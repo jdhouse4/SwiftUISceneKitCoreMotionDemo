@@ -39,35 +39,46 @@ struct ContentView: View {
                 //.overlay(Circle().opacity(0.5))
             
 
-
-            VStack {
+            Group {
                 
-                
-                Spacer()
+                VStack {
                     
-                AircraftEngineAndRCSControlsView()
+                    
+                    Spacer()
+                    
+                    AircraftEngineAndRCSControlsView()
+                    
+                }
+                //.background(Color.white.opacity(0.75))
                 
-            }
-            //.background(Color.white.opacity(0.75))
-            
-            
-            VStack {
                 
-                AircraftAtittudeView()
-                    .padding(5)
+                VStack {
+                    
+                    Spacer()
+                    
+                    BottomButtonsView()
+                    
+                }
+                //.background(Color.blue)
                 
-                Spacer()
-
-                BottomButtonsView()
-
-            }
-            //.background(Color.blue)
-            
-            VStack {
                 
-                TopRowButtonsView()
+                VStack {
+                    
+                    TopRowButtonsView()
+                    
+                    Spacer()
+                    
+                }
                 
-                Spacer()
+                
+                VStack {
+                    
+                    AircraftAtittudeView()
+                        .padding(5)
+                    
+                    Spacer()
+                    
+                }
                 
             }
 

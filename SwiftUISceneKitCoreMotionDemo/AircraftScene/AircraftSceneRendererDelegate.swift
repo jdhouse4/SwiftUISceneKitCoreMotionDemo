@@ -105,13 +105,6 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
                         
         }
 
-        //print("\(time)")
-        
-        /*
-        self.aircraftPreviousEulerAngles = self.aircraftEulerAngles
-        print("\(#function) prevEuler.z: \(self.aircraftPreviousEulerAngles)")
-        */
-
         
         if _deltaTime > 0.2 {
             //print("\nTime to calculate eulers and roll rates.")
@@ -143,6 +136,7 @@ class AircraftSceneRendererDelegate: NSObject, SCNSceneRendererDelegate, Observa
             /// for assigning published vars.
             ///
             Task {
+                
                 await MainActor.run {
                     
                     //print("Calling MainActor.run @ time: \(time)")

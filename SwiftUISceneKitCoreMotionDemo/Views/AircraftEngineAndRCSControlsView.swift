@@ -14,7 +14,9 @@ struct AircraftEngineAndRCSControlsView: View {
 
     @Environment(\.horizontalSizeClass) var sizeClass
     
+    @EnvironmentObject var aircraftAnalyticsButton: AircraftAnalyticsButton
 
+    
 
     var body: some View {
 
@@ -33,6 +35,7 @@ struct AircraftEngineAndRCSControlsView: View {
                 
             }
             .frame(alignment: .center)
+            .padding(EdgeInsets(top: 0, leading: 5, bottom: aircraftAnalyticsButton.analyticsSwitch ? 140 : 5, trailing: 0))
             //.background(Color.gray.opacity(0.7))
         }
     }
