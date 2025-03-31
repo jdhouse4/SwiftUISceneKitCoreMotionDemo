@@ -52,7 +52,7 @@ struct AircraftSunlightButtonView: View {
 
 
     func toggleSunlight() -> Void {
-        let sunlight = aircraft.aircraftScene.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
+        let sunlight = AircraftSceneKitScene.shared.rootNode.childNode(withName: "sunlightNode", recursively: true)?.light
 
         if self.sunlightSwitch.sunlight == true {
             sunlight!.intensity = 2000.0

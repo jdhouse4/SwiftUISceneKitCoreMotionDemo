@@ -16,9 +16,9 @@ import SceneKit
  */
 final public class AircraftSceneKitScene: SCNScene, ObservableObject {
     
-    public static let shared                           = AircraftSceneKitScene()
+    public static let shared                    = AircraftSceneKitScene()
 
-    private var aircraftScene                           = SCNScene(named: "art.scnassets/ship.scn")!
+    var aircraftScene                           = SCNScene(named: "art.scnassets/ship.scn")!
     var aircraftSceneNode: SCNNode
     
     var aircraftNode                            = SCNNode()
@@ -105,48 +105,17 @@ final public class AircraftSceneKitScene: SCNScene, ObservableObject {
 
         setAircraftRCS()
     }
-
-    /*
-    required init?(coder: NSCoder) {
-        print("AircraftScenekitScene required initializer")
-        self.aircraftSceneNode          = aircraftScene.rootNode.childNode(withName: "shipSceneNode", recursively: true)!
+    
+    
+    
+    //
+    // This class will never be subclassed.
+    //
+    internal required init?(coder: NSCoder) {
         
-        self.aircraftNode               = aircraftScene.rootNode.childNode(withName: "shipNode", recursively: true)!
-
-        self.aircraftCurrentCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
-
-        self.aircraftDistantCamera      = aircraftScene.rootNode.childNode(withName: "distantCamera", recursively: true)!
-        self.aircraftShipCamera         = aircraftScene.rootNode.childNode(withName: "shipCamera", recursively: true)!
-
-        self.aircraftCurrentCameraNode  = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
-
-        self.aircraftDistantCameraNode  = aircraftScene.rootNode.childNode(withName: "distantCameraNode", recursively: true)!
-        self.aircraftShipCameraNode     = aircraftScene.rootNode.childNode(withName: "shipCameraNode", recursively: true)!
-
-        self.aircraftEnginesNode        = aircraftScene.rootNode.childNode(withName: "shipEngineNode", recursively: true)!
-
-        self.aircraftEngine              = SCNParticleSystem()
-
-        // RCS Nodes
-        rcsNode                         = aircraftScene.rootNode.childNode(withName: "rcsNode", recursively: true)!
-        rcsRollPortUpNode               = aircraftScene.rootNode.childNode(withName: "rcsRollPortUp", recursively: true)!
-        rcsRollPortDownNode             = aircraftScene.rootNode.childNode(withName: "rcsRollPortDown", recursively: true)!
-        rcsRollStarboardUpNode          = aircraftScene.rootNode.childNode(withName: "rcsRollStarboardUp", recursively: true)!
-        rcsRollStarboardDownNode        = aircraftScene.rootNode.childNode(withName: "rcsRollStarboardDown", recursively: true)!
-
-        // RCS Engines
-        rcsRollPortUp                   = SCNParticleSystem()
-        rcsRollPortDown                 = SCNParticleSystem()
-        rcsRollStarboardUp              = SCNParticleSystem()
-        rcsRollStarboardDown            = SCNParticleSystem()
-
-        super.init(coder: coder)
-
-        setAircraftEngine()
-
-        setAircraftRCS()
+        fatalError("init(coder:) has not been implemented")
+        
     }
-    */
 
 
     // This is just for the particle system for the jet exhaust.

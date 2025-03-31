@@ -38,23 +38,7 @@ struct ContentView: View {
             AircraftSceneView()
                 //.overlay(Circle().opacity(0.5))
             
-            /*
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(.white)
-                .frame(width: 250, height: 250)
-                .offset(x: 0, y: -100)
-                .opacity(0.4)
-            
-            
-            Circle()
-                .fill(.gray)
-                .frame(width: 225, height: 225)
-                .offset(x: 0, y: -100)
-                .opacity(0.4)
-            */
-            
-            AircraftEngineAndRCSControlsView()
-            
+
 
             VStack {
                 
@@ -62,8 +46,15 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                BottomRowButtonsView()
+                    
+                AircraftEngineAndRCSControlsView()
                 
+                //Spacer()
+                
+                //BottomRowButtonsView()
+                
+                
+
             }
             //.background(Color.white.opacity(0.75))
             
@@ -73,6 +64,8 @@ struct ContentView: View {
                 AircraftAtittudeView()
                     .padding(10)
                 
+                Spacer()
+
                 
                 Button {
                     
@@ -87,8 +80,6 @@ struct ContentView: View {
                 .sheet(isPresented: $showOrientationSheet) {
                     AircraftOrientationControlView()
                 }
-                
-                Spacer()
 
             }
             //.background(Color.blue)

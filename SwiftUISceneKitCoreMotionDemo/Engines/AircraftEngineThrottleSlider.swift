@@ -11,13 +11,16 @@ import SwiftUI
 
 
 struct AircraftEngineThrottleSlider: View {
+
+    @Environment(\.horizontalSizeClass) var sizeClass
+
     /// @EnvironmentObject is a property wrapper type for an observable object that is
     /// instantiated by @StateObject supplied by a parent or ancestor view.
     @EnvironmentObject var aircraft: AircraftSceneKitScene
     @EnvironmentObject var aircraftEngineThrottle: AircraftEngineThrottle
 
 
-    var sliderHeight: CGFloat = 125
+    var sliderHeight: CGFloat = 175
 
     var throttle: String {
         let formatter = NumberFormatter()
@@ -34,24 +37,23 @@ struct AircraftEngineThrottleSlider: View {
 
         VStack(/*alignment: .trailing*/) {
             
-            Spacer()
 
             Text(throttle)
                 .foregroundColor(Color.black)
                 .opacity(CircleButtonSize.primaryOpacity.rawValue)
                 .font(.title3.monospaced())
-                //.background(Color.red.opacity(0.9))
+                .padding(EdgeInsets(top: 5, leading: 5, bottom: 40, trailing: 5))
+                .background(Color.red.opacity(0.7))
 
             Slider(value: $aircraft.aircraftEngine.birthRate, in: 0...aircraftEngineThrottle.aircraftEngineMaxThrust)
                 .frame(width: sliderHeight)
                 .rotationEffect(.degrees(-90), anchor: .center)
-            
-                .padding(EdgeInsets(top: 50, leading: 5, bottom: 5, trailing: 5))
-                //.background(Color.pink.opacity(0.9))
+                .padding(EdgeInsets(top: 30, leading: 5, bottom: 5, trailing: 5))
+                .background(Color.yellow.opacity(0.7))
         }
-        .frame(alignment: .bottom)
-        .padding(EdgeInsets(top: 5, leading: 5, bottom: 60, trailing: 10))
-        //.background(Color.green.opacity(0.95))
+        .frame(alignment: .center)
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 100, trailing: 5))
+        //.background(Color.green.opacity(0.7))
     }
 
 }

@@ -19,9 +19,9 @@ struct BottomRowButtonsView: View {
             
             Group {
                 
-                AircraftSunlightButtonView()
+                //AircraftSunlightButtonView()
                 
-                Spacer()
+                //Spacer()
                 
                 AircraftAnalyticsButtonView()
                 

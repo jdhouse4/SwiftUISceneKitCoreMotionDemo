@@ -40,7 +40,6 @@ struct AircraftRCSButtonsView: View {
     
 
     var body: some View {
-        HStack (spacing: 5) {
 
             ZStack {
                 Circle()
@@ -295,15 +294,10 @@ struct AircraftRCSButtonsView: View {
                 width: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
                 height: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
                 alignment: .bottomTrailing)
+                .padding(.init(top: 5, leading: 5, bottom: 10, trailing: 5))
             //.background(Color.blue)
 
-        }
-        .frame(
-            width: sizeClass == .compact ? CircleButtonSize.widthHeightCompact.rawValue : CircleButtonSize.widthHeight.rawValue,
-            height: sizeClass == .compact ? CircleButtonSize.extendedHeightCompact.rawValue : CircleButtonSize.extendedHeight.rawValue,
-            alignment: .bottomTrailing)
-        .padding(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
-        //.background(Color.red)
+//        //.background(Color.red)
 
     }
     
